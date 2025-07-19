@@ -1,0 +1,56 @@
+{
+ "Defaults": {
+    "Application" : "zzz_dominos_pizza_night",
+    "SubApplication" : "zzz_order_fulfillment",
+    "ControlmServer" : "IN01",
+    "Host" : "td-americas-k8s-hg",
+    "RunAs" : "controlm"
+    },
+ 
+  "zzz_Dominos_Pizza_Workflow" : {
+    "Type" : "Folder",
+    "Variables" : [ {
+      "customer_id" : ""
+    }, {
+      "order_id" : ""
+    } ],
+    "Description" : "Place_Order kicks off when a customer buys a pizza in the app.\\n\\nEach job chains to the next using OnSuccess, ensuring sequential orchestration.\\n\\nScripts (placeholders) handle inventory, payment, kitchen queue, delivery, and reporting.\\n\\nVariables (customer_id, order_id) make it reusable for multiple orders.",
+    "OrderMethod" : "Manual",
+   
+    "Delivery_Or_Pickup" : {
+      "Type" : "Job:Command",
+      "Description" : "Update tracker for delivery or pickup",
+      "Command" : "python3 /opt/dominos/delivery_update.py --order %%order_id"
+    },
+
+    "Generate_Reporting" : {
+      "Type" : "Job:Command",
+      "Description" : "Aggregate sales and ops data for dashboards",
+      "Command" : "python3 /opt/dominos/reporting.py --date $(date +%F)"
+    },
+
+    "Inventory_And_Store_Check" : {
+      "Type" : "Job:Command",
+      "Description" : "Check inventory and staffing for order",
+      "Command" : "bash /opt/dominos/check_inventory.sh %%order_id"
+    },
+
+    "Kitchen_Prep" : {
+      "Type" : "Job:Command",
+      "Description" : "Queue order in kitchen systems and update tracker",
+      "Command" : "python3 /opt/dominos/kitchen_queue.py --order %%order_id"
+    },
+
+    "Place_Order" : {
+      "Type" : "Job:Command",
+      "Description" : "Validate and route order from mobile app",
+      "Command" : "python3 /opt/dominos/place_order.py --customer %%customer_id"
+    },
+
+    "Process_Payment" : {
+      "Type" : "Job:Command",
+      "Description" : "Automate payment, fraud check, transaction logging",
+      "Command" : "python3 /opt/dominos/process_payment.py --order %%order_id"
+    }
+  }
+}
