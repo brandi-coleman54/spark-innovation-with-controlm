@@ -9,7 +9,7 @@ HTML_PAGE = """
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Domino's Pizza Tracker</title>
+    <title>Sample Pizza Tracker</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f8f8f8; text-align: center; padding: 50px; }
         button { background-color: #ff4500; color: white; padding: 15px 30px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; }
@@ -18,7 +18,7 @@ HTML_PAGE = """
     </style>
 </head>
 <body>
-    <h1>🍕 Domino's Pizza Tracker</h1>
+    <h1>🍕 Sample Pizza Tracker</h1>
     <p>Click below to simulate a new pizza order (this will trigger your Control‑M workflow).</p>
     <form method="POST">
         <button type="submit">Place Order</button>
