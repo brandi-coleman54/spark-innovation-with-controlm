@@ -1,0 +1,88 @@
+{
+    "Name": "${USER_CODE}",
+    "AllowedJobs": {
+        "Included": [
+            [
+                [
+                    "JobName",
+                    "like",
+                    "*"
+                ]
+            ]
+        ]
+    },
+    "AllowedJobActions": {
+        "ViewProperties": true,
+        "Documentation": true,
+        "Log": true,
+        "Statistics": true,
+        "ViewOutputList": true,
+        "ViewJcl": true,
+        "Why": true,
+        "Hold": true,
+        "Free": true,
+        "Confirm": true,
+        "Rerun": true,
+        "React": true,
+        "Restart": true,
+        "Kill": true,
+        "Bypass": true,
+        "Delete": true,
+        "Undelete": true,
+        "SetToOk": true,
+        "EditProperties": true,
+        "EditJcl": true
+    },
+    "Privileges": {
+        "ClientAccess": {
+            "ControlmWebClientAccess": "Full",
+            "AutomationAPIAccess": "Full"
+        },
+        "ConfigurationManager": {
+            "Configuration": "Update"
+        },
+        "Monitoring": {
+            "Alert": "Browse"
+        },
+        "Tools": {
+            "SiteStandardPolicies": "Update"
+        }
+    },
+    "Folders": [
+        {
+            "Privilege": "Update",
+            "ControlmServer": "*",
+            "Folder": "*",
+            "Run": true
+        }
+    ],
+    "Calendars": [
+        {
+            "Privilege": "Update",
+            "ControlmServer": "*",
+            "Name": "*"
+        }
+    ],
+    "RunasUsers": [
+        {
+            "ControlmServer": "IN01",
+            "RunasUser": "*",
+            "Host": "*"
+        }
+    ],
+    "SiteStandard": [
+        {
+            "Privilege": "Update",
+            "Name": "*"
+        }
+    ],
+    "ConnectionProfileManagement": [
+        {
+            "ControlmServer": "*",
+            "Agent": "*",
+            "PluginType": "*",
+            "Name": "*",
+            "Privilege": "Update"
+        }
+    ]
+}
