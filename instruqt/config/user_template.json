@@ -1,6 +1,6 @@
 {
-    "Name": "${CTM_USER}",
+    "Name": "CTM_USER",
     "Roles": [
-       "${USER_CODE}_instruqt"
+       "USER_CODE_instruqt"
     ]
 }
