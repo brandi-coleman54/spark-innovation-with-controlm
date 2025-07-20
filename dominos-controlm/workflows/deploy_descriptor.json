@@ -6,16 +6,16 @@
     },
     {
     "Property": "Application",
-    "Replace": [{ "zzz(.*)": " replace-with-usercode$1_preprod" }] 
+    "Replace": [{ "zzz(.*)": "replace-with-usercode$1_preprod" }] 
     },
     {
     "Property": "SubApplication",
-    "Replace": [{ "zzz(.*)": " replace-with-usercode$1_preprod" }] 
+    "Replace": [{ "zzz(.*)": "replace-with-usercode$1_preprod" }] 
     },
     {
     "Property": "@",
     "ApplyOn": {"Type": "Folder"},
-    "Replace": [{"zzz(.*)": " replace-with-usercode$1_preprod"}]
+    "Replace": [{"zzz(.*)": "replace-with-usercode$1_preprod"}]
     }
   ]
 }
