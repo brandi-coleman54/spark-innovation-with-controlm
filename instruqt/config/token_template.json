@@ -1,0 +1,6 @@
+{
+    "tokenName": "${USER_CODE}_instruqt",
+    "Roles": [
+       "${USER_CODE}_instruqt"
+    ]
+}
