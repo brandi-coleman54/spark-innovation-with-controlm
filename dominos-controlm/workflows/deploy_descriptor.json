@@ -1,0 +1,21 @@
+{
+  "DeployDescriptor": [
+    {
+    "Property": "CreatedBy",
+    "Assign": "<YOUR_EMAIL>"
+    },
+    {
+    "Property": "Application",
+    "Replace": [{ "zzz(.*)": "<USER_CODE>$1_preprod" }] 
+    },
+    {
+    "Property": "SubApplication",
+    "Replace": [{ "zzz(.*)": "<USER_CODE>$1_preprod" }] 
+    },
+    {
+    "Property": "@",
+    "ApplyOn": {"Type": "Folder"},
+    "Replace": [{"zzz(.*)": "<USER_CODE>$1_preprod"}]
+    }
+  ]
+}
