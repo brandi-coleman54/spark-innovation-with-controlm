@@ -49,7 +49,7 @@ def index():
             }
             # Send API request to trigger the workflow
             headers = {
-                "x-api-key": "<CTM_AUTH_TOKEN>",
+                "x-api-key": CTM_API_TOKEN,
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             }
