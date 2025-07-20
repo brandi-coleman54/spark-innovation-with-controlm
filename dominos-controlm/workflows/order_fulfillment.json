@@ -1,13 +1,13 @@
 {
  "Defaults": {
-    "Application" : "zzz_dominos_pizza_night",
+    "Application" : "zzz_pizza_night",
     "SubApplication" : "zzz_order_fulfillment",
     "ControlmServer" : "IN01",
     "Host" : "td-americas-k8s-hg",
     "RunAs" : "controlm"
     },
  
-  "zzz_Dominos_Pizza_Workflow" : {
+  "zzz_Pizza_Order_Workflow" : {
     "Type" : "Folder",
     "Variables" : [ {
       "customer_id" : ""
