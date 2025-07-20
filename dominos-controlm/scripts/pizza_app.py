@@ -1,0 +1,46 @@
+from flask import Flask, render_template_string, request
+import subprocess
+
+app = Flask(__name__)
+
+# HTML template with a button to trigger the order
+HTML_PAGE = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Domino's Pizza Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f8f8f8; text-align: center; padding: 50px; }
+        button { background-color: #ff4500; color: white; padding: 15px 30px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; }
+        button:hover { background-color: #e03e00; }
+        h1 { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>🍕 Domino's Pizza Tracker</h1>
+    <p>Click below to simulate a new pizza order.</p>
+    <form method="POST">
+        <button type="submit">Place Order</button>
+    </form>
+    {% if message %}
+        <p style="color:green; font-weight:bold;">{{ message }}</p>
+    {% endif %}
+</body>
+</html>
+"""
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    message = ""
+    if request.method == "POST":
+        try:
+            # Trigger the Control-M Event (NewPizzaOrder)
+            subprocess.run(["ctm", "run", "event::send", "NewPizzaOrder"], check=True)
+            message = "Pizza order placed! Workflow triggered in Control‑M."
+        except subprocess.CalledProcessError as e:
+            message = f"Error triggering Control‑M event: {e}"
+    return render_template_string(HTML_PAGE, message=message)
+
+if __name__ == "__main__":
+    # Run Flask app on port 5000
+    app.run(host="0.0.0.0", port=5000, debug=True)
