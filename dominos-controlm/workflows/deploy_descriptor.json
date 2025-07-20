@@ -2,20 +2,20 @@
   "DeployDescriptor": [
     {
     "Property": "CreatedBy",
-    "Assign": "<YOUR_EMAIL>"
+    "Assign": "replace-with-email"
     },
     {
     "Property": "Application",
-    "Replace": [{ "zzz(.*)": "<USER_CODE>$1_preprod" }] 
+    "Replace": [{ "zzz(.*)": " replace-with-usercode$1_preprod" }] 
     },
     {
     "Property": "SubApplication",
-    "Replace": [{ "zzz(.*)": "<USER_CODE>$1_preprod" }] 
+    "Replace": [{ "zzz(.*)": " replace-with-usercode$1_preprod" }] 
     },
     {
     "Property": "@",
     "ApplyOn": {"Type": "Folder"},
-    "Replace": [{"zzz(.*)": "<USER_CODE>$1_preprod"}]
+    "Replace": [{"zzz(.*)": " replace-with-usercode$1_preprod"}]
     }
   ]
 }
