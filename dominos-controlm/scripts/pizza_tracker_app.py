@@ -4,6 +4,12 @@ import os
 
 app = Flask(__name__)
 
+# Read Control-M API variables from environment (set these in Instruqt!)
+CTM_API_ENDPOINT = os.getenv("CTM_API_ENDPOINT", "replace-with-endpoint")
+CTM_API_TOKEN = os.getenv("CTM_API_TOKEN", "replace-with-token")
+CTM_SERVER = os.getenv("CTM_SERVER", "replace-with-ctm-server")
+CTM_FOLDER = os.getenv("CTM_FOLDER", "replace-with-ctm-folder")
+
 # HTML page for the Pizza Tracker
 HTML_PAGE = """
 <!DOCTYPE html>
@@ -35,11 +41,25 @@ def index():
     message = ""
     if request.method == "POST":
         try:
-            # Trigger the Control-M Event (NewPizzaOrder)
-            subprocess.run(["ctm", "run", "event::send", "NewPizzaOrder"], check=True)
-            message = "Pizza order placed! Your Control‑M workflow is running."
-        except subprocess.CalledProcessError as e:
-            message = f"Error triggering Control‑M event: {e}"
+             # Build JSON payload for Control-M API
+            payload = {
+                "ctm": CTM_SERVER,
+                "folder": CTM_FOLDER,
+                "variables": [{"order_id": "12345","customer_id": "12345" }]
+            }
+            # Send API request to trigger the workflow
+            headers = {
+                "x-api-key": "<CTM_AUTH_TOKEN>",
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+            response = requests.post(f"{CTM_API_ENDPOINT}/run/order", headers=headers, data=json.dumps(payload))
+            if response.status_code == 200:
+                message = "Pizza order placed! Workflow ordered via API."
+            else:
+                message = f"Failed to trigger workflow. Error: {response.status_code} - {response.text}"
+        except Exception as e:
+            message = f"Error connecting to Control-M API: {str(e)}"
     return render_template_string(HTML_PAGE, message=message)
 
 if __name__ == "__main__":
