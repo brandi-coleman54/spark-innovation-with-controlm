@@ -1,9 +1,10 @@
 from flask import Flask, render_template_string, request
 import subprocess
+import os
 
 app = Flask(__name__)
 
-# HTML template with a button to trigger the order
+# HTML page for the Pizza Tracker
 HTML_PAGE = """
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@ HTML_PAGE = """
 </head>
 <body>
     <h1>🍕 Domino's Pizza Tracker</h1>
-    <p>Click below to simulate a new pizza order.</p>
+    <p>Click below to simulate a new pizza order (this will trigger your Control‑M workflow).</p>
     <form method="POST">
         <button type="submit">Place Order</button>
     </form>
@@ -36,11 +37,20 @@ def index():
         try:
             # Trigger the Control-M Event (NewPizzaOrder)
             subprocess.run(["ctm", "run", "event::send", "NewPizzaOrder"], check=True)
-            message = "Pizza order placed! Workflow triggered in Control‑M."
+            message = "Pizza order placed! Your Control‑M workflow is running."
         except subprocess.CalledProcessError as e:
             message = f"Error triggering Control‑M event: {e}"
     return render_template_string(HTML_PAGE, message=message)
 
 if __name__ == "__main__":
-    # Run Flask app on port 5000
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    # Read hostname, port, and participant ID from Instruqt environment
+    HOSTNAME = os.getenv("HOSTNAME", "app")
+    PORT = os.getenv("PORT", "5000")
+    PARTICIPANT_ID = os.getenv("PARTICIPANT_ID", "user")
+
+    # Flask will bind to 0.0.0.0 (Instruqt proxy maps it to the HTTPS URL)
+    print(f"App is starting... Access it at:")
+    print(f"https://{HOSTNAME}-{PORT}-{PARTICIPANT_ID}.env.play.instruqt.com")
+
+    # No self-signed SSL needed — Instruqt provides valid certs via proxy
+    app.run(host="0.0.0.0", port=int(PORT), debug=True)
