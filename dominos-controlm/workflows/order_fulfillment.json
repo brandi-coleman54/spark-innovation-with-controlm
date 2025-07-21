@@ -3,7 +3,7 @@
     "Application" : "zzz_pizza_night",
     "SubApplication" : "zzz_order_fulfillment",
     "ControlmServer" : "IN01",
-    "Host" : "replace-with-instruqt-host",
+    "Host" : "zzz_instruqt_server",
     "RunAs" : "controlm"
     },
  
