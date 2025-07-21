@@ -69,10 +69,18 @@ if __name__ == "__main__":
     HOSTNAME = os.getenv("HOSTNAME", "app")
     PORT = os.getenv("PORT", "5000")
     PARTICIPANT_ID = os.getenv("PARTICIPANT_ID", "user")
+    
+    # Daemonize (run in the background)
+    if os.fork():
+        # Parent process exits, leaving Flask running in the background
+        os._exit(0)
 
-    # Flask will bind to 0.0.0.0 (Instruqt proxy maps it to the HTTPS URL)
-    print(f"App is starting... Access it at:")
+    print(f"App is starting in the background... Access it at:")
     print(f"https://{HOSTNAME}-{PORT}-{PARTICIPANT_ID}.env.play.instruqt.com")
+    
+    # Redirect output to a log file
+    sys.stdout = open("/home/controlm/pizza_tracker.log", "a")
+    sys.stderr = sys.stdout
 
-    # No self-signed SSL needed — Instruqt provides valid certs via proxy
-    app.run(host="0.0.0.0", port=int(PORT), debug=True)
+    # Run Flask server
+    app.run(host="0.0.0.0", port=int(PORT), debug=False)
