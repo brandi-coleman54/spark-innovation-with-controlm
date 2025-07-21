@@ -32,7 +32,7 @@
     "Inventory_And_Store_Check" : {
       "Type" : "Job:Command",
       "Description" : "Check inventory and staffing for order",
-      "Command" : "python3 /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts/delivery_update.py/check_inventory.py %%order_id"
+      "Command" : "python3 /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts/check_inventory.py %%order_id"
     },
 
     "Kitchen_Prep" : {
@@ -44,7 +44,7 @@
     "Place_Order" : {
       "Type" : "Job:Command",
       "Description" : "Validate and route order from mobile app",
-      "Command" : "python3 /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts/dominos/place_order.py --customer %%customer_id"
+      "Command" : "python3 /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts/place_order.py --customer %%customer_id"
     },
 
     "Process_Payment" : {
