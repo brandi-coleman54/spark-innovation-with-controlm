@@ -1,7 +1,7 @@
 {
     "Defaults": {
     },
-    "replace-with-usercode_payments": {
+    "zzz_payments": {
         "Type": "Folder",
         "OrderMethod" : "Manual",
         "get_payment_data": {
