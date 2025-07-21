@@ -2,8 +2,8 @@
     "Defaults" : {
         "Host": "td-<GEO>-k8s-hg",
         "ControlmServer": "IN01",
-        "Application": "td_<TD-CODE>_<USER-CODE-HERE>-whiskey-pipeline",
-        "SubApplication": "td_<TD-CODE>_<USER-CODE-HERE>-process-whiskey-data",
+        "Application": "zzz-whiskey-pipeline",
+        "SubApplication": "zzz-process-whiskey-data",
         "RunAs": "controlm"
       },    
     "zzz_whiskey_retail_shop": {
