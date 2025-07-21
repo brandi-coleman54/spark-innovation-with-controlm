@@ -1,1 +1,20 @@
+{
+	"Defaults" : {
+		"Host": "td-americas-k8s-hg",
+		"ControlmServer": "IN01",
+		"Application": "replace-with-usercode_first_job_flow",
+		"SubApplication": "replace-with-usercode_first_job_flow",
+		"OrderMethod": "Manual"
+	},
+
+   "replace-with-usercode_first_job_flow": {
+		"Type": "Folder",
+		"EchoJob": {
+			"Type" : "Job:Command",
+			"Command" : "echo hello",
+			"RunAs" : "controlm"
+		}	
+	}
+		
+}
 
