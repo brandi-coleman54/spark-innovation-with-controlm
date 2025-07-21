@@ -6,7 +6,7 @@
         "SubApplication": "td_<TD-CODE>_<USER-CODE-HERE>-process-whiskey-data",
         "RunAs": "controlm"
       },    
-    "td_<TD-CODE>_<USER-CODE-HERE>_techday_reim_aws": {
+    "zzz_whiskey_retail_shop": {
         "Type": "Folder",
         "OrderMethod" : "Manual",
         "Variables" : [ {
