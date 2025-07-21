@@ -12,7 +12,7 @@
         "Variables" : [ {
             "usercode" : "replace-with-usercode"
           }, {
-            "td_email" : "<YOUR-EMAIL-HERE>"
+            "td_email" : "replace-with-email"
           } ],
          "init_db" : {
             "Type" : "Job:Database:EmbeddedQuery",
