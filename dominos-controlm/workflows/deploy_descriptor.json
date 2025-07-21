@@ -5,6 +5,10 @@
     "Assign": "replace-with-email"
     },
     {
+    "Property": "Host",
+    "Assign": "replace-with-instruqt-host"
+    },
+    {
     "Property": "Application",
     "Replace": [{ "zzz(.*)": "replace-with-usercode$1_preprod" }] 
     },
