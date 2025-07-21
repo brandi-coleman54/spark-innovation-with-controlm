@@ -284,7 +284,7 @@
                 } ]
               }
         },
-        "replace-with-usercode_data_pipeline_product_flow": {
+        "data_pipeline_product_flow": {
             "Type": "Flow",
             "Sequence": [
                 "init_db", 
@@ -297,7 +297,7 @@
                 "SLA"
             ]
         },
-        "replace-with-usercode_data_pipeline_customer_flow": {
+        "data_pipeline_customer_flow": {
             "Type": "Flow",
             "Sequence": [
                 "prep_db", 
@@ -307,7 +307,7 @@
                 "finalize_db"
             ]
         },
-        "replace-with-usercode_data_pipeline_customer_flow2": {
+        "data_pipeline_customer_flow2": {
             "Type": "Flow",
             "Sequence": [
                 "transfer_customer_data",
@@ -315,7 +315,7 @@
                 "finalize_db"
             ]
         },
-        "replace-with-usercode_data_pipeline_countries_flow": {
+        "data_pipeline_countries_flow": {
             "Type": "Flow",
             "Sequence": [
                 "transfer_customer_data",
@@ -323,7 +323,7 @@
                 "finalize_db"
             ]
         },
-        "replace-with-usercode_data_pipeline_employee_flow": {
+        "data_pipeline_employee_flow": {
             "Type": "Flow",
             "Sequence": [
                 "transfer_resources",
@@ -335,7 +335,7 @@
                 "finalize_db"
             ]
         },
-        "replace-with-usercode_data_pipeline_departments_flow": {
+        "data_pipeline_departments_flow": {
             "Type": "Flow",
             "Sequence": [
                 "transfer_employee_data",
@@ -343,7 +343,7 @@
                 "finalize_db"
             ]
         },
-        "replace-with-usercode_data_pipeline_date_flow": {
+        "data_pipeline_date_flow": {
             "Type": "Flow",
             "Sequence": [
                 "prep_db",
