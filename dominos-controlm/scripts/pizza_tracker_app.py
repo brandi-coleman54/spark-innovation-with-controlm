@@ -47,8 +47,7 @@ def index():
              # Build JSON payload for Control-M API
             payload = {
                 "ctm": CTM_SERVER,
-                "folder": CTM_FOLDER,
-                "variables": [{"order_id": "12345","customer_id": "12345" }]
+                "folder": CTM_FOLDER
             }
             # Send API request to trigger the workflow
             headers = {
