@@ -11,9 +11,9 @@
   "zzz_Pizza_Order_Workflow" : {
     "Type" : "Folder",
     "Variables" : [ {
-      "customer_id" : ""
+      "customer_id" : "12345"
     }, {
-      "order_id" : ""
+      "order_id" : "12345"
     } ],
     "Description" : "Place_Order kicks off when a customer buys a pizza in the app.\\n\\nEach job chains to the next using OnSuccess, ensuring sequential orchestration.\\n\\nScripts (placeholders) handle inventory, payment, kitchen queue, delivery, and reporting.\\n\\nVariables (customer_id, order_id) make it reusable for multiple orders.",
     "OrderMethod" : "Manual",
