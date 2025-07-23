@@ -10,9 +10,9 @@ def check_resources(order_id):
     Simulate checking both inventory and staffing for a given order.
     Returns a tuple: (inventory_ok, staffing_ok).
     """
-    # Simulate some logic (80% chance everything is fine)
-    inventory_ok = random.random() < 0.9  # 90% chance inventory is available
-    staffing_ok = random.random() < 0.85  # 85% chance staff is available
+    # Simulate some logic (95% chance everything is fine)
+    inventory_ok = random.random() < 0.95  # 95% chance inventory is available
+    staffing_ok = random.random() < 0.95  # 95% chance staff is available
 
     return inventory_ok, staffing_ok
 
