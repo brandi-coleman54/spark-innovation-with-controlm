@@ -1,0 +1,42 @@
+{
+  "Defaults": {
+    "Application": "zzz_telco_onboarding",
+    "SubApplication": "zzz_new_customer",
+    "ControlmServer": "IN01",
+    "Host": "zzz_instruqt_server",
+    "RunAs": "controlm"
+  },
+  "zzz_Telco_Onboarding_Workflow": {
+    "Type": "Folder",
+    "Variables": [
+      { "customer_id": "98765" },
+      { "activation_id": "54321" }
+    ],
+    "Description": "Automates end-to-end onboarding for a new mobile subscriber.\n\nEach job runs sequentially using OnSuccess.\n\nCovers KYC, credit, SIM provisioning, billing setup, customer notification, and reporting.",
+    "OrderMethod": "Manual",
+    "Capture_Customer_Request": {
+      "Type": "Job:Command",
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/telco-controlm/scripts/capture_customer.py --customer %%customer_id"
+    },
+    "Credit_And_Fraud_Check": {
+      "Type": "Job:Command",
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/telco-controlm/scripts/credit_fraud_check.py --activation %%activation_id"
+    },
+    "Provision_SIM_And_Services": {
+      "Type": "Job:Command",
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/telco-controlm/scripts/provision_sim.py --activation %%activation_id"
+    },
+    "Billing_Setup": {
+      "Type": "Job:Command",
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/telco-controlm/scripts/setup_billing.py --activation %%activation_id"
+    },
+    "Notify_Customer": {
+      "Type": "Job:Command",
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/telco-controlm/scripts/notify_customer.py --customer %%customer_id"
+    },
+    "Generate_Daily_Telco_Report": {
+      "Type": "Job:Command",
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/telco-controlm/scripts/reporting.py --date $(date +%F)"
+    }
+  }
+}
