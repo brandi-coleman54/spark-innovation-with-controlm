@@ -12,7 +12,7 @@
       { "customer_id": "98765" },
       { "activation_id": "54321" }
     ],
-    "Description": "Automates end-to-end onboarding for a new mobile subscriber.\n\nEach job runs sequentially using OnSuccess.\n\nCovers KYC, credit, SIM provisioning, billing setup, customer notification, and reporting.",
+    "Description": "Automates end-to-end onboarding for a new mobile subscriber. Covers KYC, credit, SIM provisioning, billing setup, customer notification, and reporting.",
     "OrderMethod": "Manual",
     "Capture_Customer_Request": {
       "Type": "Job:Command",
