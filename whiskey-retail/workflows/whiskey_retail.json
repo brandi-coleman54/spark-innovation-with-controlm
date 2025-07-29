@@ -10,7 +10,7 @@
         "Type": "Folder",
         "OrderMethod" : "Manual",
         "Variables" : [ {
-            "usercode" : ""
+            "usercode" : "replace-with-usercode"
           }, {
             "td_email" : ""
           } ],
