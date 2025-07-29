@@ -99,7 +99,7 @@
         "payments_ref": {
             "Type": "SubFolder",
             "AdjustEvents": false,
-            "ReferencePath": "%%usercode_payments",
+            "ReferencePath": "zzz_payments",
             "eventsToWaitFor": {
                 "Type": "WaitForEvents",
                 "Events": [
