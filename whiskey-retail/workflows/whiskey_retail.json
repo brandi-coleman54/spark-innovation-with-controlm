@@ -10,9 +10,9 @@
         "Type": "Folder",
         "OrderMethod" : "Manual",
         "Variables" : [ {
-            "usercode" : ""
+            "usercode" : "replace-with-usercode"
           }, {
-            "td_email" : ""
+            "td_email" : "replace-with-email"
           } ],
          "init_db" : {
             "Type" : "Job:Database:EmbeddedQuery",
