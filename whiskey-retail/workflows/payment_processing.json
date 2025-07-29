@@ -1,23 +1,23 @@
 {
     "Defaults": {
-	    "Host": "td-americas-k8s-hg",
-"ControlmServer": "IN01",
-"RunAs": "controlm",
-"Application": "zzz-whiskey-pipeline",
-"SubApplication": "zzz-process-whiskey-data"
+        "Host": "td-americas-k8s-hg",
+        "ControlmServer": "IN01",
+        "RunAs": "controlm",
+        "Application": "zzz-whiskey-pipeline",
+        "SubApplication": "zzz-process-whiskey-data"
     },
     "zzz_payments": {
         "Type": "Folder",
-        "OrderMethod" : "Manual",
+        "OrderMethod": "Manual",
         "get_payment_data": {
-            "Type" : "Job:Airflow",
-						"ConnectionProfile" : "TD_GCP_AIRFLOW",
-						"DagId": "product_function"
+            "Type": "Job:Airflow",
+            "ConnectionProfile": "TD_GCP_AIRFLOW",
+            "DagId": "product_function"
         }
         "transfer_payment_data": {
             "Type": "Job:FileTransfer",
-						"ConnectionProfileSrc" : "TD_VSE_S3_IAM",
-						"ConnectionProfileDest" : "TD_VSE_LOCAL_FS",
+            "ConnectionProfileSrc": "TD_VSE_S3_IAM",
+            "ConnectionProfileDest": "TD_VSE_LOCAL_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/payments.csv",
@@ -27,16 +27,19 @@
                 }
             ],
             "S3BucketName": "ctm-techday-resources"
-						},
-        "insert_payment_data": {
-           "Type" : "Job:Database:EmbeddedQuery",
-					 "ConnectionProfile" : "TD_VSE_MYSQL",
-					 "OutputSQLOutput" : "Y"
-					 "Query" : "use replace-with-usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/payments.csv'\\nINTO TABLE payments\\nFIELDS TERMINATED BY ',' \\n(@col1,@col2,@col3,@col4,@col5,@col6,@col7) set payment_id=@col2, date=@col3, customer_id=@col4, employee_id=@col5, product_id=@col6, price=@col7;\\n\\nDELETE FROM payments\\nWHERE payment_id = 0;"
         },
-         "Flow": {
+        "insert_payment_data": {
+            "Type": "Job:Database:EmbeddedQuery",
+            "ConnectionProfile": "TD_VSE_MYSQL",
+            "OutputSQLOutput": "Y""Query": "use replace-with-usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/payments.csv'\\nINTO TABLE payments\\nFIELDS TERMINATED BY ',' \\n(@col1,@col2,@col3,@col4,@col5,@col6,@col7) set payment_id=@col2, date=@col3, customer_id=@col4, employee_id=@col5, product_id=@col6, price=@col7;\\n\\nDELETE FROM payments\\nWHERE payment_id = 0;"
+        },
+        "Flow": {
             "Type": "Flow",
-            "Sequence": ["get_payment_data", "transfer_payment_data", "insert_payment_data"]
+            "Sequence": [
+                "get_payment_data",
+                "transfer_payment_data",
+                "insert_payment_data"
+            ]
         }
     }
 }
