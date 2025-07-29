@@ -1,5 +1,10 @@
 {
     "Defaults": {
+	    "Host": "td-americas-k8s-hg",
+"ControlmServer": "IN01",
+"RunAs": "controlm",
+"Application": "zzz-whiskey-pipeline",
+"SubApplication": "zzz-process-whiskey-data"
     },
     "zzz_payments": {
         "Type": "Folder",
