@@ -1,6 +1,6 @@
 {
 	"Defaults" : {
-		"Host": "td-americas-k8s-hg",
+		"Host": "replace-with-usercode_instruqt_server",
 		"ControlmServer": "IN01",
 		"Application": "replace-with-usercode_first_job_flow",
 		"SubApplication": "replace-with-usercode_first_job_flow",
