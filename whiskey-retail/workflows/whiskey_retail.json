@@ -41,7 +41,6 @@
             "ConnectionProfile": "TD_GCP_AIRFLOW",
             "DagId": "product_function",
             "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "Host": "zzz-eks-preprod-0.bmci2t.com",
             "RunAs": "TD_GCP_AIRFLOW"
         },
         "transfer_product_data": {
@@ -130,7 +129,6 @@
             "ConnectionProfile": "TD_GCP_AIRFLOW",
             "DagId": "customer_functions",
             "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "Host": "zzz-eks-preprod-0.bmci2t.com",
             "RunAs": "TD_GCP_AIRFLOW",
             "eventsToAdd": {
                 "Type": "AddEvents",
@@ -185,7 +183,6 @@
             "ConnectionProfile": "TD_GCP_AIRFLOW",
             "DagId": "employee_functions",
             "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "Host": "zzz-eks-preprod-0.bmci2t.com",
             "RunAs": "TD_GCP_AIRFLOW"
         },
         "transfer_employee_data": {
