@@ -37,6 +37,28 @@
     "Generate_Daily_Telco_Report": {
       "Type": "Job:Command",
       "Command": "python3 /home/controlm/spark-innovation-with-controlm/subscriber-onboarding/scripts/reporting.py --date $(date +%F)"
-    }
+    }, 
+    "SLA" : {
+	 "Type" : "Job:SLAManagement",
+	 "ServiceName" : "replace-with-usercode Subscriber Onboarding",
+	 "JobRunsDeviationsTolerance" : "3",
+	 "CompleteIn" : {
+		 "Time" : "0:10"
+		 },
+		 "ServiceActions" : {
+			 "If:SLA:ServiceIsLate_0" : {
+			 "Type" : "If:SLA:ServiceIsLate",
+			 "Action:SLA:Notify_0" : {
+			"Type" : "Action:SLA:Mail",
+       "Email" : "replace-with-email",
+       "Subject" : "Service %%SERVICE_NAME is late",
+        "Message" : "Service %%SERVICE_NAME is projected to be late. The service deadline is %%SERVICE_DUE_TIME but it is estimated to complete at %%SERVICE_EXPECTED_END_TIME. The following job(s) are problematic: %%PROBLEMATIC_JOBS"
+          }
+		}
+	}}, 
+  "Flow": {
+	"Type": "Flow",
+	"Sequence": ["Capture_Customer_Request", "Credit_And_Fraud_Check","Provision_SIM_And_Services","Billing_Setup","Notify_Customer","Generate_Daily_Telco_Report","SLA" ]
+   }
   }
 }
