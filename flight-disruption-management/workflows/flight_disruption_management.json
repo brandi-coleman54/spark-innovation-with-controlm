@@ -1,0 +1,52 @@
+{
+    "Defaults": {
+        "Application": "zzz_airline_ops",
+        "SubApplication": "zzz_flight_disruption",
+        "ControlmServer": "IN01",
+        "Host": "zzz_instruqt_server",
+        "RunAs": "controlm"
+    },
+    "zzz_Flight_Disruption_Workflow": {
+        "Type": "Folder",
+        "Variables": [
+            {
+                "flight_id": "AA1234"
+            },
+            {
+                "pnr": "XYZ789"
+            }
+        ],
+        "Description": "Flight disruption management workflow: receive disruption, security flag check, ticket validation, agent assignment, credit/refund, and reporting.",
+        "OrderMethod": "Manual",
+        "Receive_Disruption_Notice": {
+            "Type": "Job:Command",
+            "Description": "Capture flight delay/cancel event and affected passengers",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/flight-disruption-management/scripts/receive_disruption.py --flight %%flight_id --pnr %%pnr"
+        },
+        "Security_Flag_Check": {
+            "Type": "Job:Command",
+            "Description": "Screen for security flags or ticketing anomalies",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/flight-disruption-management/scripts/security_flag_check.py --flight %%flight_id --pnr %%pnr"
+        },
+        "Ticket_Validation": {
+            "Type": "Job:Command",
+            "Description": "Validate fare class, change/refund eligibility, and interline rules",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/flight-disruption-management/scripts/ticket_validation.py %%pnr"
+        },
+        "Assign_Rebooking_Agent": {
+            "Type": "Job:Command",
+            "Description": "Route to agent or automated rebooking service",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/flight-disruption-management/scripts/assign_rebooking_agent.py --pnr %%pnr"
+        },
+        "Issue_Travel_Credit": {
+            "Type": "Job:Command",
+            "Description": "Issue refund or travel voucher/credit",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/flight-disruption-management/scripts/issue_travel_credit.py --pnr %%pnr"
+        },
+        "Generate_Disruption_Report": {
+            "Type": "Job:Command",
+            "Description": "Aggregate disruption KPIs for dashboards",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/flight-disruption-management/scripts/disruption_reporting.py --date $(date +%F)"
+        }
+    }
+}
