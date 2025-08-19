@@ -13,7 +13,6 @@ CTM_ENV=${CTM_ENV}
 CTM_AAPI_ENDPOINT=${CTM_AAPI_ENDPOINT}
 CTM_AAPI_TOKEN=${CTM_AAPI_TOKEN}
 
-
 # Check if INSTRUQT_USER_EMAIL is set and non-empty
 if [[ -z "${INSTRUQT_USER_EMAIL:-}" ]]; then
   echo "INSTRUQT_USER_EMAIL is not set. Using default value."
@@ -50,8 +49,6 @@ user_code=$(echo "${first_initial}${last_initials}${random_digit}" | tr '[:upper
 
 agent variable set CTM_USER_CODE ${user_code}
 agent variable set CTM_USER ${CTM_USER}
-
-agent variable set CTM_AAPI_ENDPOINT ${CTM_AAPI_ENDPOINT}
 
 hostnamectl set-hostname ${_SANDBOX_ID}
 
@@ -211,7 +208,7 @@ function Build_Role_Template {
         {
             "ControlmServer": "IN01",
             "RunasUser": "*",
-            "Host": "${user_code}*"
+            "Host": "*"
         }
     ],
     "SiteStandard": [
@@ -231,25 +228,25 @@ function Build_Role_Template {
     ],
     "AgentManagement": [
         {
-            "ControlmServer": "IN01",
+            "ControlmServer": "*",
             "Agent": "instruqt",
             "Privilege": "Full"
         }
     ],
     "PluginManagement": [
         {
-            "ControlmServer": "IN01",
+            "ControlmServer": "*",
             "Agent": "instruqt",
             "PluginType": "*",
-            "Privilege": "Browse"
+            "Privilege": "Update"
         }
     ],
     "ConnectionProfileManagement": [
         {
             "ControlmServer": "*",
-            "Agent": "*",
+            "Agent": "instruqt",
             "PluginType": "*",
-            "Name": "${user_code}*",
+            "Name": "*",
             "Privilege": "Update"
         }
     ]
@@ -266,45 +263,26 @@ Create_TD_Role ${user_code}
 Create_TD_User ${CTM_USER} ${user_code}
 Create_TD_Token ${user_code}
 
-
-
 TARGET_DIR="/home/controlm/spark-innovation-with-controlm/"
-
-# Function to update JSON key values safely with jq
-replace_with_jq() {
-    local key="$1"
-    local value="$2"
-    local file="$3"
-
-    # Use jq to replace any string value matching the placeholder
-    jq --arg val "$value" '
-        (.. | select(type == "string") | select(. == "'"$key"'")) |= $val
-    ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
-}
 
 
 # Replace all instances of 'replace-with-endpoint' with CTM_AAPI_ENDPOINT
-echo "Replacing 'replace-with-endpoint' with '${CTM_AAPI_ENDPOINT}' in /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts..."
+echo "Replacing 'replace-with-endpoint' with '${CTM_AAPI_ENDPOINT}' in /home/controlm/spark-innovation-with-controlm/..."
 find "/home/controlm/spark-innovation-with-controlm/" -type f -exec sed -i "s|replace-with-endpoint|${CTM_AAPI_ENDPOINT}|g" {} +
 echo "Replacement complete."
-echo "Replacing 'replace-with-email' with '${CTM_USER}' in /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts..."
+echo "Replacing 'replace-with-email' with '${CTM_USER}' in /home/controlm/spark-innovation-with-controlm/..."
 find "/home/controlm/spark-innovation-with-controlm/" -type f -exec sed -i "s|replace-with-email|${CTM_USER}|g" {} +
 echo "Replacement complete."
-echo "Replacing 'replace-with-usercode' with '${user_code}' in /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts..."
+echo "Replacing 'replace-with-usercode' with '${user_code}' in /home/controlm/spark-innovation-with-controlm/..."
 find "/home/controlm/spark-innovation-with-controlm/" -type f -exec sed -i "s|replace-with-usercode|${user_code}|g" {} +
 echo "Replacement complete."
-echo "Replacing 'replace-with-instruqt-host' with '${user_code}_instruqt_server' in /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts..."
+echo "Replacing 'replace-with-instruqt-host' with '${user_code}_instruqt_server' in /home/controlm/spark-innovation-with-controlm/..."
 find "/home/controlm/spark-innovation-with-controlm/" -type f -exec sed -i "s|replace-with-instruqt-host|${user_code}_instruqt_server|g" {} +
 echo "Replacement complete."
-echo "Replacing 'replace-with-token' with '${CTM_AUTH_TOKEN}' in /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts..."
+echo "Replacing 'replace-with-token' with '${CTM_AUTH_TOKEN}' in /home/controlm/spark-innovation-with-controlm/..."
 find "/home/controlm/spark-innovation-with-controlm/" -type f -exec sed -i "s|replace-with-token|${CTM_AUTH_TOKEN}|g" {} +
 echo "Replacement complete."
 echo "Replacing 'replace-with-ctm-server' with 'IN01' in /home/controlm/spark-innovation-with-controlm/..."
 find "/home/controlm/spark-innovation-with-controlm/" -type f -exec sed -i "s|replace-with-ctm-server|IN01|g" {} +
 echo "Replacement complete."
-echo "Replacing 'replace-with-ctm-folder' with '${user_code}_Pizza_Order_Workflow_preprod' in /home/controlm/spark-innovation-with-controlm/dominos-controlm/scripts.."
-find "/home/controlm/spark-innovation-with-controlm/" -type f -exec sed -i "s|replace-with-ctm-folder|${user_code}_Pizza_Order_Workflow|g" {} +
-echo "Replacement complete."
 
-# Set ownership and make all files editable by the user
-chown -R "$USER:$GROUP" /home/controlm/spark-innovation-with-controlm
