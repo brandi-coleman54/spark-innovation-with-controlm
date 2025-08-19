@@ -8,7 +8,6 @@ GROUP="controlm"
 HOME_DIR="/home/$USER"
 DEST_DIR="$HOME_DIR/labs"
 
-
 # CTM Provision Variables
 CTM_ENV=${CTM_ENV}
 CTM_AAPI_ENDPOINT=${CTM_AAPI_ENDPOINT}
@@ -43,12 +42,11 @@ first_initial=${first_name:0:1}
 # Get the first two characters of the last name.
 last_initials=${last_name:0:2}
 
-# Generate a random single-digit number (from 0 to 9).
-random_digit=$((RANDOM % 10))
+# Generate a random single-digit number (from 0 to 19).
+random_digit=$((RANDOM % 20))
 
 # Concatenate the parts to create the final user code.
 user_code=$(echo "${first_initial}${last_initials}${random_digit}" | tr '[:upper:]' '[:lower:]')
-
 
 agent variable set CTM_USER_CODE ${user_code}
 agent variable set CTM_USER ${CTM_USER}
@@ -57,69 +55,16 @@ agent variable set CTM_AAPI_ENDPOINT ${CTM_AAPI_ENDPOINT}
 
 hostnamectl set-hostname ${_SANDBOX_ID}
 
-CTM_AAPI_ENDPOINT=https://se-preprod-aapi.us1.controlm.com/automation-api
-#CTM_CLI_FILE=https://bmc-prod-saas-agent-application-artifacts.s3.us-west-2.amazonaws.com/9.0.22.000/extracted/4461/root/apps/DEV/9.0.22.000/install_ctm_cli.py
-
-# Create group if it doesn't exist
-#if ! getent group "$GROUP" > /dev/null; then
-#  groupadd "$GROUP"
-#fi
-
-# Create user if it doesn't exist
-#if ! id "$USER" &>/dev/null; then
-#  useradd -m -d "$HOME_DIR" -g "$GROUP" -s /bin/bash "$USER"
-#fi
-
-# Ensure home and labs directories exist
-#mkdir -p "$DEST_DIR"
-
-# Set ownership of home directory
-#chown -R "$USER:$GROUP" "$HOME_DIR"
-
 cd "$HOME_DIR"
-git clone https://github.com/brandi-coleman54/spark-innovation-with-controlm.git
 
 # Set ownership and make all files editable by the user
 chown -R "$USER:$GROUP" /home/controlm/spark-innovation-with-controlm
-
-#apt update && apt install -y python3-pip python3.10-venv openjdk-17-jdk cups dos2unix
-#BASHRC="/home/controlm/.bashrc"
-#LINE2='export BMC_INST_JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64'
-#grep -qxF "$LINE2" "$BASHRC" || echo "$LINE2" >> "$BASHRC"
-
-#wget http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2ubuntu0.1_amd64.deb
-#apt install ./libtinfo5_6.3-2ubuntu0.1_amd64.deb
-
-# Start CTM Provisioning
-set +e
-set -x
-env > /tmp/env.txt
-echo "USER_CODE=${user_code}" >> /tmp/env.txt
-echo "CTM_USER=${CTM_USER}" >> /tmp/env.txt
-env |grep "INSTRUQT"
-env |grep "CTM"
-
-
-cd ${HOME_DIR}
-# Set ownership of home directory
-#python3 -m venv venv
-#source venv/bin/activate
-#curl -O ${CTM_CLI_FILE}
-#python3 ./install_ctm_cli.py
-#python3 -m pip install flask
-
-#LINE='export PATH=/home/controlm/venv/bin:$PATH'
-#grep -qxF "$LINE" "$BASHRC" || echo "$LINE" >> "$BASHRC"
-#source "$BASHRC"
 
 # Activate immediately for current session
 export BMC_INST_JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export PATH=/home/controlm/venv/bin:$PATH
 
-#pip install flask
-
 ctm env add ${CTM_ENV} ${CTM_AAPI_ENDPOINT} ${CTM_AAPI_TOKEN}
-
 
 function Create_TD_Role {
     user_code=$1
@@ -165,14 +110,6 @@ function Create_TD_Token {
     fi
  
 }
-
-function Create_Agent {
-#    sudo -u controlm ctm env add admin "https://se-preprod-aapi.us1.controlm.com/automation-api" UFJER0ZQOjRhZWU0M2JkLTc0MDYtNDk1OC05Zjk3LTk5OWNlN2RmZDU4ZjpHeFJRY09kSzFyQnpzNE5idTlIYWpxOE9yZHdWNnc5YXVVU1FpT1haVERjPQ==
-#    sudo -u controlm ctm provision saas::install Agent_Ubuntu.Linux instruqt "${user_code}_instruqt_server"
-    ctm env del admin
-#    sudo - controlm ctm env del admin
-}
-
 
 function Build_User_Template {
     user_code=$1
@@ -328,7 +265,7 @@ Build_Token_Template ${user_code}
 Create_TD_Role ${user_code} 
 Create_TD_User ${CTM_USER} ${user_code}
 Create_TD_Token ${user_code}
-Create_Agent
+
 
 
 TARGET_DIR="/home/controlm/spark-innovation-with-controlm/"
