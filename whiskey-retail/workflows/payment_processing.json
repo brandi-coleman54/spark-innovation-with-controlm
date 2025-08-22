@@ -11,13 +11,13 @@
         "OrderMethod": "Manual",
         "get_payment_data": {
             "Type": "Job:Airflow",
-            "ConnectionProfile": "ZZZ_GCP_AIRFLOW",
+            "ConnectionProfile": "replace-with-usercode_GCP_AIRFLOW",
             "DagId": "product_function"
         },
         "transfer_payment_data": {
             "Type": "Job:FileTransfer",
             "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "ZZZ_LOCAL_FS",
+            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/payments.csv",
