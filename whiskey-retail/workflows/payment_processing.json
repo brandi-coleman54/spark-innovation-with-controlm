@@ -1,6 +1,6 @@
 {
     "Defaults": {
-        "Host": "td-americas-k8s-hg",
+        "Host": "zzz_instruqt_server",
         "ControlmServer": "IN01",
         "RunAs": "controlm",
         "Application": "zzz-whiskey-pipeline",
