@@ -21,6 +21,14 @@
     "Property": "@",
     "ApplyOn": {"Type": "Folder"},
     "Replace": [{"zzz(.*)": "replace-with-usercode$1"}]
-    }
+    },
+    {
+		"Property": "ReferencePath",
+		"ApplyOn": {
+		"Type": "SubFolder",
+		"@": "payments_ref"
+		},
+		"Replace": [ { "zzz(.*)": "replace-with-usercode$1"}]
+	}
   ]
 }
