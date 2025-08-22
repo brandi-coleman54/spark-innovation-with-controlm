@@ -38,16 +38,16 @@
         },
         "get_product_data": {
             "Type": "Job:Airflow",
-            "ConnectionProfile": "ZZZ_GCP_AIRFLOW",
+            "ConnectionProfile": "replace-with-usercode_GCP_AIRFLOW",
             "DagId": "product_function",
             "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "RunAs": "ZZZ_GCP_AIRFLOW"
+            "RunAs": "replace-with-usercode_GCP_AIRFLOW"
         },
         "transfer_product_data": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+ZZZ_LOCAL_FS",
+            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL_FS",
             "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "ZZZ_LOCAL_FS",
+            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/products.csv",
@@ -126,10 +126,10 @@
         },
         "customer_data": {
             "Type": "Job:Airflow",
-            "ConnectionProfile": "ZZZ_GCP_AIRFLOW",
+            "ConnectionProfile": "replace-with-usercode_GCP_AIRFLOW",
             "DagId": "customer_functions",
             "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "RunAs": "ZZZ_GCP_AIRFLOW",
+            "RunAs": "replace-with-usercode_GCP_AIRFLOW",
             "eventsToAdd": {
                 "Type": "AddEvents",
                 "Events": [
@@ -141,9 +141,9 @@
         },
         "transfer_customer_data": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+ZZZ_LOCAL",
+            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL",
             "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "ZZZ_LOCAL_FS",
+            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/norm_customers.csv",
@@ -180,16 +180,16 @@
         },
         "employee_data": {
             "Type": "Job:Airflow",
-            "ConnectionProfile": "ZZZ_GCP_AIRFLOW",
+            "ConnectionProfile": "replace-with-usercode_GCP_AIRFLOW",
             "DagId": "employee_functions",
             "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "RunAs": "ZZZ_GCP_AIRFLOW"
+            "RunAs": "replace-with-usercode_GCP_AIRFLOW"
         },
         "transfer_employee_data": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+ZZZ_LOCAL_FS",
+            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL_FS",
             "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "ZZZ_LOCAL_FS",
+            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/norm_employees.csv",
@@ -208,9 +208,9 @@
         },
         "transfer_resources": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+ZZZ_LOCAL_FS",
+            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL_FS",
             "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "ZZZ_LOCAL_FS",
+            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/scripts/complete_db_setup.py",
@@ -247,9 +247,9 @@
         },
         "transfer_date_data": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+ZZZ_LOCAL_FS",
+            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL_FS",
             "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "ZZZ_LOCAL_FS",
+            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/all_dates.csv",
