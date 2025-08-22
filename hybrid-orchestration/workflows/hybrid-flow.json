@@ -19,7 +19,7 @@
         }
       }
     },
-    "OS_Job_2" : {
+    "SaaS_Job" : {
       "Type" : "Job:Command",
       "Host" : "saas_agent",
       "CreatedBy" : "brandi.coleman54@gmail.com",
@@ -64,7 +64,7 @@
         }
       }
     },
-    "OS_Job_5" : {
+    "OnPrem_Job" : {
       "Type" : "Job:Command",
       "Host" : "self-hosted-agent",
       "CreatedBy" : "brandi.coleman54@gmail.com",
