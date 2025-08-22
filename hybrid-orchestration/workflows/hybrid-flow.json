@@ -1,0 +1,86 @@
+{
+  "zzz_SaaS_Flow" : {
+    "Type" : "Folder",
+    "ControlmServer" : "IN01",
+    "OrderMethod" : "Manual",
+    "SubApplication" : "zzz_SaaS_Flow",
+    "CreatedBy" : "brandi.coleman54@gmail.com",
+    "Application" : "zzz_SaaS_Flow",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "OS_Job_2" : {
+      "Type" : "Job:Command",
+      "Host" : "saas_agent",
+      "CreatedBy" : "brandi.coleman54@gmail.com",
+      "RunAs" : "controlm",
+      "Application" : "zzz_Hybrid_Workflowzzz_Hybrid_Workflow",
+      "Command" : "echo hello",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      }
+    },
+    "eventsToWaitFor" : {
+      "Type" : "WaitForEvents",
+      "Events" : [ {
+        "Event" : "wzazzz_Self-Hosted-Flow-TO-zzz_SaaS_Flow"
+      } ]
+    },
+    "eventsToDelete" : {
+      "Type" : "DeleteEvents",
+      "Events" : [ {
+        "Event" : "wzazzz_Self-Hosted-Flow-TO-zzz_SaaS_Flow"
+      } ]
+    }
+  },
+  "zzz_Self-Hosted-Flow" : {
+    "Type" : "Folder",
+    "ControlmServer" : "vsepreprod",
+    "SubApplication" : "zzz_Self-Hosted-Flow",
+    "CreatedBy" : "brandi.coleman54@gmail.com",
+    "Application" : "zzz_Self-Hosted-Flow",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "OS_Job_5" : {
+      "Type" : "Job:Command",
+      "Host" : "self-hosted-agent",
+      "CreatedBy" : "brandi.coleman54@gmail.com",
+      "RunAs" : "controlm",
+      "Command" : "echo hello",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      }
+    },
+    "eventsToAdd" : {
+      "Type" : "AddEvents",
+      "Events" : [ {
+        "Event" : "wzazzz_Self-Hosted-Flow-TO-zzz_SaaS_Flow"
+      } ]
+    }
+  }
+}
