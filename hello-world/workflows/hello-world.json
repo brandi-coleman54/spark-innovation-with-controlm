@@ -7,7 +7,7 @@
 		"OrderMethod": "Manual"
 	},
 
-   "replace-with-usercode_hello_world": {
+   "replace-with-usercode_hello_world_flow": {
 		"Type": "Folder",
 		"Job-A": {
 			"Type" : "Job:Command",
