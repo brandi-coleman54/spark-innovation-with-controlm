@@ -1,0 +1,53 @@
+
+{
+    "Defaults": {
+        "Application": "zzz_insurance_ops",
+        "SubApplication": "zzz_claims_processing",
+        "ControlmServer": "IN01",
+        "Host": "zzz_instruqt_server",
+        "RunAs": "controlm"
+    },
+    "zzz_Claims_Processing_Workflow": {
+        "Type": "Folder",
+        "Variables": [
+            {
+                "claim_id": "C12345"
+            },
+            {
+                "policy_id": "P98765"
+            }
+        ],
+        "Description": "Claims processing workflow simulates intake, fraud detection, policy validation, adjuster assignment, payment, and reporting.",
+        "OrderMethod": "Manual",
+        "Intake_Claim": {
+            "Type": "Job:Command",
+            "Description": "Validate and log incoming claim request",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/intake_claim.py --claim %%claim_id"
+        },
+        "Fraud_Check": {
+            "Type": "Job:Command",
+            "Description": "Perform fraud risk scoring for the claim",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/fraud_check_claim.py --claim %%claim_id"
+        },
+        "Policy_Validation": {
+            "Type": "Job:Command",
+            "Description": "Validate policy coverage and resources",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/policy_validation.py %%policy_id"
+        },
+        "Assign_Adjuster": {
+            "Type": "Job:Command",
+            "Description": "Queue claim for adjuster review or auto-approval",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/assign_adjuster.py --claim %%claim_id"
+        },
+        "Disburse_Payment": {
+            "Type": "Job:Command",
+            "Description": "Process payment for approved claim",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/disburse_payment.py --claim %%claim_id"
+        },
+        "Generate_Reporting": {
+            "Type": "Job:Command",
+            "Description": "Aggregate processed claims data for dashboards",
+            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/claims_reporting.py --date $(date +%F)"
+        }
+    }
+}
