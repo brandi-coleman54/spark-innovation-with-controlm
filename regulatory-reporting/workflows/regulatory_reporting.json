@@ -5,7 +5,7 @@
     "ControlmServer": "IN01",
     "Host": "zzz_instruqt_server",
     "RunAs": "controlm"
-  }
+  },
   "zzz_Regulatory_Reporting_Workflow": {
     "Type": "Folder",
     "OrderMethod": "Manual",
