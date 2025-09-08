@@ -1,53 +1,117 @@
-
 {
-    "Defaults": {
-        "Application": "zzz_insurance_ops",
-        "SubApplication": "zzz_claims_processing",
-        "ControlmServer": "IN01",
-        "Host": "zzz_instruqt_server",
-        "RunAs": "controlm"
+  "Defaults": {
+    "Application": "zzz_regulatory_reporting",
+    "SubApplication": "zzz_regulatory_daily",
+    "ControlmServer": "IN01",
+    "Host": "zzz_instruqt_server",
+     "RunAs": "controlm"
+  }
+  "zzz_Regulatory_Reporting_Workflow": {
+    "Type": "Folder",
+    "OrderMethod": "Manual",
+    "Variables": [
+      { "regulator": "GENERIC" },
+      { "region": "NA" }
+    ],
+
+    "Ingest_Transactions": {
+      "Type": "Job:Command",
+      "Description": "Fetch prior-day trades/payments from core systems/data lake",
+      "Command": "python3 /opt/reg_reporting/scripts/ingest_transactions.py --region %%region"
     },
-    "zzz_Claims_Processing_Workflow": {
-        "Type": "Folder",
-        "Variables": [
-            {
-                "claim_id": "C12345"
-            },
-            {
-                "policy_id": "P98765"
-            }
-        ],
-        "Description": "Claims processing workflow simulates intake, fraud detection, policy validation, adjuster assignment, payment, and reporting.",
-        "OrderMethod": "Manual",
-        "Intake_Claim": {
-            "Type": "Job:Command",
-            "Description": "Validate and log incoming claim request",
-            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/intake_claim.py --claim %%claim_id"
-        },
-        "Fraud_Check": {
-            "Type": "Job:Command",
-            "Description": "Perform fraud risk scoring for the claim",
-            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/fraud_check_claim.py --claim %%claim_id"
-        },
-        "Policy_Validation": {
-            "Type": "Job:Command",
-            "Description": "Validate policy coverage and resources",
-            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/policy_validation.py %%policy_id"
-        },
-        "Assign_Adjuster": {
-            "Type": "Job:Command",
-            "Description": "Queue claim for adjuster review or auto-approval",
-            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/assign_adjuster.py --claim %%claim_id"
-        },
-        "Disburse_Payment": {
-            "Type": "Job:Command",
-            "Description": "Process payment for approved claim",
-            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/disburse_payment.py --claim %%claim_id"
-        },
-        "Generate_Reporting": {
-            "Type": "Job:Command",
-            "Description": "Aggregate processed claims data for dashboards",
-            "Command": "python3 /home/controlm/spark-innovation-with-controlm/claims-processing/scripts/claims_reporting.py --date $(date +%F)"
+
+    "Data_Quality_Check": {
+      "Type": "Job:Command",
+      "Description": "Schema, nulls, ranges, duplicates; write DQ metrics",
+      "Command": "python3 /opt/reg_reporting/scripts/dq_check.py --input /data/raw/transactions --output /data/curated/dq_ok",
+      "On": {
+        "DoIf:RC:NotOK_0": {
+          "Type": "If:RC:NotOK",
+          "Action:Mail_Notify_DQ_0": {
+            "Type": "Action:Mail",
+            "Email": "compliance-alerts@bank.com",
+            "Subject": "[DQ FAIL] Regulatory pipeline",
+            "Message": "DQ check failed. Please review job %%JOBNAME in run %%RUNID."
+          }
         }
+      }
+    },
+
+    "Policy_Compliance_Validation": {
+      "Type": "Job:Command",
+      "Description": "AML/KYC rules, threshold checks (deterministic for demos)",
+      "Command": "python3 /opt/reg_reporting/scripts/policy_validation.py --mode strict --force-outcome pass",
+    },
+
+    "Aggregate_And_Transform": {
+      "Type": "Job:Command",
+      "Description": "Build regulator-specific dataset (e.g., XBRL/CSV/XML)",
+      "Command": "python3 /opt/reg_reporting/scripts/transform_for_regulator.py --regulator %%regulator --region %%region --out /data/exports/report_payload"
+    },
+
+    "Generate_Regulatory_Report": {
+      "Type": "Job:Command",
+      "Description": "Package report + checksum + manifest",
+      "Command": "python3 /opt/reg_reporting/scripts/generate_report.py --in /data/exports/report_payload --out /data/exports/report_package"
+    },
+
+    "Submit_To_Regulator": {
+      "Type": "Job:Command",
+      "Description": "Primary: API/SFTP; Retry, then fallback",
+      "Command": "python3 /opt/reg_reporting/scripts/submit_report.py --method sftp --endpoint $REG_SFTP_HOST --package /data/exports/report_package --timeout 120",
+      "On": {
+        "DoIf:RC:NotOK_0": {
+          "Type": "If:RC:NotOK",
+          "Action:Try_Fallback_API_0": {
+            "Type": "Action:DoCommand",
+            "Command": "python3 /opt/reg_reporting/scripts/submit_report.py --method api --endpoint $REG_API_URL --package /data/exports/report_package --timeout 120"
+          },
+          "Action:Mail_Notify_Submit_1": {
+            "Type": "Action:Mail",
+            "Email": "compliance-alerts@bank.com",
+            "Subject": "[SUBMISSION ISSUE] Regulatory pipeline",
+            "Message": "Submission encountered errors. Fallback attempted. Check run %%RUNID."
+          }
+        }
+      }
+    },
+
+    "Generate_Audit_Log": {
+      "Type": "Job:Command",
+      "Description": "Persist run metadata for audit trail",
+      "Command": "python3 /opt/reg_reporting/scripts/audit_log.py --run %%RUNID --workspace %%FOLDER --jobs Ingest_Transactions,Data_Quality_Check,Policy_Compliance_Validation,Aggregate_And_Transform,Generate_Regulatory_Report,Submit_To_Regulator"
+    },
+
+    "SLA_Regulatory_Report": {
+      "Type": "Job:SLAManagement",
+      "ServiceName": "Daily Regulatory Report SLA",
+      "JobRunsDeviationsTolerance": "3",
+      "CompleteIn": { "Time": "6:00" },
+      "ServiceActions": {
+        "If:SLA:ServiceIsLate_0": {
+          "Type": "If:SLA:ServiceIsLate",
+          "Action:SLA:Mail_0": {
+            "Type": "Action:SLA:Mail",
+            "Email": "compliance-team@bank.com",
+            "Subject": "Service %%SERVICE_NAME is late",
+            "Message": "Projected late. Due: %%SERVICE_DUE_TIME, ETA: %%SERVICE_EXPECTED_END_TIME. Problem jobs: %%PROBLEMATIC_JOBS"
+          }
+        }
+      }
+    },
+
+    "Flow": {
+      "Type": "Flow",
+      "Sequence": [
+        "Ingest_Transactions",
+        "Data_Quality_Check",
+        "Policy_Compliance_Validation",
+        "Aggregate_And_Transform",
+        "Generate_Regulatory_Report",
+        "Submit_To_Regulator",
+        "Generate_Audit_Log",
+        "SLA_Regulatory_Report"
+      ]
     }
+  }
 }
