@@ -80,38 +80,6 @@
       "Type": "Job:Command",
       "Description": "Persist run metadata for audit trail",
       "Command": "python3 /opt/reg_reporting/scripts/audit_log.py --run %%RUNID --workspace %%FOLDER --jobs Ingest_Transactions,Data_Quality_Check,Policy_Compliance_Validation,Aggregate_And_Transform,Generate_Regulatory_Report,Submit_To_Regulator"
-    },
-
-    "SLA_Regulatory_Report": {
-      "Type": "Job:SLAManagement",
-      "ServiceName": "Daily Regulatory Report SLA",
-      "JobRunsDeviationsTolerance": "3",
-      "CompleteIn": { "Time": "6:00" },
-      "ServiceActions": {
-        "If:SLA:ServiceIsLate_0": {
-          "Type": "If:SLA:ServiceIsLate",
-          "Action:SLA:Mail_0": {
-            "Type": "Action:SLA:Mail",
-            "Email": "compliance-team@bank.com",
-            "Subject": "Service %%SERVICE_NAME is late",
-            "Message": "Projected late. Due: %%SERVICE_DUE_TIME, ETA: %%SERVICE_EXPECTED_END_TIME. Problem jobs: %%PROBLEMATIC_JOBS"
-          }
-        }
-      }
-    },
-
-    "Flow": {
-      "Type": "Flow",
-      "Sequence": [
-        "Ingest_Transactions",
-        "Data_Quality_Check",
-        "Policy_Compliance_Validation",
-        "Aggregate_And_Transform",
-        "Generate_Regulatory_Report",
-        "Submit_To_Regulator",
-        "Generate_Audit_Log",
-        "SLA_Regulatory_Report"
-      ]
     }
   }
 }
