@@ -1,0 +1,1019 @@
+{
+  "zzz_Order_Processing" : {
+    "Type" : "Folder",
+    "ControlmServer" : "psctm",
+    "Description" : "Ordered daily for GBR purposes.",
+    "OrderMethod" : "Manual",
+    "RunAs" : "ctmagent",
+    "SiteStandard" : "zzz_prd",
+    "SubApplication" : "zzz_",
+    "CreatedBy" : "grask",
+    "Priority" : "Very Low",
+    "Application" : "zzz_",
+    "RerunLimit" : {
+      "Units" : "Minutes",
+      "Every" : "5"
+    },
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "IfBase:Folder:CompletionStatus_0" : {
+      "Type" : "If:CompletionStatus",
+      "CompletionStatus" : "NOTOK",
+      "Mail_0" : {
+        "Type" : "Action:Mail",
+        "Subject" : "WOOT WOOT!!!",
+        "To" : "grask@bmc.com",
+        "Message" : "Folder failed."
+      }
+    },
+    "zzz_change_ag01" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "change file permissions",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "Command" : "rm -rf /home/grask@adprod.bmc.com/grask.txt; chmod 777 /home/grask@adprod.bmc.com/*",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01-313"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313"
+        } ]
+      }
+    },
+    "zzz_change_ap01" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "change file permissions",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "Command" : "chmod 777 /home/grask@adprod.bmc.com/*.txt",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Action:SetToOK_0" : {
+          "Type" : "Action:SetToOK"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_cmd_not_found-TO-zzz_chmod-313"
+        }, {
+          "Event" : "zzz_list2_dir_contents-TO-zzz_change_ap01-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_change_ap01-TO-zzz_cleanup_ap01-313"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_list2_dir_contents-TO-zzz_change_ap01-313"
+        } ]
+      }
+    },
+    "zzz_cleanup_ag01" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "cleanup ag01 environment",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "Command" : "rm -f /home/grask@adprod.bmc.com/*.txt",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_cleanup_ag01-TO-zzz_report1-313"
+        } ]
+      }
+    },
+    "zzz_cleanup_ap01" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "cleanup ap01 environment",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "Command" : "rm -f /home/grask@adprod.bmc.com/*.txt",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_change_ap01-TO-zzz_cleanup_ap01-313"
+        }, {
+          "Event" : "zzz_dir_which_directory-TO-zzz_cleanup_ap01"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_cleanup_ap01-TO-zzz_report1-313"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_dir_which_directory-TO-zzz_cleanup_ap01"
+        } ]
+      }
+    },
+    "zzz_cmd_not_found" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "FileName" : "quotes.sh",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "FilePath" : "/home/grask@adprod.bmc.com/scripts",
+      "CreatedBy" : "grask",
+      "Description" : "This workload is problematic",
+      "RunAs" : "ctmagent",
+      "Application" : "zzz_",
+      "Command" : "echo good to go",
+      "DocumentationUrl" : {
+        "Url" : "https://www.bmc.com/it-solutions/control-m.html"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Mail_0" : {
+          "Type" : "Action:Mail",
+          "Subject" : "WOMP WOMP WOMP!!!",
+          "To" : "grask@bmc.com",
+          "Message" : "%%ODATE at %%TIME.\\n\\n%%JOBNAME in %%SCHEDTAB folder has failed.\\n\\nClick on this link for direct access to the failed job: http://vl-aus-ctm-em01.ctm.bmc.com:18080/ControlM/#Neighborhood:id=%%ORDERID&ctm=%%DATACENTER&name=%%JOBNAME.&date=%%DATE&direction=1&radius=3",
+          "AttachOutput" : true
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_cmd_not_found-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_cmd_not_found-TO-zzz_chmod-313"
+        }, {
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313"
+        } ]
+      }
+    },
+    "zzz_copy_dir_contents" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "copy directory contents",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "Command" : "cp /home/grask@adprod.bmc.com/grask.txt /home/grask@adprod.bmc.com/outgoing/grask2.txt",
+      "DocumentationUrl" : {
+        "Url" : "https://www.bmc.com/it-solutions/control-m.html"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "Output" : {
+        "Destination" : "/home/grask@adprod.bmc.com/apps/PRD/App1",
+        "Operation" : "Move"
+      },
+      "Notify:NotOK_0" : {
+        "Type" : "Notify:NotOK",
+        "Urgency" : "VeryUrgent",
+        "Destination" : "Slack",
+        "Message" : "%%JOBNAME with JobID %%JOBID ended with Status %%COMPSTAT on %%NODEID at %%TIME  Log into https://acb-rhctmv20.centralus.cloudapp.azure.com:8443/ControlM/#viewpoint:id=All%2520Jobs%25201&name=All%2520Jobs to analyze"
+      },
+      "IfBase:Folder:CompletionStatus_1" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Action:Rerun_0" : {
+          "Type" : "Action:Rerun"
+        },
+        "Mail_1" : {
+          "Type" : "Action:Mail",
+          "Subject" : "Job Failure- Please attend to",
+          "To" : "grask@bmc.com",
+          "Message" : "%%JOBNAME located in %%SCHEDTAB failed today %%ODATE in %%APPLIC within CTM instance %%DATACENTER on agent machine running as %%OWNER",
+          "AttachOutput" : true
+        },
+        "Run_2" : {
+          "Type" : "Action:Run",
+          "Folder" : "<FolderName>",
+          "RunAsIndependentFlow" : false,
+          "Job" : "<JobName>"
+        },
+        "Set_3" : {
+          "Type" : "Action:Set",
+          "Variable" : "AutomatedRecoveryforAG01",
+          "Value" : "GO_NOW"
+        }
+      },
+      "IfBase:Folder:CompletionStatus_2" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "<=3",
+        "DoNotify_0" : {
+          "Type" : "Action:Notify",
+          "Destination" : "JobLog",
+          "Message" : "%%JOBNAME failed"
+        }
+      },
+      "IfBase:Folder:Output_3" : {
+        "Type" : "If:Output",
+        "Statement" : "SpecificString",
+        "Action:SetToOK_0" : {
+          "Type" : "Action:SetToOK"
+        }
+      },
+      "CaptureOutput_4" : {
+        "Type" : "Action:CaptureOutput",
+        "Search" : "RC=6",
+        "VariableName" : "\\startJobs",
+        "ForwardBy" : {
+          "Columns" : "3",
+          "Lines" : "25"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_file_exist-TO-zzz_copy_dir_contents-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_copy_dir_contents-TO-zzz_failure-313"
+        } ]
+      }
+    },
+    "zzz_dir_which_directory" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "which directory are we in?",
+      "RunAs" : "ctmagent",
+      "Application" : "zzz_",
+      "Command" : "pwd",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_dir_which_directory-TO-zzz_cleanup_ap01"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory"
+        } ]
+      }
+    },
+    "zzz_fail_runtime_breach" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "runtime breach workload",
+      "RunAs" : "root",
+      "Application" : "zzz_",
+      "Command" : "echo good to go",
+      "DocumentationUrl" : {
+        "Url" : "https://www.bmc.com/it-solutions/control-m.html"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Mail_0" : {
+          "Type" : "Action:Mail",
+          "Subject" : "WOMP WOMP WOMP!!!",
+          "To" : "grask@bmc.com",
+          "Message" : "%%DAY FAILED!!!"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_output_capture-TO-zzz_fail_runtime_breach-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_cmd_not_found-313"
+        }, {
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_list2_dir_contents-313"
+        } ]
+      }
+    },
+    "zzz_failure" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
+      "CreatedBy" : "grask",
+      "Description" : "this workload fails",
+      "RunAs" : "ctmagent",
+      "Application" : "zzz_",
+      "Command" : "sleep 10",
+      "DocumentationUrl" : {
+        "Url" : "https://confluence.bmc.com/display/AOE/Load+SnowFlake+Data+into+DataWarehouse"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_copy_dir_contents-TO-zzz_failure-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_failure-TO-zzz_failure_copy"
+        } ]
+      }
+    },
+    "zzz_after_failure" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
+      "CreatedBy" : "grask",
+      "Description" : "this workload runs after the previous failure",
+      "RunAs" : "ctmagent",
+      "Application" : "zzz_",
+      "Command" : "sleep 10",
+      "DocumentationUrl" : {
+        "Url" : "https://confluence.bmc.com/display/AOE/Load+SnowFlake+Data+into+DataWarehouse"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_failure-TO-zzz_failure_copy"
+        } ]
+      }
+    },
+    "zzz_file_exist" : {
+      "Type" : "Job:FileWatcher:Create",
+      "SearchInterval" : "5",
+      "Path" : "/home/grask@adprod.bmc.com/grask.txt",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
+      "CreatedBy" : "grask",
+      "Description" : "check for file existence",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "RerunLimit" : {
+        "Units" : "Minutes",
+        "Every" : "5"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Action:SetToOK_0" : {
+          "Type" : "Action:SetToOK"
+        }
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_file_exist-TO-zzz_copy_dir_contents-313"
+        }, {
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir"
+        } ]
+      }
+    },
+    "zzz_impact_analysis" : {
+      "Type" : "Job:SLAManagement",
+      "ServiceActions" : {
+        "If:SLA:JobFailureOnServicePath_0" : {
+          "Type" : "If:SLA:JobFailureOnServicePath",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "grask@bmc.com",
+            "Subject" : "Service %%SERVICE_NAME: Job failed on service path.",
+            "Message" : "The service %%SERVICE_NAME contains failed job(s). The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          },
+          "Action:SLA:Notify_1" : {
+            "Type" : "Action:SLA:Notify",
+            "Severity" : "Regular",
+            "Message" : "The service %%SERVICE_NAME contains failed job(s). The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          }
+        },
+        "If:SLA:JobRanTooLong_1" : {
+          "Type" : "If:SLA:JobRanTooLong",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "grask@bmc.com",
+            "Subject" : "Service %%SERVICE_NAME: Job ran too long.",
+            "Message" : "The service %%SERVICE_NAME contains a job(s) that ran too long. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          }
+        },
+        "If:SLA:JobFinishedTooQuickly_2" : {
+          "Type" : "If:SLA:JobFinishedTooQuickly",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "grask@bmc.com",
+            "Subject" : "Service %%SERVICE_NAME: Job finished too quickly.",
+            "Message" : "The service %%SERVICE_NAME contains a job(s) that ended too quickly. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          }
+        },
+        "If:SLA:ServiceEndedOK_3" : {
+          "Type" : "If:SLA:ServiceEndedOK",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "grask@bmc.com",
+            "Subject" : "The service %%SERVICE_NAME ended OK at %%SERVICE_EXPECTED_END_TIME.",
+            "Message" : "The service %%SERVICE_NAME ended OK at %%SERVICE_EXPECTED_END_TIME, the service deadline was %%SERVICE_DUE_TIME."
+          }
+        },
+        "If:SLA:ServiceIsLate_4" : {
+          "Type" : "If:SLA:ServiceIsLate",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "grask@bmc.com",
+            "Subject" : "Service %%SERVICE_NAME is late.",
+            "Message" : "Service %%SERVICE_NAME is projected to be late. The service deadline is %%SERVICE_DUE_TIME but it is estimated to complete at %%SERVICE_EXPECTED_END_TIME. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          }
+        },
+        "If:SLA:ServiceLatePastDeadline_5" : {
+          "Type" : "If:SLA:ServiceLatePastDeadline",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "grask@bmc.com",
+            "Subject" : "Service %%SERVICE_NAME past deadline.",
+            "Message" : "Service %%SERVICE_NAME has passed its deadline at %%SERVICE_DUE_TIME. The service is estimated to complete at %%SERVICE_EXPECTED_END_TIME. The following job(s) are problematic: %%PROBLEMATIC_JOBS"
+          }
+        }
+      },
+      "ServicePriority" : "1",
+      "ServiceName" : "grask_Order_Processing",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "JobRunsDeviationsTolerance" : "3",
+      "CreatedBy" : "grask",
+      "Description" : "monitor business service",
+      "RunAs" : "ctmagent",
+      "Application" : "zzz_",
+      "CompleteIn" : {
+        "Time" : "0:3"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_report1-TO-zzz_impact_analysis-313"
+        } ]
+      }
+    },
+    "zzz_list2_dir_contents" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "list directory contents",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "Command" : "ls -al /home/grask@adprod.bmc.com",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_list2_dir_contents-313"
+        }, {
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_list2_dir_contents-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_list2_dir_contents-TO-zzz_change_ap01-313"
+        } ]
+      }
+    },
+    "zzz_output_capture" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "captures string from output",
+      "RunAs" : "ctmagent",
+      "Application" : "zzz_",
+      "Command" : "echo ERRNO=12345",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "CaptureOutput_0" : {
+        "Type" : "Action:CaptureOutput",
+        "Capture" : "UpToEndOfLine",
+        "Search" : "ERRNO",
+        "VariableName" : "\\capture_string",
+        "ForwardBy" : {
+          "Columns" : "1",
+          "ColumnsOption" : "Characters"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_User_Wait-TO-zzz_output_capture-313"
+        }, {
+          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture"
+        }, {
+          "Event" : "zzz_touch-TO-zzz_output_capture"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_output_capture-TO-zzz_fail_runtime_breach-313"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture"
+        }, {
+          "Event" : "zzz_touch-TO-zzz_output_capture"
+        } ]
+      }
+    },
+    "zzz_process_data" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
+      "CreatedBy" : "grask",
+      "Description" : "processing data",
+      "RunAs" : "ctmagent",
+      "Application" : "zzz_",
+      "Command" : "echo processing data",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_process_data-TO-zzz_synch_dir-313"
+        } ]
+      }
+    },
+    "zzz_report1" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "RunAsDummy" : true,
+      "Host" : "vl-aus-ctm-vse-ag01.bmc.com",
+      "FilePath" : "/home/grask@adprod.bmc.com/",
+      "CreatedBy" : "grask",
+      "Description" : "business process report",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "Command" : "ctm reporting report::get Order_Processing EXCEL -o /home/grask@adprod.bmc.com/GBI.xls",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "OK",
+        "Mail_0" : {
+          "Type" : "Action:Mail",
+          "Subject" : "YOO HOO!!!",
+          "To" : "grask@bmc.com",
+          "Message" : "Your report is ready!!!",
+          "AttachOutput" : true
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_cleanup_ap01-TO-zzz_report1-313"
+        }, {
+          "Event" : "zzz_cleanup_ag01-TO-zzz_report1-313"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_report1-TO-zzz_impact_analysis-313"
+        } ]
+      }
+    },
+    "zzz_SP_MSSQL" : {
+      "Type" : "Job:Database:StoredProcedure",
+      "ConnectionProfile" : "ADVENTUREWORKS",
+      "OutputSQLOutput" : "Y",
+      "SQLOutputFormat" : "HTML",
+      "Schema" : "dbo",
+      "StoredProcedure" : "udfBuildISO8601Date;0",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vw-aus-ctm-wk01.adprod.bmc.com",
+      "CreatedBy" : "abaldwin",
+      "Description" : "MSSQL stored procedure",
+      "RunAs" : "ADVENTUREWORKS",
+      "Application" : "zzz_",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture"
+        } ]
+      }
+    },
+    "zzz_synch_dir" : {
+      "Type" : "Job:FileTransfer",
+      "ConnectionProfileDualEndpoint" : "zzz_psctm",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ag01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "synch directory",
+      "RunAs" : "zzz_psctm",
+      "Application" : "zzz_",
+      "Variables" : [ {
+        "FTP-LOSTYPE" : "Unix"
+      }, {
+        "FTP-CONNTYPE1" : "SFTP"
+      }, {
+        "FTP-LHOST" : "vl-aus-ctm-ag01.ctm.bmc.com"
+      }, {
+        "FTP-LUSER" : "grask@adprod.bmc.com"
+      }, {
+        "FTP-HOMEDIR1" : "/home/grask@adprod.bmc.com"
+      }, {
+        "FTP-ROSTYPE" : "Unix"
+      }, {
+        "FTP-CONNTYPE2" : "SFTP"
+      }, {
+        "FTP-RHOST" : "vl-aus-ctm-ap01.ctm.bmc.com"
+      }, {
+        "FTP-RUSER" : "grask@adprod.bmc.com"
+      }, {
+        "FTP-HOMEDIR2" : "/home/grask@adprod.bmc.com"
+      }, {
+        "FTP-CM_VER" : "9.0.20"
+      }, {
+        "FTP-COMPRESSION11" : "0"
+      }, {
+        "FTP-COMPRESSION21" : "0"
+      }, {
+        "FTP-OVERRIDE_WATCH_INTERVAL1" : "0"
+      }, {
+        "FTP-POSTCMD_ON_FAILURE1" : "0"
+      }, {
+        "FTP-SYNC_DIR_NO_DEL1" : "0"
+      } ],
+      "FileTransfers" : [ {
+        "ABSTIME" : "0",
+        "VERNUM" : "0",
+        "Dest" : "/home/grask@adprod.bmc.com/",
+        "ContinueOnFailure" : false,
+        "SRC_PATTERN" : "Wildcard",
+        "SRCOPT" : "0",
+        "DeleteFileOnDestIfFails" : false,
+        "TransferType" : "Binary",
+        "CASEIFS" : "0",
+        "DSTOPT" : "0",
+        "RECURSIVE" : "0",
+        "TransferOption" : "SrcToDest",
+        "Src" : "/home/grask@adprod.bmc.com/grask.txt",
+        "TIMELIMIT" : "0",
+        "FailJobOnDestCommandFailure" : false,
+        "EXCLUDE_WILDCARD" : "0",
+        "NULLFLDS" : "0",
+        "FailJobOnDestActionFailure" : false,
+        "TRIM" : "1",
+        "IF_EXIST" : "0",
+        "FailJobOnSourceCommandFailure" : false,
+        "UNIQUE" : "0",
+        "FileWatcherOptions" : {
+          "UnitsOfTimeLimit" : "Minutes",
+          "SkipToNextFileIfCriteriaNotMatch" : false,
+          "MinDetectedSizeInBytes" : "0"
+        },
+        "SimultaneousTransfer" : {
+          "TransferMultipleFilesSimultaneously" : false
+        },
+        "IncrementalTransfer" : {
+          "IncrementalTransferEnabled" : false,
+          "MaxModificationAgeForFirstRunEnabled" : false,
+          "MaxModificationAgeForFirstRunInHours" : "0"
+        }
+      } ],
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_process_data-TO-zzz_synch_dir-313"
+        }, {
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir"
+        } ]
+      }
+    },
+    "zzz_touch" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "Create MFT file grask",
+      "RunAs" : "grask@adprod.bmc.com",
+      "Application" : "zzz_",
+      "Command" : "touch /home/grask@adprod.bmc.com/grask.txt",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_touch-TO-zzz_output_capture"
+        } ]
+      }
+    },
+    "zzz_trans_dir_contents" : {
+      "Type" : "Job:FileTransfer",
+      "ConnectionProfileDualEndpoint" : "zzz_psctm",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "Host" : "vl-aus-ctm-vse-ag01.bmc.com",
+      "CreatedBy" : "grask",
+      "Description" : "transfer from ag01 to ap01",
+      "RunAs" : "zzz_psctm",
+      "Application" : "zzz_",
+      "Variables" : [ {
+        "FTP-LOSTYPE" : "Unix"
+      }, {
+        "FTP-CONNTYPE1" : "SFTP"
+      }, {
+        "FTP-LHOST" : "vl-aus-ctm-ag01.ctm.bmc.com"
+      }, {
+        "FTP-LUSER" : "grask@adprod.bmc.com"
+      }, {
+        "FTP-HOMEDIR1" : "/home/grask@adprod.bmc.com"
+      }, {
+        "FTP-ROSTYPE" : "Unix"
+      }, {
+        "FTP-CONNTYPE2" : "SFTP"
+      }, {
+        "FTP-RHOST" : "vl-aus-ctm-ap01.ctm.bmc.com"
+      }, {
+        "FTP-RUSER" : "grask@adprod.bmc.com"
+      }, {
+        "FTP-HOMEDIR2" : "/home/grask@adprod.bmc.com"
+      }, {
+        "FTP-CM_VER" : "9.0.20.100"
+      }, {
+        "FTP-COMPRESSION11" : "0"
+      }, {
+        "FTP-COMPRESSION21" : "0"
+      }, {
+        "FTP-OVERRIDE_WATCH_INTERVAL1" : "0"
+      }, {
+        "FTP-POSTCMD_ON_FAILURE1" : "0"
+      }, {
+        "FTP-SYNC_DIR_NO_DEL1" : "0"
+      } ],
+      "FileTransfers" : [ {
+        "TransferType" : "Binary",
+        "TransferOption" : "SrcToDest",
+        "Src" : "/home/grask@adprod.bmc.com/grask.txt",
+        "Dest" : "/home/grask@adprod.bmc.com/",
+        "ABSTIME" : "0",
+        "TIMELIMIT" : "0",
+        "UNIQUE" : "0",
+        "SRCOPT" : "0",
+        "IF_EXIST" : "0",
+        "DSTOPT" : "0",
+        "ContinueOnFailure" : false,
+        "DeleteFileOnDestIfFails" : false,
+        "FailJobOnDestActionFailure" : false,
+        "FailJobOnSourceCommandFailure" : false,
+        "FailJobOnDestCommandFailure" : false,
+        "RECURSIVE" : "0",
+        "EXCLUDE_WILDCARD" : "0",
+        "TRIM" : "1",
+        "NULLFLDS" : "0",
+        "VERNUM" : "0",
+        "CASEIFS" : "0",
+        "FileWatcherOptions" : {
+          "MinDetectedSizeInBytes" : "0",
+          "UnitsOfTimeLimit" : "Minutes",
+          "SkipToNextFileIfCriteriaNotMatch" : false
+        },
+        "IncrementalTransfer" : {
+          "IncrementalTransferEnabled" : false,
+          "MaxModificationAgeForFirstRunEnabled" : false,
+          "MaxModificationAgeForFirstRunInHours" : "0"
+        },
+        "SimultaneousTransfer" : {
+          "TransferMultipleFilesSimultaneously" : false
+        }
+      } ],
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_16" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Mail_0" : {
+          "Type" : "Action:Mail",
+          "Subject" : "BAD FILE!!!",
+          "To" : "grask@bmc.com",
+          "Message" : "%%ODATE at %%TIME.\\n\\n%%JOBNAME in %%SCHEDTAB folder has failed.  %%MFT_FILE has not been received.\\n\\nClick on this link for direct access to the failed job: http://vl-aus-ctm-em01.ctm.bmc.com:18080/ControlM/#Neighborhood:id=%%ORDERID&ctm=%%DATACENTER&name=%%JOBNAME.&date=%%DATE&direction=1&radius=3",
+          "Urgency" : "VeryUrgent"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_list2_dir_contents-313"
+        }, {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents"
+        } ]
+      }
+    },
+    "zzz_User_Wait" : {
+      "Type" : "Job:Dummy",
+      "SubApplication" : "zzz_",
+      "Priority" : "Very Low",
+      "CreatedBy" : "grask",
+      "Description" : "wait for user interaction- updated",
+      "RunAs" : "ctmagent",
+      "Application" : "zzz_",
+      "RerunLimit" : {
+        "Units" : "Minutes",
+        "Every" : "5"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_User_Wait-TO-zzz_output_capture-313"
+        } ]
+      }
+    }
+  }
+}
