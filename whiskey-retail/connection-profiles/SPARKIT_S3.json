@@ -1,0 +1,12 @@
+{
+  "SPARKIT_S3": {
+    "Type": "ConnectionProfile:FileTransfer:S3:Amazon",
+    "VerifyBytes": true,
+    "SecretAccessKey": {"Secret": "secret_name"},
+    "VerifyDestination": true,
+    "Region": "us-east-1",
+    "AccessKey": "AKIAVVZZ2EN6YL6DXL5S",
+    "Description": "",
+    "Centralized": true
+  }
+}
