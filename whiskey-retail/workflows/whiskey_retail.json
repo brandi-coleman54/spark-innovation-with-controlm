@@ -1,6 +1,6 @@
 {
     "Defaults": {
-        "Host": "zzz_instruqt_server",
+        "Host": "zzz_sparkit_server",
         "ControlmServer": "IN01",
         "Application": "zzz_whiskey_pipeline",
         "SubApplication": "zzz_process_whiskey_data",
@@ -11,65 +11,77 @@
         "OrderMethod": "Manual",
         "Variables": [
             {
-                "usercode": "replace-with-usercode"
+                "usercode": "zzz"
             },
             {
-                "td_email": "replace-with-email"
+                "td_email": "user@bmc.com"
             }
         ],
         "init_db": {
-            "Type": "Job:Database:EmbeddedQuery",
-            "Query": "drop schema if exists %%usercode_whiskey_retail_shop;\\ncreate schema replace-with-usercode_whiskey_retail_shop;\\nuse %%usercode_whiskey_retail_shop;\\nDROP TABLE IF EXISTS countries;\\nCREATE TABLE countries (\\n    Country VARCHAR(100) NOT NULL,\\n    Country_Code VARCHAR(100) NOT NULL,\\n    country_id INT PRIMARY KEY\\n    );\\nDROP TABLE IF EXISTS customer_cc;\\nCREATE TABLE customer_cc (\\n    credit_provider VARCHAR(100) NOT NULL,\\n    credit_provider_id INT PRIMARY KEY\\n    );\\nDROP TABLE IF EXISTS products;\\nCREATE TABLE products (\\n    Product_Name VARCHAR(100) NOT NULL,\\n    Alcohol_Percent FLOAT NOT NULL,\\n    Alcohol_Amount FLOAT NOT NULL,\\n    Alcohol_Price FLOAT NOT NULL,\\n    product_id int NOT NULL PRIMARY KEY\\n    );\\nDROP TABLE IF EXISTS departments;\\nCREATE TABLE departments (\\n    department_id INT PRIMARY KEY,\\n    department VARCHAR(100) NOT NULL\\n    );\\nDROP TABLE IF EXISTS customers;\\nCREATE TABLE customers (\\n    customer_id INT PRIMARY KEY NOT NULL,\\n    first_name VARCHAR(100) NOT NULL,\\n    last_name VARCHAR(100) NOT NULL,\\n    full_name VARCHAR(100) NOT NULL,\\n    email VARCHAR(100) NOT NULL,\\n    street VARCHAR(100) NOT NULL,\\n    four_digits INT NOT NULL,\\n    country_id INT NOT NULL,\\n    credit_provider_id INT NOT NULL,\\n    FOREIGN KEY (country_id) REFERENCES countries (country_id),\\n    FOREIGN KEY (credit_provider_id) REFERENCES customer_cc (credit_provider_id)\\n);\\nDROP TABLE IF EXISTS employees;\\nCREATE TABLE employees (\\n    employee_id INT PRIMARY KEY NOT NULL,\\n    first_name VARCHAR(100) NOT NULL,\\n    last_name VARCHAR(100) NOT NULL,\\n    full_name VARCHAR(100) NOT NULL,\\n    email VARCHAR(100) NOT NULL,\\n    city VARCHAR(100) NOT NULL,\\n    department_id INT NOT NULL,\\n    FOREIGN KEY (department_id) REFERENCES departments(department_id)\\n);\\nDROP TABLE IF EXISTS payments;\\nCREATE TABLE payments (\\n    payment_id INT NOT NULL PRIMARY KEY,\\n    date DATE NOT NULL,\\n    customer_id INT NOT NULL,\\n    employee_id INT NOT NULL,\\n    product_id INT NOT NULL,\\n    price FLOAT NOT NULL\\n    );\\ndrop table if exists dwh_date;\\nCREATE TABLE dwh_date (\\n    Date_key INT NOT NULL PRIMARY KEY,\\n    Dates DATE NOT NULL,\\n    Day_name VARCHAR(50) NOT NULL,\\n    Month_name VARCHAR(50) NOT NULL,\\n    Year_name VARCHAR(50) NOT NULL\\n);",
-            "ConnectionProfile": "INSTRUQT_MYSQL",
-            "RunAs": "INSTRUQT_MYSQL"
+            "Type": "Job:Command",
+            "FileName": "create_schema.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/create_schema.py zzz"
         },
         "prep_db": {
             "Type": "Job:Command",
             "FileName": "complete_db_setup.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python complete_db_setup.py %%usercode"
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/complete_db_setup.py zzz",
+            "eventsToAdd": {
+                "Type": "AddEvents",
+                "Events": [
+                    {
+                        "Event": "prep_db-TO-payments_ref"
+                    }
+                ]
+            }
         },
         "insert_countries": {
-            "Type": "Job:Database:EmbeddedQuery",
-            "RunAs": "INSTRUQT_MYSQL",
-            "ConnectionProfile": "INSTRUQT_MYSQL",
-            "Query": "use %%usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/countries.csv'\\nINTO TABLE countries FIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4) set Country=@col2, Country_Code=@col3, country_id=@col4;\\n\\nDELETE FROM countries\\nWHERE country_id = 0;"
+            "Type": "Job:Command",
+            "FileName": "insert_countries_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_countries_data.py zzz"
         },
         "get_product_data": {
-            "Type": "Job:Airflow",
-            "ConnectionProfile": "replace-with-usercode_GCP_AIRFLOW",
-            "DagId": "product_function",
-            "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "RunAs": "replace-with-usercode_GCP_AIRFLOW"
+            "Type": "Job:Apache Airflow",
+            "ConnectionProfile": "ZZZ_AF",
+            "Airflow REST Version": "v2",
+            "Action": "Run DAG",
+            "DAG Name": "product_function",
+            "Parameters": "{}",
+            "Logical Date": "null",
+            "Status Polling Frequency": "15"
         },
         "transfer_product_data": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL_FS",
-            "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/products.csv",
-                    "Dest": "/home/controlm/products.csv",
+                    "Dest": "/mft_mountPath/products.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/data_engineering/scripts/insert_product_data.py",
-                    "Dest": "/home/controlm/insert_product_data.py",
+                    "Dest": "/mft_mountPath/insert_product_data.py",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/data_engineering/scripts/analyze_data.py",
-                    "Dest": "/home/controlm/analyze_data.py",
+                    "Dest": "/mft_mountPath/analyze_data.py",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/data_engineering/all-whiskey-clean.csv",
-                    "Dest": "/home/controlm/all-whiskey.csv",
+                    "Dest": "/mft_mountPath/all-whiskey.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
@@ -77,21 +89,22 @@
             "S3BucketName": "ctm-techday-resources"
         },
         "insert_product_data": {
-            "Type": "Job:Database:EmbeddedQuery",
-            "Query": "use %%usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/all-whiskey.csv'\\nINTO TABLE products\\nFIELDS TERMINATED BY ',' \\n(@col1,@col2,@col3,@col4,@col5) set Product_Name=@col2, Alcohol_Percent=@col3, Alcohol_Amount=@col4, Alcohol_Price=@col5, product_id=@col1;",
-            "ConnectionProfile": "INSTRUQT_MYSQL",
-            "OutputSQLOutput": "Y"
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_product_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_product_data.py zzz"
         },
         "analyze_data": {
             "Type": "Job:Command",
             "RunAs": "controlm",
             "FileName": "analyze_data.py",
             "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python analyze_data.py %%td_email %%usercode"
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/analyze_data.py zzz_email zzz"
         },
         "SLA": {
             "Type": "Job:SLAManagement",
-            "ServiceName": "%%usercode Product Data Pipeline",
+            "ServiceName": "ZZZ Product Data Pipeline",
             "ServicePriority": "1",
             "JobRunsDeviationsTolerance": "3"
         },
@@ -103,7 +116,15 @@
                 "Type": "WaitForEvents",
                 "Events": [
                     {
-                        "Event": "set_customer_data-TO-payments_ref"
+                        "Event": "prep_db-TO-payments_ref"
+                    }
+                ]
+            },
+            "eventsToDelete": {
+                "Type": "DeleteEvents",
+                "Events": [
+                    {
+                        "Event": "prep_db-TO-payments_ref"
                     }
                 ]
             },
@@ -114,52 +135,38 @@
                         "Event": "payments_ref-TO-finalize_db"
                     }
                 ]
-            },
-            "eventsToDelete": {
-                "Type": "DeleteEvents",
-                "Events": [
-                    {
-                        "Event": "set_customer_data-TO-payments_ref"
-                    }
-                ]
             }
         },
         "customer_data": {
-            "Type": "Job:Airflow",
-            "ConnectionProfile": "replace-with-usercode_GCP_AIRFLOW",
-            "DagId": "customer_functions",
-            "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "RunAs": "replace-with-usercode_GCP_AIRFLOW",
-            "eventsToAdd": {
-                "Type": "AddEvents",
-                "Events": [
-                    {
-                        "Event": "customer_data-TO-payments_ref"
-                    }
-                ]
-            }
+            "Type": "Job:Apache Airflow",
+            "ConnectionProfile": "ZZZ_AF",
+            "Airflow REST Version": "v2",
+            "Action": "Run DAG",
+            "DAG Name": "customer_functions",
+            "Parameters": "{}",
+            "Logical Date": "null",
+            "Status Polling Frequency": "15"
         },
         "transfer_customer_data": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL",
-            "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/norm_customers.csv",
-                    "Dest": "/home/controlm/norm_customers.csv",
+                    "Dest": "/mft_mountPath/norm_customers.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/data_engineering/customer_cc.csv",
-                    "Dest": "/home/controlm/customer_cc.csv",
+                    "Dest": "/mft_mountPath/customer_cc.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/data_engineering/countries.csv",
-                    "Dest": "/home/controlm/countries.csv",
+                    "Dest": "/mft_mountPath/countries.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
@@ -167,39 +174,43 @@
             "S3BucketName": "ctm-techday-resources"
         },
         "insert_customer_data": {
-            "Type": "Job:Database:EmbeddedQuery",
-            "RunAs": "INSTRUQT_MYSQL",
-            "ConnectionProfile": "INSTRUQT_MYSQL",
-            "Query": "use %%usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/norm_customers.csv'\\nINTO TABLE customers FIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5,@col6,@col7,@col8,@col9,@col10,@col11) set customer_id=@col3, first_name=@col4, last_name=@col5, full_name=@col6, email=@col7, street=@col8, four_digits=@col9, country_id=@col10, credit_provider_id=@col11;\\n\\nDELETE FROM customers\\nWHERE customer_id = 0;"
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_customer_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_data.py zzz"
         },
         "insert_customer_cc": {
-            "Type": "Job:Database:EmbeddedQuery",
-            "RunAs": "INSTRUQT_MYSQL",
-            "ConnectionProfile": "INSTRUQT_MYSQL",
-            "Query": "use %%usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/customer_cc.csv'\\nINTO TABLE customer_cc FIELDS TERMINATED BY ',' (@col1,@col2,@col3) set credit_provider=@col2, credit_provider_id=@col3;\\n\\nDELETE FROM customer_cc\\nWHERE credit_provider_id = 0;"
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_customer_cc.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_cc.py zzz"
         },
         "employee_data": {
-            "Type": "Job:Airflow",
-            "ConnectionProfile": "replace-with-usercode_GCP_AIRFLOW",
-            "DagId": "employee_functions",
-            "OutputDetails": "IncludeOnlyFailedTasksLogs",
-            "RunAs": "replace-with-usercode_GCP_AIRFLOW"
+            "Type": "Job:Apache Airflow",
+            "ConnectionProfile": "ZZZ_AF",
+            "Airflow REST Version": "v2",
+            "Action": "Run DAG",
+            "DAG Name": "employee_functions",
+            "Parameters": "{}",
+            "Logical Date": "null",
+            "Status Polling Frequency": "15"
         },
         "transfer_employee_data": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL_FS",
-            "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/norm_employees.csv",
-                    "Dest": "/home/controlm/norm_employees.csv",
+                    "Dest": "/mft_mountPath/norm_employees.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/data_engineering/departments.csv",
-                    "Dest": "/home/controlm/departments.csv",
+                    "Dest": "/mft_mountPath/departments.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
@@ -208,25 +219,18 @@
         },
         "transfer_resources": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL_FS",
-            "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
-                    "Src": "/data_engineering/scripts/complete_db_setup.py",
-                    "Dest": "/home/controlm/complete_db_setup.py",
+                    "Src": "/data_engineering/scripts/*.py",
+                    "Dest": "/mft_mountPath/",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/data_engineering/scripts/analyze_data.py",
-                    "Dest": "/home/controlm/analyze_data.py",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                },
-                {
-                    "Src": "/data_engineering/scripts/finalize_db.py",
-                    "Dest": "/home/controlm/finalize_db.py",
+                    "Src": "/data_engineering/*.csv",
+                    "Dest": "/mft_mountPath/",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
@@ -234,26 +238,27 @@
             "S3BucketName": "ctm-techday-resources"
         },
         "insert_employee_data": {
-            "Type": "Job:Database:EmbeddedQuery",
-            "RunAs": "INSTRUQT_MYSQL",
-            "ConnectionProfile": "INSTRUQT_MYSQL",
-            "Query": "use %%usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/norm_employees.csv'\\nINTO TABLE employees\\nFIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5,@col6,@col7,@col8,@col9) set employee_id=@col3, first_name=@col4, last_name=@col5, full_name=@col6, email=@col7, city=@col8, department_id=@col9;\\n\\nDELETE FROM employees\\nWHERE employee_id = 0;\\n\\nDELETE FROM dwh_employees\\nWHERE employee_id = 0;"
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_employee_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_employee_data.py zzz"
         },
         "insert_department_data": {
-            "Type": "Job:Database:EmbeddedQuery",
-            "RunAs": "INSTRUQT_MYSQL",
-            "ConnectionProfile": "INSTRUQT_MYSQL",
-            "Query": "use %%usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/departments.csv'\\nINTO TABLE departments\\nFIELDS TERMINATED BY ',' (@col1,@col2,@col3) set department_id=@col2, department=@col3;"
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_department_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_department_data.py zzz"
         },
         "transfer_date_data": {
             "Type": "Job:FileTransfer",
-            "RunAs": "INSTRUQT_S3+replace-with-usercode_LOCAL_FS",
-            "ConnectionProfileSrc": "INSTRUQT_S3",
-            "ConnectionProfileDest": "replace-with-usercode_LOCAL_FS",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
                     "Src": "/data_engineering/all_dates.csv",
-                    "Dest": "/home/controlm/all_dates.csv",
+                    "Dest": "/mft_mountPath/all_dates.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
@@ -261,17 +266,18 @@
             "S3BucketName": "ctm-techday-resources"
         },
         "insert_date_data": {
-            "Type": "Job:Database:EmbeddedQuery",
-            "RunAs": "INSTRUQT_MYSQL",
-            "ConnectionProfile": "INSTRUQT_MYSQL",
-            "Query": "use %%usercode_whiskey_retail_shop;\\n\\nLOAD DATA LOCAL INFILE '/home/controlm/all_dates.csv'\\nINTO TABLE dwh_date\\nFIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5) set Date_key=@col2, Dates=@col1, Day_name=@col3, Month_name=@col4, Year_name=@col5;\\n\\nDELETE FROM dwh_date\\nWHERE Date_key = 0;"
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_date_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_date_data.py zzz"
         },
         "finalize_db": {
             "Type": "Job:Command",
             "FileName": "finalize_db.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python finalize_db.py %%usercode",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/finalize_db.py zzz",
             "IfBase:Folder:CompletionStatus_0": {
                 "Type": "If:CompletionStatus",
                 "CompletionStatus": "NOTOK",

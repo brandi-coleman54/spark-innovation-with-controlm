@@ -1,34 +1,128 @@
 {
-  
   "DeployDescriptor": [
     {
-    "Property": "CreatedBy",
-    "Assign": "replace-with-email"
+      "Property": "CreatedBy",
+      "Assign": "${CTM_USER}"
     },
     {
-    "Property": "Host",
-    "Assign": "replace-with-instruqt-host"
+      "Property": "Host",
+      "Assign": "${CTM_HOST}"
     },
     {
-    "Property": "Application",
-    "Replace": [{ "zzz(.*)": "replace-with-usercode$1" }] 
+      "Property": "Application",
+      "Replace": [
+        {
+          "zzz(.*)": "${CTM_USER_CODE}$1"
+        }
+      ]
     },
     {
-    "Property": "SubApplication",
-    "Replace": [{ "zzz(.*)": "replace-with-usercode$1" }] 
+      "Property": "SubApplication",
+      "Replace": [
+        {
+          "zzz(.*)": "${CTM_USER_CODE}$1"
+        }
+      ]
     },
     {
-    "Property": "@",
-    "ApplyOn": {"Type": "Folder"},
-    "Replace": [{"zzz(.*)": "replace-with-usercode$1"}]
+      "ApplyOn": {
+        "Type": "Job.*"
+      },
+      "Property": "ConnectionProfile",
+      "Replace": [
+        {
+          "ZZZ(.*)": "${CTM_UC_USER_CODE}$1"
+        }
+      ]
     },
     {
-		"Property": "ReferencePath",
-		"ApplyOn": {
-		"Type": "SubFolder",
-		"@": "payments_ref"
-		},
-		"Replace": [ { "zzz(.*)": "replace-with-usercode$1"}]
-	}
+      "ApplyOn": {
+        "Type": "Job.*"
+      },
+      "Property": "ConnectionProfileDest",
+      "Replace": [
+        {
+          "ZZZ(.*)": "${CTM_UC_USER_CODE}$1"
+        }
+      ]
+    },
+    {
+      "ApplyOn": {
+        "Type": "Job.*"
+      },
+      "Property": "Query",
+      "Replace": [
+        {
+          "(.*)zzz(.*)zzz(.*)": "$1${CTM_USER_CODE}$2${CTM_USER_CODE}$3"
+        }
+      ]
+    },
+    {
+      "ApplyOn": {
+        "Type": "Job.*"
+      },
+      "Property": "Query",
+      "Replace": [
+        {
+          "(.*)zzz(.*)": "$1${CTM_USER_CODE}$2"
+        }
+      ]
+    },
+    {
+      "ApplyOn": {
+        "Type": "Job.Command"
+      },
+      "Property": "Command",
+      "Replace": [
+        {
+          "(.*)zzz_email(.*)zzz": "$1${INSTRUQT_USER_EMAIL}$2${CTM_USER_CODE}"
+        }
+      ]
+    },
+    {
+      "ApplyOn": {
+        "Type": "Job.Command"
+      },
+      "Property": "Command",
+      "Replace": [
+        {
+          "(.*)zzz": "$1${CTM_USER_CODE}"
+        }
+      ]
+    },
+    {
+      "ApplyOn": {
+        "Type": "Job.SLA*"
+      },
+      "Property": "ServiceName",
+      "Replace": [
+        {
+          "ZZZ(.*)": "${CTM_UC_USER_CODE}$1"
+        }
+      ]
+    },
+    {
+      "Property": "@",
+      "ApplyOn": {
+        "Type": "Folder"
+      },
+      "Replace": [
+        {
+          "zzz(.*)": "${CTM_USER_CODE}$1"
+        }
+      ]
+    },
+    {
+      "Property": "ReferencePath",
+      "ApplyOn": {
+        "Type": "SubFolder",
+        "@": "payments_ref"
+      },
+      "Replace": [
+        {
+          "zzz(.*)": "${CTM_USER_CODE}$1"
+        }
+      ]
+    }
   ]
 }
