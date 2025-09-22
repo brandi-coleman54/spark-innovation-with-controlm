@@ -15,8 +15,8 @@ HTML_PAGE = '''
     <title>Flight Disruption Tracker</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; padding: 50px; }
-        button { padding: 15px 30px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; }
-        button:hover { opacity: 0.9; }
+        button { background-color: #0077cc; color: white; padding: 15px 30px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; }
+        button:hover { background-color: #005fa3; }
         h1 { color: #333; }
     </style>
 </head>
