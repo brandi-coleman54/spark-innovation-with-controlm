@@ -75,7 +75,7 @@
       "Property": "Command",
       "Replace": [
         {
-          "(.*)zzz_email(.*)zzz": "$1${INSTRUQT_USER_EMAIL}$2${CTM_USER_CODE}"
+          "(.*)zzz_email(.*)zzz": "$1${CTM_USER}$2${CTM_USER_CODE}"
         }
       ]
     },
