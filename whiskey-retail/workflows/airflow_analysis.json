@@ -10,14 +10,15 @@
         "Type": "Folder",
         "OrderMethod": "Manual",
         "analyze_sales_data": {
-            "Type": "Job:Apache Airflow",
-            "ConnectionProfile": "ZZZ_AF",
-            "Airflow REST Version": "v2",
-            "Action": "Run DAG",
-            "DAG Name": "analyze_function",
-            "Parameters": "{ 'email': 'jon_fink@bmc.com', 'user_code': 'tus' }",
-            "Logical Date": "null",
-            "Status Polling Frequency": "15"
+          "Type": "Job:ApplicationIntegrator:AI Apa51K",
+          "ConnectionProfile": "ZZZ_APA",
+          "AI-Airflow REST Version": "v2",
+          "AI-Action": "Run DAG",
+          "AI-DAG Name": "analyze_whiskey_data",
+          "AI-Parameters": "{\"email\":\"jon_fink@bmc.com\", \"user_code\": \"tus\"}",
+          "AI-Logical Date": "null",
+          "AI-Status Polling Frequency": "15"
         }
     }
+
 }
