@@ -1,0 +1,11 @@
+,credit_provider,credit_provider_id
+0,Discover,0
+1,VISA 16 digit,1
+2,JCB 15 digit,2
+3,Maestro,3
+4,Diners Club / Carte Blanche,4
+5,Mastercard,5
+6,JCB 16 digit,6
+7,VISA 13 digit,7
+8,American Express,8
+9,VISA 19 digit,9
