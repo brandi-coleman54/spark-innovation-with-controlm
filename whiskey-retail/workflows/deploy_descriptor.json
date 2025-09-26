@@ -25,6 +25,14 @@
       ]
     },
     {
+      "Property": "ReferencePath",
+      "Replace": [
+        {
+          "zzz(.*)": "${CTM_USER_CODE}$1"
+        }
+      ]
+    },
+    {
       "ApplyOn": {
         "Type": "Job.*"
       },
