@@ -92,6 +92,17 @@
     },
     {
       "ApplyOn": {
+        "Type": "Job.*"
+      },
+      "Property": "AI-Parameters",
+      "Replace": [
+        {
+          "(.*)zzz_email(.*)zzz(.*)": "$1${CTM_USER}$2${CTM_USER_CODE}$3"
+        }
+      ]
+    },
+    {
+      "ApplyOn": {
         "Type": "Job.SLA*"
       },
       "Property": "ServiceName",
