@@ -1,0 +1,413 @@
+{
+    "Defaults": {
+        "Host": "tus-eks-hg",
+        "ControlmServer": "IN01",
+        "Application": "zzz_whiskey_pipeline",
+        "SubApplication": "zzz_process_whiskey_data",
+        "RunAs": "controlm"
+    },
+    "zzz_whiskey_retail_shop": {
+        "Type": "Folder",
+        "OrderMethod": "Manual",
+        "Variables": [
+            {
+                "usercode": "zzz"
+            },
+            {
+                "td_email": "user@bmc.com"
+            }
+        ],
+        "init_db": {
+            "Type": "Job:Command",
+            "FileName": "create_schema.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/create_schema.py zzz"
+        },
+        "prep_db": {
+            "Type": "Job:Command",
+            "FileName": "complete_db_setup.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/complete_db_setup.py zzz",
+            "eventsToAdd": {
+                "Type": "AddEvents",
+                "Events": [
+                    {
+                        "Event": "prep_db-TO-payments_ref"
+                    }
+                ]
+            }
+        },
+        "insert_countries": {
+            "Type": "Job:Command",
+            "FileName": "insert_countries_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_countries_data.py zzz"
+        },
+        "get_product_data": {
+            "Type": "Job:Apache Airflow",
+            "ConnectionProfile": "ZZZ_AF",
+            "Airflow REST Version": "v2",
+            "Action": "Run DAG",
+            "DAG Name": "product_function",
+            "Parameters": "{}",
+            "Logical Date": "null",
+            "Status Polling Frequency": "15"
+        },
+        "transfer_product_data": {
+            "Type": "Job:FileTransfer",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
+            "FileTransfers": [
+                {
+                    "Src": "/data_engineering/products.csv",
+                    "Dest": "/mft_mountPath/products.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/data_engineering/scripts/insert_product_data.py",
+                    "Dest": "/mft_mountPath/insert_product_data.py",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/data_engineering/scripts/analyze_data.py",
+                    "Dest": "/mft_mountPath/analyze_data.py",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/data_engineering/all-whiskey-clean.csv",
+                    "Dest": "/mft_mountPath/all-whiskey.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                }
+            ],
+            "S3BucketName": "ctm-techday-resources"
+        },
+        "insert_product_data": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_product_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_product_data.py zzz"
+        },
+        "get_payment_data": {
+            "Type": "Job:Apache Airflow",
+            "ConnectionProfile": "ZZZ_AF",
+            "Airflow REST Version": "v2",
+            "Action": "Run DAG",
+            "DAG Name": "payments_function",
+            "Parameters": "{}",
+            "Logical Date": "null",
+            "Status Polling Frequency": "15"
+        },
+        "transfer_payment_data": {
+            "Type": "Job:FileTransfer",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
+            "FileTransfers": [
+                {
+                    "Src": "/data_engineering/payments.csv",
+                    "Dest": "/home/controlm/payments.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                }
+            ],
+            "S3BucketName": "ctm-techday-resources"
+        },
+        "insert_payment_data": {
+            "Type": "Job:Command",
+            "FileName": "insert_payment_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_payment_data.py zzz"
+        },
+        "customer_data": {
+            "Type": "Job:Apache Airflow",
+            "ConnectionProfile": "ZZZ_AF",
+            "Airflow REST Version": "v2",
+            "Action": "Run DAG",
+            "DAG Name": "customer_functions",
+            "Parameters": "{}",
+            "Logical Date": "null",
+            "Status Polling Frequency": "15"
+        },
+        "transfer_customer_data": {
+            "Type": "Job:FileTransfer",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
+            "FileTransfers": [
+                {
+                    "Src": "/data_engineering/norm_customers.csv",
+                    "Dest": "/mft_mountPath/norm_customers.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/data_engineering/customer_cc.csv",
+                    "Dest": "/mft_mountPath/customer_cc.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/data_engineering/countries.csv",
+                    "Dest": "/mft_mountPath/countries.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                }
+            ],
+            "S3BucketName": "ctm-techday-resources"
+        },
+        "insert_customer_data": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_customer_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_data.py zzz"
+        },
+        "insert_customer_cc": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_customer_cc.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_cc.py zzz"
+        },
+        "employee_data": {
+            "Type": "Job:Apache Airflow",
+            "ConnectionProfile": "ZZZ_AF",
+            "Airflow REST Version": "v2",
+            "Action": "Run DAG",
+            "DAG Name": "employee_functions",
+            "Parameters": "{}",
+            "Logical Date": "null",
+            "Status Polling Frequency": "15"
+        },
+        "transfer_employee_data": {
+            "Type": "Job:FileTransfer",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
+            "FileTransfers": [
+                {
+                    "Src": "/data_engineering/norm_employees.csv",
+                    "Dest": "/mft_mountPath/norm_employees.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/data_engineering/departments.csv",
+                    "Dest": "/mft_mountPath/departments.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                }
+            ],
+            "S3BucketName": "ctm-techday-resources"
+        },
+        "transfer_resources": {
+            "Type": "Job:FileTransfer",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
+            "FileTransfers": [
+                {
+                    "Src": "/data_engineering/scripts/*.py",
+                    "Dest": "/mft_mountPath/",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/data_engineering/*.csv",
+                    "Dest": "/mft_mountPath/",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                }
+            ],
+            "S3BucketName": "ctm-techday-resources"
+        },
+        "insert_employee_data": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_employee_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_employee_data.py zzz"
+        },
+        "insert_department_data": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_department_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_department_data.py zzz"
+        },
+        "transfer_date_data": {
+            "Type": "Job:FileTransfer",
+            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileDest": "SPARKIT_FS",
+            "FileTransfers": [
+                {
+                    "Src": "/data_engineering/all_dates.csv",
+                    "Dest": "/mft_mountPath/all_dates.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                }
+            ],
+            "S3BucketName": "ctm-techday-resources"
+        },
+        "insert_date_data": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_date_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_date_data.py zzz"
+        },
+        "finalize_db": {
+            "Type": "Job:Command",
+            "FileName": "finalize_db.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/finalize_db.py zzz",
+            "IfBase:Folder:CompletionStatus_0": {
+                "Type": "If:CompletionStatus",
+                "CompletionStatus": "NOTOK",
+                "Action:SetToNotOK_0": {
+                    "Type": "Action:SetToOK"
+                }
+            },
+            "eventsToAdd": {
+                "Type": "AddEvents",
+                "Events": [
+                    {
+                        "Event": "finalize_db-TO-analysis"
+                    }
+                ]
+            }
+        },
+        "analysis": {
+            "Type": "SubFolder",
+            "AdjustEvents": false,
+            "ReferencePath": "zzz_airflow_analysis",
+            "eventsToAdd": {
+                "Type": "AddEvents",
+                "Events": [
+                    {
+                        "Event": "analysis-TO-SLA"
+                    }
+                ]
+            },
+            "eventsToWaitFor": {
+                "Type": "WaitForEvents",
+                "Events": [
+                    {
+                        "Event": "finalize_db-TO-analysis"
+                    }
+                ]
+            },
+            "eventsToDelete": {
+                "Type": "DeleteEvents",
+                "Events": [
+                    {
+                        "Event": "finalize_db-TO-analysis"
+                    }
+                ]
+            }
+        },
+        "SLA": {
+            "Type": "Job:SLAManagement",
+            "ServiceName": "ZZZ Product Data Pipeline",
+            "ServicePriority": "1",
+            "JobRunsDeviationsTolerance": "3",
+            "eventsToWaitFor": {
+                "Type": "WaitForEvents",
+                "Events": [
+                    {
+                        "Event": "analysis-TO-SLA"
+                    }
+                ]
+            },
+            "eventsToDelete": {
+                "Type": "DeleteEvents",
+                "Events": [
+                    {
+                        "Event": "analysis-TO-SLA"
+                    }
+                ]
+            }
+        },
+        "data_pipeline_payments_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "prep_db",
+                "get_payment_data",
+                "transfer_payment_data",
+                "insert_payment_data",
+                "finalize_db"
+            ]
+        },
+        "data_pipeline_product_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "init_db",
+                "prep_db",
+                "get_product_data",
+                "transfer_product_data",
+                "insert_product_data",
+                "finalize_db"
+            ]
+        },
+        "data_pipeline_customer_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "prep_db",
+                "customer_data",
+                "transfer_customer_data",
+                "insert_customer_data",
+                "finalize_db"
+            ]
+        },
+        "data_pipeline_customer_flow2": {
+            "Type": "Flow",
+            "Sequence": [
+                "transfer_customer_data",
+                "insert_customer_cc",
+                "finalize_db"
+            ]
+        },
+        "data_pipeline_countries_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "transfer_customer_data",
+                "insert_countries",
+                "finalize_db"
+            ]
+        },
+        "data_pipeline_employee_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "transfer_resources",
+                "init_db",
+                "prep_db",
+                "employee_data",
+                "transfer_employee_data",
+                "insert_employee_data",
+                "finalize_db"
+            ]
+        },
+        "data_pipeline_departments_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "transfer_employee_data",
+                "insert_department_data",
+                "finalize_db"
+            ]
+        },
+        "data_pipeline_date_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "prep_db",
+                "transfer_date_data",
+                "insert_date_data"
+            ]
+        }
+    }
+}

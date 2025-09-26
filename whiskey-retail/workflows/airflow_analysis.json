@@ -1,0 +1,23 @@
+{
+    "Defaults": {
+        "Host": "tus-eks-hg",
+        "ControlmServer": "IN01",
+        "RunAs": "controlm",
+        "Application": "zzz_whiskey_pipeline",
+        "SubApplication": "zzz_process_whiskey_data"
+    },
+    "zzz_airflow_analysis": {
+        "Type": "Folder",
+        "OrderMethod": "Manual",
+        "analyze_sales_data": {
+            "Type": "Job:Apache Airflow",
+            "ConnectionProfile": "ZZZ_AF",
+            "Airflow REST Version": "v2",
+            "Action": "Run DAG",
+            "DAG Name": "analyze_function",
+            "Parameters": "{ 'email': 'jon_fink@bmc.com', 'user_code': 'tus' }",
+            "Logical Date": "null",
+            "Status Polling Frequency": "15"
+        }
+    }
+}
