@@ -15,10 +15,11 @@
           "AI-Airflow REST Version": "v2",
           "AI-Action": "Run DAG",
           "AI-DAG Name": "analyze_whiskey_data",
-          "AI-Parameters": "{\"email\":\"jon_fink@bmc.com\", \"user_code\": \"tus\"}",
+          "AI-Parameters": "{\"email\":\"zzz_email\", \"user_code\": \"zzz\"}",
           "AI-Logical Date": "null",
           "AI-Status Polling Frequency": "15"
         }
     }
 
 }
+
