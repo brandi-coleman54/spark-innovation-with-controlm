@@ -33,11 +33,12 @@
             "Type": "Flow",
             "Sequence": [
                 "zzz_airflow_analysis",
-                "product"feedback_summarization"
+                "product_feedback_summarization"
             ]
         }
     }
 }
+
 
 
 
