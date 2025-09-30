@@ -32,12 +32,13 @@
         "analysis_flow": {
             "Type": "Flow",
             "Sequence": [
-                "zzz_airflow_analysis",
+                "analyze_sales_data",
                 "product_feedback_summarization"
             ]
         }
     }
 }
+
 
 
 
