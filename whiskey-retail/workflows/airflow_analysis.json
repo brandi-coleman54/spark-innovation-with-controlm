@@ -18,8 +18,22 @@
           "AI-Parameters": "{\"email\":\"zzz_email\", \"user_code\": \"zzz\"}",
           "AI-Logical Date": "null",
           "AI-Status Polling Frequency": "15"
-        }
+        },
+        "product_feedback_summarization": {
+          "Type": "Job:ApplicationIntegrator:AI Apa51K",
+          "ConnectionProfile": "ZZZ_APA",
+          "AI-Airflow REST Version": "v2",
+          "AI-Action": "Run DAG",
+          "AI-DAG Name": "product_feedback_summarization",
+          "AI-Parameters": "{\"email\":\"zzz_email\", \"user_code\": \"zzz\"}",
+          "AI-Logical Date": "null",
+          "AI-Status Polling Frequency": "15"
+        },
+        "flow": {
+            "type": "flow",
+            
     }
 
 }
+
 
