@@ -30,7 +30,7 @@
     },
     "Credit_Score_Check": {
       "Type": "Job:Command",
-      "Description": "Check applicant\u2019s credit score",
+      "Description": "Check applicant's credit score",
       "Command": "python3 /home/controlm/credit-card-issuance/scripts/credit_score_check.py --application %%application_id"
     },
     "Underwriting_Decision": {
