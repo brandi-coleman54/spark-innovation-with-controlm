@@ -21,32 +21,32 @@
     "Application_Intake": {
       "Type": "Job:Command",
       "Description": "Validate and log incoming credit card application",
-      "Command": "python3 /home/controlm/credit-card-issuance/scripts/application_intake.py --application %%application_id --customer %%customer_id"
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/credit-card-issuance/scripts/application_intake.py --application %%application_id --customer %%customer_id"
     },
     "KYC_AML_Check": {
       "Type": "Job:Command",
       "Description": "Perform KYC/AML screening",
-      "Command": "python3 /home/controlm/credit-card-issuance/scripts/kyc_aml_check.py --customer %%customer_id"
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/credit-card-issuance/scripts/kyc_aml_check.py --customer %%customer_id"
     },
     "Credit_Score_Check": {
       "Type": "Job:Command",
       "Description": "Check applicant's credit score",
-      "Command": "python3 /home/controlm/credit-card-issuance/scripts/credit_score_check.py --application %%application_id"
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/credit-card-issuance/scripts/credit_score_check.py --application %%application_id"
     },
     "Underwriting_Decision": {
       "Type": "Job:Command",
       "Description": "Automated underwriting rules and manual review if needed",
-      "Command": "python3 /home/controlm/credit-card-issuance/scripts/underwriting_decision.py --application %%application_id"
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/credit-card-issuance/scripts/underwriting_decision.py --application %%application_id"
     },
     "Card_Issuance": {
       "Type": "Job:Command",
       "Description": "Trigger digital card provisioning and physical card printing",
-      "Command": "python3 /home/controlm/credit-card-issuance/scripts/card_issuance.py --application %%application_id"
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/credit-card-issuance/scripts/card_issuance.py --application %%application_id"
     },
     "Generate_Reporting": {
       "Type": "Job:Command",
       "Description": "Aggregate daily metrics (applications processed, approvals, declines)",
-      "Command": "python3 /home/controlm/credit-card-issuance/scripts/application_reporting.py --date $(date +%F)"
+      "Command": "python3 /home/controlm/spark-innovation-with-controlm/credit-card-issuance/scripts/application_reporting.py --date $(date +%F)"
     }
   }
 }
