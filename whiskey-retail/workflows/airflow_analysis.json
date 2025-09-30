@@ -10,24 +10,24 @@
         "Type": "Folder",
         "OrderMethod": "Manual",
         "analyze_sales_data": {
-          "Type": "Job:ApplicationIntegrator:AI Apa51K",
-          "ConnectionProfile": "ZZZ_APA",
-          "AI-Airflow REST Version": "v2",
-          "AI-Action": "Run DAG",
-          "AI-DAG Name": "analyze_whiskey_data",
-          "AI-Parameters": "{\"email\":\"zzz_email\", \"user_code\": \"zzz\"}",
-          "AI-Logical Date": "null",
-          "AI-Status Polling Frequency": "15"
+          "Type": "Job:Apache Airflow",
+          "ConnectionProfile": "ZZZ_AF",
+          "Airflow REST Version": "v2",
+          "Action": "Run DAG",
+          "DAG Name": "analyze_whiskey_data",
+          "Parameters": "{}",
+          "Logical Date": "null",
+          "Status Polling Frequency": "15"
         },
         "product_feedback_summarization": {
-          "Type": "Job:ApplicationIntegrator:AI Apa51K",
-          "ConnectionProfile": "ZZZ_APA",
-          "AI-Airflow REST Version": "v2",
-          "AI-Action": "Run DAG",
-          "AI-DAG Name": "product_feedback_summarization",
-          "AI-Parameters": "{\"email\":\"zzz_email\", \"user_code\": \"zzz\"}",
-          "AI-Logical Date": "null",
-          "AI-Status Polling Frequency": "15"
+          "Type": "Job:Apache Airflow",
+          "ConnectionProfile": "ZZZ_AF",
+          "Airflow REST Version": "v2",
+          "Action": "Run DAG",
+          "DAG Name": "product_feedback_summarization",
+          "Parameters": "{}",
+          "Logical Date": "null",
+          "Status Polling Frequency": "15"
         },
         "analysis_flow": {
             "Type": "Flow",
@@ -38,6 +38,7 @@
         }
     }
 }
+
 
 
 
