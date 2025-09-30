@@ -42,7 +42,7 @@ def index():
             headers = {"x-api-key": CTM_API_TOKEN, "Content-Type": "application/json", "Accept": "application/json"}
             response = requests.post(f"{CTM_API_ENDPOINT}/run/order", headers=headers, data=json.dumps(payload))
             if response.status_code == 200:
-                message = "Disruption reported! Workflow ordered via API."
+                message = "Credit Card Application Submitted! Workflow ordered via API."
             else:
                 message = f"Workflow trigger failed: {response.status_code} - {response.text}"
         except Exception as e:
