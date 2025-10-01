@@ -18,26 +18,10 @@
           "Parameters": "{}",
           "Logical Date": "null",
           "Status Polling Frequency": "15"
-        },
-        "product_feedback_summarization": {
-          "Type": "Job:Apache Airflow",
-          "ConnectionProfile": "ZZZ_AF",
-          "Airflow REST Version": "v2",
-          "Action": "Run DAG",
-          "DAG Name": "product_feedback_summarization",
-          "Parameters": "{}",
-          "Logical Date": "null",
-          "Status Polling Frequency": "15"
-        },
-        "analysis_flow": {
-            "Type": "Flow",
-            "Sequence": [
-                "analyze_sales_data",
-                "product_feedback_summarization"
-            ]
         }
     }
 }
+
 
 
 
