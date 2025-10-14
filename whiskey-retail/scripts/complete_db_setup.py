@@ -43,7 +43,9 @@ connection.commit()
 
 query = '''
 alter table dwh_customers
-modify column customer_id int not null primary key;'''
+alter column customer_id type int,
+alter column customer_id set not null,
+add primary key (customer_id);'''
 
 # Execute the query
 cursor.execute(query)
@@ -81,7 +83,9 @@ connection.commit()
 
 query = '''
 alter table dwh_employees
-modify column employee_id int not null primary key;'''
+alter column employee_id type int,
+alter column employee_id set not null,
+add primary key (employee_id);'''
 
 # Execute the query
 cursor.execute(query)
@@ -106,7 +110,9 @@ connection.commit()
 
 query = '''
 alter table dwh_products
-modify column product_id int not null primary key;
+alter column product_id type int,
+alter column product_id set not null,
+add primary key (product_id);
 '''
     
 # Execute the query
@@ -164,7 +170,7 @@ connection.commit()
 #Setting the foreign keys for each dimension table
 query = '''
 alter table dwh_fact
-add foreign key (customer_id)  references dwh_customers ( customer_id);
+add foreign key (customer_id) references dwh_customers ( customer_id);
 '''
     
 # Execute the query
@@ -173,7 +179,7 @@ connection.commit()
 
 query = '''
 alter table dwh_fact
-add foreign key (employee_id)  references dwh_employees ( employee_id);
+add foreign key (employee_id) references dwh_employees (employee_id);
 '''
     
 # Execute the query
@@ -182,7 +188,7 @@ connection.commit()
 
 query = '''
 alter table dwh_fact
-add foreign key (product_id)  references dwh_products ( product_id);
+add foreign key (product_id) references dwh_products (product_id);
 '''
     
 # Execute the query
@@ -192,7 +198,7 @@ connection.commit()
 
 query = '''
 alter table dwh_fact
-add foreign key (Date_key)  references dwh_date ( Date_key);
+add foreign key (Date_key) references dwh_date (Date_key);
 '''
     
 # Execute the query
