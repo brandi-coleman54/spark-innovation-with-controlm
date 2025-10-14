@@ -47,6 +47,17 @@
       "ApplyOn": {
         "Type": "Job.*"
       },
+      "Property": "ConnectionProfileSrc",
+      "Replace": [
+        {
+          "ZZZ(.*)": "${CTM_UC_USER_CODE}$1"
+        }
+      ]
+    },
+    {
+      "ApplyOn": {
+        "Type": "Job.*"
+      },
       "Property": "ConnectionProfileDest",
       "Replace": [
         {
