@@ -214,7 +214,7 @@
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/root/labs/whiskey-retrail/data/*.csv",
+                    "Src": "/root/labs/whiskey-retail/data/*.csv",
                     "Dest": "/mft_mountPath/",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
@@ -405,4 +405,5 @@
         }
     }
 }
+
 
