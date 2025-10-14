@@ -58,35 +58,34 @@
         },
         "transfer_product_data": {
             "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileSrc": "ZZZ_SFTP",
             "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
-                    "Src": "/data_engineering/products.csv",
+                    "Src": "/root/labs/whiskey-retail/data/products.csv",
                     "Dest": "/mft_mountPath/products.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/data_engineering/scripts/insert_product_data.py",
+                    "Src": "/root/labs/whiskey-retail/scripts/insert_product_data.py",
                     "Dest": "/mft_mountPath/insert_product_data.py",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/data_engineering/scripts/analyze_data.py",
+                    "Src": "/root/labs/whiskey-retail/scripts/analyze_data.py",
                     "Dest": "/mft_mountPath/analyze_data.py",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/data_engineering/all-whiskey-clean.csv",
+                    "Src": "/root/labs/whiskey-retail/data/all-whiskey-clean.csv",
                     "Dest": "/mft_mountPath/all-whiskey.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
-            ],
-            "S3BucketName": "ctm-techday-resources"
+            ]
         },
         "insert_product_data": {
             "Type": "Job:Command",
@@ -107,17 +106,16 @@
         },
         "transfer_payment_data": {
             "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileSrc": "ZZZ_SFTP",
             "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
-                    "Src": "/data_engineering/payments.csv",
-                    "Dest": "/home/controlm/payments.csv",
+                    "Src": "/root/labs/whiskey-retail/data/payments.csv",
+                    "Dest": "/mft_mountPath/payments.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
-            ],
-            "S3BucketName": "ctm-techday-resources"
+            ]
         },
         "insert_payment_data": {
             "Type": "Job:Command",
@@ -138,29 +136,28 @@
         },
         "transfer_customer_data": {
             "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileSrc": "ZZZ_SFTP",
             "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
-                    "Src": "/data_engineering/norm_customers.csv",
+                    "Src": "/root/labs/whiskey-retail/data/norm_customers.csv",
                     "Dest": "/mft_mountPath/norm_customers.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/data_engineering/customer_cc.csv",
+                    "Src": "/root/labs/whiskey-retail/data/customer_cc.csv",
                     "Dest": "/mft_mountPath/customer_cc.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/data_engineering/countries.csv",
+                    "Src": "/root/labs/whiskey-retail/data/countries.csv",
                     "Dest": "/mft_mountPath/countries.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
-            ],
-            "S3BucketName": "ctm-techday-resources"
+            ]
         },
         "insert_customer_data": {
             "Type": "Job:Command",
@@ -188,43 +185,41 @@
         },
         "transfer_employee_data": {
             "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileSrc": "ZZZ_SFTP",
             "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
-                    "Src": "/data_engineering/norm_employees.csv",
+                    "Src": "/root/labs/whiskey-retail/data/norm_employees.csv",
                     "Dest": "/mft_mountPath/norm_employees.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/data_engineering/departments.csv",
+                    "Src": "/root/labs/whiskey-retail/data/departments.csv",
                     "Dest": "/mft_mountPath/departments.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
-            ],
-            "S3BucketName": "ctm-techday-resources"
+            ]
         },
         "transfer_resources": {
             "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileSrc": "ZZZ_SFTP",
             "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
-                    "Src": "/data_engineering/scripts/*.py",
+                    "Src": "/root/labs/whiskey-retail/scripts/*.py",
                     "Dest": "/mft_mountPath/",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "/data_engineering/*.csv",
+                    "Src": "/root/labs/whiskey-retrail/data/*.csv",
                     "Dest": "/mft_mountPath/",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
-            ],
-            "S3BucketName": "ctm-techday-resources"
+            ]
         },
         "insert_employee_data": {
             "Type": "Job:Command",
@@ -242,17 +237,16 @@
         },
         "transfer_date_data": {
             "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "SPARKIT_S3",
+            "ConnectionProfileSrc": "ZZZ_SFTP",
             "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
-                    "Src": "/data_engineering/all_dates.csv",
+                    "Src": "/root/labs/whiskey-retail/data/all_dates.csv",
                     "Dest": "/mft_mountPath/all_dates.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
-            ],
-            "S3BucketName": "ctm-techday-resources"
+            ]
         },
         "insert_date_data": {
             "Type": "Job:Command",
@@ -411,3 +405,4 @@
         }
     }
 }
+
