@@ -9,7 +9,7 @@ db_prefix = sys.argv[1]
 connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password)
 cursor = connection.cursor()
 
-query = f"drop schema if exists {db_prefix}_whiskey_retail_shop;"
+query = f"drop schema if exists {db_prefix}_whiskey_retail_shop cascade;"
 cursor.execute(query)
 query = f"create schema {db_prefix}_whiskey_retail_shop;"
 cursor.execute(query)

@@ -130,7 +130,7 @@ drop table if exists dwh_fact;
 cursor.execute(query)
 connection.commit()
 
-query = '''
+query = f'''
 CREATE TABLE dwh_fact AS 
 SELECT c1.customer_id,
     e1.employee_id,
@@ -145,17 +145,17 @@ SELECT c1.customer_id,
     d.Date_key,
     p1.date 
 FROM
-    whiskey_retail_shop.payments AS p1
+    {db_prefix}_whiskey_retail_shop.payments AS p1
         JOIN
-    whiskey_retail_shop.customers AS c1 ON p1.customer_id = c1.customer_id
+    {db_prefix}_whiskey_retail_shop.customers AS c1 ON p1.customer_id = c1.customer_id
         JOIN
-    whiskey_retail_shop.employees AS e1 ON p1.employee_id = e1.employee_id
+    {db_prefix}_whiskey_retail_shop.employees AS e1 ON p1.employee_id = e1.employee_id
         JOIN
-    whiskey_retail_shop.products AS p2 ON p1.product_id = p2.product_id
+    {db_prefix}_whiskey_retail_shop.products AS p2 ON p1.product_id = p2.product_id
         JOIN
-    whiskey_retail_shop.countries AS c2 ON c1.country_id = c2.country_id
+    {db_prefix}_whiskey_retail_shop.countries AS c2 ON c1.country_id = c2.country_id
         JOIN
-    whiskey_retail_shop.customer_cc AS c3 ON c1.credit_provider_id = c3.credit_provider_id
+    {db_prefix}_whiskey_retail_shop.customer_cc AS c3 ON c1.credit_provider_id = c3.credit_provider_id
         JOIN
     dwh_date AS d ON p1.date = d.Dates
 ORDER BY d.Dates;
