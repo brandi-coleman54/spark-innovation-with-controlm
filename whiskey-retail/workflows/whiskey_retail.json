@@ -260,6 +260,7 @@
             "FileName": "finalize_db.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
+            "RunAsDummy": true,
             "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/finalize_db.py zzz",
             "IfBase:Folder:CompletionStatus_0": {
                 "Type": "If:CompletionStatus",
@@ -405,5 +406,6 @@
         }
     }
 }
+
 
 
