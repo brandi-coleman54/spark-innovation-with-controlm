@@ -206,7 +206,7 @@ cursor.execute(query)
 connection.commit()
 
 # Create trigger insert_customer
-query = '''
+old_query = '''
 create trigger insert_customer
 after insert on '''+ db_prefix +'''_whiskey_retail_shop.customers 
 for each row
@@ -222,6 +222,30 @@ join countries as c2
 on c1.country_id = c2.country_id
 where c1.customer_id = new.customer_id;
 '''
+
+query = f'''
+CREATE OR REPLACE FUNCTION log_customer_to_dwh()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO {db_prefix}_whiskey_retail_shop.dwh_customers (
+        customer_id,
+        first_name,
+        last_name,
+        full_name,
+        country_code
+    )
+    SELECT
+        NEW.customer_id,
+        NEW.first_name,
+        NEW.last_name,
+        NEW.full_name,
+        c2.country_code
+    FROM {db_prefix}_whiskey_retail_shop.countries AS c2
+    WHERE NEW.country_id = c2.country_id;
+
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;'''
     
 # Execute the query
 cursor.execute(query)
@@ -231,7 +255,7 @@ connection.commit()
 
 
 # Create trigger insert_employee
-query = '''
+old_query = '''
 create trigger insert_employee
 after insert on '''+ db_prefix +'''_whiskey_retail_shop.employees 
 for each row
@@ -247,7 +271,31 @@ join departments as d
 on e.department_id = d.department_id
 where e.employee_id = new.employee_id;
 '''
+query = f'''
+CREATE OR REPLACE FUNCTION log_employee_to_dwh()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO {db_prefix}_whiskey_retail_shop.dwh_employees (
+        employee_id,
+        first_name,
+        last_name,
+        full_name,
+        department
+    )
+    SELECT
+        NEW.employee_id,
+        NEW.first_name,
+        NEW.last_name,
+        NEW.full_name,
+        d.department
+    FROM {db_prefix}_whiskey_retail_shop.departments AS d
+    WHERE NEW.department_id = d.department_id;
     
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;'''
+
+
 # Execute the query
 cursor.execute(query)
     
@@ -256,7 +304,7 @@ connection.commit()
 
 
 # Create trigger new_payment
-query = '''
+old_query = '''
 create trigger new_payment
 after insert on payments
 for each row
@@ -289,7 +337,52 @@ join '''+ db_prefix +'''_whiskey_retail_shop.dwh_date d
 on d.Dates = p.date
 where p.payment_id = new.payment_id;
 '''
-    
+
+query = f'''
+CREATE OR REPLACE FUNCTION new_payment_to_dwh()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO {db_prefix}_whiskey_retail_shop.dwh_fact (
+        customer_id,
+        employee_id,
+        product_id,
+        "Alcohol_Amount",
+        "Alcohol_Percent",
+        "Alcohol_Price",
+        "Product_Name",
+        four_digits,
+        "Country",
+        credit_provider,
+        "Date_key",
+        "Dates"
+    )
+    SELECT
+        c.customer_id,
+        e.employee_id,
+        pr.product_id,
+        pr."Alcohol_Amount",
+        pr."Alcohol_Percent",
+        pr."Alcohol_Price",
+        pr."Product_Name",
+        c.four_digits,
+        co."Country",
+        cc.credit_provider,
+        d."Date_key",
+        d."Dates"
+    FROM payments AS p
+    JOIN customers AS c ON p.customer_id = c.customer_id
+    JOIN countries AS co ON c.country_id = co.country_id
+    JOIN customer_cc AS cc ON c.credit_provider_id = cc.credit_provider_id
+    JOIN employees AS e ON p.employee_id = e.employee_id
+    JOIN products AS pr ON p.product_id = pr.product_id
+    JOIN {db_prefix}_whiskey_retail_shop.dwh_date AS d ON d."Dates" = p.date
+    WHERE p.payment_id = NEW.payment_id;
+
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;'''
+
+
 # Execute the query
 cursor.execute(query)
     
