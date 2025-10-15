@@ -10,7 +10,7 @@ db_prefix = sys.argv[1]
 
 connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password)
 cursor = connection.cursor()
-cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;"
+cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;")
 
 def sql(query):
     return ps.sqldf(query)
