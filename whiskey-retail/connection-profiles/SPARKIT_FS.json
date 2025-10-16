@@ -1,0 +1,9 @@
+{
+  "SPARKIT_LOCAL_FS": {
+    "Type": "ConnectionProfile:FileTransfer:Local",
+    "VerifyBytes": true,
+    "User": "controlm",
+    "Description": "",
+    "Centralized": true
+  }
+}
