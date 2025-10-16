@@ -1,0 +1,17 @@
+{
+  "${CTM_USER_CODE}-first-workflow": {
+    "Type": "Folder",
+    "ControlmServer": "IN01",
+    "OrderMethod": "Manual",
+    "${CTM_USER_CODE}-airflow-job": {
+      "Type": "Job:Apache Airflow",
+      "ConnectionProfile": "${CTM_UC_USER_CODE}_AF",
+      "Airflow REST Version": "v2",
+      "Action": "Run DAG",
+      "DAG Name": "bash_decorator",
+      "Parameters": "{}",
+      "Logical Date": "null",
+      "Host": "${CTM_USER_CODE}-eks-hg"
+    }
+  }
+}
