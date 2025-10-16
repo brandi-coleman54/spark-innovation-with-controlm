@@ -5,7 +5,7 @@
     "SecretAccessKey": {"Secret": "secret_name"},
     "VerifyDestination": true,
     "Region": "us-east-1",
-    "AccessKey": "AKIAVVZZ2EN6YL6DXL5S",
+    "AccessKey": {"Secret": "key_name",
     "Description": "",
     "Centralized": true
   }
