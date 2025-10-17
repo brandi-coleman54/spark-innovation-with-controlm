@@ -2,7 +2,7 @@
    "${CTM_UC_USER_CODE}_AF": {
         "Type": "ConnectionProfile:Apache Airflow",
         "Connection Timeout": "30",
-        "Airflow URL": "http://${AIRFLOW_IP}:8081",
+        "Airflow URL": "http://${AIRFLOW_IP}:8080",
         "Username": "${AIRFLOW_USER}",
         "Password": "${AIRFLOW_PASSWORD}",
         "Description": "",
