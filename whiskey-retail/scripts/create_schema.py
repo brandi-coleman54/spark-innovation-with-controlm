@@ -97,4 +97,5 @@ cursor.execute(query)
     
 # Commit the transaction
 
-connection.commit()
+conn.commit()
+
