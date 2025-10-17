@@ -19,6 +19,14 @@ connection.close()
 conn = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password, database=f"{db_prefix}_whiskey_retail_shop")
 cursor = conn.cursor()
 query = '''
+    CREATE TABLE countries (
+        Country VARCHAR(100) NOT NULL,
+        Country_Code VARCHAR(100) NOT NULL,
+        country_id INT PRIMARY KEY
+    );
+'''
+cursor.execute(query)
+query = '''
     CREATE TABLE customer_cc (
         credit_provider VARCHAR(100) NOT NULL,
         credit_provider_id INT PRIMARY KEY
@@ -97,4 +105,5 @@ cursor.execute(query)
     
 # Commit the transaction
 connection.commit()
+
 
