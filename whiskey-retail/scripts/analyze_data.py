@@ -51,9 +51,9 @@ select
     f.credit_provider,
     e.full_name as employee_name
 from dwh_fact as f
-left join {db_prefix}whiskey_retail_shop.customers c
+left join {db_prefix}_whiskey_retail_shop.customers c
 on f.customer_id = c.customer_id
-left join {db_prefix}whiskey_retail_shop.countries as co
+left join {db_prefix}_whiskey_retail_shop.countries as co
 on co.country_id = c.country_id 
 left join dwh_employees as e
 on e.employee_id = f.employee_id
