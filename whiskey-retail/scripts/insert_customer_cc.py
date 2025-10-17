@@ -8,9 +8,8 @@ pg_host = os.environ['POSTGRES_POSTGRESQL_SERVICE_HOST']
 pg_password = os.environ['PG_PASSWORD']
 db_prefix = sys.argv[1]
 
-connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password)
+connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password, database=f"{db_prefix}_whiskey_retail_shop")
 cursor = connection.cursor()
-cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;")
 
 def sql(query):
     return ps.sqldf(query)
@@ -26,4 +25,5 @@ cursor.executemany(query, records)
 
     
 # Commit the transaction
+
 connection.commit()
