@@ -8,7 +8,6 @@ db_prefix = sys.argv[1]
 
 connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password, database=f"{db_prefix}_whiskey_retail_shop")
 cursor = connection.cursor()
-#cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;")
 
 # Creating customer query
 query = '''
@@ -23,7 +22,7 @@ connection.commit()
 query = '''
 create table dwh_customers as
 select
-        c1.customer_id,
+    c1.customer_id,
     c1.first_name,
     c1.last_name,
     c1.full_name,
@@ -64,7 +63,7 @@ connection.commit()
 query = '''
 create table dwh_employees as
 select 
-        e.employee_id,
+    e.employee_id,
     e.first_name,
     e.last_name,
     e.full_name,
@@ -279,33 +278,40 @@ on e.department_id = d.department_id
 where e.employee_id = new.employee_id;
 '''
 query = f'''
-CREATE OR REPLACE FUNCTION log_employee_to_dwh()
+CREATE OR REPLACE FUNCTION insert_employee_trigger()
 RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO {db_prefix}_whiskey_retail_shop.dwh_employees (
-        employee_id,
-        first_name,
-        last_name,
-        full_name,
-        department
-    )
-    SELECT
-        NEW.employee_id,
-        NEW.first_name,
-        NEW.last_name,
-        NEW.full_name,
-        d.department
-    FROM {db_prefix}_whiskey_retail_shop.departments AS d
-    WHERE NEW.department_id = d.department_id;
-    
-    RETURN NULL;
+  INSERT INTO .dwh_employees (
+    employee_id,
+    first_name,
+    last_name,
+    full_name,
+    department
+  )
+  SELECT 
+    e.employee_id,
+    e.first_name,
+    e.last_name,
+    e.full_name,
+    d.department
+  FROM employees AS e
+  JOIN departments AS d
+    ON e.department_id = d.department_id
+  WHERE e.employee_id = NEW.employee_id;
+
+  RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;'''
 
+trigger = '''
+CREATE TRIGGER insert_employee
+AFTER INSERT ON {{db_prefix}}_whiskey_retail_shop.employees
+FOR EACH ROW
+EXECUTE FUNCTION insert_employee_trigger();'''
 
 # Execute the query
 cursor.execute(query)
-    
+cursor.execute(trigger)
 # Commit the transaction
 connection.commit()
 
@@ -346,52 +352,64 @@ where p.payment_id = new.payment_id;
 '''
 
 query = f'''
-CREATE OR REPLACE FUNCTION new_payment_to_dwh()
+CREATE OR REPLACE FUNCTION new_payment_trigger()
 RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO {db_prefix}_whiskey_retail_shop.dwh_fact (
-        customer_id,
-        employee_id,
-        product_id,
-        "Alcohol_Amount",
-        "Alcohol_Percent",
-        "Alcohol_Price",
-        "Product_Name",
-        four_digits,
-        "Country",
-        credit_provider,
-        "Date_key",
-        "Dates"
-    )
-    SELECT
-        c.customer_id,
-        e.employee_id,
-        pr.product_id,
-        pr."Alcohol_Amount",
-        pr."Alcohol_Percent",
-        pr."Alcohol_Price",
-        pr."Product_Name",
-        c.four_digits,
-        co."Country",
-        cc.credit_provider,
-        d."Date_key",
-        d."Dates"
-    FROM payments AS p
-    JOIN customers AS c ON p.customer_id = c.customer_id
-    JOIN countries AS co ON c.country_id = co.country_id
-    JOIN customer_cc AS cc ON c.credit_provider_id = cc.credit_provider_id
-    JOIN employees AS e ON p.employee_id = e.employee_id
-    JOIN products AS pr ON p.product_id = pr.product_id
-    JOIN {db_prefix}_whiskey_retail_shop.dwh_date AS d ON d."Dates" = p.date
-    WHERE p.payment_id = NEW.payment_id;
+  INSERT INTO dwh_fact (
+    customer_id,
+    employee_id,
+    product_id,
+    Alcohol_Amount,
+    Alcohol_Percent,
+    Alcohol_Price,
+    Product_Name,
+    four_digits,
+    Country,
+    credit_provider,
+    Date_key,
+    Dates
+  )
+  SELECT 
+    c.customer_id,
+    e.employee_id,
+    pr.product_id,
+    pr.Alcohol_Amount,
+    pr.Alcohol_Percent,
+    pr.Alcohol_Price,
+    pr.Product_Name,
+    c.four_digits,
+    co.Country,
+    cc.credit_provider,
+    d.Date_key,
+    d.Dates
+  FROM payments AS p
+  JOIN customers AS c
+    ON p.customer_id = c.customer_id
+  JOIN countries AS co
+    ON c.country_id = co.country_id
+  JOIN customer_cc AS cc
+    ON c.credit_provider_id = cc.credit_provider_id
+  JOIN employees AS e
+    ON p.employee_id = e.employee_id
+  JOIN products AS pr
+    ON p.product_id = pr.product_id
+  JOIN dwh_date AS d
+    ON d.Dates = p.date
+  WHERE p.payment_id = NEW.payment_id;
 
-    RETURN NULL;
+  RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;'''
 
+trigger = '''
+CREATE TRIGGER new_payment
+AFTER INSERT ON your_schema_whiskey_retail_shop.payments
+FOR EACH ROW
+EXECUTE FUNCTION new_payment_trigger();'''
 
 # Execute the query
 cursor.execute(query)
-    
+cursor.execute(trigger)
 # Commit the transaction
 connection.commit()
+
