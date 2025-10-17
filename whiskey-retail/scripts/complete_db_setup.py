@@ -281,7 +281,7 @@ query = f'''
 CREATE OR REPLACE FUNCTION insert_employee_trigger()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO .dwh_employees (
+  INSERT INTO dwh_employees (
     employee_id,
     first_name,
     last_name,
@@ -305,7 +305,7 @@ $$ LANGUAGE plpgsql;'''
 
 trigger = '''
 CREATE TRIGGER insert_employee
-AFTER INSERT ON {{db_prefix}}_whiskey_retail_shop.employees
+AFTER INSERT ON employees
 FOR EACH ROW
 EXECUTE FUNCTION insert_employee_trigger();'''
 
@@ -403,7 +403,7 @@ $$ LANGUAGE plpgsql;'''
 
 trigger = '''
 CREATE TRIGGER new_payment
-AFTER INSERT ON your_schema_whiskey_retail_shop.payments
+AFTER INSERT ON payments
 FOR EACH ROW
 EXECUTE FUNCTION new_payment_trigger();'''
 
@@ -412,4 +412,5 @@ cursor.execute(query)
 cursor.execute(trigger)
 # Commit the transaction
 connection.commit()
+
 
