@@ -90,7 +90,7 @@ def bash_decorator():
     def _get_files_in_cwd() -> list[str]:
         from pathlib import Path
 
-        dir_contents = Path.cwd().glob("opt/airflow/dags/*.py")
+        dir_contents = Path.cwd().glob("root/airflow/dags/*.py")
         files = [str(elem) for elem in dir_contents if elem.is_file()]
 
         return files
