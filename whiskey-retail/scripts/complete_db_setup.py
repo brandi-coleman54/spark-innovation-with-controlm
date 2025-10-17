@@ -6,9 +6,9 @@ pg_host = os.environ['POSTGRES_POSTGRESQL_SERVICE_HOST']
 pg_password = os.environ['PG_PASSWORD']
 db_prefix = sys.argv[1]
 
-connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password)
+connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password, database=f"{db_prefix}_whiskey_retail_shop")
 cursor = connection.cursor()
-cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;")
+#cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;")
 
 # Creating customer query
 query = '''
@@ -23,13 +23,13 @@ connection.commit()
 query = '''
 create table dwh_customers as
 select
-	c1.customer_id,
+        c1.customer_id,
     c1.first_name,
     c1.last_name,
     c1.full_name,
     c2.country_code
-from '''+ db_prefix +'''_whiskey_retail_shop.customers as c1
-join '''+ db_prefix +'''_whiskey_retail_shop.countries as c2
+from customers as c1
+join countries as c2
 on c1.country_id = c2.country_id
 order by customer_id;
 '''
@@ -64,13 +64,13 @@ connection.commit()
 query = '''
 create table dwh_employees as
 select 
-	e.employee_id,
+        e.employee_id,
     e.first_name,
     e.last_name,
     e.full_name,
     d.department
-from '''+ db_prefix +'''_whiskey_retail_shop.employees as e
-join '''+ db_prefix +'''_whiskey_retail_shop.departments as d
+from employees as e
+join departments as d
 on e.department_id = d.department_id
 order by employee_id;
 '''
@@ -98,7 +98,7 @@ connection.commit()
 query = '''
 create table dwh_products as
 select *
-from '''+ db_prefix +'''_whiskey_retail_shop.products 
+from products 
 order by product_id;
 '''
     
@@ -145,17 +145,17 @@ SELECT c1.customer_id,
     d.Date_key,
     p1.date 
 FROM
-    {db_prefix}_whiskey_retail_shop.payments AS p1
+    payments AS p1
         JOIN
-    {db_prefix}_whiskey_retail_shop.customers AS c1 ON p1.customer_id = c1.customer_id
+    customers AS c1 ON p1.customer_id = c1.customer_id
         JOIN
-    {db_prefix}_whiskey_retail_shop.employees AS e1 ON p1.employee_id = e1.employee_id
+    employees AS e1 ON p1.employee_id = e1.employee_id
         JOIN
-    {db_prefix}_whiskey_retail_shop.products AS p2 ON p1.product_id = p2.product_id
+    products AS p2 ON p1.product_id = p2.product_id
         JOIN
-    {db_prefix}_whiskey_retail_shop.countries AS c2 ON c1.country_id = c2.country_id
+    countries AS c2 ON c1.country_id = c2.country_id
         JOIN
-    {db_prefix}_whiskey_retail_shop.customer_cc AS c3 ON c1.credit_provider_id = c3.credit_provider_id
+    customer_cc AS c3 ON c1.credit_provider_id = c3.credit_provider_id
         JOIN
     dwh_date AS d ON p1.date = d.Dates
 ORDER BY d.Dates;
@@ -212,7 +212,7 @@ after insert on '''+ db_prefix +'''_whiskey_retail_shop.customers
 for each row
 insert into '''+ db_prefix +'''_whiskey_retail_shop.dwh_customers
 select 
-	c1.customer_id,
+        c1.customer_id,
     c1.first_name,
     c1.last_name,
     c1.full_name,
@@ -227,7 +227,7 @@ query = f'''
 CREATE OR REPLACE FUNCTION log_customer_to_dwh()
 RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO {db_prefix}_whiskey_retail_shop.dwh_customers (
+    INSERT INTO dwh_customers (
         customer_id,
         first_name,
         last_name,
@@ -235,21 +235,28 @@ BEGIN
         country_code
     )
     SELECT
-        NEW.customer_id,
-        NEW.first_name,
-        NEW.last_name,
-        NEW.full_name,
+        c1.customer_id,
+        c1.first_name,
+        c1.last_name,
+        c1.full_name,
         c2.country_code
-    FROM {db_prefix}_whiskey_retail_shop.countries AS c2
-    WHERE NEW.country_id = c2.country_id;
+    FROM customers as c1    
+    JOIN countries AS c2
+      ON c1.country_id = c2.country_id
+    WHERE c1.customer_id = NEW.customer_id;
 
     RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;'''
-    
+trigger = '''
+create trigger insert_customer
+after insert on customers
+for each row
+execute function log_customer_to_dwh();
+'''    
 # Execute the query
 cursor.execute(query)
-    
+cursor.execute(trigger)    
 # Commit the transaction
 connection.commit()
 
@@ -261,7 +268,7 @@ after insert on '''+ db_prefix +'''_whiskey_retail_shop.employees
 for each row
 insert into '''+ db_prefix +'''_whiskey_retail_shop.dwh_employees
 select 
-	e.employee_id,
+        e.employee_id,
     e.first_name,
     e.last_name,
     e.full_name,
@@ -310,7 +317,7 @@ after insert on payments
 for each row
 insert into '''+ db_prefix +'''_whiskey_retail_shop.dwh_fact
 select 
-	c.customer_id,
+        c.customer_id,
     e.employee_id,
     pr.product_id,
     pr.Alcohol_Amount,
