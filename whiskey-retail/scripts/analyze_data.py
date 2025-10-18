@@ -16,7 +16,6 @@ db_prefix = sys.argv[1]
 
 connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres', password=pg_password, database=f"{db_prefix}_whiskey_retail_shop")
 cursor = connection.cursor()
-#cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;")
 
 plt.style.use('ggplot')
 sns.set_palette('colorblind')
@@ -104,17 +103,17 @@ top_5_products = sql(query)
 st.header("Top 5 Most Profitable")
 st.dataframe(top_5_products, use_container_width=True)
 
-sns.catplot(data = top_5_products, x = 'Product_Name', y = 'Profit', 
-            kind = 'bar', palette='colorblind', height = 6, aspect = 2)
-plt.xlabel('Product Name',size = 16)
-plt.xlabel('Profit',size = 16)
+#sns.catplot(data = top_5_products, x = 'Product_Name', y = 'Profit', 
+#            kind = 'bar', palette='colorblind', height = 6, aspect = 2)
+#plt.xlabel('Product Name',size = 16)
+#plt.xlabel('Profit',size = 16)
 
-plt.title('Top 5 Most Profitable Products',size = 18)
-filename = '/opt/airflow/data/top5.png'
-plt.savefig(filename)
+#plt.title('Top 5 Most Profitable Products',size = 18)
+#filename = '/opt/airflow/data/top5.png'
+#plt.savefig(filename)
 #plt.show()
-fp = open(filename, 'rb') 
-img_data = fp.read()
+#fp = open(filename, 'rb') 
+#img_data = fp.read()
 
 #'''
 #Q2 — Which products people usually buy?
@@ -133,10 +132,10 @@ limit 10
 
 most_bought_products = sql(query)
 st.header("Most Purchased Products")
-st.bar_chart(most_bought_products, y="Number_Of_Transactions", x="Product_Name")
+st.bar_chart(most_bought_products, y="Number_Of_Transactions", x="product_name")
 
 # Generating a PMF
-prob_mass_func = pd.DataFrame(Pmf.from_seq(df.Product_Name))
+prob_mass_func = pd.DataFrame(Pmf.from_seq(df.product_name))
 
 # Sorting 
 sorted_prob_mass_func = prob_mass_func.iloc[:,0].sort_values(ascending = False)
@@ -169,18 +168,18 @@ most_bought_products_by_month = sql(query)
 
 #print(most_bought_products_by_month)
 
-sns.catplot(data = most_bought_products_by_month, 
-            y = 'Number_Of_Transactions', x = 'Month', kind = 'bar',
-           height = 6, aspect = 3, palette='colorblind')
-plt.xlabel('Month', size = 18)
-plt.ylabel('Number_Of_Transactions', size = 18)
-plt.title('Number of Transaction vs Month', size = 22)
-filename = '/opt/airflow/data/most_bought_by_month.png'
-plt.savefig(filename)
+#sns.catplot(data = most_bought_products_by_month, 
+#            y = 'Number_Of_Transactions', x = 'Month', kind = 'bar',
+#           height = 6, aspect = 3, palette='colorblind')
+#plt.xlabel('Month', size = 18)
+#plt.ylabel('Number_Of_Transactions', size = 18)
+#plt.title('Number of Transaction vs Month', size = 22)
+#filename = '/opt/airflow/data/most_bought_by_month.png'
+#plt.savefig(filename)
 #plt.show()
 
-fp = open(filename, 'rb') 
-img_data = fp.read()
+#fp = open(filename, 'rb') 
+#img_data = fp.read()
 
 #'''
 #Q4 — Are we growing as a company in terms of profits or not?
@@ -202,21 +201,21 @@ profits_by_year = sql(query)
 #st.header("Revenue by Year")
 #st.line_chart(profits_by_year, x="year", y="Revenue")
 
-x = profits_by_year.Year
-y = np.cumsum(profits_by_year.Revenue)
+#x = profits_by_year.Year
+#y = np.cumsum(profits_by_year.Revenue)
 
-plt.rcParams["figure.figsize"] = [15, 8]
-plt.rcParams["figure.autolayout"] = True
-plt.plot(x,y)
-plt.xlabel('Year', size = 16)
-plt.ylabel('Profit(in Millions)', size = 16)
-plt.title('Cummulative Profit', size = 20)
-filename = '/opt/airflow/data/profits_by_year.png'
-plt.savefig(filename)
+#plt.rcParams["figure.figsize"] = [15, 8]
+#plt.rcParams["figure.autolayout"] = True
+#plt.plot(x,y)
+#plt.xlabel('Year', size = 16)
+#plt.ylabel('Profit(in Millions)', size = 16)
+#plt.title('Cummulative Profit', size = 20)
+#filename = '/opt/airflow/data/profits_by_year.png'
+#plt.savefig(filename)
 #plt.show()
 
-fp = open(filename, 'rb') 
-img_data = fp.read()
+#fp = open(filename, 'rb') 
+#img_data = fp.read()
 
 #'''
 #Q5 — From which counties do most of the customers come from
@@ -248,11 +247,11 @@ st.dataframe(top_ten_percentile)
 
 print(f"top_ten_percentile: {top_ten_percentile}")
 
-sns.barplot(data =top_ten_percentile, x='Number_of_customers', y='customer_country', palette='colorblind')
-filename = '/opt/airflow/data/customer_by_country.png'
-plt.savefig(filename)
+#sns.barplot(data =top_ten_percentile, x='Number_of_customers', y='customer_country', palette='colorblind')
+#filename = '/opt/airflow/data/customer_by_country.png'
+#plt.savefig(filename)
 #plt.show()
 
-fp = open(filename, 'rb') 
-img_data = fp.read()
+#fp = open(filename, 'rb') 
+#img_data = fp.read()
 
