@@ -185,14 +185,14 @@ add foreign key (employee_id) references dwh_employees (employee_id);
 cursor.execute(query)
 connection.commit()
 
-query = '''
-alter table dwh_fact
-add foreign key (product_id) references dwh_products (product_id);
-'''
+#query = '''
+#alter table dwh_fact
+#add foreign key (product_id) references dwh_products (product_id);
+#'''
     
 # Execute the query
-cursor.execute(query)
-connection.commit()
+#cursor.execute(query)
+#connection.commit()
 
 
 query = '''
@@ -412,6 +412,7 @@ cursor.execute(query)
 cursor.execute(trigger)
 # Commit the transaction
 connection.commit()
+
 
 
 
