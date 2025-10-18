@@ -367,7 +367,7 @@ BEGIN
     Country,
     credit_provider,
     Date_key,
-    Dates
+    date
   )
   SELECT 
     c.customer_id,
@@ -412,5 +412,6 @@ cursor.execute(query)
 cursor.execute(trigger)
 # Commit the transaction
 connection.commit()
+
 
 
