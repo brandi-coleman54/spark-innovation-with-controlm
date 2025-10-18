@@ -14,9 +14,9 @@ pg_host = '${PG_CLUSTER_IP}'
 pg_password = '${PG_PASSWORD}'
 db_prefix = sys.argv[1]
 
-connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres',password=pg_password)
+connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres', password=pg_password, database=f"{db_prefix}_whiskey_retail_shop")
 cursor = connection.cursor()
-cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;")
+#cursor.execute(f"SET search_path = {db_prefix}_whiskey_retail_shop;")
 
 plt.style.use('ggplot')
 sns.set_palette('colorblind')
@@ -51,9 +51,9 @@ select
     f.credit_provider,
     e.full_name as employee_name
 from dwh_fact as f
-left join {db_prefix}_whiskey_retail_shop.customers c
+left join customers c
 on f.customer_id = c.customer_id
-left join {db_prefix}_whiskey_retail_shop.countries as co
+left join countries as co
 on co.country_id = c.country_id 
 left join dwh_employees as e
 on e.employee_id = f.employee_id
