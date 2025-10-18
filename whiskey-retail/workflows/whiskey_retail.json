@@ -347,7 +347,7 @@
                 "get_product_data",
                 "transfer_product_data",
                 "insert_product_data",
-                "finalize_db"
+                "insert_payment_data"
             ]
         },
         "data_pipeline_customer_flow": {
@@ -358,7 +358,7 @@
                 "transfer_customer_data",
                 "insert_customer_cc",
                 "insert_customer_data",
-                "finalize_db"
+                "insert_payment_data"
             ]
         },
         "data_pipeline_customer_flow2": {
@@ -379,7 +379,7 @@
                 "transfer_employee_data",
                 "insert_department_data",
                 "insert_employee_data",
-                "finalize_db"
+                "insert_payment_data"
             ]
         },
         "data_pipeline_date_flow": {
@@ -388,11 +388,12 @@
                 "prep_db",
                 "transfer_date_data",
                 "insert_date_data",
-                "finalize_db"
+                "insert_payment_data"
             ]
         }
     }
 }
+
 
 
 
