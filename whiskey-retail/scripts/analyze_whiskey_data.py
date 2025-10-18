@@ -13,5 +13,5 @@ with DAG(
 ) as dag:
     run_background_script = BashOperator(
         task_id='run_background_script',
-        bash_command='cd /root/scripts && nohup /root/scripts/analyze_whiskey_data.sh ${CTM_USER_CODE} &'
+        bash_command='cd /root/scripts && nohup nohup /root/scripts/analyze_whiskey_data.sh ${CTM_USER_CODE} > /dev/null 2>&1 &'
     )
