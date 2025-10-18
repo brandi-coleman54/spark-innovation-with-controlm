@@ -102,7 +102,7 @@ connection.commit()
 #'''
     
 # Execute the query
-cursor.execute(query)
+#cursor.execute(query)
     
 # Commit the transaction
 #connection.commit()
@@ -412,6 +412,7 @@ cursor.execute(query)
 cursor.execute(trigger)
 # Commit the transaction
 connection.commit()
+
 
 
 
