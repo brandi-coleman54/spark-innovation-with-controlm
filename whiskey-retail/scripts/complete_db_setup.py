@@ -94,31 +94,31 @@ connection.commit()
 
 
 # Creating product query
-query = '''
-create table dwh_products as
-select *
-from products 
-order by product_id;
-'''
+#query = '''
+#create table dwh_products as
+#select *
+#from products 
+#order by product_id;
+#'''
     
 # Execute the query
 cursor.execute(query)
     
 # Commit the transaction
-connection.commit()
+#connection.commit()
 
-query = '''
-alter table dwh_products
-alter column product_id type int,
-alter column product_id set not null,
-add primary key (product_id);
-'''
+#query = '''
+#alter table dwh_products
+#alter column product_id type int,
+#alter column product_id set not null,
+#add primary key (product_id);
+#'''
     
 # Execute the query
-cursor.execute(query)
+#cursor.execute(query)
     
 # Commit the transaction
-connection.commit()
+#connection.commit()
 
 # Creating fact query
 query = '''
@@ -412,6 +412,7 @@ cursor.execute(query)
 cursor.execute(trigger)
 # Commit the transaction
 connection.commit()
+
 
 
 
