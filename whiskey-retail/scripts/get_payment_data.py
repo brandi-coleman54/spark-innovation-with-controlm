@@ -16,7 +16,7 @@ employee_df = pd.read_csv("/mft_mountPath/employees.csv")
 employee_id = employee_df['employee_id']
 
 # Generating random days in the range of 1990 to 2020
-date_range = pd.date_range(start = "1990-01-01", end = "2020-12-31", freq="D")
+date_range = pd.date_range(start = "2016-01-01", end = "2025-10-31", freq="D")
 
 # Generating Unique payment id's
 payment_id = np.random.default_rng().choice(999999, len(date_range), replace = False)
