@@ -17,6 +17,31 @@
                 "td_email": "user@bmc.com"
             }
         ],
+        "transfer_resources": {
+            "Type": "Job:FileTransfer",
+            "ConnectionProfileSrc": "ZZZ_SFTP",
+            "ConnectionProfileDest": "SPARKIT_FS",
+            "FileTransfers": [
+                {
+                    "Src": "/root/labs/whiskey-retail/scripts/*.py",
+                    "Dest": "/mft_mountPath/",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/root/labs/whiskey-retail/data/all-whiskey-clean.csv",
+                    "Dest": "/mft_mountPath/all-whiskey.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
+                    "Src": "/root/labs/whiskey-retail/data/all_dates.csv",
+                    "Dest": "/mft_mountPath/all_dates.csv",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                }
+            ]
+        },
         "init_db": {
             "Type": "Job:Command",
             "FileName": "create_schema.py",
@@ -39,53 +64,20 @@
                 ]
             }
         },
-        "insert_countries": {
-            "Type": "Job:Command",
-            "FileName": "insert_countries_data.py",
-            "FilePath": "/home/controlm",
-            "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_countries_data.py zzz"
+        "init_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "transfer_resources",
+                "init_db",
+                "prep_db"
+            ]
         },
         "get_product_data": {
-            "Type": "Job:Apache Airflow",
-            "ConnectionProfile": "ZZZ_AF",
-            "Airflow REST Version": "v2",
-            "Action": "Run DAG",
-            "DAG Name": "product_function",
-            "Parameters": "{}",
-            "Logical Date": "null",
-            "Status Polling Frequency": "15"
-        },
-        "transfer_product_data": {
-            "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "ZZZ_SFTP",
-            "ConnectionProfileDest": "SPARKIT_FS",
-            "FileTransfers": [
-                {
-                    "Src": "/root/labs/whiskey-retail/data/products.csv",
-                    "Dest": "/mft_mountPath/products.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                },
-                {
-                    "Src": "/root/labs/whiskey-retail/scripts/insert_product_data.py",
-                    "Dest": "/mft_mountPath/insert_product_data.py",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                },
-                {
-                    "Src": "/root/labs/whiskey-retail/scripts/analyze_data.py",
-                    "Dest": "/mft_mountPath/analyze_data.py",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                },
-                {
-                    "Src": "/root/labs/whiskey-retail/data/all-whiskey-clean.csv",
-                    "Dest": "/mft_mountPath/all-whiskey.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                }
-            ]
+            "Type": "Job:Command",
+            "FileName": "get_product_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/get_product_data.py zzz"
         },
         "insert_product_data": {
             "Type": "Job:Command",
@@ -94,158 +86,13 @@
             "FilePath": "/home/controlm",
             "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_product_data.py zzz"
         },
-        "get_payment_data": {
-            "Type": "Job:Apache Airflow",
-            "ConnectionProfile": "ZZZ_AF",
-            "Airflow REST Version": "v2",
-            "Action": "Run DAG",
-            "DAG Name": "payments_function",
-            "Parameters": "{}",
-            "Logical Date": "null",
-            "Status Polling Frequency": "15"
-        },
-        "transfer_payment_data": {
-            "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "ZZZ_SFTP",
-            "ConnectionProfileDest": "SPARKIT_FS",
-            "FileTransfers": [
-                {
-                    "Src": "/root/labs/whiskey-retail/data/payments.csv",
-                    "Dest": "/mft_mountPath/payments.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                }
-            ]
-        },
-        "insert_payment_data": {
-            "Type": "Job:Command",
-            "FileName": "insert_payment_data.py",
-            "FilePath": "/home/controlm",
-            "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_payment_data.py zzz"
-        },
-        "customer_data": {
-            "Type": "Job:Apache Airflow",
-            "ConnectionProfile": "ZZZ_AF",
-            "Airflow REST Version": "v2",
-            "Action": "Run DAG",
-            "DAG Name": "customer_functions",
-            "Parameters": "{}",
-            "Logical Date": "null",
-            "Status Polling Frequency": "15"
-        },
-        "transfer_customer_data": {
-            "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "ZZZ_SFTP",
-            "ConnectionProfileDest": "SPARKIT_FS",
-            "FileTransfers": [
-                {
-                    "Src": "/root/labs/whiskey-retail/data/norm_customers.csv",
-                    "Dest": "/mft_mountPath/norm_customers.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                },
-                {
-                    "Src": "/root/labs/whiskey-retail/data/customer_cc.csv",
-                    "Dest": "/mft_mountPath/customer_cc.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                },
-                {
-                    "Src": "/root/labs/whiskey-retail/data/countries.csv",
-                    "Dest": "/mft_mountPath/countries.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                }
-            ]
-        },
-        "insert_customer_data": {
-            "Type": "Job:Command",
-            "RunAs": "controlm",
-            "FileName": "insert_customer_data.py",
-            "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_data.py zzz"
-        },
-        "insert_customer_cc": {
-            "Type": "Job:Command",
-            "RunAs": "controlm",
-            "FileName": "insert_customer_cc.py",
-            "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_cc.py zzz"
-        },
-        "employee_data": {
-            "Type": "Job:Apache Airflow",
-            "ConnectionProfile": "ZZZ_AF",
-            "Airflow REST Version": "v2",
-            "Action": "Run DAG",
-            "DAG Name": "employee_functions",
-            "Parameters": "{}",
-            "Logical Date": "null",
-            "Status Polling Frequency": "15"
-        },
-        "transfer_employee_data": {
-            "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "ZZZ_SFTP",
-            "ConnectionProfileDest": "SPARKIT_FS",
-            "FileTransfers": [
-                {
-                    "Src": "/root/labs/whiskey-retail/data/norm_employees.csv",
-                    "Dest": "/mft_mountPath/norm_employees.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                },
-                {
-                    "Src": "/root/labs/whiskey-retail/data/departments.csv",
-                    "Dest": "/mft_mountPath/departments.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                }
-            ]
-        },
-        "transfer_resources": {
-            "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "ZZZ_SFTP",
-            "ConnectionProfileDest": "SPARKIT_FS",
-            "FileTransfers": [
-                {
-                    "Src": "/root/labs/whiskey-retail/scripts/*.py",
-                    "Dest": "/mft_mountPath/",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                },
-                {
-                    "Src": "/root/labs/whiskey-retail/data/*.csv",
-                    "Dest": "/mft_mountPath/",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                }
-            ]
-        },
-        "insert_employee_data": {
-            "Type": "Job:Command",
-            "RunAs": "controlm",
-            "FileName": "insert_employee_data.py",
-            "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_employee_data.py zzz"
-        },
-        "insert_department_data": {
-            "Type": "Job:Command",
-            "RunAs": "controlm",
-            "FileName": "insert_department_data.py",
-            "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_department_data.py zzz"
-        },
-        "transfer_date_data": {
-            "Type": "Job:FileTransfer",
-            "ConnectionProfileSrc": "ZZZ_SFTP",
-            "ConnectionProfileDest": "SPARKIT_FS",
-            "FileTransfers": [
-                {
-                    "Src": "/root/labs/whiskey-retail/data/all_dates.csv",
-                    "Dest": "/mft_mountPath/all_dates.csv",
-                    "TransferOption": "SrcToDest",
-                    "TransferType": "Binary"
-                }
+        "product_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "prep_db",
+                "get_product_data",
+                "insert_product_data",
+                "get_payment_data"
             ]
         },
         "insert_date_data": {
@@ -254,6 +101,121 @@
             "FileName": "insert_date_data.py",
             "FilePath": "/home/controlm",
             "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_date_data.py zzz"
+        },
+        "date_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "prep_db",
+                "insert_date_data",
+                "get_payment_data"
+            ]
+        },
+        "set_customer_data": {
+            "Type": "Job:Command",
+            "FileName": "set_customer_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/set_customer_data.py zzz"
+        },
+        "normalize_customers": {
+            "Type": "Job:Command",
+            "FileName": "normalize_customers.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/normalize_customers.py zzz"
+        },
+        "insert_countries": {
+            "Type": "Job:Command",
+            "FileName": "insert_countries_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_countries_data.py zzz"
+        },
+        "insert_customer_cc": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_customer_cc.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_cc.py zzz"
+        },
+        "insert_customer_data": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_customer_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_data.py zzz"
+        },
+        "customer_flow1": {
+            "Type": "Flow",
+            "Sequence": [
+                "prep_db",
+                "set_customer_data",
+                "normalize_customers",
+                "insert_countries",
+                "insert_customer_data",
+                "get_payment_data"
+            ]
+        },
+        "customer_flow2": {
+            "Type": "Flow",
+            "Sequence": [
+                "normalize_customers",
+                "insert_customer_cc",
+                "insert_customer_data"
+            ]
+        },
+        "set_employee_data": {
+            "Type": "Job:Command",
+            "FileName": "set_employee_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/set_employee_data.py zzz"
+        },
+        "normalize_employees": {
+            "Type": "Job:Command",
+            "FileName": "normalize_employees.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/normalize_employees.py zzz"
+        },
+        "insert_department_data": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_department_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_department_data.py zzz"
+        },
+        "insert_employee_data": {
+            "Type": "Job:Command",
+            "RunAs": "controlm",
+            "FileName": "insert_employee_data.py",
+            "FilePath": "/home/controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_employee_data.py zzz"
+        },
+        "employee_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "prep_db",
+                "set_employee_data",
+                "normalize_employees",
+                "insert_department_data",
+                "insert_employee_data",
+                "get_payment_data"
+            ]
+        },
+        "get_payment_data": {
+            "Type": "Job:Command",
+            "FileName": "get_payment_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/get_payment_data.py zzz"
+        },
+        "insert_payment_data": {
+            "Type": "Job:Command",
+            "FileName": "insert_payment_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_payment_data.py zzz"
         },
         "finalize_db": {
             "Type": "Job:Command",
@@ -277,6 +239,14 @@
                     }
                 ]
             }
+        },
+        "finalize_flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "get_payment_data",
+                "insert_payment_data",
+                "finalize_db"
+            ]
         },
         "analysis": {
             "Type": "SubFolder",
@@ -328,71 +298,10 @@
                     }
                 ]
             }
-        },
-        "data_pipeline_payments_flow": {
-            "Type": "Flow",
-            "Sequence": [
-                "prep_db",
-                "get_payment_data",
-                "transfer_payment_data",
-                "insert_payment_data",
-                "finalize_db"
-            ]
-        },
-        "data_pipeline_product_flow": {
-            "Type": "Flow",
-            "Sequence": [
-                "init_db",
-                "prep_db",
-                "get_product_data",
-                "transfer_product_data",
-                "insert_product_data",
-                "insert_payment_data"
-            ]
-        },
-        "data_pipeline_customer_flow": {
-            "Type": "Flow",
-            "Sequence": [
-                "prep_db",
-                "customer_data",
-                "transfer_customer_data",
-                "insert_customer_cc",
-                "insert_customer_data",
-                "insert_payment_data"
-            ]
-        },
-        "data_pipeline_customer_flow2": {
-            "Type": "Flow",
-            "Sequence": [
-                "transfer_customer_data",
-                "insert_countries",
-                "insert_customer_data"
-            ]
-        },
-        "data_pipeline_employee_flow": {
-            "Type": "Flow",
-            "Sequence": [
-                "transfer_resources",
-                "init_db",
-                "prep_db",
-                "employee_data",
-                "transfer_employee_data",
-                "insert_department_data",
-                "insert_employee_data",
-                "insert_payment_data"
-            ]
-        },
-        "data_pipeline_date_flow": {
-            "Type": "Flow",
-            "Sequence": [
-                "prep_db",
-                "transfer_date_data",
-                "insert_date_data",
-                "insert_payment_data"
-            ]
         }
     }
 }
+
 
 
 
