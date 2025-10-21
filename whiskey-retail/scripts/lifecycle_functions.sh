@@ -603,7 +603,7 @@ function Add_AAPI_Env {
 #====================
 # Arguments:
 #  None
-* Outputs
+# Outputs
 #  MODE = INVITE | TEST
 # Comments:
 #  Tests whether the Track was started using an Invite or in Test mode.
