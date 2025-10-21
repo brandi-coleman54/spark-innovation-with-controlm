@@ -58,7 +58,6 @@ function Set_User_Data {
         else
           export CTM_USER_CODE=$(echo "${first_initial}${last_initials}${random_digit}" | tr '[:upper:]' '[:lower:]')
         fi
-
     else
         export CTM_USER="tst-inst@example.com"
         export CTM_USER_NAME="Test User"
