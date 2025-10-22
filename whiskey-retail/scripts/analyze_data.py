@@ -166,6 +166,9 @@ order by count(*)
 
 most_bought_products_by_month = sql(query)
 
+st.header("Purchases by Month")
+st.bar_chart(most_bought_products_by_month, y="Number_Of_Transactions", x="month")
+
 #print(most_bought_products_by_month)
 
 #sns.catplot(data = most_bought_products_by_month, 
@@ -198,8 +201,8 @@ order by year asc
 
 profits_by_year = sql(query)
 
-#st.header("Revenue by Year")
-#st.line_chart(profits_by_year, x="year", y="Revenue")
+st.header("Revenue by Year")
+st.line_chart(profits_by_year, x="year", y="Revenue")
 
 #x = profits_by_year.Year
 #y = np.cumsum(profits_by_year.Revenue)
