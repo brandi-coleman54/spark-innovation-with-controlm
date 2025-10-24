@@ -249,9 +249,11 @@
             ]
         },
         "analysis": {
-            "Type": "SubFolder",
-            "AdjustEvents": false,
-            "ReferencePath": "zzz_airflow_analysis",
+            "Type": "Job:Command",
+            "FileName": "analyze_data.py",
+            "FilePath": "/home/controlm",
+            "RunAs": "controlm",
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/analyze_data.py zzz"
             "eventsToAdd": {
                 "Type": "AddEvents",
                 "Events": [
@@ -301,6 +303,7 @@
         }
     }
 }
+
 
 
 
