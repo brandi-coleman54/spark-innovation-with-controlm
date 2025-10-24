@@ -253,7 +253,7 @@
             "FileName": "analyze_data.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/analyze_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/analyze_data.py zzz",
             "eventsToAdd": {
                 "Type": "AddEvents",
                 "Events": [
@@ -303,6 +303,7 @@
         }
     }
 }
+
 
 
 
