@@ -256,7 +256,7 @@
         },
         "analysis": {
             "Type": "Job:Command",
-            "Host": "zzz-sts-0
+            "Host": "zzz-sts-0",
             "FileName": "analyze_data.sh",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
@@ -310,6 +310,7 @@
         }
     }
 }
+
 
 
 
