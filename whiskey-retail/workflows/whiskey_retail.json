@@ -6,7 +6,7 @@
         "SubApplication": "zzz_process_whiskey_data",
         "RunAs": "controlm"
     },
-    "zzz_whiskey_retail_shop": {
+    "zzz_whiskey_retail_shop": {/
         "Type": "Folder",
         "OrderMethod": "Manual",
         "Variables": [
@@ -24,25 +24,25 @@
             "FileTransfers": [
                 {
                     "Src": "/root/labs/whiskey-retail/scripts/*.py",
-                    "Dest": "/mft_mountPath/",
+                    "Dest": "~/",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/root/labs/whiskey-retail/scripts/analyze_data.sh",
-                    "Dest": "/mft_mountPath/",
+                    "Dest": "~/",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/root/labs/whiskey-retail/data/all-whiskey-clean.csv",
-                    "Dest": "/mft_mountPath/all-whiskey.csv",
+                    "Dest": "~/all-whiskey.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
                     "Src": "/root/labs/whiskey-retail/data/all_dates.csv",
-                    "Dest": "/mft_mountPath/all_dates.csv",
+                    "Dest": "~/all_dates.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 }
@@ -53,14 +53,14 @@
             "FileName": "create_schema.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/create_schema.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/create_schema.py zzz"
         },
         "prep_db": {
             "Type": "Job:Command",
             "FileName": "complete_db_setup.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/complete_db_setup.py zzz",
+            "Command": ". /home/controlm/venv/bin/activate && python ~/complete_db_setup.py zzz",
             "eventsToAdd": {
                 "Type": "AddEvents",
                 "Events": [
@@ -83,14 +83,14 @@
             "FileName": "get_product_data.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/get_product_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/get_product_data.py zzz"
         },
         "insert_product_data": {
             "Type": "Job:Command",
             "RunAs": "controlm",
             "FileName": "insert_product_data.py",
             "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_product_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/insert_product_data.py zzz"
         },
         "product_flow": {
             "Type": "Flow",
@@ -106,7 +106,7 @@
             "RunAs": "controlm",
             "FileName": "insert_date_data.py",
             "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_date_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/insert_date_data.py zzz"
         },
         "date_flow": {
             "Type": "Flow",
@@ -121,35 +121,35 @@
             "FileName": "set_customer_data.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/set_customer_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/set_customer_data.py zzz"
         },
         "normalize_customers": {
             "Type": "Job:Command",
             "FileName": "normalize_customers.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/normalize_customers.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/normalize_customers.py zzz"
         },
         "insert_countries": {
             "Type": "Job:Command",
             "FileName": "insert_countries_data.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_countries_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/insert_countries_data.py zzz"
         },
         "insert_customer_cc": {
             "Type": "Job:Command",
             "RunAs": "controlm",
             "FileName": "insert_customer_cc.py",
             "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_cc.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/insert_customer_cc.py zzz"
         },
         "insert_customer_data": {
             "Type": "Job:Command",
             "RunAs": "controlm",
             "FileName": "insert_customer_data.py",
             "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_customer_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/insert_customer_data.py zzz"
         },
         "customer_flow1": {
             "Type": "Flow",
@@ -175,28 +175,28 @@
             "FileName": "set_employee_data.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/set_employee_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/set_employee_data.py zzz"
         },
         "normalize_employees": {
             "Type": "Job:Command",
             "FileName": "normalize_employees.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/normalize_employees.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/normalize_employees.py zzz"
         },
         "insert_department_data": {
             "Type": "Job:Command",
             "RunAs": "controlm",
             "FileName": "insert_department_data.py",
             "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_department_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/insert_department_data.py zzz"
         },
         "insert_employee_data": {
             "Type": "Job:Command",
             "RunAs": "controlm",
             "FileName": "insert_employee_data.py",
             "FilePath": "/home/controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_employee_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/insert_employee_data.py zzz"
         },
         "employee_flow": {
             "Type": "Flow",
@@ -214,14 +214,14 @@
             "FileName": "get_payment_data.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/get_payment_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/get_payment_data.py zzz"
         },
         "insert_payment_data": {
             "Type": "Job:Command",
             "FileName": "insert_payment_data.py",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/insert_payment_data.py zzz"
+            "Command": ". /home/controlm/venv/bin/activate && python ~/insert_payment_data.py zzz"
         },
         "finalize_db": {
             "Type": "Job:Command",
@@ -229,7 +229,7 @@
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
             "RunAsDummy": true,
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/finalize_db.py zzz",
+            "Command": ". /home/controlm/venv/bin/activate && python ~/finalize_db.py zzz",
             "IfBase:Folder:CompletionStatus_0": {
                 "Type": "If:CompletionStatus",
                 "CompletionStatus": "NOTOK",
@@ -260,7 +260,7 @@
             "FileName": "analyze_data.sh",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". ~/venv/bin/activate && chmod +x /mft_mountPath/analyze_data.sh && /mft_mountPath/analyze_data.sh zzz",
+            "Command": ". ~/venv/bin/activate && chmod +x ~/analyze_data.sh && ~/analyze_data.sh zzz",
             "eventsToAdd": {
                 "Type": "AddEvents",
                 "Events": [
@@ -310,6 +310,7 @@
         }
     }
 }
+
 
 
 
