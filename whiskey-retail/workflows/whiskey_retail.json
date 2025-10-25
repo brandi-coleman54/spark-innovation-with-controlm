@@ -1,6 +1,6 @@
 {
     "Defaults": {
-        "Host": "tus-eks-hg",
+        "Host": "zzz-eks-hg",
         "ControlmServer": "IN01",
         "Application": "zzz_whiskey_pipeline",
         "SubApplication": "zzz_process_whiskey_data",
@@ -250,10 +250,11 @@
         },
         "analysis": {
             "Type": "Job:Command",
-            "FileName": "analyze_data.py",
+            "Host": "zzz-sts-0
+            "FileName": "analyze_data.sh",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". /home/controlm/venv/bin/activate && python /mft_mountPath/analyze_data.py zzz",
+            "Command": ". ~/venv/bin/activate && && chmod +x /mft_mountPath/analyze_data.sh && /mft_mountPath/analyze_data.sh zzz",
             "eventsToAdd": {
                 "Type": "AddEvents",
                 "Events": [
@@ -303,6 +304,7 @@
         }
     }
 }
+
 
 
 
