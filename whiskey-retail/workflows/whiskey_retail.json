@@ -29,6 +29,12 @@
                     "TransferType": "Binary"
                 },
                 {
+                    "Src": "/root/labs/whiskey-retail/scripts/analyze_data.sh",
+                    "Dest": "/mft_mountPath/",
+                    "TransferOption": "SrcToDest",
+                    "TransferType": "Binary"
+                },
+                {
                     "Src": "/root/labs/whiskey-retail/data/all-whiskey-clean.csv",
                     "Dest": "/mft_mountPath/all-whiskey.csv",
                     "TransferOption": "SrcToDest",
@@ -304,6 +310,7 @@
         }
     }
 }
+
 
 
 
