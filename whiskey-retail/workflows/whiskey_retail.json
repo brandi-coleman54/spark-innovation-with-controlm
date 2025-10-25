@@ -6,7 +6,7 @@
         "SubApplication": "zzz_process_whiskey_data",
         "RunAs": "controlm"
     },
-    "zzz_whiskey_retail_shop": {/
+    "zzz_whiskey_retail_shop": {
         "Type": "Folder",
         "OrderMethod": "Manual",
         "Variables": [
@@ -310,6 +310,7 @@
         }
     }
 }
+
 
 
 
