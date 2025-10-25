@@ -1,6 +1,6 @@
 {
     "Defaults": {
-        "Host": "tus-eks-hg",
+        "Host": "zzz-eks-hg",
         "ControlmServer": "IN01",
         "Application": "zzz_whiskey_pipeline",
         "SubApplication": "zzz_process_whiskey_data",
