@@ -10,8 +10,8 @@ from empiricaldist import Pmf
 import psycopg2
 import os
 
-pg_host = '${PG_CLUSTER_IP}'
-pg_password = '${PG_PASSWORD}'
+pg_host = os.environ['POSTGRES_POSTGRESQL_SERVICE_HOST']
+pg_password = os.environ['PG_PASSWORD']
 db_prefix = sys.argv[1]
 
 connection = psycopg2.connect(host=pg_host, port=int(5432), user='postgres', password=pg_password, database=f"{db_prefix}_whiskey_retail_shop")
