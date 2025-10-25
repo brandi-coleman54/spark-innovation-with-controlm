@@ -6,7 +6,11 @@
     },
     {
       "Property": "Host",
-      "Assign": "${CTM_HG}"
+      "Replace": [
+        {
+          "zzz(.*)": "${CTM_USER_CODE}$1"
+        }
+      ]
     },
     {
       "Property": "Application",
