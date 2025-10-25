@@ -260,7 +260,7 @@
             "FileName": "analyze_data.sh",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". ~/venv/bin/activate && && chmod +x /mft_mountPath/analyze_data.sh && /mft_mountPath/analyze_data.sh zzz",
+            "Command": ". ~/venv/bin/activate && chmod +x /mft_mountPath/analyze_data.sh && /mft_mountPath/analyze_data.sh zzz",
             "eventsToAdd": {
                 "Type": "AddEvents",
                 "Events": [
@@ -310,6 +310,7 @@
         }
     }
 }
+
 
 
 
