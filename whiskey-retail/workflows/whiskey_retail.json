@@ -263,7 +263,7 @@
             "FileName": "analyze_data.sh",
             "FilePath": "/home/controlm",
             "RunAs": "controlm",
-            "Command": ". %%work_dir/venv/bin/activate && chmod +x %%work_dir/analyze_data.sh && %%work_dir/analyze_data.sh zzz",
+            "Command": ". ~/venv/bin/activate && chmod +x %%work_dir/analyze_data.sh && %%work_dir/analyze_data.sh zzz",
             "eventsToAdd": {
                 "Type": "AddEvents",
                 "Events": [
@@ -313,6 +313,7 @@
         }
     }
 }
+
 
 
 
