@@ -1,25 +1,32 @@
 {
     "MY_WEATHER_FORECAST": {
         "Type": "Folder",
-      
-
-        "StartJob": {
-            "Type": "Job:Command",
-            "Command": "echo \"Hello\"",
-            "Host": "workbench",
-            "RunAs": "workbench"
+        "Variables": [
+            {
+                "zip_code": "77001",
+                "forecast_file": "~/forecast.json"
+            }
+        ],
+        "get_forecast": {
+            "Type": "Job:ApplicationIntegrator:AI Weather",
+            "Host": "workbench-host",
+            "ConnectionProfile": "NONE",
+            "AI-Location": "%%zip_code",
+            "AI-Temperature Units": "Fahrenheit",
+            "AI-Target Path": "%%forecast_file"
         },
-
-        "EndJob": {
+        "generate_dashboard": {
             "Type": "Job:Command",
-            "Command": "echo \"Bye\"",
-            "Host": "workbench",
-            "RunAs": "workbench"
+            "Command": "source ~/venv/bin/activate && nohup streamlit run ~/labs/workbench/scripts/weather_dashboard.py -- %%forecast_file --server.headless true --server.address 0.0.0.0 &",
+            "Host": "workbench-host",
+            "RunAs": "controlm"
         },
-
         "Flow": {
             "Type": "Flow",
-            "Sequence": ["StartJob", "EndJob"]
+            "Sequence": [
+                "get_forecast",
+                "generate_dashboard"
+            ]
         }
     }
 }
