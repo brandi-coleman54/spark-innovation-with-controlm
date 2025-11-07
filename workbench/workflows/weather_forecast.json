@@ -3,7 +3,9 @@
         "Type": "Folder",
         "Variables": [
             {
-                "zip_code": "77001",
+                "zip_code": "77001"
+            },
+            {
                 "forecast_file": "~/forecast.json"
             }
         ],
