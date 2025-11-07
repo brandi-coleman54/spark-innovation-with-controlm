@@ -41,7 +41,7 @@ def get_owm_icon_url(wmo_code):
 
 
 # Load the JSON data
-with open("forecast.txt", "r") as f:
+with open(forecast_file, "r") as f:
     data = json.load(f)
 
 # Build DataFrame
