@@ -1,17 +1,18 @@
 {
     "First_Workflow": {
         "Type": "Folder",
-        "RunAs": "workbench",
 
         "StartJob": {
             "Type": "Job:Command",
             "Command": "echo \"Hello\"",
+            "Host": "workbench",
             "RunAs": "workbench"
         },
 
         "EndJob": {
             "Type": "Job:Command",
             "Command": "echo \"Bye\"",
+            "Host": "workbench",
             "RunAs": "workbench"
         },
 
