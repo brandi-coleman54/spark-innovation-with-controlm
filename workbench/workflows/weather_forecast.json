@@ -1,0 +1,25 @@
+{
+    "MY_WEATHER_FORECAST": {
+        "Type": "Folder",
+      
+
+        "StartJob": {
+            "Type": "Job:Command",
+            "Command": "echo \"Hello\"",
+            "Host": "workbench",
+            "RunAs": "workbench"
+        },
+
+        "EndJob": {
+            "Type": "Job:Command",
+            "Command": "echo \"Bye\"",
+            "Host": "workbench",
+            "RunAs": "workbench"
+        },
+
+        "Flow": {
+            "Type": "Flow",
+            "Sequence": ["StartJob", "EndJob"]
+        }
+    }
+}
