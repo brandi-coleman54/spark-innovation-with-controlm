@@ -11,7 +11,7 @@ CONTAINER_NAME=workbench
 
 EXIT_CODE=1
 TRIES=0
-MAX_TRIES=10
+MAX_TRIES=20
 
 # Wait for workbench to complete startup
 while [[ "${EXIT_CODE}" -ne "0" ]]; do
@@ -19,6 +19,7 @@ while [[ "${EXIT_CODE}" -ne "0" ]]; do
   EXIT_CODE=$?
   if [[ "${EXIT_CODE}" -ne "0" ]]; then
     ((TRIES++))
+    echo "Try ${TRIES}..."
     if [[ "${TRIES}" -le "${MAX_TRIES}" ]]; then
       sleep 30
     else
