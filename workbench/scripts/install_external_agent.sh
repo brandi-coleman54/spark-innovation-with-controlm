@@ -29,6 +29,25 @@ while [[ "${EXIT_CODE}" -ne "0" ]]; do
   fi
 done
 
+function Run_Agent_Test {
+
+  cat > /tmp/agt_test.json <<EOF
+{
+    "TEST_AGENT_INSTALL": {
+        "Type": "Folder",
+        "testjob": {
+            "Type": "Job:Command",
+            "Command": "echo \"Hello from workbench\"",
+            "Host": "${AGENT_NAME}",
+            "RunAs": "${USER}"
+        }
+    }
+}
+EOF
+  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm env workbench::add
+  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm run /tmp/agt_test.json
+}
+
 function Create_Silent_File {
 
     agent_port=$1
@@ -72,3 +91,5 @@ function Run_Silent_Install {
 
 Create_Silent_File ${AGENT_PORT} ${SERVER_PORT} ${SERVER_HOST} ${SERVER_NAME}
 Run_Silent_Install ${AGENT_NAME}
+Run_Agent_Test
+
