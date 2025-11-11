@@ -44,8 +44,9 @@ function Run_Agent_Test {
     }
 }
 EOF
-  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm env workbench::add
-  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm run /tmp/agt_test.json
+  chmod +r /tmp/agt_test.json
+  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm env workbench::add"
+  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm run /tmp/agt_test.json"
 }
 
 function Create_Silent_File {
