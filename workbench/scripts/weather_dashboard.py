@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import folium
+from streamlit_folium import st_folium
 import json
 import plotly.express as px
 import sys
@@ -58,18 +60,51 @@ latitude = data['latitude']
 longitude = data['longitude']
 elevation = data['elevation']
 
+
+API_KEY = "${OWM_KEY}"  # Replace with your actual API key
+CENTER = [latitude, longitude]  # Florida center
+ZOOM = 10
+
+# --- Layer Options ---
+layer_options = {
+    "Precipitation": f"https://tile.openweathermap.org/map/precipitation_new/{{z}}/{{x}}/{{y}}.png?appid={API_KEY}",
+    "Clouds": f"https://tile.openweathermap.org/map/clouds_new/{{z}}/{{x}}/{{y}}.png?appid={API_KEY}",
+    "Temperature": f"https://tile.openweathermap.org/map/temp_new/{{z}}/{{x}}/{{y}}.png?appid={API_KEY}"
+}
+
 # Map weather codes to emojis
 df["Weather Emoji"] = df["Weather Code"].map(lambda x: WEATHER_EMOJI.get(x, "❓"))
 
-st.title("Weather Forecast Dashboard")
+
+
+# --- Create Map ---
+m = folium.Map(location=CENTER, zoom_start=ZOOM)
+
+st.title(f"Current Weather Map for Your Location")
+selected_layer = st.selectbox("Choose a weather layer:", list(layer_options.keys()))
+# Add selected tile layer
+folium.TileLayer(
+    tiles=layer_options[selected_layer],
+    attr="OpenWeatherMap",
+    name=selected_layer,
+    overlay=True,
+    control=True
+).add_to(m)
+
+# Add layer control
+folium.LayerControl().add_to(m)
+
+# --- Display Map ---
+st_folium(m, width=700, height=500)
+
 
 # Location and forecast period
 st.markdown(f"**Location:** Latitude {latitude}, Longitude {longitude}, Elevation {elevation} m")
 st.markdown(f"**Forecast Period:** {df['Date'].iloc[0]} to {df['Date'].iloc[-1]}")
 
 # Map view
-st.subheader("Forecast Location")
-st.map(pd.DataFrame({"lat": [latitude], "lon": [longitude]}))
+st.subheader("7 Day Forecast")
+#st.map(pd.DataFrame({"lat": [latitude], "lon": [longitude]}))
 
 # Weather emoji chart
 # Build HTML table
