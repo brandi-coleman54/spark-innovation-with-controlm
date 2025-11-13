@@ -1,0 +1,11 @@
+{
+    "DeployDescriptor": [
+      {
+        "Property": "@",
+        "ApplyOn": { "Type": "Job" },
+        "Replace": [
+          { "^(.*)$": "replace-with-usercode-$1" }
+        ]
+      }
+    ]
+  }
