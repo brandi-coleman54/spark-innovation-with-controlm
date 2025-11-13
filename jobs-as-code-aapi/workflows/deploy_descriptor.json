@@ -1,11 +1,25 @@
 {
     "DeployDescriptor": [
       {
+    "Property": "@",
+    "ApplyOn": {"Type": "Folder"},
+    "Replace": [
+        { "^(.*)$": "replace-with-usercode-$1" }
+        ]
+    },
+    {
         "Property": "@",
         "ApplyOn": { "Type": "Job" },
         "Replace": [
           { "^(.*)$": "replace-with-usercode-$1" }
         ]
-      }
+    },
+    {
+      "Property": "Sequence",
+      "ApplyOn": { "Type": "Flow" },
+      "Replace": [
+        { "^(.*)$": "replace-with-usercode-$1" }
+      ]
+    }
     ]
   }
