@@ -1,9 +1,6 @@
 {
   "zzz-social-media-feeds" : {
     "Type" : "Folder",
-    "BusinessFields" : [ {
-      "Usercode" : "zzz"
-    } ],
     "ControlmServer" : "host",
     "SubApplication" : "zzz-da-feeds",
     "CreatedBy" : "miwalter",
