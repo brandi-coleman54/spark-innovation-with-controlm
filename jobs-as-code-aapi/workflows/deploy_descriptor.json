@@ -1,11 +1,11 @@
 {
-    "DeployDescriptor": [
-      {
-    "Property": "@",
-    "ApplyOn": {"Type": "Folder"},
-    "Replace": [
-        { "^(.*)$": "replace-with-usercode-$1" }
-        ]
+  "DeployDescriptor": [
+    {
+      "Property": "@",
+      "ApplyOn": { "Type": "Folder" },
+      "Replace": [
+        { "^(.+?)_(.*)$": "$1-$2" }
+      ]
     },
     {
         "Property": "@",
