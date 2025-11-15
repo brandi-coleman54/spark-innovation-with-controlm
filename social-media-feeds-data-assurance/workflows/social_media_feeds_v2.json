@@ -1,5 +1,5 @@
 {
-  "zzz-social-media-feeds" : {
+  "zzz-social-media-feeds-with-data-quality" : {
     "Type" : "Folder",
     "ControlmServer" : "host",
     "OrderMethod" : "Manual",
