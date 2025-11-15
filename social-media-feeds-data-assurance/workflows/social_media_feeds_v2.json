@@ -157,7 +157,6 @@
     "zzz-remediate-data" : {
       "Type" : "Job:Command",
       "SubApplication" : "zzz-da-feeds",
-      "Confirm" : true,
       "Host" : "dadb",
       "CreatedBy" : "emuser",
       "RunAs" : "ctmda",
