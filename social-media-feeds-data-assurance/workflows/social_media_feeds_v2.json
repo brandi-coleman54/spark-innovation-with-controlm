@@ -1,0 +1,191 @@
+{
+  "zzz-social-media-feeds" : {
+    "Type" : "Folder",
+    "ControlmServer" : "host",
+    "OrderMethod" : "Manual",
+    "ActiveRetentionPolicy" : "CleanEndedOK",
+    "SubApplication" : "zzz-da-feeds",
+    "CreatedBy" : "miwalter",
+    "Application" : "zzz-da-feeds",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "zzz-ai-score" : {
+      "Type" : "Job:EmbeddedScript",
+      "Script" : "#!/usr/bin/python\\n\\nfrom google import genai\\nimport os\\n\\n# Define the name of the output file\\nOUTPUT_FILENAME = \"/home/ctmda/social-media-feeds/sentiment_scores.csv\"\\n\\n# Initialize the client\\n# Make sure the GOOGLE_AI_KEY environment variable is set\\nclient = genai.Client(api_key=\"replace-with-google-api-key\")\\n\\n# Upload the file\\nprint(f\"Uploading file...\")\\ntry:\\n    uploaded_file = client.files.upload(file=\"/home/ctmda/social-media-feeds/feeds.csv\")\\nexcept Exception as e:\\n    print(f\"Error uploading file: {e}\")\\n    exit()\\n\\nprint(\"File uploaded successfully.\")\\n\\n# Prompt for sentiment analysis\\nprompt = \"\"\"\\nYou must act as a **deterministic sentiment scoring system**. Analyze the 'Content' column of the uploaded CSV file and classify the sentiment into one of five distinct categories: \\n**Very Negative, Negative, Neutral, Positive, or Very Positive**. Then, assign a **fixed numerical score** based on this classification: \\n**Very Negative = 0.00**, **Negative = 0.25**, **Neutral = 0.50**, **Positive = 0.75**, **Very Positive = 1.00**. \\nCreate a new CSV that includes all original columns plus a final column named 'Sentiment Score' with only the numerical value. \\nProvide the full content of this resulting CSV in a single markdown code block and not more.\\n\"\"\"\\n\\n# Generate content\\nprint(\"Generating Sentiment Scores...\")\\ntry:\\n    response = client.models.generate_content(\\n        model=\"gemini-2.5-pro\",\\n        contents=[prompt, uploaded_file]\\n    )\\nexcept Exception as e:\\n    print(f\"Error generating content: {e}\")\\n    # Try to clean up the uploaded file if an error occurs\\n    client.files.delete(name=uploaded_file.name)\\n    exit()\\n\\n# Clean up the model's text output\\n# The output is expected to be a Markdown code block, e.g.: ```csv ...content...```\\nraw_text = response.text.strip()\\nif raw_text.startswith(\"```csv\") and raw_text.endswith(\"```\"):\\n    # Remove '```csv' at the beginning and '```' at the end\\n    csv_content = raw_text.removeprefix(\"```csv\").removesuffix(\"```\").strip()\\nelse:\\n    # If the expected formatting is off (e.g., just plain text)\\n    print(\"Warning: Output does not match expected Markdown format. Using raw text.\")\\n    csv_content = raw_text\\n\\n# Write the cleaned content to the CSV file\\ntry:\\n    with open(OUTPUT_FILENAME, \"w\", encoding=\"utf-8\") as f:\\n        f.write(csv_content)\\n    print(f\"Sentiment data successfully saved to '{OUTPUT_FILENAME}'.\")\\nexcept Exception as e:\\n    print(f\"Error writing file: {e}\")\\n\\n# Clean up the uploaded file\\nprint(f\"Deleting temporary uploaded file {uploaded_file.name}...\")\\nclient.files.delete(name=uploaded_file.name)\\nprint(\"Cleanup complete.\")",
+      "SubApplication" : "zzz-da-feeds",
+      "FileName" : "google-ai.py",
+      "Host" : "dadb",
+      "CreatedBy" : "miwalter",
+      "Description" : "This job runs Google Gemini test on file (Sentiment scoring). It uses token set in root environment.",
+      "RunAs" : "ctmda",
+      "Application" : "zzz-da-feeds",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-data-quality-check-TO-zzz-ai-score"
+        }, "OR", {
+          "Event" : "zzz-remediate-data-TO-zzz-ai-score"
+        }, "OR" ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-ai-score-TO-zzz-ai-score-cat"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz-data-quality-check-TO-zzz-ai-score"
+        }, {
+          "Event" : "zzz-remediate-data-TO-zzz-ai-score"
+        } ]
+      }
+    },
+    "zzz-ai-score-cat" : {
+      "Type" : "Job:EmbeddedScript",
+      "Script" : "#!/usr/bin/python\\n\\nimport csv\\n\\n# Pfad zur Originaldatei\\ninput_file = \"/home/ctmda/social-media-feeds/sentiment_scores.csv\"\\n\\n# Ausgabe-Dateien\\napproved_file = \"/home/ctmda/social-media-feeds/approved.csv\"\\ndeclined_file = \"/home/ctmda/social-media-feeds/declined.csv\"\\n\\n# Listen zum Speichern\\napproved = []\\ndeclined = []\\n\\n# CSV einlesen und filtern\\nwith open(input_file, newline='', encoding='utf-8') as csvfile:\\n    reader = csv.DictReader(csvfile)\\n    headers = reader.fieldnames + [\"Category\"]  # Neue Spalte\\n    for row in reader:\\n        score = float(row[\"Sentiment Score\"])\\n        if score >= 0.75:\\n            row[\"Category\"] = \"Approved\"\\n            approved.append(row)\\n        else:\\n            row[\"Category\"] = \"Declined\"\\n            declined.append(row)\\n\\n# CSV-Dateien schreiben\\ndef write_csv(filename, data):\\n    with open(filename, mode='w', newline='', encoding='utf-8') as csvfile:\\n        writer = csv.DictWriter(csvfile, fieldnames=headers)\\n        writer.writeheader()\\n        writer.writerows(data)\\n\\nwrite_csv(approved_file, approved)\\nwrite_csv(declined_file, declined)\\n\\n# Ausgabe auf der Konsole\\nprint(\"--- Approved ---\")\\nfor row in approved:\\n    print(row)\\n\\nprint(\"--- Declined ---\")\\nfor row in declined:\\n    print(row)",
+      "SubApplication" : "zzz-da-feeds",
+      "FileName" : "output.py",
+      "Host" : "dadb",
+      "CreatedBy" : "miwalter",
+      "Description" : "This job exports proper lines to STD OUT.",
+      "RunAs" : "ctmda",
+      "Application" : "zzz-da-feeds",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-ai-score-TO-zzz-ai-score-cat"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz-ai-score-TO-zzz-ai-score-cat"
+        } ]
+      }
+    },
+    "zzz-data-quality-check" : {
+      "Type" : "Job:DataAssurance",
+      "ConnectionProfile" : "SOCIAL_MEDIA_FEEDS",
+      "MonitorName" : "SOCIAL_MEDIA_FEEDS_MONITOR",
+      "Severity" : "Info",
+      "SubApplication" : "zzz-da-feeds",
+      "Host" : "dadb",
+      "CreatedBy" : "emuser",
+      "RunAs" : "SOCIAL_MEDIA_FEEDS",
+      "Application" : "zzz-da-feeds",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Run_0" : {
+          "Type" : "Action:Run",
+          "Folder" : "zzz-social-media-feeds",
+          "RunAsIndependentFlow" : false,
+          "Job" : "zzz-remediate-data"
+        },
+        "Event:Add_1" : {
+          "Type" : "Event:Add",
+          "Event" : "data-quality-failure"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-get-feeds-TO-zzz-data-quality-check"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-data-quality-check-TO-zzz-ai-score"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz-get-feeds-TO-zzz-data-quality-check"
+        } ]
+      }
+    },
+    "zzz-get-feeds" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-da-feeds",
+      "Host" : "dadb",
+      "CreatedBy" : "miwalter",
+      "RunAs" : "ctmda",
+      "Application" : "zzz-da-feeds",
+      "Command" : "curl http://social-media-feeds-app:8080/ > /home/ctmda/social-media-feeds/feeds.csv",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-get-feeds-TO-zzz-data-quality-check"
+        } ]
+      }
+    },
+    "zzz-remediate-data" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-da-feeds",
+      "Confirm" : true,
+      "Host" : "dadb",
+      "CreatedBy" : "emuser",
+      "RunAs" : "ctmda",
+      "Application" : "zzz-da-feeds",
+      "Command" : "awk -F, 'NR==1 || ($7 > 50 && $8 > 10 && $9 > 10)' /home/ctmda/social-media-feeds/feeds.csv > tmp.csv && mv tmp.csv /home/ctmda/social-media-feeds/feeds.csv",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "data-quality-failure"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-remediate-data-TO-zzz-ai-score"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "data-quality-failure"
+        } ]
+      }
+    }
+  }
+}
