@@ -1,0 +1,34 @@
+{
+    "${CTM_USER_CODE}_weather_forecast": {
+        "Type": "Folder",
+        "Variables": [
+            {
+                "zip_code": "77001"
+            },
+            {
+                "forecast_file": "~/forecast.json"
+            }
+        ],
+        "get_forecast": {
+            "Type": "Job:ApplicationIntegrator:AI ${CTM_UC_USER_CODE}_Weather",
+            "Host": "${CTM_USER_CODE}_instruqt_server",
+            "ConnectionProfile": "NONE",
+            "AI-Location": "%%zip_code",
+            "AI-Temperature Units": "Fahrenheit",
+            "AI-Target Path": "%%forecast_file"
+        },
+        "generate_dashboard": {
+            "Type": "Job:Command",
+            "Command": ". ~/venv/bin/activate && nohup streamlit run ~/spark-innovation-with-controlm/common/scripts/run_weather_dashboard.py -- %%forecast_file --server.headless true --server.address 0.0.0.0 &",
+            "Host": "${CTM_USER_CODE}_instruqt_server",
+            "RunAs": "controlm"
+        },
+        "Flow": {
+            "Type": "Flow",
+            "Sequence": [
+                "get_forecast",
+                "generate_dashboard"
+            ]
+        }
+    }
+}
