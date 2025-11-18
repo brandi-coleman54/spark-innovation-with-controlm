@@ -161,7 +161,7 @@
       "CreatedBy" : "emuser",
       "RunAs" : "ctmda",
       "Application" : "zzz-da-feeds",
-      "Command" : "awk -F, 'NR==1 || ($7 > 50 && $8 > 10 && $9 > 10)' /home/ctmda/social-media-feeds/feeds.csv > tmp.csv && mv tmp.csv /home/ctmda/social-media-feeds/feeds.csv",
+      "Command" : "awk -F, 'NR==1 || ($7 > 50 && $9 > 10)' home/ctmda/social-media-feeds/feeds.csv > tmp.csv && mv tmp.csv home/ctmda/social-media-feeds/feeds.csv",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
