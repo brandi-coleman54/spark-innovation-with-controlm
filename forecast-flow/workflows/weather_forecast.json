@@ -1,6 +1,7 @@
 {
     "${CTM_USER_CODE}_weather_forecast": {
         "Type": "Folder",
+        "ControlmServer": "IN01",
         "Variables": [
             {
                 "zip_code": "77001"
