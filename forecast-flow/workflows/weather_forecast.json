@@ -20,7 +20,7 @@
         },
         "generate_dashboard": {
             "Type": "Job:Command",
-            "Command": ". ~/venv/bin/activate && nohup streamlit run ~/spark-innovation-with-controlm/forecast-flow/scripts/run_weather_dashboard.py -- %%forecast_file --server.headless true --server.address 0.0.0.0 &",
+            "Command": ". ~/venv/bin/activate && nohup streamlit run ~/spark-innovation-with-controlm/forecast-flow/scripts/weather_dashboard.py -- %%forecast_file --server.headless true --server.address 0.0.0.0 &",
             "Host": "${CTM_USER_CODE}_instruqt_server",
             "RunAs": "controlm"
         },
