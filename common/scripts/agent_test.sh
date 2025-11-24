@@ -9,7 +9,7 @@ function Test_Agent {
     ctm_agent=$2
 
     count=1
-    limit=2
+    limit=50
     while [ "${count}" -le "${limit}" ]; do
 
         echo "Agent test ${count}"
