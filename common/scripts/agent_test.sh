@@ -13,7 +13,7 @@ function Test_Agent {
     while [ "${count}" -le "${limit}" ]; do
 
         echo "Agent ${ctm_agent} test ${count}"
-        status=$(ctm config server:agents::get ${ctm_server} -s "${ctm_agent}" | jq -r '.agents[0].status')
+        status=$(ctm config server:agents::get ${ctm_server} -s "agent=${ctm_agent}" | jq -r '.agents[0].status')
         if [[ "${status}" == "Available" ]]; then
             break
         else
