@@ -9,12 +9,12 @@ function Test_Agent {
     ctm_agent=$2
 
     count=1
-    limit=50
+    limit=20
     while [ "${count}" -le "${limit}" ]; do
 
         echo "Agent ${ctm_agent} test ${count}"
-        ctm config server:agent::test ${ctm_server} ${ctm_agent}
-        if [ "$?" -eq "0" ]; then
+        status=$(ctm config server:agents::get ${ctm_server} -s "${ctm_agent}" | jq -r '.agents[0].status')
+        if [[ "${status}" == "Available" ]]; then
             break
         else
             ((count++))
@@ -24,6 +24,7 @@ function Test_Agent {
                 sleep 10
             fi
         fi
+        echo "Status is ${status}"
         
     done
 
