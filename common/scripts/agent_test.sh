@@ -12,7 +12,7 @@ function Test_Agent {
     limit=50
     while [ "${count}" -le "${limit}" ]; do
 
-        echo "Agent test ${count}"
+        echo "Agent ${ctm_agent} test ${count}"
         ctm config server:agent::test ${ctm_server} ${ctm_agent}
         if [ "$?" -eq "0" ]; then
             break
