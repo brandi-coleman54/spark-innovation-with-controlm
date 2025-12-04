@@ -1,5 +1,5 @@
 {
-   "replace-with-usercode_CP_SAP" : 
+   "replace-with-usercode-uc_CP_SAP" : 
    {
    "Type": "ConnectionProfile:SAP",
     "User": "BWDEVELOPER",
