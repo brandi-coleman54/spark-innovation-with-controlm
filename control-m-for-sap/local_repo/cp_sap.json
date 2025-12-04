@@ -1,0 +1,14 @@
+{
+   "replace-with-usercode_CP_SAP" : 
+   {
+      "Type" : "ConnectionProfile:SAP",
+      "TargetAgent": "vhcalnplci",
+      "TargetCTM": "IN01",
+      "Centralized": true,
+      "User" : "BWDEVELOPER",
+      "Password" : "replace-with-SAP_LOGIN_PASSWORD-secret",
+      "SapClient" : "001",
+      "Language" : "English",
+      "XBPVersion": "XBP3.0",
+      "AppVersion": "R3"
+}
