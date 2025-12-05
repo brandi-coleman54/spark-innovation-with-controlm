@@ -793,7 +793,7 @@ function Repo_Replacements {
     fi
     # If token had no '=', repl_str will be identical to token; treat that as malformed.
     if [[ "${find_str}" == "${repl_str}" ]]; then
-      echo "Warning: malformed token '${token}' (missing '='), skipping." >&2
+      echo "Warning: malformed token '${token}', skipping." >&2
       continue
     fi
 
