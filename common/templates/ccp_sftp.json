@@ -1,0 +1,12 @@
+{
+  "${user_code}_SFTP": {
+    "Type": "ConnectionProfile:FileTransfer:SFTP",
+    "VerifyBytes": true,
+    "SSHCompression": false,
+    "User": "${sftp_user}",
+    "PrivateKeyName": "${pk_name}",
+    "HostName": "${hostname}",
+    "Description": "",
+    "Centralized": true
+  }
+}
