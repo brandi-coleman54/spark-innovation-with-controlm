@@ -1,0 +1,6 @@
+{
+  "Name": "${user}",
+  "Roles": [
+    "${user_code}"
+  ]
+}
