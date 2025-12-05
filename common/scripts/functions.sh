@@ -157,24 +157,22 @@ EOF
 
 function Create_TD_Role {
   local user_code="${1:?usage: Create_TD_Role <user_code>}"
+  local template_file=$2
+  local build_file=/tmp/role_build_file.json
 
   # Tool checks
   command -v ctm       >/dev/null 2>&1 || { echo "Error: 'ctm' CLI not found." >&2; return 127; }
   command -v envsubst >/dev/null 2>&1 || { echo "Error: 'envsubst' not found."   >&2; return 127; }
 
-  # Prepare template substitution (provide vars only to envsubst)
-  local uc_user_code
-  uc_user_code="${user_code^^}"
-
-  user_code="${user_code}" uc_user_code="${uc_user_code}" \
-    envsubst < /tmp/role_template_file.json > /tmp/role_def_sub.json
+  user_code="${user_code}" uc_user_code="${user_code^^}" \
+    envsubst < ${template_file} > ${build_file}
 
   # Check existence via CLI exit status or via filtered output
   if ctm config authorization:roles::get -s "role=${user_code}" >/dev/null 2>&1; then
     echo "Role '${user_code}' already exists."
   else
     echo "Creating role '${user_code}'"
-    ctm config authorization:role::add /tmp/role_def_sub.json
+    ctm config authorization:role::add ${build_file}
   fi
 }
 
@@ -182,6 +180,8 @@ function Create_TD_Role {
 function Create_TD_User {
   local user="${1:?usage: Create_TD_User <user> <user_code>}"
   local user_code="${2:?usage: Create_TD_User <user> <user_code>}"
+  local template_file=$3
+  local build_file=/tmp/user_build_file.json
 
   command -v ctm       >/dev/null 2>&1 || { echo "Error: 'ctm' CLI not found." >&2; return 127; }
   command -v jq        >/dev/null 2>&1 || { echo "Error: 'jq' not found."        >&2; return 127; }
@@ -199,34 +199,38 @@ function Create_TD_User {
             | (index($role) // -1) as $i
             | if $i == -1 then . + [$role] else . end
           )
-        ' > /tmp/user_def_upd.json
+        ' > ${build_file}
 
     ctm config authorization:user::update "${user}" /tmp/user_def_upd.json
   else
     # Create new user via templated JSON
     user="${user}" user_code="${user_code}" \
-      envsubst < /tmp/user_template_file.json > /tmp/user_def_sub.json
+      envsubst < ${template_file} > ${build_file}
 
-    echo "Adding user '${user}' using /tmp/user_def_sub.json"
-    ctm config authorization:user::add /tmp/user_def_sub.json
+    echo "Adding user '${user}' using ${build_file}"
+    ctm config authorization:user::add ${build_file}
   fi
 }
 
 
 function Create_TD_Token {
+  local user_code=$1
+  local template_file=$2
+  local build_file=/tmp/token_build_file.json
   # Ensure required tools exist
   command -v ctm >/dev/null 2>&1 || { echo "Error: 'ctm' CLI not found." >&2; return 127; }
   command -v jq  >/dev/null 2>&1 || { echo "Error: 'jq' not found."       >&2; return 127; }
 
   # Build template must exist
-  if [[ ! -s /tmp/token_template_file.json ]]; then
-    echo "Error: /tmp/token_template_file.json not found or empty." >&2
+  if [[ ! -s ${template_file} ]]; then
+    echo "Error: ${template_file} not found or empty." >&2
     return 2
   fi
-
+  user_code=${user_code} envsubst < ${template_file} > ${build_file}
+  
   # Create token; catch failures without breaking the whole script
   local token
-  if ! token="$(ctm authentication token::create -f /tmp/token_template_file.json 2>/dev/null | jq -r '.tokenValue')"; then
+  if ! token="$(ctm authentication token::create -f ${build_file} 2>/dev/null | jq -r '.tokenValue')"; then
     echo "Failed to create CTM authentication token (ctm/jq error)." >&2
     return 1
   fi
@@ -242,230 +246,6 @@ function Create_TD_Token {
     echo "Failed to create CTM authentication token (empty/null tokenValue)." >&2
     return 1
   fi
-}
-
-
-
-function Build_User_Template {
-  local user_code="${1:?usage: Build_User_Template <user_code> <user_email>}"
-  local user="${2:?usage: Build_User_Template <user_code> <user_email>}"
-
-  # Write minimal template; assume user and user_code contain no double-quotes.
-  # If user/email may contain quotes, add an escaping helper.
-  cat > /tmp/user_template_file.json <<EOF
-{
-  "Name": "${user}",
-  "Roles": [
-    "${user_code}"
-  ]
-}
-EOF
-}
-
-function Build_Token_Template {
-  local user_code="${1:?usage: Build_Token_Template <user_code>}"
-
-  cat > /tmp/token_template_file.json <<EOF
-{
-  "tokenName": "${user_code}",
-  "Roles": [
-    "${user_code}"
-  ]
-}
-EOF
-
-
-function Build_Role_Template {
-  local user_code="${1:?usage: Build_Role_Template <user_code> <uc_user_code>}"
-  local uc_user_code="${2:?usage: Build_Role_Template <user_code> <uc_user_code>}"
-
-  # Write template with placeholders for envsubst
-  # IMPORTANT: We use upper-case names to match env vars in Create_TD_Role
-  local tmp="/tmp/role_template_file.json.tmp"
-  cat > "${tmp}" <<EOF
-{
-  "Name": "\${user_code}",
-  "AllowedJobs": {
-    "Included": [
-      [
-        [
-          "Folder",
-          "like",
-          "\${user_code}*"
-        ]
-      ]
-    ]
-  },
-  "AllowedJobActions": {
-    "ViewProperties": true,
-    "Documentation": true,
-    "Log": true,
-    "Statistics": true,
-    "ViewOutputList": true,
-    "ViewJcl": true,
-    "Why": true,
-    "Hold": true,
-    "Free": true,
-    "Confirm": true,
-    "Rerun": true,
-    "React": true,
-    "Restart": true,
-    "Kill": true,
-    "Bypass": true,
-    "Delete": true,
-    "Undelete": true,
-    "SetToOk": true,
-    "EditProperties": true,
-    "EditJcl": true
-  },
-  "Privileges": {
-    "ClientAccess": {
-      "ControlmWebClientAccess": "Full",
-      "ApplicationIntegratorAccess": "Full",
-      "AutomationAPIAccess": "Full"
-    },
-    "ConfigurationManager": {
-      "Configuration": "Browse",
-      "ControlmSecurity": "Full"
-    },
-    "Tools": {
-      "SiteStandardPolicies": "Browse"
-    },
-    "ViewpointManager": {
-      "Viewpoints": "Browse"
-    }
-  },
-  "Folders": [
-    {
-      "Privilege": "Full",
-      "ControlmServer": "*",
-      "Folder": "\${user_code}*",
-      "Run": true
-    }
-  ],
-  "RunasUsers": [
-    {
-      "ControlmServer": "*",
-      "RunasUser": "*",
-      "Host": "\${user_code}*"
-    }
-  ],
-  "SiteStandard": [
-    {
-      "Privilege": "Browse",
-      "Name": "*"
-    }
-  ],
-  "Secrets": [
-    {
-      "Privilege": "Browse",
-      "Name": "\${user_code}*"
-    }
-  ],
-  "SiteCustomization": [
-    {
-      "Privilege": "Browse",
-      "Name": "*"
-    }
-  ],
-  "AgentManagement": [
-    {
-      "ControlmServer": "*",
-      "Agent": "sparkit",
-      "Privilege": "Full"
-    }
-  ],
-  "PluginManagement": [
-    {
-      "ControlmServer": "*",
-      "Agent": "sparkit",
-      "PluginType": "*",
-      "Privilege": "Browse"
-    }
-  ],
-  "ConnectionProfileManagement": [
-    {
-      "ControlmServer": "*",
-      "Agent": "sparkit",
-      "PluginType": "*",
-      "Name": "\${uc_user_code}*",
-      "Privilege": "Full"
-    },
-    {
-      "ControlmServer": "IN01",
-      "Agent": "sparkit",
-      "PluginType": "*",
-      "Name": "SPARKIT*",
-      "Privilege": "Browse"
-    }
-  ]
-}
-EOF
-  mv "${tmp}" /tmp/role_template_file.json
-}
-
-
-function Build_Agent_Resources {
-  local filename="${1:?usage: Build_Agent_Resources <filename>}"
-
-  local tmp="${filename}.tmp"
-  cat > "${tmp}" <<'EOF'
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: plugins-list
-data:
-  plugins_list.txt: |
-    AAF112024
-    AAFJEQ
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: mft-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  resources:
-    requests:
-      storage: 10Mi
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mft-config-params
-data:
-  com.bmc.aft.configurable.ftp.protocolJobOutputDebugLevel: "DEBUG"
-  com.bmc.aft.configurable.printTransferDefinitions: "true"
-EOF
-  mv "${tmp}" "${filename}"
-}
-
-
-function Build_SFTP_CCP {
-  local user_code="${1:?usage: Build_SFTP_CCP <user_code> <sftp_user> <pk_name> <hostname> <filename>}"
-  local sftp_user="${2:?usage: Build_SFTP_CCP <user_code> <sftp_user> <pk_name> <hostname> <filename>}"
-  local pk_name="${3:?usage: Build_SFTP_CCP <user_code> <sftp_user> <pk_name> <hostname> <filename>}"
-  local hostname="${4:?usage: Build_SFTP_CCP <user_code> <sftp_user> <pk_name> <hostname> <filename>}"
-  local filename="${5:?usage: Build_SFTP_CCP <user_code> <sftp_user> <pk_name> <hostname> <filename>}"
-
-  local tmp="${filename}.tmp"
-  cat > "${tmp}" <<EOF
-{
-  "${user_code}_SFTP": {
-    "Type": "ConnectionProfile:FileTransfer:SFTP",
-    "VerifyBytes": true,
-    "SSHCompression": false,
-    "User": "${sftp_user}",
-    "PrivateKeyName": "${pk_name}",
-    "HostName": "${hostname}",
-    "Description": "",
-    "Centralized": true
-  }
-}
-EOF
-  mv "${tmp}" "${filename}"
 }
 
 function Provision_Agents_Helm {
@@ -686,12 +466,9 @@ function Configure_CTM_User {
   command -v ctm       >/dev/null 2>&1 || { echo "Error: 'ctm' CLI not found." >&2; return 127; }
 
   if [[ "${MODE:-TEST}" == "INVITE" ]]; then
-    Build_Role_Template  "${ctm_user_code}" "${ctm_uc_user_code}"
-    Build_User_Template  "${ctm_user_code}" "${ctm_user}"
-    Build_Token_Template "${ctm_user_code}"
-    Create_TD_Role       "${ctm_user_code}"
-    Create_TD_User       "${ctm_user}" "${ctm_user_code}"
-    Create_TD_Token      "${ctm_user_code}"
+    Create_TD_Role       "${ctm_user_code}" "${USER_HOME}/spark-innovation-with-controlm/common/templates/role_saas_attendee.json"
+    Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/spark-innovation-with-controlm/common/templates/user.json"
+    Create_TD_Token      "${ctm_user_code}" "${USER_HOME}/spark-innovation-with-controlm/common/templates/api_token.json"
   else
     # Validate role exists
     if ctm config authorization:role::get "${ctm_tst_role}" >/dev/null 2>&1; then
@@ -707,10 +484,6 @@ function Configure_CTM_User {
       echo "Error: Test API Token '${ctm_tst_token}' does not exist." >&2
       return 8
     fi
-    # Build templates for debugging consistency
-    Build_Role_Template  "${ctm_user_code}" "${ctm_uc_user_code}"
-    Build_User_Template  "${ctm_user_code}" "${ctm_user}"
-    Build_Token_Template "${ctm_user_code}"
   fi
 }
 
