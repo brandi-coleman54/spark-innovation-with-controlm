@@ -756,7 +756,7 @@ function Set_Hostname {
   command -v hostnamectl >/dev/null 2>&1 || { echo "Error: 'hostnamectl' not found." >&2; return 127; }
 
   if ! hostnamectl set-hostname "${new_hostname}"; then
-    echo "Error: failed to set hostname to ${new_hostname} (requires root?)." >&2
+    echo "Error: failed to set hostname to ${new_hostname}." >&2
     return 1
   fi
 }
