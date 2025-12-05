@@ -807,3 +807,43 @@ function Repo_Replacements {
     echo "Done: '${find_str}' → '${repl_str}'."
   done
 }
+
+function Config_Code_Server {
+  local user_home="${1:?usage: Config_Code_Server <user_home> <base_dir> <user>}"
+  local base_dir="${2:?usage: Config_Code_Server <user_home> <base_dir> <user>}"
+  local user="${3:?usage: Config_Code_Server <user_home> <base_dir> <user>}"
+
+  # Ensure code-server is available (fail fast if missing)
+  command -v code-server >/dev/null 2>&1 || { echo "Error: 'code-server' not found on PATH." >&2; return 127; }
+
+  # Install VS Code extensions for the specified user
+  # su - <user> -c 'code-server --install-extension <ext>'
+  if ! su - "${user}" -c 'code-server --install-extension ms-python.python'; then
+    echo "Error: failed to install ms-python.python for user '${user}'." >&2
+    return 1
+  fi
+  if ! su - "${user}" -c 'code-server --install-extension ms-toolsai.jupyter'; then
+    echo "Error: failed to install ms-toolsai.jupyter for user '${user}'." >&2
+    return 1
+  fi
+  if ! su - "${user}" -c 'code-server --install-extension wesbos.theme-cobalt2'; then
+    echo "Error: failed to install wesbos.theme-cobalt2 for user '${user}'." >&2
+    return 1
+  fi
+
+  # Ensure settings directory exists, then set theme
+  local settings_dir="${user_home}/.local/share/code-server/User"
+  mkdir -p "${settings_dir}"
+  printf '%s\n' '{"workbench.colorTheme": "Cobalt2"}' > "${settings_dir}/settings.json"
+
+  # Add venv to .gitignore in the repo root (optional)
+  local repo_root="${user_home}/${base_dir}"
+  if [[ -d "${repo_root}" ]]; then
+    # Create .gitignore if missing; append 'venv' only if not present
+    local gitignore="${repo_root}/.gitignore"
+    touch "${gitignore}"
+    grep -Fxq 'venv' "${gitignore}" || echo 'venv' >> "${gitignore}"
+  else
+    echo "Warning: repo directory '${repo_root}' not found; skipping .gitignore update." >&2
+  fi
+}
