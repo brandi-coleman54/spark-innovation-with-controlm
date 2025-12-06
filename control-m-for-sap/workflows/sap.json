@@ -1,9 +1,10 @@
 {
   "Defaults" : {
 		"Host": "replace-with-usercode_instruqt_server",
+	  	"CreatedBy" : "replace-with-email",
 		"ControlmServer": "IN01",
-		"Application": "replace-with-usercode-SAP01",
-		"SubApplication": "replace-with-usercode-SAP01",
+		"Application": "replace-with-usercode_sap",
+		"SubApplication": "replace-with-usercode_sap",
 		"OrderMethod": "Manual"
 	},
   "replace-with-usercode-SAP01" : {
@@ -18,9 +19,9 @@
         "OutputNumberColumns" : "85"
       } ],
       "SapJobName" : "job_SAP",
-      "ConnectionProfile" : "replace-with-usercode_CP_SAP",
+      "ConnectionProfile" : "replace-with-usercode-uc_CP_SAP",
       "Target" : "vhcalnplci_NPL_00",
-      "RunAs" : "replace-with-usercode_CP_SAP",
+      "RunAs" : "replace-with-usercode-uc_CP_SAP",
       "DetectSpawnedJob" : {
         "JobName" : "replace-with-usercode-job"
       },
