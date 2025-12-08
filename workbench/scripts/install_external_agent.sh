@@ -47,7 +47,7 @@ EOF
   chmod +r /tmp/agt_test.json
   su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm env workbench::add"
   su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm run /tmp/agt_test.json"
-  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm env delete workbench" 
+  #su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm env delete workbench" 
 }
 
 function Create_Silent_File {
