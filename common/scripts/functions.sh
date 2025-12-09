@@ -62,8 +62,11 @@ function Set_User_Data {
     export CTM_USER_NAME="${INSTRUQT_USER_NAME:?INSTRUQT_USER_NAME required in INVITE mode}"
     export CTM_USER="${INSTRUQT_USER_EMAIL:?INSTRUQT_USER_EMAIL required in INVITE mode}"
 
+    OIFS="$IFS"
+    IFS=' '
     local first_name="" last_name=""
     read -r first_name last_name <<< "${INSTRUQT_USER_NAME}"
+    IFS="$OIFS"
     if [[ -z "${last_name}" ]]; then
       echo "Error: Please provide both a first and last name in INSTRUQT_USER_NAME." >&2
       return 2
