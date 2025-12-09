@@ -171,7 +171,8 @@ function Create_TD_Role {
     envsubst < ${template_file} > ${build_file}
 
   # Check existence via CLI exit status or via filtered output
-  if ctm config authorization:roles::get -s "role=${user_code}" >/dev/null 2>&1; then
+  ctm config authorization:roles::get -s "role=${user_code}" | grep ${user_code}
+  if [ "$?" -eq "0" ]; then
     echo "Role '${user_code}' already exists."
   else
     echo "Creating role '${user_code}'"
