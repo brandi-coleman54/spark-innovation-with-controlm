@@ -204,7 +204,7 @@ function Create_TD_User {
           )
         ' > ${build_file}
 
-    ctm config authorization:user::update "${user}" /tmp/user_def_upd.json
+    ctm config authorization:user::update "${user}" ${build_file}
   else
     # Create new user via templated JSON
     user="${user}" user_code="${user_code}" \
