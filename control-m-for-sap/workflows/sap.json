@@ -9,7 +9,7 @@
 	},
   "replace-with-usercode-SAP01" : {
     "Type" : "Folder",
-    "bco7-job" : {
+    "replace-with-usercode-job" : {
       "Type" : "Job:SAP:R3:CREATE",
       "Steps" : [ {
         "StepType" : "ABAP",
