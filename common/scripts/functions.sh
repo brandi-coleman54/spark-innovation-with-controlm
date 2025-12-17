@@ -169,7 +169,8 @@ function Create_TD_Role {
 
   user_code="${user_code}" uc_user_code="${user_code^^}" \
     envsubst < ${template_file} > ${build_file}
-
+  cat ${template_file}
+  cat ${build_file}
   # Check existence via CLI exit status or via filtered output
   set +e
   ctm config authorization:roles::get -s "role=${user_code}" | grep ${user_code}
