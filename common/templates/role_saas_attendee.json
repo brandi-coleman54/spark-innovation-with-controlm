@@ -1,12 +1,12 @@
 {
-  "Name": "\${user_code}",
+  "Name": "${user_code}",
   "AllowedJobs": {
     "Included": [
       [
         [
           "Folder",
           "like",
-          "\${user_code}*"
+          "${user_code}*"
         ]
       ]
     ]
@@ -54,7 +54,7 @@
     {
       "Privilege": "Full",
       "ControlmServer": "*",
-      "Folder": "\${user_code}*",
+      "Folder": "${user_code}*",
       "Run": true
     }
   ],
@@ -62,7 +62,7 @@
     {
       "ControlmServer": "*",
       "RunasUser": "*",
-      "Host": "\${user_code}*"
+      "Host": "${user_code}*"
     }
   ],
   "SiteStandard": [
@@ -74,7 +74,7 @@
   "Secrets": [
     {
       "Privilege": "Browse",
-      "Name": "\${user_code}*"
+      "Name": "${user_code}*"
     }
   ],
   "SiteCustomization": [
@@ -103,7 +103,7 @@
       "ControlmServer": "*",
       "Agent": "sparkit",
       "PluginType": "*",
-      "Name": "\${uc_user_code}*",
+      "Name": "${uc_user_code}*",
       "Privilege": "Full"
     },
     {
