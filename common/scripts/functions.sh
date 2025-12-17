@@ -110,8 +110,8 @@ EOF
 
 function Generate_User_Code {
   local alpha numeric
-  alpha="$(tr -dc 'a-z' </dev/urandom | head -c 3)"
-  numeric="$(tr -dc '0-9' </dev/urandom | head -c 1)"
+  alpha=$(head /dev/urandom | tr -dc a-z | head -c 3)
+  numeric=$(head /dev/urandom | tr -dc 0-9 | head -c 1)
   echo "${alpha}${numeric}"
 }
 
