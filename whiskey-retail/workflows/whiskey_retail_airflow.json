@@ -29,19 +29,19 @@
             "ConnectionProfileDest": "SPARKIT_FS",
             "FileTransfers": [
                 {
-                    "Src": "&&repo_dir/whiskey-retail/scripts/*.py",
+                    "Src": "%%repo_dir/whiskey-retail/scripts/*.py",
                     "Dest": "/mft_mountPath/",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "&&repo_dir/whiskey-retail/data/all-whiskey-clean.csv",
+                    "Src": "%%repo_dir/whiskey-retail/data/all-whiskey-clean.csv",
                     "Dest": "/mft_mountPath/all-whiskey.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
                 },
                 {
-                    "Src": "&&repo_dir/whiskey-retail/data/all_dates.csv",
+                    "Src": "%%repo_dir/whiskey-retail/data/all_dates.csv",
                     "Dest": "/mft_mountPath/all_dates.csv",
                     "TransferOption": "SrcToDest",
                     "TransferType": "Binary"
