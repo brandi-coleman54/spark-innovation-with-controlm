@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
 function Delete_TD_User {
-    user=$1
+    local user=$1
     
     echo "Deleting user ${user} and API Tokens created by user ${user}"
     ctm config authorization:user::delete ${user} -s "deleteUserTokens=true"
@@ -9,7 +11,7 @@ function Delete_TD_User {
 }
 
 function Delete_API_Token {
-    token=$1
+    local token=$1
 
     echo "Deleting API Token ${token}"
     ctm auth token::delete ${token}
@@ -19,7 +21,7 @@ function Delete_API_Token {
 }
 
 function Delete_TD_Role {
-    role=$1
+    local role=$1
     
     echo "Deleting role ${role}"
     ctm config authorization:role::delete ${role}
@@ -29,7 +31,7 @@ function Delete_TD_Role {
 }
 
 function Delete_HostGroup {
-    hg=$1
+    local hg=$1
     
     echo "Deleting HostGroup ${hg}"
     ctm config server:hostgroup::delete IN01 ${hg}
@@ -39,7 +41,7 @@ function Delete_HostGroup {
 }
 
 function Delete_Agents {
-    code=$1
+    local code=$1
     
     echo "Deleting Agents for ${code}"
     agents=$(ctm config server:agents::get IN01 -s "agent=${code}*" | jq -r '.agents[].nodeid')
@@ -53,7 +55,7 @@ function Delete_Agents {
 
 function Delete_CCPs {
 
-    code=$1
+    local code=$1
 
     echo "Deleteing Connection Profiles for ${code}"
     ccps=$(ctm deploy connectionprofiles:centralized:status::get -s "type=*&name=${code}*" | jq -r '.statuses[].name')
@@ -66,7 +68,7 @@ function Delete_CCPs {
 
 function Delete_Folders {
     
-    code=$1
+    local code=$1
 
     echo "Deleting Folders for ${code}"
     folders=$(ctm deploy folders::get -s "server=IN01&folder=${code}*" | jq -r 'keys[]')
