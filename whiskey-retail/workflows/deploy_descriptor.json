@@ -157,6 +157,16 @@
           "zzz(.*)": "${CTM_USER_CODE}$1"
         }
       ]
+    },
+    {
+      "Property": "$.Variables[*].*",
+      "MapCondition": "KEY:home_dir",
+      "Assign": "${HOME_DIR}"
+    },
+    {
+      "Property": "$.Variables[*].*",
+      "MapCondition": "KEY:repo_dir",
+      "Assign": "${HOME_DIR}/${BASE_DIR}"
     }
   ]
 }
