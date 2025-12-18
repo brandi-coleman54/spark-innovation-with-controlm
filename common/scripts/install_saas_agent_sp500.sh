@@ -3,7 +3,7 @@
 user_code=$1
 api_endpoint=$2
 api_token=$3
-ctm_env=admin1
+ctm_env=agent_provisioning
 
 # Run from /home/controlm
 cd /home/controlm || {
