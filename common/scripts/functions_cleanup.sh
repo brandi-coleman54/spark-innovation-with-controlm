@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function Delete_TD_User {
-    local user=$1
+    user=$1
     
     echo "Deleting user ${user} and API Tokens created by user ${user}"
     ctm config authorization:user::delete ${user} -s "deleteUserTokens=true"
@@ -11,7 +11,7 @@ function Delete_TD_User {
 }
 
 function Delete_API_Token {
-    local token=$1
+    token=$1
 
     echo "Deleting API Token ${token}"
     ctm auth token::delete ${token}
@@ -21,7 +21,7 @@ function Delete_API_Token {
 }
 
 function Delete_TD_Role {
-    local role=$1
+    role=$1
     
     echo "Deleting role ${role}"
     ctm config authorization:role::delete ${role}
@@ -31,7 +31,7 @@ function Delete_TD_Role {
 }
 
 function Delete_HostGroup {
-    local hg=$1
+    hg=$1
     
     echo "Deleting HostGroup ${hg}"
     ctm config server:hostgroup::delete IN01 ${hg}
@@ -41,7 +41,7 @@ function Delete_HostGroup {
 }
 
 function Delete_Agents {
-    local code=$1
+    code=$1
     
     echo "Deleting Agents for ${code}"
     agents=$(ctm config server:agents::get IN01 -s "agent=${code}*" | jq -r '.agents[].nodeid')
@@ -55,7 +55,7 @@ function Delete_Agents {
 
 function Delete_CCPs {
 
-    local code=$1
+    code=$1
 
     echo "Deleteing Connection Profiles for ${code}"
     ccps=$(ctm deploy connectionprofiles:centralized:status::get -s "type=*&name=${code}*" | jq -r '.statuses[].name')
@@ -68,11 +68,31 @@ function Delete_CCPs {
 
 function Delete_Folders {
     
-    local code=$1
+    code=$1
 
     echo "Deleting Folders for ${code}"
     folders=$(ctm deploy folders::get -s "server=IN01&folder=${code}*" | jq -r 'keys[]')
     for folder in ${folders[@]}; do
         ctm deploy folder::delete IN01 ${folder}
     done
+}
+
+function Add_User_Role {
+
+    user=$1
+    role=$2
+
+    ctm config authorization:user::get "${user}" | jq ".Roles += [\"${role}\"]" > /tmp/user_upd.json
+    ctm config authorization:user::update "${user}" /tmp/user_upd.json
+
+}
+
+function Remove_User_Role {
+
+    user=$1
+    role=$2
+
+    ctm config authorization:user::get ${user} | jq "del(.Roles[] | select(. == \"${role}\"))" > /tmp/user_upd.json
+    ctm config authorization:user::update "${user}" /tmp/user_upd.json
+
 }
