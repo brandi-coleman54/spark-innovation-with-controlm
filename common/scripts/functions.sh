@@ -468,14 +468,15 @@ function Configure_CTM_User {
   local ctm_user="${2:?usage: Configure_CTM_User <ctm_user_code> <ctm_user> <ctm_tst_role> <ctm_tst_token>}"
   local ctm_tst_role="${3:-}"   # only used in TEST mode
   local ctm_tst_token="${4:-}" # only used in TEST mode
+  
 
   # Tool checks
   command -v ctm       >/dev/null 2>&1 || { echo "Error: 'ctm' CLI not found." >&2; return 127; }
 
   if [[ "${MODE:-TEST}" == "INVITE" ]]; then
-    Create_TD_Role       "${ctm_user_code}" "${USER_HOME}/spark-innovation-with-controlm/common/templates/role_saas_attendee.json"
-    Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/spark-innovation-with-controlm/common/templates/user.json"
-    Create_TD_Token      "${ctm_user_code}" "${USER_HOME}/spark-innovation-with-controlm/common/templates/api_token.json"
+    Create_TD_Role       "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/role_saas_attendee.json"
+    Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/user.json"
+    Create_TD_Token      "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/api_token.json"
   else
     # Validate role exists
     if ctm config authorization:role::get "${ctm_tst_role}" >/dev/null 2>&1; then
