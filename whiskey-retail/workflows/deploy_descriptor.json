@@ -161,7 +161,7 @@
     {
       "Property": "$.Variables[*].*",
       "MapCondition": "KEY:home_dir",
-      "Assign": "${USER_HOME}"
+      "Assign": "/home/controlm"
     },
     {
       "Property": "$.Variables[*].*",
