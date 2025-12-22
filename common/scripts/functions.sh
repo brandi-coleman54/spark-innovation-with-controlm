@@ -89,13 +89,12 @@ function Set_User_Data {
   fi
 
   export CTM_UC_USER_CODE="${CTM_USER_CODE^^}"
-
-  if command -v agent >/dev/null 2>&1; then
-    agent variable set CTM_USER         "${CTM_USER}"
-    agent variable set CTM_USER_NAME    "${CTM_USER_NAME}"
-    agent variable set CTM_USER_CODE    "${CTM_USER_CODE}"
-    agent variable set CTM_UC_USER_CODE "${CTM_UC_USER_CODE}"
-  fi
+  
+  agent variable set CTM_USER         "${CTM_USER}"
+  agent variable set CTM_USER_NAME    "${CTM_USER_NAME}"
+  agent variable set CTM_USER_CODE    "${CTM_USER_CODE}"
+  agent variable set CTM_UC_USER_CODE "${CTM_UC_USER_CODE}"
+  
 
   cat <<EOF
 ============================================
