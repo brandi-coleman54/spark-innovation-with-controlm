@@ -599,7 +599,8 @@ function Config_Code_Server {
   command -v code-server >/dev/null 2>&1 || { echo "Error: 'code-server' not found on PATH." >&2; return 127; }
 
   # Start code-server
-  if ! su - "${user}" -c nohup /bin/sh "/usr/bin/code-server --host 0.0.0.0 --port 8081 --auth none ${user_home}/${base_dir}" > code-server-output.log 2>&1 &; then
+  su - "${user}" -c nohup /bin/sh "/usr/bin/code-server --host 0.0.0.0 --port 8081 --auth none ${user_home}/${base_dir}" > code-server-output.log 2>&1 &
+  if [ "$?" -ne "0" ]; then
     echo "Error: failed to start code-server for user '${user}'." >&2
     return 1
   fi
