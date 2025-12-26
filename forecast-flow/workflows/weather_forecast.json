@@ -10,7 +10,7 @@
                 "user_home": "${user_home}"
             },
             {
-                "base_folder": "${base_folder}"
+                "base_dir": "${base_dir}"
             },
             {
                 "forecast_file": "~/forecast.json"
@@ -26,7 +26,7 @@
         },
         "generate_dashboard": {
             "Type": "Job:Command",
-            "Command": ". ~/venv/bin/activate && nohup streamlit run ~/spark-innovation-with-controlm/forecast-flow/scripts/run_weather_dashboard.py -- %%forecast_file --server.headless true --server.address 0.0.0.0 &",
+            "Command": ". ~/venv/bin/activate && nohup streamlit run ${user_home}/${base_dir}/forecast-flow/scripts/run_weather_dashboard.py -- %%forecast_file --server.headless true --server.address 0.0.0.0 &",
             "Host": "${CTM_USER_CODE}_instruqt_server",
             "RunAs": "controlm"
         },
