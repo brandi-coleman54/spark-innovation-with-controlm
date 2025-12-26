@@ -598,6 +598,11 @@ function Config_Code_Server {
   # Ensure code-server is available (fail fast if missing)
   command -v code-server >/dev/null 2>&1 || { echo "Error: 'code-server' not found on PATH." >&2; return 127; }
 
+  # Start code-server
+  if ! su - "${user}" -c "/usr/bin/code-server --host 0.0.0.0 --port 8081 --auth none ${user_home}/${base_dir}"; then
+    echo "Error: failed to start code-server for user '${user}'." >&2
+    return 1
+  fi
   # Install VS Code extensions for the specified user
   # su - <user> -c 'code-server --install-extension <ext>'
   if ! su - "${user}" -c 'code-server --install-extension ms-python.python'; then
