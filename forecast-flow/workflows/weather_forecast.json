@@ -7,6 +7,12 @@
                 "zip_code": "77001"
             },
             {
+                "user_home": "${user_home}"
+            },
+            {
+                "base_folder": "${base_folder}"
+            },
+            {
                 "forecast_file": "~/forecast.json"
             }
         ],
