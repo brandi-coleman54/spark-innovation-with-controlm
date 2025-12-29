@@ -1,17 +1,20 @@
 {
+  
+    "Defaults": {
+        "Application": "zzz_data",
+        "SubApplication": "zzz_flow",
+        "ControlmServer": "IN01",
+        "CreatedBy" : "rjacobs", 
+        "OrderMethod" : "Manual",
+        "Host": "zzz_instruqt_server",
+        "RunAs": "controlm"
+    },
   "zzz-AI-Fraud-Detection" : {
     "Type" : "Folder",
-    "BusinessFields" : [ {
-      "Usercode" : "zzz"
-    } ],
-    "ControlmServer" : "QA",
-    "OrderMethod" : "Manual",
+
     "ActiveRetentionPolicy" : "CleanEndedOK",
-    "RunAs" : "controlm",
-    "SiteStandard" : "SE Demo System Standard",
-    "SubApplication" : "zzz-flow",
-    "CreatedBy" : "rjacobs",
-    "Application" : "zzz-data",
+
+
     "Confirm" : true,
     "When" : {
       "RuleBasedCalendars" : {
@@ -29,12 +32,12 @@
     "zzz-AI-Fraud-Service" : {
       "Type" : "Job:SLAManagement",
       "ServiceName" : "zzz-AI-Fraud-Service-Monitor",
-      "SubApplication" : " zzz-flow",
+
       "Host" : "ctmawsdemoqa.vse.bmc.com",
       "JobRunsDeviationsTolerance" : "3",
-      "CreatedBy" : "rjacobs",
+
       "RunAs" : "controlm",
-      "Application" : "zzz-data",
+ 
       "CompleteBy" : {
         "Time" : "12:00",
         "Days" : "0"
@@ -60,12 +63,12 @@
     "zzz-AI-Reporting" : {
       "Type" : "Job:EmbeddedScript",
       "Script" : "#!/usr/bin/python\\n \\nfrom google import genai\\nimport os\\nimport sys\\n\\n# Initialize the client\\n# Make sure the GOOGLE_AI_KEY environment variable is set\\nclient = genai.Client(api_key=os.getenv(\"GOOGLE_AI_KEY\"))\\n \\n# Upload the file\\nprint(f\"Uploading file...\")\\ntry:\\n    uploaded_file = client.files.upload(file=\"/opt/ctmagent/rja-transaction/rja-transaction-normilisation_part00000.csv\")\\nexcept Exception as e:\\n    print(f\"Error uploading file: {e}\")\\n    exit()\\n \\nprint(\"File uploaded successfully.\")\\n \\n# Prompt for reporting\\nprompt = os.getenv('ctmprompt')\\n\\n# Generate content\\nprint(\"Generating Sentiment Scores...\")\\ntry:\\n    response = client.models.generate_content(\\n        model=\"gemini-2.5-pro\",\\n        contents=[prompt, uploaded_file]\\n    )\\nexcept Exception as e:\\n    print(f\"Error generating content: {e}\")\\n    # Try to clean up the uploaded file if an error occurs\\n    client.files.delete(name=uploaded_file.name)\\n    exit()\\n \\nprint(response.text)\\n \\n# Clean up the uploaded file\\nprint(f\"Deleting temporary uploaded file {uploaded_file.name}...\")\\nclient.files.delete(name=uploaded_file.name)\\nprint(\"Cleanup complete.\")",
-      "SubApplication" : " zzz-flow",
+
       "FileName" : "reporting.py",
       "Host" : "ctmawsdemoqa-mft1.vse.bmc.com",
-      "CreatedBy" : "rjacobs",
+     
       "RunAs" : "controlm",
-      "Application" : "zzz-data",
+
       "Variables" : [ {
         "ctmprompt" : "list all Gift Card transactions"
       } ],
@@ -117,11 +120,11 @@
       "ConnectionProfileDest" : "rjas3",
       "S3BucketNameSrc" : "rja-ai-bucket",
       "S3BucketNameDest" : "rja-ai-bucket",
-      "SubApplication" : " zzz-flow",
+
       "Host" : "ctmawsdemoqa-mft2.vse.bmc.com",
-      "CreatedBy" : "rjacobs",
+
       "RunAs" : "ODD_S3_CP+rjas3",
-      "Application" : "zzz-data",
+
       "Variables" : [ {
         "FTP-LOSTYPE" : "Unix"
       }, {
@@ -200,11 +203,11 @@
       "ConnectionProfile" : "RJADATABREW",
       "Job Name" : "rja-transaction-normilisation",
       "Output Job Logs" : "checked",
-      "SubApplication" : " zzz-flow",
+  
       "Host" : "ctmawsdemoqa.vse.bmc.com",
-      "CreatedBy" : "rjacobs",
+
       "RunAs" : "RJADATABREW",
-      "Application" : "zzz-data",
+  
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
@@ -234,11 +237,11 @@
       "ConnectionProfileSrc" : "rjas3",
       "ConnectionProfileDest" : "ZZM_LOCAL",
       "S3BucketName" : "rja-ai-bucket",
-      "SubApplication" : " zzz-flow",
+
       "Host" : "ctmawsdemoqa-mft1.vse.bmc.com",
-      "CreatedBy" : "rjacobs",
+
       "RunAs" : "rjas3+ZZM_LOCAL",
-      "Application" : "zzz-data",
+ 
       "Variables" : [ {
         "FTP-LOSTYPE" : "Unix"
       }, {
