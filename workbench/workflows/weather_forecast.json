@@ -25,7 +25,7 @@
         },
         "generate_dashboard": {
             "Type": "Job:Command",
-            "Command": ". ~/venv/bin/activate && nohup streamlit run %%user_home/%%base_dir/workbench/scripts/run_weather_dashboard.py -- %%forecast_file --server.headless true --server.address 0.0.0.0 &",
+            "Command": ". ~/venv/bin/activate && nohup streamlit run %%user_home/%%base_dir/forecast-flow/scripts/run_weather_dashboard.py -- %%forecast_file --server.headless true --server.address 0.0.0.0 &",
             "Host": "workbench-host",
             "RunAs": "controlm"
         },
