@@ -22,20 +22,37 @@ WEATHER_EMOJI = {
     95: "⛈️", 96: "⛈️", 99: "⛈️"
 }
 
-
-
-def get_owm_icon_url(wmo_code):
-    WMO_OWM_ICON_MAP = {
-        0: "01d", 1: "02d", 2: "03d", 3: "04d", 45: "50d", 48: "50d",
-        51: "09d", 53: "09d", 55: "09d", 56: "13d", 57: "13d",
-        61: "10d", 63: "10d", 65: "10d", 66: "13d", 67: "13d",
-        71: "13d", 73: "13d", 75: "13d", 77: "13d",
-        80: "09d", 81: "09d", 82: "09d", 85: "13d", 86: "13d",
-        95: "11d", 96: "11d", 99: "11d"
-    }
-    icon_code = WMO_OWM_ICON_MAP.get(wmo_code, "01d")
-    return f"http://openweathermap.org/img/wn/{icon_code}@2x.png"
-
+# WMO code → human-readable condition text
+WMO_DESCRIPTIONS = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Fog",
+    48: "Depositing rime fog",
+    51: "Light drizzle",
+    53: "Moderate drizzle",
+    55: "Heavy drizzle",
+    56: "Light freezing drizzle",
+    57: "Heavy freezing drizzle",
+    61: "Slight rain",
+    63: "Moderate rain",
+    65: "Heavy rain",
+    66: "Light freezing rain",
+    67: "Heavy freezing rain",
+    71: "Slight snow",
+    73: "Moderate snow",
+    75: "Heavy snow",
+    77: "Snow grains",
+    80: "Slight rain showers",
+    81: "Moderate rain showers",
+    82: "Violent rain showers",
+    85: "Slight snow showers",
+    86: "Heavy snow showers",
+    95: "Thunderstorm",
+    96: "Thunderstorm with hail",
+    99: "Thunderstorm with heavy hail",
+}
 
 # Load the JSON data
 with open(forecast_file, "r") as f:
@@ -115,140 +132,64 @@ table_html += "</tr></table>"
 #=================================
 
 
-import pandas as pd
-
 def build_7day_forecast_table_flipped(df: pd.DataFrame) -> str:
     """
-    Build an HTML table for a 7-day forecast with rows per day.
-    Columns: Day (weekday + date), Condition (emoji), High/Low (°F), Precip (%).
+    Simple flipped table: Day | Emoji | Condition | High/Low | Precip
     """
-    # Validate required columns
-    required_cols = [
-        "Date", "Weather Code",
-        "Max Temperature (°F)", "Min Temperature (°F)",
-        "Precipitation Probability (%)"
-    ]
-    for col in required_cols:
-        if col not in df.columns:
-            raise ValueError(f"Missing required column in df: {col}")
+    # Sort by date
+    df_sorted = df.copy()
+    df_sorted["__dt__"] = pd.to_datetime(df_sorted["Date"], errors="coerce")
+    df_sorted = df_sorted.sort_values("__dt__").drop(columns="__dt__")
 
-    # Parse dates to get weekday + pretty date
-    dates_parsed = pd.to_datetime(df["Date"], errors="coerce")
-    weekday_labels = dates_parsed.dt.strftime("%a").fillna(df["Date"])
-    date_labels = dates_parsed.dt.strftime("%b %d").fillna("")
+    # Labels
+    dt = pd.to_datetime(df_sorted["Date"], errors="coerce")
+    weekdays = dt.dt.strftime("%a").fillna(df_sorted["Date"])
+    dates    = dt.dt.strftime("%b %d").fillna("")
 
-    # CSS and table header
+    # Build HTML
     html = """
-    <style>
-      .forecast-table {
-          width: 100%;
-          border-collapse: collapse;
-          table-layout: fixed;
-      }
-      .forecast-table thead th {
-          background: #f8f9fa;
-          border-bottom: 2px solid #e6e6e6;
-          font-weight: 700;
-          text-align: left;
-          padding: 10px;
-          font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-          font-size: 0.95rem;
-      }
-      .forecast-table tbody td {
-          border-bottom: 1px solid #ececec;
-          padding: 10px;
-          font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-          font-size: 0.95rem;
-          vertical-align: middle;
-      }
-      .forecast-table tbody tr:nth-child(odd) {
-          background: #fcfcfc;
-      }
-      .col-day { width: 36%; }
-      .col-cond { width: 18%; }
-      .col-temps { width: 26%; }
-      .col-precip { width: 20%; }
-
-      .day-cell .weekday {
-          font-weight: 700;
-          margin-right: 6px;
-      }
-      .day-cell .date {
-          color: #666;
-          font-size: 0.9rem;
-      }
-
-      .emoji {
-          font-size: 1.35rem;
-          line-height: 1;
-      }
-
-      .temps {
-          white-space: nowrap;
-          font-weight: 600;
-      }
-      .high { color: #d9534f; }  /* red-ish for highs */
-      .low { color: #428bca; margin-left: 8px; } /* blue-ish for lows */
-
-      .precip {
-          color: #4a4a4a;
-          font-size: 0.95rem;
-      }
-    </style>
-    <table class="forecast-table">
-      <thead>
-        <tr>
-          <th class="col-day">Day</th>
-          <th class="col-cond">Condition</th>
-          <th class="col-temps">High / Low (°F)</th>
-          <th class="col-precip">Precip (%)</th>
-        </tr>
-      </thead>
-      <tbody>
-    """
-
-    # Build body rows: one per day
-    for weekday, date_txt, code, hi, lo, p in zip(
-        weekday_labels,
-        date_labels,
-        df["Weather Code"],
-        df["Max Temperature (°F)"],
-        df["Min Temperature (°F)"],
-        df["Precipitation Probability (%)"]
+<table style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;">
+<thead>
+<tr style="background-color: #f8f9fa; font-weight: bold;">
+  <th style="text-align:left; padding:8px;">Day</th>
+  <th style="text-align:left; padding:8px;">Emoji</th>
+  <th style="text-align:left; padding:8px;">Condition</th>
+  <th style="text-align:left; padding:8px;">High / Low (°F)</th>
+  <th style="text-align:left; padding:8px;">Precip (%)</th>
+</tr>
+</thead>
+<tbody>
+"""
+    for w, d, code, hi, lo, p in zip(
+        weekdays, dates,
+        df_sorted["Weather Code"],
+        df_sorted["Max Temperature (°F)"],
+        df_sorted["Min Temperature (°F)"],
+        df_sorted["Precipitation Probability (%)"]
     ):
-        # Emoji from WMO code
-        try:
-            emoji = WEATHER_EMOJI.get(int(code), "❓")
-        except Exception:
-            emoji = "❓"
-
-        # Temperatures
+        c = int(code) if pd.notna(code) else None
+        emoji = WEATHER_EMOJI.get(c, "❓")
+        cond  = WMO_DESCRIPTIONS.get(c, "Unknown")
         hi_str = f"{round(hi)}°" if pd.notna(hi) else "—"
         lo_str = f"{round(lo)}°" if pd.notna(lo) else "—"
-
-        # Precip prob
-        p_str = f"{int(round(p))}%" if pd.notna(p) else "—"
+        p_str  = f"{int(round(p))}%" if pd.notna(p) else "—"
 
         html += f"""
-        <tr>
-          <td class="day-cell"><span class="weekday">{weekday}</span><span class="date">· {date_txt}</span></td>
-          <td class="emoji">{emoji}</td>
-          <td class="temps"><span class="high">{hi_str}</span><span class="low">{lo_str}</span></td>
-          <td class="precip">{p_str}</td>
-        </tr>
-        """
-
-    html += """
-      </tbody>
-    </table>
-    """
-
+<tr>
+  <td style="padding:8px;">{w} · {d}</td>
+  <td style="padding:8px;">{emoji}</td>
+  <td style="padding:8px;">{cond}</td>
+  <td style="padding:8px;">{hi_str} / {lo_str}</td>
+  <td style="padding:8px;">{p_str}</td>
+</tr>
+"""
+    html += "</tbody></table>"
     return html
 
 html = build_7day_forecast_table_flipped(df)
 with open("7day.html", 'w') as f:
     f.write(html)
-st.markdown(html, unsafe_allow_html=True)
+st.html(html)
 
 # Temperature chart
 fig_temp = px.line(df, x="Date", y=["Max Temperature (°F)", "Min Temperature (°F)"],
