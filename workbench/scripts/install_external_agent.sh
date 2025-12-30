@@ -44,10 +44,11 @@ function Run_Agent_Test {
     }
 }
 EOF
-  chmod +r /tmp/agt_test.json
-  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm env workbench::add"
-  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm run /tmp/agt_test.json"
-  su - ${USER} bash -c ". ${USER_HOME}/venv/bin/activate && ctm env delete workbench" 
+  
+  . ${USER_HOME}/venv/bin/activate
+  ctm env workbench::add
+  ctm run /tmp/agt_test.json
+  ctm env delete workbench 
 }
 
 function Create_Silent_File {
@@ -81,12 +82,12 @@ function Run_Silent_Install {
 
     cd ${USER_HOME}
 
-    su - ${USER} bash -c "${USER_HOME}/setup.sh -silent ${USER_HOME}/silent_install_agent.xml"
-    su - ${USER} bash -c '''source ~/.bashrc &&
-        ctmcfg -table CONFIG -action update -parameter LOGICAL_AGENT_NAME -value ${agent_name} &
-        ctmcfg -table CONFIG -action update -parameter PERSISTENT_CONNECTION -value Y &
-        shut-ag -u controlm -p ALL &&
-        start-ag -u controlm -p ALL'''
+    ${USER_HOME}/setup.sh -silent ${USER_HOME}/silent_install_agent.xml
+    source ~/.bashrc && \
+        ctmcfg -table CONFIG -action update -parameter LOGICAL_AGENT_NAME -value ${agent_name} & \
+        ctmcfg -table CONFIG -action update -parameter PERSISTENT_CONNECTION -value Y & \
+        shut-ag -u controlm -p ALL && \
+        start-ag -u controlm -p ALL
 
 }
 
