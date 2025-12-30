@@ -83,11 +83,11 @@ function Run_Silent_Install {
     cd ${USER_HOME}
 
     ${USER_HOME}/setup.sh -silent ${USER_HOME}/silent_install_agent.xml
-    source ~/.bashrc && \
-        ctmcfg -table CONFIG -action update -parameter LOGICAL_AGENT_NAME -value ${agent_name} & \
-        ctmcfg -table CONFIG -action update -parameter PERSISTENT_CONNECTION -value Y & \
-        shut-ag -u controlm -p ALL && \
-        start-ag -u controlm -p ALL
+    source ~/.bashrc
+    ctmcfg -table CONFIG -action update -parameter LOGICAL_AGENT_NAME -value ${agent_name}
+    ctmcfg -table CONFIG -action update -parameter PERSISTENT_CONNECTION -value Y
+    shut-ag -u controlm -p ALL
+    start-ag -u controlm -p ALL
 
 }
 
