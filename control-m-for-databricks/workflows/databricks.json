@@ -1,0 +1,27 @@
+{
+  "Defaults" : {
+		"Host": "replace-with-usercode_instruqt_server",
+	  "CreatedBy" : "replace-with-email",
+		"ControlmServer": "IN01",
+		"Application": "replace-with-usercode_azure_databricks",
+		"SubApplication": "replace-with-usercode_azure_databricks",
+		"OrderMethod": "Manual"
+	},
+  "replace-with-usercode-databricks" : {
+    "Type" : "Folder",
+
+
+     "replace-with-usercode-databricks-job" : {
+      "Type" : "Job:Azure Databricks",
+      "ConnectionProfile" : "AZURE-DATABRICKS",
+      "Databricks Job ID" : "171121838206557",
+      "Parameters" : "\"params\": {}",
+      "Show Tasks Output" : "unchecked",
+
+
+      "RunAs" : "replace-with-usercode-uc-AZURE-DATABRICKS",
+
+   
+    }
+  }
+}
