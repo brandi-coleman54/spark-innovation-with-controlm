@@ -1,5 +1,5 @@
 
-  "replace-with-usercode-AZURE-DATABRICKS": {
+  "replace-with-usercode-uc-AZURE-DATABRICKS": {
     "Type": "ConnectionProfile:Azure Databricks",
     "Tenant ID": "92b796c5-5839-40a6-8dd9-c1fad320c69b",
     "Rerun Interval": "10",
