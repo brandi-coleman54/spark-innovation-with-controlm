@@ -1,0 +1,17 @@
+
+  "replace-with-usercode-AZURE-DATABRICKS": {
+    "Type": "ConnectionProfile:Azure Databricks",
+    "Tenant ID": "92b796c5-5839-40a6-8dd9-c1fad320c69b",
+    "Rerun Interval": "10",
+    "Azure Login url": "https://login.microsoftonline.com",
+    "Databricks url": "https://adb-5209843808612711.11.azuredatabricks.net",
+    "Connection Timeout": "50",
+    "Attempt Reruns": "3",
+    "HTTP Codes": "429 503",
+    "Databricks Resource": "2ff814a6-3304-4ab8-85cb-cd0e6f879c1d",
+    "Client Secret": "replace-azure-databricks-client-secret",
+    "Application ID": "77142206-7a9e-4c1d-b8e5-31042bcdd38d",
+    "Authentication Method": "PRINCIPAL",
+    "Description": "",
+    "Centralized": true
+  }
