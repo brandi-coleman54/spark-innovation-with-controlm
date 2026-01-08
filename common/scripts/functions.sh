@@ -549,7 +549,8 @@ function Repo_Replacements {
   replacements=$2
 
   delimiter="="
-  for replacement in ${replacements}; do
+  for replacement in "${replacements}"; do
+    echo "Processing ${replacement}"
     find_str=${replacement%${delimiter}*}
     repl_str=${replacement#*${delimiter}}
     echo "Replacing ${find_str} with ${repl_str} in ${repo_dir}/..."
