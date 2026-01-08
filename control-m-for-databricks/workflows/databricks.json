@@ -9,19 +9,13 @@
 	},
   "replace-with-usercode-databricks" : {
     "Type" : "Folder",
-
-
      "replace-with-usercode-databricks-job" : {
       "Type" : "Job:Azure Databricks",
       "ConnectionProfile" : "AZURE-DATABRICKS",
       "Databricks Job ID" : "171121838206557",
       "Parameters" : "\"params\": {}",
       "Show Tasks Output" : "unchecked",
-
-
       "RunAs" : "replace-with-usercode-uc-AZURE-DATABRICKS"
-
-   
     }
   }
 }
