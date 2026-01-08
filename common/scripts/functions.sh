@@ -548,8 +548,9 @@ function Repo_Replacements {
   repo_dir=$1
   replacements=$2
 
+  set -f
   delimiter="="
-  for replacement in "${replacements}"; do
+  for replacement in ${replacements}; do
     echo "Processing ${replacement}"
     find_str=${replacement%${delimiter}*}
     repl_str=${replacement#*${delimiter}}
@@ -558,7 +559,7 @@ function Repo_Replacements {
     echo "Replacement complete."
 
   done
-
+  set +f
 }
 
 function Config_Code_Server {
