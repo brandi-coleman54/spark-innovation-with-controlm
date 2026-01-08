@@ -545,12 +545,14 @@ function Set_Hostname {
 
 function Repo_Replacements {
 
-  repo_dir=$1
-  replacements=$2
+  local repo_dir=$1
+  local replacements="$2"
+  local IFS=' '
 
-  set -f
+  read -r -a tokens <<< "$replacements"
   delimiter="="
-  for replacement in ${replacements}; do
+  
+  for replacement in "${tokens[@]}; do
     echo "Processing ${replacement}"
     find_str=${replacement%${delimiter}*}
     repl_str=${replacement#*${delimiter}}
