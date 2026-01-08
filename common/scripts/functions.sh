@@ -544,51 +544,20 @@ function Set_Hostname {
 }
 
 function Repo_Replacements {
-  local repo_dir="${1:?usage: Repo_Replacements <repo_dir> <space_delimited_replacements>}"
-  local replacements="${2:?usage: Repo_Replacements <repo_dir> <space_delimited_replacements>}"
 
-  # Ensure the directory exists
-  [[ -d "${repo_dir}" ]] || { echo "Error: repo_dir '${repo_dir}' not found." >&2; return 2; }
+  repo_dir=$1
+  replacements=$2
 
-  # Split the single, quoted, space-delimited argument into an array of tokens
-  # Example input: "foo=bar IN01=IN02 SPARKIT-HG=SPARKIT-HG-NEW"
-  local tokens=()
-  # shellcheck disable=SC2206  # intentional word splitting on spaces
-  tokens=( ${replacements} )
+  delimiter="="
+  for replacement in ${replacements}; do
+    find_str=${replacement%${delimiter}*}
+    repl_str=${replacement#*${delimiter}}
+    echo "Replacing ${find_str} with ${repl_str} in ${repo_dir}/..."
+    find "${repo_dir}/" -type f -exec sed -i "s|${find_str}|$repl_str|g" {} +
+    echo "Replacement complete."
 
-  if (( ${#tokens[@]} == 0 )); then
-    echo "Warning: No replacements specified." >&2
-    return 0
-  fi
-
-  local delimiter="="
-  local token find_str repl_str
-
-  for token in "${tokens[@]}"; do
-    echo "Processing ${token}"
-    # Split on first '='
-    find_str="${token%%${delimiter}*}"
-    repl_str="${token#*${delimiter}}"
-
-    if [[ -z "${find_str}" ]]; then
-      echo "Warning: empty find_str in token '${token}', skipping." >&2
-      continue
-    fi
-    # If token had no '=', repl_str will be identical to token; treat that as malformed.
-    if [[ "${find_str}" == "${repl_str}" ]]; then
-      echo "Warning: malformed token '${token}', skipping." >&2
-      continue
-    fi
-
-    echo "Replacing '${find_str}' → '${repl_str}' under '${repo_dir}/'..."
-
-    # Perform in-place replacement across regular files; use '|' as sed delimiter to reduce escaping needs.
-    # Note: if find_str contains '|' you should escape it (see note below).
-    LC_ALL=C find "${repo_dir}/" -type f -print0 \
-      | xargs -0 sed -i "s|${find_str}|${repl_str}|g"
-
-    echo "Done: '${find_str}' → '${repl_str}'."
   done
+
 }
 
 function Config_Code_Server {
