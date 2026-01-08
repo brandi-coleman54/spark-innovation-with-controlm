@@ -565,6 +565,7 @@ function Repo_Replacements {
   local token find_str repl_str
 
   for token in "${tokens[@]}"; do
+    echo "Processing ${token}"
     # Split on first '='
     find_str="${token%%${delimiter}*}"
     repl_str="${token#*${delimiter}}"
