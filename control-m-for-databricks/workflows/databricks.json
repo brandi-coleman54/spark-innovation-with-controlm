@@ -7,9 +7,9 @@
 		"SubApplication": "replace-with-usercode_azure_databricks",
 		"OrderMethod": "Manual"
 	},
-  "replace-with-usercode-databricks" : {
+  "replace-with-usercode_azure_databricks" : {
     "Type" : "Folder",
-     "replace-with-usercode-databricks-job" : {
+     "replace-with-usercode_azure_databricks_job" : {
       "Type" : "Job:Azure Databricks",
       "ConnectionProfile" : "AZURE-DATABRICKS",
       "Databricks Job ID" : "171121838206557",
