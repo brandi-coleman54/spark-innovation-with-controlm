@@ -19,7 +19,7 @@
       "Show Tasks Output" : "unchecked",
 
 
-      "RunAs" : "replace-with-usercode-uc-AZURE-DATABRICKS",
+      "RunAs" : "replace-with-usercode-uc-AZURE-DATABRICKS"
 
    
     }
