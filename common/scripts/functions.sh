@@ -552,7 +552,7 @@ function Repo_Replacements {
   read -r -a tokens <<< "$replacements"
   delimiter="="
   
-  for replacement in "${tokens[@]}; do
+  for replacement in "${tokens[@]}"; do
     echo "Processing ${replacement}"
     find_str=${replacement%${delimiter}*}
     repl_str=${replacement#*${delimiter}}
