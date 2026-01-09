@@ -1,0 +1,10 @@
+{
+"replace-with-usercode-uc-BQ-CP": {
+    "Type": "ConnectionProfile:GCP BigQuery",
+    "Identity Type": "service_account",
+    "Service Account Key": "replace-gcp-bigquery-service-account-key",
+    "GCP BigQuery URL": "https://bigquery.googleapis.com",
+    "Description": "",
+    "Centralized": true
+  }
+}
