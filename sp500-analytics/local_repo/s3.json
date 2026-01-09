@@ -1,0 +1,12 @@
+{
+"replace-with-usercode-uc-S3-CP": {
+    "Type": "ConnectionProfile:FileTransfer:S3:Amazon",
+    "VerifyBytes": true,
+    "SecretAccessKey": "replace-aws-sm-secret-key",
+    "VerifyDestination": true,
+    "Region": "us-west-2",
+    "AccessKey": "AKIAZCKNG7JUMRSQSSHD",
+    "Description": "",
+    "Centralized": true
+  }
+}
