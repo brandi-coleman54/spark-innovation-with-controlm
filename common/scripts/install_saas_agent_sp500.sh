@@ -66,19 +66,6 @@ until ctm provision image AQS_plugin.Linux; do
   sleep 10
 done
 
-# --- Install Athena plugin ---
-tries=0
-until ctm provision image AWS_Athena_plugin.Linux; do
-  ((tries++))
-  if [ "\$tries" -ge 3 ]; then
-    echo "Failed installation of SAP plugin after \$tries attempt."
-    ctm env del admin
-    exit 4
-  fi
-  echo "Installation failed (attempt \$tries). Retrying in 10s..."
-  sleep 10
-done
-
 ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_bigquery.json
 ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_gcs.json
 ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_quicksight.json
