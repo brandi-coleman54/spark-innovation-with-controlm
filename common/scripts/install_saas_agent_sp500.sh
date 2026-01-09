@@ -66,10 +66,10 @@ until ctm provision image AQS_plugin.Linux; do
   sleep 10
 done
 
-ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_bigquery.json
-ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_gcs.json
-ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_quicksight.json
-ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_s3.json
+ctm deploy /home/controlm/labs/sp500-analytics/local_repo/cp_bigquery.json
+ctm deploy /home/controlm/labs/sp500-analytics/local_repo/cp_gcs.json
+ctm deploy /home/controlm/labs/sp500-analytics/local_repo/cp_quicksight.json
+ctm deploy/home/controlm/labs/sp500-analytics/local_repo/cp_s3.json
 
 ctm env del ${ctm_env}
 echo "Agent install invoked successfully for ${target}."
