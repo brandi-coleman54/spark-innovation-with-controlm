@@ -53,7 +53,7 @@ until ctm provision image DBX_plugin.Linux; do
   sleep 10
 done
 
-ctm deploy /home/controlm/spark-innovation-with-controlm/control-m-for-databricks/local_repo/cp_azure_databricks.json
+ctm deploy /home/controlm/labscontrol-m-for-databricks/local_repo/cp_azure_databricks.json
 
 ctm env del ${ctm_env}
 echo "Agent install invoked successfully for ${target}."
