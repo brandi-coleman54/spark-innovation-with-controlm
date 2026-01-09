@@ -79,10 +79,10 @@ until ctm provision image AWS_Athena_plugin.Linux; do
   sleep 10
 done
 
-ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/bigquery.json
-ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/gcs.json
-ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/quicksight.json
-ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/s3.json
+ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_bigquery.json
+ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_gcs.json
+ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_quicksight.json
+ctm deploy /home/controlm/spark-innovation-with-controlm/sp500-analytics/local_repo/cp_s3.json
 
 ctm env del ${ctm_env}
 echo "Agent install invoked successfully for ${target}."
