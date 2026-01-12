@@ -623,7 +623,7 @@ function Repo_Replacements2 {
   local -a parts
   
   # Choose an uncommon delimiter (Unit Separator)
-  local SED_DELIM=$'\x1F'
+  local SED_DELIM="|"
 
 
   # Split on '|' while preserving newlines (and everything else)
