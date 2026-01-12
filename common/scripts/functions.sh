@@ -564,6 +564,23 @@ function Repo_Replacements {
   set +f
 }
 
+function Repo_Replacements2 {
+
+  local repo_dir=$1
+  local replacements="$2"
+
+  while IFS= read -r token || [[ -n "$token" ]]; do
+    # Use %q to see the raw control characters (\r\n)
+    printf "DEBUG: %q\n" "$token"
+    find_str=${token%${delimiter}*}
+    repl_str="${token#*${delimiter}}"
+    #echo "Replacing ${find_str} with "${repl_str}" in ${repo_dir}/..."
+    find "${repo_dir}/" -type f -exec sed -i "s|${find_str}|$repl_str|g" {} +
+    echo "Replacement complete."
+  done <<< "$replacements"
+
+}
+
 function Config_Code_Server {
   local user_home="${1:?usage: Config_Code_Server <user_home> <base_dir> <user>}"
   local base_dir="${2:?usage: Config_Code_Server <user_home> <base_dir> <user>}"
