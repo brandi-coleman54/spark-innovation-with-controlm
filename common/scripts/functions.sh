@@ -568,6 +568,7 @@ function Repo_Replacements2 {
 
   local repo_dir=$1
   local replacements="$2"
+  local delimiter="="
 
   while IFS= read -r token || [[ -n "$token" ]]; do
     # Use %q to see the raw control characters (\r\n)
