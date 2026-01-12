@@ -648,7 +648,8 @@ function Repo_Replacements2 {
     
     # Escape for sed
     local pat repl
-    pat=$(escape_sed_pattern "$key")
+    #pat=$(escape_sed_pattern "$key")
+    pat="$key"
     repl=$(escape_sed_replacement "$value")
   
     # Perform in-place replacement of ALL occurrences
