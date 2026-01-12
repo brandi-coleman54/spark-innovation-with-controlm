@@ -578,7 +578,7 @@ function Repo_Replacements2 {
 
   # Iterate over parts
   for i in "${!parts[@]}"; do
-    printf '--- part %d ---\n%s\n' "$i" "${parts[i]}"
+    echo "${i}"
   done
 
 
