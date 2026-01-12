@@ -543,6 +543,58 @@ function Set_Hostname {
   fi
 }
 
+
+# Detect sed flavor and set inline flag
+sed_inline() {
+  # GNU sed supports: sed -i
+  if sed --version >/dev/null 2>&1; then
+    printf -- '-i'
+  else
+    # BSD/macOS sed requires -i '' (empty suffix)
+    printf -- "-i ''"
+  fi
+}
+
+# Escape a string to be used as a literal sed regex pattern:
+# - Escape regex metacharacters: . ^ $ * + ? ( ) [ ] { } | \
+# - Also escape the chosen delimiter (|)
+escape_sed_pattern() {
+  local s=$1
+  s=${s//\\/\\\\}  # backslash -> \\ 
+  s=${s//\//\/}    # (not used as delimiter, but keep for safety)
+  s=${s//|/\\|}    # escape delimiter
+  # Escape regex metas:
+  s=${s//./\\.}
+  s=${s//^/\\^}
+  s=${s//$/\\$}
+  s=${s//\*/\\*}
+  s=${s//+/\\+}
+  s=${s//\?/\\?}
+  s=${s//\(/\\(}
+  s=${s//\)/\\)}
+  s=${s//[/\\[}
+  s=${s//]/\\]}
+  s=${s//\{ /\\{ } # space to avoid brace expansion in some shells
+  s=${s//\{/\\{}
+  s=${s//\}/\\}}
+  s=${s//|/\\|}
+  printf '%s' "$s"
+}
+
+# Escape replacement text for sed 's///':
+# - Escape '&' (it expands to the matched text otherwise)
+# - Escape backslashes
+# - Escape delimiter '|'
+# - Preserve literal newlines/spaces (bash will pass them through)
+escape_sed_replacement() {
+  local s=$1
+  s=${s//\\/\\\\}  # backslash -> \\
+  s=${s//&/\\&}    # ampersand -> \&
+  s=${s//|/\\|}    # delimiter -> \|
+  printf '%s' "$s"
+}
+
+
 function Repo_Replacements {
 
   local repo_dir=$1
@@ -567,22 +619,45 @@ function Repo_Replacements {
 function Repo_Replacements2 {
 
   local repo_dir=$1
-  #local replacements="$2"
-  #local delimiter="="
-
   local arg=$2
   local -a parts
 
   # Split on '|' while preserving newlines (and everything else)
   mapfile -d '|' -t parts < <(printf '%s' "$arg")
 
+  # Get inline flag for sed
+  local inline_flag
+  inline_flag=$(sed_inline)
+
   # Iterate over parts
-  for i in "${!parts[@]}"; do
-    echo "${i} ${parts[i]}"
+  for part in "${!parts[@]}"; do
+    echo "${part} ${parts[part]}"
+    
+    # Skip empty segments (e.g., trailing '|')
+    [[ -z $part ]] && continue
+  
+    # Split into key and value at the first '='
+    if [[ $part != *'='* ]]; then
+      printf 'WARN: segment has no "=" and was skipped: %q\n' "$part" >&2
+      continue
+    fi
+    local key=${part%%=*}
+    local value=${part#*=}
+  
+    
+    # Escape for sed
+    local pat repl
+    pat=$(escape_sed_pattern "$key")
+    repl=$(escape_sed_replacement "$value")
+  
+    # Perform in-place replacement of ALL occurrences
+    # Use '|' as s/// delimiter to avoid slash-heavy JSON issues.
+    # Note: bash passes literal newlines in $repl just fine.
+    # shellcheck disable=SC2086
+    #eval sed $inline_flag -e "s|$pat|$repl|g" -- "$file"
+    find "${repo_dir}" -type f -print0 | xargs -0 sed -i -e "s|$pat|$repl|g"
+
   done
-
-
-
 }
 
 function Config_Code_Server {
