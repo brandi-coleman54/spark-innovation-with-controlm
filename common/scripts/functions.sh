@@ -567,18 +567,21 @@ function Repo_Replacements {
 function Repo_Replacements2 {
 
   local repo_dir=$1
-  local replacements="$2"
-  local delimiter="="
+  #local replacements="$2"
+  #local delimiter="="
 
-  while IFS= read -r token || [[ -n "$token" ]]; do
-    # Use %q to see the raw control characters (\r\n)
-    printf "DEBUG: %q\n" "$token"
-    find_str=${token%${delimiter}*}
-    repl_str="${token#*${delimiter}}"
-    #echo "Replacing ${find_str} with "${repl_str}" in ${repo_dir}/..."
-    find "${repo_dir}/" -type f -exec sed -i "s|${find_str}|$repl_str|g" {} +
-    echo "Replacement complete."
-  done <<< "$replacements"
+  local arg=$2
+  local -a parts
+
+  # Split on '|' while preserving newlines (and everything else)
+  mapfile -d '|' -t parts < <(printf '%s' "$arg")
+
+  # Iterate over parts
+  for i in "${!parts[@]}"; do
+    printf '--- part %d ---\n%s\n' "$i" "${parts[i]}"
+  done
+
+
 
 }
 
