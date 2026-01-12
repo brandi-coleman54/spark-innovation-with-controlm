@@ -630,8 +630,9 @@ function Repo_Replacements2 {
   inline_flag=$(sed_inline)
 
   # Iterate over parts
-  for part in "${!parts[@]}"; do
-    echo "${part} ${parts[part]}"
+  for i in "${!parts[@]}"; do
+    part="${parts[i]"
+    echo "$i ${part}"
     
     # Skip empty segments (e.g., trailing '|')
     [[ -z $part ]] && continue
