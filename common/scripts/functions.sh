@@ -631,7 +631,7 @@ function Repo_Replacements2 {
 
   # Iterate over parts
   for i in "${!parts[@]}"; do
-    part="${parts[i]"
+    part="${parts[i]}"
     echo "$i ${part}"
     
     # Skip empty segments (e.g., trailing '|')
