@@ -621,6 +621,10 @@ function Repo_Replacements2 {
   local repo_dir=$1
   local arg=$2
   local -a parts
+  
+  # Choose an uncommon delimiter (Unit Separator)
+  local SED_DELIM=$'\x1F'
+
 
   # Split on '|' while preserving newlines (and everything else)
   mapfile -d '|' -t parts < <(printf '%s' "$arg")
@@ -651,13 +655,26 @@ function Repo_Replacements2 {
     #pat=$(escape_sed_pattern "$key")
     pat="$key"
     repl=$(escape_sed_replacement "$value")
-  
+    
+    # Build one sed script using the uncommon delimiter
+    local script="s${SED_DELIM}${pat}${SED_DELIM}${repl}${SED_DELIM}g"
+
     # Perform in-place replacement of ALL occurrences
     # Use '|' as s/// delimiter to avoid slash-heavy JSON issues.
     # Note: bash passes literal newlines in $repl just fine.
     # shellcheck disable=SC2086
     #eval sed $inline_flag -e "s|$pat|$repl|g" -- "$file"
-    find "${repo_dir}" -type f -print0 | xargs -0 sed -i -e "s|$pat|$repl|g"
+    #find "${repo_dir}" -type f -print0 | xargs -0 sed -i -e "s|$pat|$repl|g"
+
+    
+    if sed --version >/dev/null 2>&1; then
+      # GNU sed
+      find "$repo_dir" -type f -exec sed $inline_flag -e "$script" {} +
+    else
+      # BSD/macOS sed
+      find "$repo_dir" -type f -exec sed $inline_flag -e "$script" {} +
+    fi
+
 
   done
 }
