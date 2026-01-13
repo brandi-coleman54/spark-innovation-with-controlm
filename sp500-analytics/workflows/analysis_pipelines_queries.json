@@ -15,7 +15,7 @@
       "ConnectionProfile" : "replace-with-usercode-uc-QS-CP",
       "AWS Dataset ID" : "d409fb2a-cf47-4820-a24e-d6eca8bbef9b",
       "Refresh Type" : "Full Refresh",
-      "RunAs" : "replace-with-usercode-uc-QS-CP",  
+      "RunAs" : "replace-with-usercode-uc-QS-CP" 
     },
     "BQ_Top_Daily_Decliners" : {
       "Type" : "Job:GCP BigQuery",
