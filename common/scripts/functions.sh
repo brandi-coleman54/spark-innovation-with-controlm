@@ -658,7 +658,11 @@ function Repo_Replacements2 {
     
     # Build one sed script using the uncommon delimiter
     local script="s${SED_DELIM}${pat}${SED_DELIM}${repl}${SED_DELIM}g"
-    local script=$(printf '%s' "$script" | tr -d '\r')
+    script=$(printf '%s' "$script" | tr -d '\r')
+    
+    # Trace a safe one-line preview (doesn't affect sed)
+    printf 'sed script (escaped preview): %q\n' "$script" >&2
+
 
     # Perform in-place replacement of ALL occurrences
     # Use '|' as s/// delimiter to avoid slash-heavy JSON issues.
