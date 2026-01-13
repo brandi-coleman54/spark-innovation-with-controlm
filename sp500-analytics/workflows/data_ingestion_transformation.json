@@ -10,7 +10,7 @@
 	},
   "replace-with-usercode-SP500-MFT-to-Table-Setup" : {
     "Type" : "Folder",
-"BQ MFT Job s3-to-gcs" : {
+"BQ_MFT_Job_s3_to_gcs" : {
       "Type" : "Job:FileTransfer",
       "ConnectionProfileSrc" : "replace-with-usercode-uc-S3-CP",
       "ConnectionProfileDest" : "replace-with-usercode-uc-GCS-CP",
@@ -76,7 +76,7 @@
         }
       } ]
         },
-      "BQ Schema Table Creation" : {
+      "BQ_Schema_Table_Creation" : {
       "Type" : "Job:GCP BigQuery",
       "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
       "Action" : "Query",
@@ -111,7 +111,7 @@
         "UCM-TABLE_ID" : ""
       } ]
   },
-      "BQ Load data to table" : {
+      "BQ_Load_data_to_table" : {
       "Type" : "Job:GCP BigQuery",
       "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
       "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
@@ -135,7 +135,7 @@
       } ]
    
     },
-  "BQ Clean Data" : {
+  "BQ_Clean_Data" : {
       "Type" : "Job:GCP BigQuery",
       "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
       "Action" : "Query",
@@ -168,14 +168,15 @@
       }, {
         "UCM-TABLE_ID" : ""
       } ]
-    }
+    },
   "Flow": {
             "Type": "Flow",
             "Sequence": [
-                "BQ MFT Job s3-to-gcs",
-                "BQ Schema Table Creation",
-                "BQ Load data to table",
-                "BQ Clean Data"
+                "BQ_MFT_Job_s3_to_gcs",
+                "BQ_Schema_Table_Creation",
+                "BQ_Load_data_to_table",
+                "BQ_Clean_Data"
             ]
         }
+}
 }
