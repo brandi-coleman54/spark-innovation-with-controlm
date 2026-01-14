@@ -10,7 +10,7 @@
 	},
    "replace-with-usercode-SP500-Refresh-to-Queries" : {
     "Type" : "Folder",
-    "AWS QuickSight Refresh" : {
+    "AWS_QuickSight_Refresh" : {
       "Type" : "Job:AWS QuickSight",
       "ConnectionProfile" : "replace-with-usercode-uc-QS-CP",
       "AWS Dataset ID" : "d409fb2a-cf47-4820-a24e-d6eca8bbef9b",
@@ -125,10 +125,23 @@
   "Flow": {
             "Type": "Flow",
             "Sequence": [
-              "replace-with-usercode-SP500-MFT-to-Table-Setup:AWS_QuickSight_Refresh",
-                "AWS_QuickSight_Refresh:BQ_Top_Daily_Decliners",
-                "AWS_QuickSight_Refresh:BQ_Top_Daily_Gainers",
-                "AWS_QuickSight_Refresh:BQ_Top_Most_Volatile"
+                "AWS_QuickSight_Refresh",
+              "BQ_Top_Daily_Decliners"       
+            ]
+        },
+    "Flow2": {
+            "Type": "Flow",
+            "Sequence": [
+                "AWS_QuickSight_Refresh",
+              "BQ_Top_Daily_Gainers"
+            ]
+        },
+    "Flow3": {
+            "Type": "Flow",
+            "Sequence": [
+                "AWS_QuickSight_Refresh",
+              "BQ_Top_Most_Volatile"
             ]
         }
+}
 }
