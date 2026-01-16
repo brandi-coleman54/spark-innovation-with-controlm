@@ -1,12 +1,13 @@
 {
     "Defaults": {
-      "Host": "zzz_instruqt_server",
+      "Host": "replace-with-usercode_instruqt_server",
       "ControlmServer": "IN01",
-      "Application": "zzz_forecast_flow",
-      "SubApplication": "zzz_forecast_flow",
-      "RunAs": "controlm"
+      "Application": "replace-with-usercode_forecast_flow",
+      "SubApplication": "replace-with-usercode_forecast_flow",
+      "RunAs": "controlm",
+      "OrderMethod": "Manual"
           },
-    "zzz_forecast_flow": {
+    "replace-with-usercode_forecast_flow": {
       "Type": "Folder",
       "Variables": [
         {
@@ -18,8 +19,7 @@
         {
           "email": "replace-with-email"
         }
-      ],
-      "OrderMethod": "Manual",
+      ]
       },
       "forecast-flow-sla": {
         "Type": "Job:SLAManagement",
