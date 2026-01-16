@@ -44,7 +44,7 @@ jobs:
       source venv/bin/activate
 
       # Prefer storing CTM_AAPI_TOKEN as a secret pipeline variable
-       ctm environment saas::add sparkit https://bmc-spark-aapi.us2.controlm.com/automation-api "$CTM_AAPI_TOKEN"
+       ctm environment saas::add sparkit https://bmc-spark-aapi.us2.controlm.com/automation-api replace-with-ctm-aapi-token
     displayName: 'Environment Add'
     env:
       CTM_AAPI_TOKEN: $(apiTokenValue)
@@ -53,21 +53,21 @@ jobs:
       set -euo pipefail
       source venv/bin/activate
 
-      ctm build jobs/forecast-flow-helix-zzz.json
+      ctm build workflows/forecast-flow.json
     displayName: 'Build Jobs-as-Code JSON file.'
 
   - script: |
       set -euo pipefail
       source venv/bin/activate
 
-      ctm deploy jobs/forecast-flow-helix-zzz.json
+      ctm deploy workflows/forecast-flow.json
     displayName: 'Deploy jobs to Control-M environment'
 
   - script: |
       set -euo pipefail
       source venv/bin/activate
 
-      ctm run jobs/forecast-flow-helix-zzz.json
+      ctm run workflows/forecast-flow.json
     displayName: 'Run Control-M jobs'
 
   - script: |
