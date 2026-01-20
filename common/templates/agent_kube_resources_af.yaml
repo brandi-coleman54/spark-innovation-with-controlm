@@ -5,7 +5,6 @@ metadata:
 data:
   plugins_list.txt: |
     AAF112024
-    AAFJEQ
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
