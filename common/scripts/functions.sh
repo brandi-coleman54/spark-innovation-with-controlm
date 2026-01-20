@@ -482,7 +482,9 @@ function Configure_CTM_User {
 
   if [[ "${MODE:-TEST}" == "INVITE" ]]; then
     Create_TD_Role       "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/role_saas_attendee.json"
-    #Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/user.json"
+    if [ "${ctm_user}" -ne "tst-inst@example.com" ]; then 
+      Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/user.json"
+    fi
     Create_TD_Token      "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/api_token.json"
   else
     # Validate role exists
