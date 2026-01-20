@@ -293,9 +293,10 @@ function Provision_Agents_Helm {
     --set mft.pvcs[0].name="mft-pvc" \
     --set mft.pvcs[0].mountPath="/mft_mountPath" \
     --set mft.configParametersConfigMapName="mft-config-params" \
+    --set ai.additionalPluginsConfigMapName="plugins-list" \
     --set mft.sshPrivateKeySecretName="k3s-sftp-key" \
     --namespace "${ctm_user_code}" --create-namespace
-    # --set ai.additionalPluginsConfigMapName="plugins-list" \
+    
 }
 
 function Create_Docker_Secret {
