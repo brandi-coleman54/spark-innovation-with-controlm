@@ -56,7 +56,14 @@ function Check_Mode_Vars {
 
 function Set_User_Data {
   local gen_random_code="${1:-}"
-  local current_mode="${MODE:-TEST}"
+  local current_mode="INVITE"
+
+  if [ ! -z "${INSTRUQT_USER_NAME:-}" ]; then
+    INSTRUQT_USER_NAME="Test User"
+  fi
+  if [ ! -z "${INSTRUQT_USER_EMAIL:-}" ]; then
+    INSTRUQT_USER_EMAIL="tst-inst@example.com"
+  fi
 
   if [[ "${current_mode}" == "INVITE" ]]; then
     export CTM_USER_NAME="${INSTRUQT_USER_NAME:?INSTRUQT_USER_NAME required in INVITE mode}"
@@ -98,7 +105,7 @@ function Set_User_Data {
 
   cat <<EOF
 ============================================
-Mode: ${MODE:-TEST}
+Mode: ${MODE}
 AAPI Endpoint: ${CTM_AAPI_ENDPOINT:-<unset>}
 CTM User: ${CTM_USER}
 CTM User Name: ${CTM_USER_NAME}
@@ -475,7 +482,7 @@ function Configure_CTM_User {
 
   if [[ "${MODE:-TEST}" == "INVITE" ]]; then
     Create_TD_Role       "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/role_saas_attendee.json"
-    Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/user.json"
+    #Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/user.json"
     Create_TD_Token      "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/api_token.json"
   else
     # Validate role exists
