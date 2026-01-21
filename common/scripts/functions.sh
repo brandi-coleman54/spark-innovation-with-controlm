@@ -59,10 +59,10 @@ function Set_User_Data {
   local gen_random_code="${1:-}"
   local current_mode="INVITE"
 
-  if [ ! -z "${INSTRUQT_USER_NAME:-}" ]; then
+  if [ -z "${INSTRUQT_USER_NAME:-}" ]; then
     INSTRUQT_USER_NAME="Test User"
   fi
-  if [ ! -z "${INSTRUQT_USER_EMAIL:-}" ]; then
+  if [ -z "${INSTRUQT_USER_EMAIL:-}" ]; then
     INSTRUQT_USER_EMAIL="tst-inst@example.com"
   fi
 
