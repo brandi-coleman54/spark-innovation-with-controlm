@@ -52,6 +52,7 @@ function Check_Mode_Vars {
   if command -v agent >/dev/null 2>&1; then
     agent variable set MODE "${MODE}"
   fi
+  echo "End of Check_Mode_Vars"
 }
 
 function Set_User_Data {
