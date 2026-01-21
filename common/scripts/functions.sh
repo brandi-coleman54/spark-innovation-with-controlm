@@ -299,12 +299,12 @@ function Provision_Agents_Helm {
     --set pvc.volumeSize="1Gi" \
     --set pvc.accessMode="ReadWriteOnce" \
     --set server.hostgroup="${ctm_hg}" \
+    --set ai.additionalPluginsConfigMapName="plugins-list" \
     --set mft.pvcs[0].name="mft-pvc" \
     --set mft.pvcs[0].mountPath="/mft_mountPath" \
     --set mft.configParametersConfigMapName="mft-config-params" \
     --set mft.sshPrivateKeySecretName="k3s-sftp-key" \
     --namespace "${ctm_user_code}" --create-namespace
-    #--set ai.additionalPluginsConfigMapName="plugins-list" \
     
 }
 
