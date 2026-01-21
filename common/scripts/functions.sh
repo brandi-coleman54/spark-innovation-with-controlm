@@ -180,6 +180,7 @@ function Create_TD_Role {
   cat ${build_file}
   # Check existence via CLI exit status or via filtered output
   set +e
+  ctm env show
   ctm config authorization:roles::get -s "role=${user_code}" | grep ${user_code}
   if [ "$?" -eq "0" ]; then
     echo "Role '${user_code}' already exists."
@@ -483,7 +484,7 @@ function Configure_CTM_User {
 
   if [[ "INVITE" == "INVITE" ]]; then
     Create_TD_Role       "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/role_saas_attendee.json"
-    if [ "${ctm_user}" -ne "tst-inst@example.com" ]; then 
+    if [[ "${ctm_user}" != "tst-inst@example.com" ]]; then 
       Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/user.json"
     fi
     Create_TD_Token      "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/api_token.json"
