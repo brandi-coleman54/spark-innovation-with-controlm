@@ -38,7 +38,7 @@ function Check_Mode_Vars {
   [[ -z "${CTM_PRV_TOKEN:-}"     ]] && echo "Warning: env variable CTM_PRV_TOKEN not set!"
 
   if [[ -z "${INSTRUQT_USER_EMAIL:-}" ]]; then
-    export MODE="TEST"
+    export MODE="INVITE"
     if [[ -z "${CTM_TST_TOKEN:-}" ]]; then
       echo "Warning: env variable CTM_TST_TOKEN not set!"
     else
