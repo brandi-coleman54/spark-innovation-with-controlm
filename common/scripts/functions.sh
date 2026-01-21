@@ -481,7 +481,7 @@ function Configure_CTM_User {
   # Tool checks
   command -v ctm       >/dev/null 2>&1 || { echo "Error: 'ctm' CLI not found." >&2; return 127; }
 
-  if [[ "${MODE}" == "INVITE" ]]; then
+  if [[ "INVITE" == "INVITE" ]]; then
     Create_TD_Role       "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/role_saas_attendee.json"
     if [ "${ctm_user}" -ne "tst-inst@example.com" ]; then 
       Create_TD_User       "${ctm_user}" "${ctm_user_code}" "${USER_HOME}/${BASE_DIR}/common/templates/user.json"
