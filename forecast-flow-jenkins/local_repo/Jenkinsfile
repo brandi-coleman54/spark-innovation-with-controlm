@@ -1,0 +1,27 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Validate CTM CLI') {
+      steps {
+        sh '''#!/usr/bin/env bash
+            set -euo pipefail
+            source /var/jenkins_home/venv/bin/activate 
+            ctm -v
+            '''
+      }
+    }
+    
+     stage('Build Workflow') {
+      steps {
+        sh '''#!/usr/bin/env bash
+            set -euo pipefail
+            source /var/jenkins_home/venv/bin/activate 
+            mkdir -p workflows
+            cp /tmp/forecast-flow.json workflows/forecast-flow.json
+            ctm build workflows/forecast-flow.json
+            '''
+      }
+    }
+  }
+}
