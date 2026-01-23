@@ -48,7 +48,7 @@
       "getweatherdata": {
         "Type": "Job:Command",
         "RunOnAllAgentsInGroup": true,
-        "Command": "wget \"https://api.openweathermap.org/data/2.5/weather?zip=%%zipcode,us&appid=%%appid&units=imperial\" -O $HOME/output.json",
+        "Command": "wget \"https://api.openweathermap.org/data/2.5/weather?zip=%%zipcode,us&appid=%%appid&units=imperial\" -O $HOME/output.json"
       },
       "hightempvar": {
         "Type": "Job:Command",
