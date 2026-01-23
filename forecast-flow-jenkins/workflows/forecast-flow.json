@@ -1,0 +1,92 @@
+{
+    "Defaults": {
+      "Host": "replace-with-usercode_instruqt_server",
+      "ControlmServer": "IN01",
+      "Application": "replace-with-usercode_forecast_flow",
+      "SubApplication": "replace-with-usercode_forecast_flow",
+      "RunAs": "controlm",
+      "OrderMethod": "Manual"
+          },
+    "replace-with-usercode_forecast_flow": {
+      "Type": "Folder",
+      "Variables": [
+        {
+          "appid": "481be8b9210a09cc3a3bcdcf190a3aa8"
+        },
+        {
+          "zipcode": "63146"
+        },
+        {
+          "email": "replace-with-email"
+        }
+      ]
+      },
+      "forecast-flow-sla": {
+        "Type": "Job:SLAManagement",
+        "ServiceName": "replace-with-usercode-forecast-flow-sla",
+        "ServicePriority": "3",
+        "JobRunsDeviationsTolerance": "3",
+        "CompleteIn": {
+          "Time": "0:5"
+        }
+      },
+      "getoutput": {
+        "Type": "Job:Command",
+        "Command": "echo \\\"Today, the high temperature in %%city %%country is %%hightemp F.\\\"",
+        "IfBase:Folder:CompletionStatus_0": {
+          "Type": "If:CompletionStatus",
+          "CompletionStatus": "OK",
+          "Mail_0": {
+            "Type": "Action:Mail",
+            "Subject": "Today's High Temperature",
+            "To": "%%email",
+            "Message": "Today, the high temperature in %%city %%country is %%hightemp F."
+          }
+        }
+      }
+     ,
+      "getweatherdata": {
+        "Type": "Job:Command",
+        "RunOnAllAgentsInGroup": true,
+        "Command": "wget \"https://api.openweathermap.org/data/2.5/weather?zip=%%zipcode,us&appid=%%appid&units=imperial\" -O $HOME/output.json",
+      },
+      "hightempvar": {
+        "Type": "Job:Command",
+        "Command": "cd $HOME/ && high_temp=$(cat output.json | jq \".main.temp_max\") | echo \"$high_temp\"",
+        "CaptureOutput_0": {
+          "Type": "Action:CaptureOutput",
+          "Capture": "UpToEndOfLine",
+          "Search": "high_temp=",
+          "VariableName": "\\\\hightemp",
+          "ForwardBy": {
+            "ColumnsOption": "Characters"
+          }
+        }
+      },
+      "cityvar": {
+        "Type": "Job:Command",
+        "Command": "cd $HOME/ && city=$(cat output.json | jq -r \".name\") | echo \"$city\"",
+        "CaptureOutput_0": {
+          "Type": "Action:CaptureOutput",
+          "Capture": "UpToEndOfLine",
+          "Search": "city=",
+          "VariableName": "\\\\city",
+          "ForwardBy": {
+            "ColumnsOption": "Characters"
+          }
+        }
+      },
+      "countryvar": {
+        "Type": "Job:Command",
+        "Command": "cd $HOME/ && country=$(cat output.json | jq -r \".sys.country\") | echo \"$country\"",
+        "CaptureOutput_0": {
+          "Type": "Action:CaptureOutput",
+          "Capture": "UpToEndOfLine",
+          "Search": "country=",
+          "VariableName": "\\\\country",
+          "ForwardBy": {
+            "ColumnsOption": "Characters"
+          }
+        }   
+  }
+}
