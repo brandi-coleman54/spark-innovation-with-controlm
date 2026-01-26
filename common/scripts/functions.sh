@@ -775,6 +775,11 @@ function Config_Code_Server {
     return 1
   fi
 
+  if ! su - "${user}" -c 'code-server --install-extension jobs-as-code'; then
+    echo "Error: failed to install jobs-as-code for user '${user}'." >&2
+    return 1
+  fi
+
   # Ensure settings directory exists, then set theme
   local settings_dir="${user_home}/.local/share/code-server/User"
   mkdir -p "${settings_dir}"
