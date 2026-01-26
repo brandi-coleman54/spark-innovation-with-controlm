@@ -308,6 +308,51 @@ function Provision_Agents_Helm {
     
 }
 
+function Provision_Agents_Helm2 {
+  local ctm_user_code="${1:?usage: Provision_Agents_Helm <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> <resources_file> <ctm_hg>}"
+  local ctm_aapi_endpoint="${2:?usage: Provision_Agents_Helm <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> <resources_file> <ctm_hg>}"
+  local ctm_auth_token="${3:?usage: Provision_Agents_Helm <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> <resources_file> <ctm_hg>}"
+  local ctm_server="${4:?usage: Provision_Agents_Helm <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> <resources_file> <ctm_hg>}"
+  local resources_file="${5:?usage: Provision_Agents_Helm <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> <resources_file> <ctm_hg>}"
+  local ctm_hg="${6:?usage: Provision_Agents_Helm <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> <resources_file> <ctm_hg>}"
+
+  requires helm || return $?
+  requires kubectl || return $?
+
+  agent_set CTM_HG "${ctm_hg}"
+
+  # Helm repo setup (idempotent)
+  helm repo add controlm "https://controlm-charts.s3.us-west-2.amazonaws.com/" >/dev/null 2>&1 || true
+  helm repo update
+
+  # Ensure namespace exists; apply resources
+  ns_ensure "${ctm_user_code}"
+  [[ -s "${resources_file}" ]] || { echo "Error: resources_file '${resources_file}' not found or empty." >&2; return 2; }
+  kubectl apply -f "${resources_file}" -n "${ctm_user_code}"
+
+  # NOTE: Avoid duplicate flags; set each value once.
+  # TIP: The mft mountPath should be an absolute path (e.g., /opt/controlm/mft). Adjust as needed.
+  helm upgrade --install "${ctm_user_code}" controlm/saas-controlm-agent --version "9.22.050" \
+    --set image.tag="9.22.050-k8s-mft-openjdk" \
+    --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}' \
+    --set-json 'pod.annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}' \
+    --set server.name="${ctm_server}" \
+    --set api.endpoint="${ctm_aapi_endpoint}" \
+    --set api.token="${ctm_auth_token}" \
+    --set agent.tag="sparkit" \
+    --set pvc.storageClass="local-path" \
+    --set pvc.volumeSize="1Gi" \
+    --set pvc.accessMode="ReadWriteOnce" \
+    --set server.hostgroup="${ctm_hg}" \
+    --set mft.pvcs[0].name="mft-pvc" \
+    --set mft.pvcs[0].mountPath="/mft_mountPath" \
+    --set mft.configParametersConfigMapName="mft-config-params" \
+    --set mft.sshPrivateKeySecretName="k3s-sftp-key" \
+    --namespace "${ctm_user_code}" --create-namespace
+    #--set ai.additionalPluginsConfigMapName="plugins-list" \
+    
+}
+
 function Create_Docker_Secret {
   local name="${1:?usage: Create_Docker_Secret <name> <namespace> <docker_config_json>}"
   local namespace="${2:?usage: Create_Docker_Secret <name> <namespace> <docker_config_json>}"
