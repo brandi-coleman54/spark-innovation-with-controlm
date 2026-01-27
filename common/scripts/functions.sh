@@ -169,12 +169,14 @@ function Create_TD_Role {
   local user_code="${1:?usage: Create_TD_Role <user_code>}"
   local template_file=$2
   local build_file=/tmp/role_build_file.json
+  local current_seconds=$(date '+%s')
+  local readable_date=$(date +"%Y-%m-%d")
 
   # Tool checks
   command -v ctm       >/dev/null 2>&1 || { echo "Error: 'ctm' CLI not found." >&2; return 127; }
   command -v envsubst >/dev/null 2>&1 || { echo "Error: 'envsubst' not found."   >&2; return 127; }
 
-  user_code="${user_code}" uc_user_code="${user_code^^}" \
+  user_code="${user_code}" uc_user_code="${user_code^^}" description="${current_seconds}_${readable_date}" \
     envsubst < ${template_file} > ${build_file}
   cat ${template_file}
   cat ${build_file}
