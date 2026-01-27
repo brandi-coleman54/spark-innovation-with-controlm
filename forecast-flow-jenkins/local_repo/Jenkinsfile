@@ -17,7 +17,7 @@ pipeline {
         sh '''#!/usr/bin/env bash
             set -euo pipefail
             source /var/jenkins_home/venv/bin/activate 
-            if ctm environment saas::add sparkit replace-with-endpoint "replace-with-token" 2>add_err.log; then
+            if ctm environment saas::add sparkit replace-with-endpoint replace-with-token 2>add_err.log; then
             echo "Environment added: sparkit"
             exit 0 
             fi 
