@@ -1,5 +1,6 @@
 {
   "Name": "${user_code}",
+  "Description": "spark_${description}",
   "AllowedJobs": {
     "Included": [
       [
