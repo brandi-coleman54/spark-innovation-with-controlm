@@ -297,7 +297,7 @@ function Provision_Agents_Helm {
     --set api.endpoint="${ctm_aapi_endpoint}" \
     --set api.token="${ctm_auth_token}" \
     --set agent.tag="sparkit" \
-    --set agent.replicas="2" \
+    --set agent.replicas="1" \
     --set pvc.storageClass="local-path" \
     --set pvc.volumeSize="1Gi" \
     --set pvc.accessMode="ReadWriteOnce" \
