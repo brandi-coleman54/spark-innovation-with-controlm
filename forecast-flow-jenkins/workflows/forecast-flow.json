@@ -8,9 +8,6 @@
     }, {
       "email" : "replace-with-email"
     } ],
-    "BusinessFields" : [ {
-      "Usercode" : "replace-with-usercode"
-    } ],
     "ControlmServer" : "IN01",
     "OrderMethod" : "Manual",
     "RunAs" : "controlm",
