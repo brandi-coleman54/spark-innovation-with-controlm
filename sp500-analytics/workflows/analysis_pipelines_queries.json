@@ -122,6 +122,19 @@
         "UCM-TABLE_ID" : ""
       } ]
     },
+	"copy_data_local": {
+        "Type": "Job:FileTransfer",
+		"ConnectionProfileSrc": "ZZZ_SFTP",
+		"ConnectionProfileDest": "SPARKIT_FS",
+		"FileTransfers": [
+			{
+				"Src": "%%repo_dir/whiskey-retail/scripts/*.py",
+				"Dest": "/mft_mountPath/",
+				"TransferOption": "SrcToDest",
+				"TransferType": "Binary"
+			}
+		]
+    },
   "Flow": {
             "Type": "Flow",
             "Sequence": [
