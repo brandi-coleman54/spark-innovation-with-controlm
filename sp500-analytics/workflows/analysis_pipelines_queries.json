@@ -124,12 +124,13 @@
     },
 	"copy_data_local": {
         "Type": "Job:FileTransfer",
-		"ConnectionProfileSrc": "ZZZ_SFTP",
+		"ConnectionProfileSrc" : "replace-with-usercode-uc-S3-CP",
+      	"S3BucketNameSrc" : "gcp-bigquery-source",
 		"ConnectionProfileDest": "SPARKIT_FS",
 		"FileTransfers": [
 			{
 				"Src": "%%repo_dir/whiskey-retail/scripts/*.py",
-				"Dest": "/mft_mountPath/",
+				"Dest": "/home/controlm/labs/sp500-analytics/data/",
 				"TransferOption": "SrcToDest",
 				"TransferType": "Binary"
 			}
