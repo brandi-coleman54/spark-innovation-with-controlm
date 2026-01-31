@@ -60,7 +60,7 @@ function Delete_CCPs {
     echo "Deleteing Connection Profiles for ${code}"
     ccps=$(ctm deploy connectionprofiles:centralized:status::get -s "type=*&name=${code}*" | jq -r '.statuses[].name')
     for ccp in ${ccps[@]}; do
-        type=$(ctm deploy connectionprofiles:centralized::get -s "type=*&name=${ccp}" | jq -r ".${ccp}.Type")
+        type=$(ctm deploy connectionprofiles:centralized::get -s "type=*&name=${ccp}" | jq -r ".\"${ccp}\".Type")
         short_type="${type#*:}"
         final_type="${short_type%%:*}"
         ctm deploy connectionprofile:centralized::delete "${final_type}" ${ccp}
