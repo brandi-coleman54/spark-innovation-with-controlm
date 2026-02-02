@@ -1,15 +1,20 @@
 {
-  "zzz_Order_Processing" : {
+  "zzz-Order-Processing-saas" : {
     "Type" : "Folder",
-    "ControlmServer" : "psctm",
-    "Description" : "Ordered daily for GBR purposes.",
+    "BusinessFields" : [ {
+      "Usercode" : "zzz"
+    }, {
+      "BU" : "zzz"
+    } ],
+    "ControlmServer" : "IN01",
+    "Description" : "Ordered daily for AAS purposes.",
     "OrderMethod" : "Manual",
-    "RunAs" : "ctmagent",
-    "SiteStandard" : "zzz_prd",
-    "SubApplication" : "zzz_",
-    "CreatedBy" : "grask",
+    "RunAs" : "controlm",
+    "SiteStandard" : "SaaS Standard",
+    "SubApplication" : "zzz_Order_Processing_zzz",
+    "CreatedBy" : "user_email",
     "Priority" : "Very Low",
-    "Application" : "zzz_",
+    "Application" : "Financial",
     "RerunLimit" : {
       "Units" : "Minutes",
       "Every" : "5"
@@ -33,20 +38,24 @@
       "Mail_0" : {
         "Type" : "Action:Mail",
         "Subject" : "WOOT WOOT!!!",
-        "To" : "grask@bmc.com",
+        "To" : "user_email",
         "Message" : "Folder failed."
       }
     },
-    "zzz_change_ag01" : {
+    "zzz-after-failure" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
-      "Description" : "change file permissions",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
-      "Command" : "rm -rf /home/grask@adprod.bmc.com/grask.txt; chmod 777 /home/grask@adprod.bmc.com/*",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
+      "Description" : "this workload runs after the previous failure",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "sleep 10",
+      "DocumentationUrl" : {
+        "Url" : "https://confluence.bmc.com/display/AOE/Load+SnowFlake+Data+into+DataWarehouse"
+      },
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
@@ -55,75 +64,88 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313"
-        } ]
-      },
-      "eventsToAdd" : {
-        "Type" : "AddEvents",
-        "Events" : [ {
-          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01-313"
-        } ]
-      },
-      "eventsToDelete" : {
-        "Type" : "DeleteEvents",
-        "Events" : [ {
-          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313"
+          "Event" : "zzz_failure-TO-zzz_failure_copy-286"
         } ]
       }
     },
-    "zzz_change_ap01" : {
+    "zzz-change-lin02" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
       "Description" : "change file permissions",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
-      "Command" : "chmod 777 /home/grask@adprod.bmc.com/*.txt",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "echo change line job",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
         "DaysRelation" : "OR"
       },
-      "IfBase:Folder:CompletionStatus_0" : {
-        "Type" : "If:CompletionStatus",
-        "CompletionStatus" : "NOTOK",
-        "Action:SetToOK_0" : {
-          "Type" : "Action:SetToOK"
-        }
-      },
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_cmd_not_found-TO-zzz_chmod-313"
-        }, {
-          "Event" : "zzz_list2_dir_contents-TO-zzz_change_ap01-313"
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313-286"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_change_ap01-TO-zzz_cleanup_ap01-313"
+          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01-313-286"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "zzz_list2_dir_contents-TO-zzz_change_ap01-313"
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313-286"
         } ]
       }
     },
-    "zzz_cleanup_ag01" : {
+    "zzz-change2-lin02" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "change file permissions",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "chmod 777 /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/outgoing/*",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-cmd-not-found-TO-zzz-change2-lin02"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-change2-lin02-TO-zzz-cleanup2-lin02"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz-cmd-not-found-TO-zzz-change2-lin02"
+        } ]
+      }
+    },
+    "zzz-cleanup-lin02" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
       "Description" : "cleanup ag01 environment",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
-      "Command" : "rm -f /home/grask@adprod.bmc.com/*.txt",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "rm -f /tmp/*.txt",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
@@ -132,26 +154,26 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01-313"
+          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_cleanup_ag01-TO-zzz_report1-313"
+          "Event" : "zzz-cleanup-lin02-TO-zzz-report1"
         } ]
       }
     },
-    "zzz_cleanup_ap01" : {
+    "zzz-cleanup2-lin02" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
-      "Description" : "cleanup ap01 environment",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
-      "Command" : "rm -f /home/grask@adprod.bmc.com/*.txt",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "cleanup ag01 environment",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "cat ~/.bashrc",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
@@ -160,36 +182,34 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_change_ap01-TO-zzz_cleanup_ap01-313"
-        }, {
-          "Event" : "zzz_dir_which_directory-TO-zzz_cleanup_ap01"
+          "Event" : "zzz-change2-lin02-TO-zzz-cleanup2-lin02"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_cleanup_ap01-TO-zzz_report1-313"
+          "Event" : "zzz-cleanup2-lin02-TO-zzz-report1"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "zzz_dir_which_directory-TO-zzz_cleanup_ap01"
+          "Event" : "zzz-change2-lin02-TO-zzz-cleanup2-lin02"
         } ]
       }
     },
-    "zzz_cmd_not_found" : {
+    "zzz-cmd-not-found" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
       "FileName" : "quotes.sh",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "FilePath" : "/home/grask@adprod.bmc.com/scripts",
-      "CreatedBy" : "grask",
-      "Description" : "This workload is problematic",
-      "RunAs" : "ctmagent",
-      "Application" : "zzz_",
-      "Command" : "echo good to go",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm",
+      "CreatedBy" : "user_email",
+      "Description" : "This workload is problematic. Replace with exit code 0 or echo good to go.",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "command not found",
       "DocumentationUrl" : {
         "Url" : "https://www.bmc.com/it-solutions/control-m.html"
       },
@@ -204,7 +224,7 @@
         "Mail_0" : {
           "Type" : "Action:Mail",
           "Subject" : "WOMP WOMP WOMP!!!",
-          "To" : "grask@bmc.com",
+          "To" : "user_email",
           "Message" : "%%ODATE at %%TIME.\\n\\n%%JOBNAME in %%SCHEDTAB folder has failed.\\n\\nClick on this link for direct access to the failed job: http://vl-aus-ctm-em01.ctm.bmc.com:18080/ControlM/#Neighborhood:id=%%ORDERID&ctm=%%DATACENTER&name=%%JOBNAME.&date=%%DATE&direction=1&radius=3",
           "AttachOutput" : true
         }
@@ -212,28 +232,48 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_fail_runtime_breach-TO-zzz_cmd_not_found-313"
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_cmd_not_found-313-286"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_cmd_not_found-TO-zzz_chmod-313"
+          "Event" : "zzz_cmd_not_found-TO-zzz_chmod-313-286"
         }, {
-          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313"
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313-286"
+        }, {
+          "Event" : "zzz-cmd-not-found-TO-zzz-change2-lin02"
         } ]
       }
     },
-    "zzz_copy_dir_contents" : {
+    "zzz-command-updates" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
+      "Description" : "Use to update folder paths and permissions on agent.",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "echo processing data",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "Months" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "OR"
+      }
+    },
+    "zzz-copy-dir-contents" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
       "Description" : "copy directory contents",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
-      "Command" : "cp /home/grask@adprod.bmc.com/grask.txt /home/grask@adprod.bmc.com/outgoing/grask2.txt",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "cp /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/onboarding.txt /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/onboarding2.txt",
       "DocumentationUrl" : {
         "Url" : "https://www.bmc.com/it-solutions/control-m.html"
       },
@@ -243,7 +283,7 @@
         "DaysRelation" : "OR"
       },
       "Output" : {
-        "Destination" : "/home/grask@adprod.bmc.com/apps/PRD/App1",
+        "Destination" : "/home/controlm",
         "Operation" : "Move"
       },
       "Notify:NotOK_0" : {
@@ -261,7 +301,7 @@
         "Mail_1" : {
           "Type" : "Action:Mail",
           "Subject" : "Job Failure- Please attend to",
-          "To" : "grask@bmc.com",
+          "To" : "user_email",
           "Message" : "%%JOBNAME located in %%SCHEDTAB failed today %%ODATE in %%APPLIC within CTM instance %%DATACENTER on agent machine running as %%OWNER",
           "AttachOutput" : true
         },
@@ -305,25 +345,25 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_file_exist-TO-zzz_copy_dir_contents-313"
+          "Event" : "zzz_file_exist-TO-zzz_copy_dir_contents-313-286"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_copy_dir_contents-TO-zzz_failure-313"
+          "Event" : "zzz_copy_dir_contents-TO-zzz_failure-313-286"
         } ]
       }
     },
-    "zzz_dir_which_directory" : {
+    "zzz-dir-which-directory" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
       "Description" : "which directory are we in?",
-      "RunAs" : "ctmagent",
-      "Application" : "zzz_",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
       "Command" : "pwd",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -333,31 +373,25 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory"
+          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory-286"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_dir_which_directory-TO-zzz_cleanup_ap01"
-        } ]
-      },
-      "eventsToDelete" : {
-        "Type" : "DeleteEvents",
-        "Events" : [ {
-          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory"
+          "Event" : "zzz-dir-which-directory-TO-zzz-report1"
         } ]
       }
     },
-    "zzz_fail_runtime_breach" : {
+    "zzz-fail-runtime-breach" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
       "Description" : "runtime breach workload",
-      "RunAs" : "root",
-      "Application" : "zzz_",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
       "Command" : "echo good to go",
       "DocumentationUrl" : {
         "Url" : "https://www.bmc.com/it-solutions/control-m.html"
@@ -373,36 +407,38 @@
         "Mail_0" : {
           "Type" : "Action:Mail",
           "Subject" : "WOMP WOMP WOMP!!!",
-          "To" : "grask@bmc.com",
+          "To" : "user_email",
           "Message" : "%%DAY FAILED!!!"
         }
       },
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_output_capture-TO-zzz_fail_runtime_breach-313"
+          "Event" : "zzz_output_capture-TO-zzz_fail_runtime_breach-313-286"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_fail_runtime_breach-TO-zzz_cmd_not_found-313"
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_cmd_not_found-313-286"
         }, {
-          "Event" : "zzz_fail_runtime_breach-TO-zzz_list2_dir_contents-313"
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_list2_dir_contents-313-286"
+        }, {
+          "Event" : "zzz-fail-runtime-breach-TO-zzz-list2-dir2-contents"
         } ]
       }
     },
-    "zzz_failure" : {
+    "zzz-failure" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "Host" : "zzz_instruqt_server",
       "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
-      "CreatedBy" : "grask",
+      "CreatedBy" : "user_email",
       "Description" : "this workload fails",
-      "RunAs" : "ctmagent",
-      "Application" : "zzz_",
-      "Command" : "sleep 10",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "exit code 1",
       "DocumentationUrl" : {
         "Url" : "https://confluence.bmc.com/display/AOE/Load+SnowFlake+Data+into+DataWarehouse"
       },
@@ -414,54 +450,28 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_copy_dir_contents-TO-zzz_failure-313"
+          "Event" : "zzz_copy_dir_contents-TO-zzz_failure-313-286"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_failure-TO-zzz_failure_copy"
+          "Event" : "zzz_failure-TO-zzz_failure_copy-286"
         } ]
       }
     },
-    "zzz_after_failure" : {
-      "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
-      "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
-      "CreatedBy" : "grask",
-      "Description" : "this workload runs after the previous failure",
-      "RunAs" : "ctmagent",
-      "Application" : "zzz_",
-      "Command" : "sleep 10",
-      "DocumentationUrl" : {
-        "Url" : "https://confluence.bmc.com/display/AOE/Load+SnowFlake+Data+into+DataWarehouse"
-      },
-      "When" : {
-        "WeekDays" : [ "NONE" ],
-        "MonthDays" : [ "ALL" ],
-        "DaysRelation" : "OR"
-      },
-      "eventsToWaitFor" : {
-        "Type" : "WaitForEvents",
-        "Events" : [ {
-          "Event" : "zzz_failure-TO-zzz_failure_copy"
-        } ]
-      }
-    },
-    "zzz_file_exist" : {
+    "zzz-file-exist" : {
       "Type" : "Job:FileWatcher:Create",
       "SearchInterval" : "5",
-      "Path" : "/home/grask@adprod.bmc.com/grask.txt",
-      "SubApplication" : "zzz_",
+      "Path" : "/home/controlm/.bashrc",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
       "Description" : "check for file existence",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
       "RerunLimit" : {
         "Units" : "Minutes",
         "Every" : "5"
@@ -481,20 +491,20 @@
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_file_exist-TO-zzz_copy_dir_contents-313"
+          "Event" : "zzz_file_exist-TO-zzz_copy_dir_contents-313-286"
         }, {
-          "Event" : "zzz_file_exist-TO-zzz_synch_dir"
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir-286"
         } ]
       }
     },
-    "zzz_impact_analysis" : {
+    "zzz-impact-analysis" : {
       "Type" : "Job:SLAManagement",
       "ServiceActions" : {
         "If:SLA:JobFailureOnServicePath_0" : {
           "Type" : "If:SLA:JobFailureOnServicePath",
           "Action:SLA:Mail_0" : {
             "Type" : "Action:SLA:Mail",
-            "Email" : "grask@bmc.com",
+            "Email" : "user_email",
             "Subject" : "Service %%SERVICE_NAME: Job failed on service path.",
             "Message" : "The service %%SERVICE_NAME contains failed job(s). The following job(s) are problematic: %%PROBLEMATIC_JOBS."
           },
@@ -508,7 +518,7 @@
           "Type" : "If:SLA:JobRanTooLong",
           "Action:SLA:Mail_0" : {
             "Type" : "Action:SLA:Mail",
-            "Email" : "grask@bmc.com",
+            "Email" : "user_email",
             "Subject" : "Service %%SERVICE_NAME: Job ran too long.",
             "Message" : "The service %%SERVICE_NAME contains a job(s) that ran too long. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
           }
@@ -517,7 +527,7 @@
           "Type" : "If:SLA:JobFinishedTooQuickly",
           "Action:SLA:Mail_0" : {
             "Type" : "Action:SLA:Mail",
-            "Email" : "grask@bmc.com",
+            "Email" : "user_email",
             "Subject" : "Service %%SERVICE_NAME: Job finished too quickly.",
             "Message" : "The service %%SERVICE_NAME contains a job(s) that ended too quickly. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
           }
@@ -526,7 +536,7 @@
           "Type" : "If:SLA:ServiceEndedOK",
           "Action:SLA:Mail_0" : {
             "Type" : "Action:SLA:Mail",
-            "Email" : "grask@bmc.com",
+            "Email" : "user_email",
             "Subject" : "The service %%SERVICE_NAME ended OK at %%SERVICE_EXPECTED_END_TIME.",
             "Message" : "The service %%SERVICE_NAME ended OK at %%SERVICE_EXPECTED_END_TIME, the service deadline was %%SERVICE_DUE_TIME."
           }
@@ -535,7 +545,7 @@
           "Type" : "If:SLA:ServiceIsLate",
           "Action:SLA:Mail_0" : {
             "Type" : "Action:SLA:Mail",
-            "Email" : "grask@bmc.com",
+            "Email" : "user_email",
             "Subject" : "Service %%SERVICE_NAME is late.",
             "Message" : "Service %%SERVICE_NAME is projected to be late. The service deadline is %%SERVICE_DUE_TIME but it is estimated to complete at %%SERVICE_EXPECTED_END_TIME. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
           }
@@ -544,47 +554,47 @@
           "Type" : "If:SLA:ServiceLatePastDeadline",
           "Action:SLA:Mail_0" : {
             "Type" : "Action:SLA:Mail",
-            "Email" : "grask@bmc.com",
+            "Email" : "user_email",
             "Subject" : "Service %%SERVICE_NAME past deadline.",
             "Message" : "Service %%SERVICE_NAME has passed its deadline at %%SERVICE_DUE_TIME. The service is estimated to complete at %%SERVICE_EXPECTED_END_TIME. The following job(s) are problematic: %%PROBLEMATIC_JOBS"
           }
         }
       },
       "ServicePriority" : "1",
-      "ServiceName" : "grask_Order_Processing",
-      "SubApplication" : "zzz_",
+      "ServiceName" : "zzz_Order_Processing",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
+      "Host" : "zzz_instruqt_server",
       "JobRunsDeviationsTolerance" : "3",
-      "CreatedBy" : "grask",
+      "CreatedBy" : "user_email",
       "Description" : "monitor business service",
-      "RunAs" : "ctmagent",
-      "Application" : "zzz_",
-      "CompleteIn" : {
-        "Time" : "0:3"
-      },
+      "RunAs" : "controlm",
+      "Application" : "Financial",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
         "DaysRelation" : "OR"
       },
+      "CompleteIn" : {
+        "Time" : "0:1"
+      },
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_report1-TO-zzz_impact_analysis-313"
+          "Event" : "zzz_report1-TO-zzz_impact_analysis-313-286"
         } ]
       }
     },
-    "zzz_list2_dir_contents" : {
+    "zzz-list2-dir-contents" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
       "Description" : "list directory contents",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
-      "Command" : "ls -al /home/grask@adprod.bmc.com",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "ls -al /home/controlm/ctm/",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
@@ -593,27 +603,65 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_trans_dir_contents-TO-zzz_list2_dir_contents-313"
+          "Event" : "zzz_trans_dir_contents-TO-zzz_list2_dir_contents-313-286"
         }, {
-          "Event" : "zzz_fail_runtime_breach-TO-zzz_list2_dir_contents-313"
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_list2_dir_contents-313-286"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_list2_dir_contents-TO-zzz_change_ap01-313"
+          "Event" : "zzz-list2-dir-contents-TO-zzz-report1"
         } ]
       }
     },
-    "zzz_output_capture" : {
+    "zzz-list2-dir2-contents" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "list directory contents",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "ls -al /home/controlm/",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-fail-runtime-breach-TO-zzz-list2-dir2-contents"
+        }, {
+          "Event" : "zzz-trans-dir-contents-TO-zzz-list2-dir2-contents"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-list2-dir2-contents-TO-zzz-report1"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz-fail-runtime-breach-TO-zzz-list2-dir2-contents"
+        }, {
+          "Event" : "zzz-trans-dir-contents-TO-zzz-list2-dir2-contents"
+        } ]
+      }
+    },
+    "zzz-output-capture" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
       "Description" : "captures string from output",
-      "RunAs" : "ctmagent",
-      "Application" : "zzz_",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
       "Command" : "echo ERRNO=12345",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -633,38 +681,46 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_User_Wait-TO-zzz_output_capture-313"
+          "Event" : "zzz-SP-MSSQL-TO-zzz-output-capture"
         }, {
-          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture"
+          "Event" : "zzz-touch-TO-zzz-output-capture"
         }, {
-          "Event" : "zzz_touch-TO-zzz_output_capture"
+          "Event" : "zzz-User-Wait-TO-zzz-output-capture"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_output_capture-TO-zzz_fail_runtime_breach-313"
+          "Event" : "zzz_output_capture-TO-zzz_fail_runtime_breach-313-286"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture"
+          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture-286"
         }, {
-          "Event" : "zzz_touch-TO-zzz_output_capture"
+          "Event" : "zzz_touch-TO-zzz_output_capture-286"
+        }, {
+          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture-487-286"
+        }, {
+          "Event" : "zzz-SP-MSSQL-TO-zzz-output-capture"
+        }, {
+          "Event" : "zzz-touch-TO-zzz-output-capture"
+        }, {
+          "Event" : "zzz-User-Wait-TO-zzz-output-capture"
         } ]
       }
     },
-    "zzz_process_data" : {
+    "zzz-process-data" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "data-quality",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
       "Description" : "processing data",
-      "RunAs" : "ctmagent",
-      "Application" : "zzz_",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
       "Command" : "echo processing data",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -674,22 +730,21 @@
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_process_data-TO-zzz_synch_dir-313"
+          "Event" : "zzz_process_data-TO-zzz_synch_dir-313-286"
         } ]
       }
     },
-    "zzz_report1" : {
+    "zzz-report1" : {
       "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "RunAsDummy" : true,
-      "Host" : "vl-aus-ctm-vse-ag01.bmc.com",
-      "FilePath" : "/home/grask@adprod.bmc.com/",
-      "CreatedBy" : "grask",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
       "Description" : "business process report",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
-      "Command" : "ctm reporting report::get Order_Processing EXCEL -o /home/grask@adprod.bmc.com/GBI.xls",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "ctm reporting report::get shared:ActiveJobsOrderProcessing excel -o /home/controlm/zzz_order_processing.xls",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
@@ -701,7 +756,7 @@
         "Mail_0" : {
           "Type" : "Action:Mail",
           "Subject" : "YOO HOO!!!",
-          "To" : "grask@bmc.com",
+          "To" : "user_email",
           "Message" : "Your report is ready!!!",
           "AttachOutput" : true
         }
@@ -709,220 +764,91 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_cleanup_ap01-TO-zzz_report1-313"
+          "Event" : "zzz-cleanup2-lin02-TO-zzz-report1"
         }, {
-          "Event" : "zzz_cleanup_ag01-TO-zzz_report1-313"
-        } ]
-      },
-      "eventsToAdd" : {
-        "Type" : "AddEvents",
-        "Events" : [ {
-          "Event" : "zzz_report1-TO-zzz_impact_analysis-313"
-        } ]
-      }
-    },
-    "zzz_SP_MSSQL" : {
-      "Type" : "Job:Database:StoredProcedure",
-      "ConnectionProfile" : "ADVENTUREWORKS",
-      "OutputSQLOutput" : "Y",
-      "SQLOutputFormat" : "HTML",
-      "Schema" : "dbo",
-      "StoredProcedure" : "udfBuildISO8601Date;0",
-      "SubApplication" : "zzz_",
-      "Priority" : "Very Low",
-      "Host" : "vw-aus-ctm-wk01.adprod.bmc.com",
-      "CreatedBy" : "abaldwin",
-      "Description" : "MSSQL stored procedure",
-      "RunAs" : "ADVENTUREWORKS",
-      "Application" : "zzz_",
-      "When" : {
-        "WeekDays" : [ "NONE" ],
-        "MonthDays" : [ "ALL" ],
-        "DaysRelation" : "OR"
-      },
-      "eventsToAdd" : {
-        "Type" : "AddEvents",
-        "Events" : [ {
-          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture"
-        } ]
-      }
-    },
-    "zzz_synch_dir" : {
-      "Type" : "Job:FileTransfer",
-      "ConnectionProfileDualEndpoint" : "zzz_psctm",
-      "SubApplication" : "zzz_",
-      "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ag01.bmc.com",
-      "CreatedBy" : "grask",
-      "Description" : "synch directory",
-      "RunAs" : "zzz_psctm",
-      "Application" : "zzz_",
-      "Variables" : [ {
-        "FTP-LOSTYPE" : "Unix"
-      }, {
-        "FTP-CONNTYPE1" : "SFTP"
-      }, {
-        "FTP-LHOST" : "vl-aus-ctm-ag01.ctm.bmc.com"
-      }, {
-        "FTP-LUSER" : "grask@adprod.bmc.com"
-      }, {
-        "FTP-HOMEDIR1" : "/home/grask@adprod.bmc.com"
-      }, {
-        "FTP-ROSTYPE" : "Unix"
-      }, {
-        "FTP-CONNTYPE2" : "SFTP"
-      }, {
-        "FTP-RHOST" : "vl-aus-ctm-ap01.ctm.bmc.com"
-      }, {
-        "FTP-RUSER" : "grask@adprod.bmc.com"
-      }, {
-        "FTP-HOMEDIR2" : "/home/grask@adprod.bmc.com"
-      }, {
-        "FTP-CM_VER" : "9.0.20"
-      }, {
-        "FTP-COMPRESSION11" : "0"
-      }, {
-        "FTP-COMPRESSION21" : "0"
-      }, {
-        "FTP-OVERRIDE_WATCH_INTERVAL1" : "0"
-      }, {
-        "FTP-POSTCMD_ON_FAILURE1" : "0"
-      }, {
-        "FTP-SYNC_DIR_NO_DEL1" : "0"
-      } ],
-      "FileTransfers" : [ {
-        "ABSTIME" : "0",
-        "VERNUM" : "0",
-        "Dest" : "/home/grask@adprod.bmc.com/",
-        "ContinueOnFailure" : false,
-        "SRC_PATTERN" : "Wildcard",
-        "SRCOPT" : "0",
-        "DeleteFileOnDestIfFails" : false,
-        "TransferType" : "Binary",
-        "CASEIFS" : "0",
-        "DSTOPT" : "0",
-        "RECURSIVE" : "0",
-        "TransferOption" : "SrcToDest",
-        "Src" : "/home/grask@adprod.bmc.com/grask.txt",
-        "TIMELIMIT" : "0",
-        "FailJobOnDestCommandFailure" : false,
-        "EXCLUDE_WILDCARD" : "0",
-        "NULLFLDS" : "0",
-        "FailJobOnDestActionFailure" : false,
-        "TRIM" : "1",
-        "IF_EXIST" : "0",
-        "FailJobOnSourceCommandFailure" : false,
-        "UNIQUE" : "0",
-        "FileWatcherOptions" : {
-          "UnitsOfTimeLimit" : "Minutes",
-          "SkipToNextFileIfCriteriaNotMatch" : false,
-          "MinDetectedSizeInBytes" : "0"
-        },
-        "SimultaneousTransfer" : {
-          "TransferMultipleFilesSimultaneously" : false
-        },
-        "IncrementalTransfer" : {
-          "IncrementalTransferEnabled" : false,
-          "MaxModificationAgeForFirstRunEnabled" : false,
-          "MaxModificationAgeForFirstRunInHours" : "0"
-        }
-      } ],
-      "When" : {
-        "WeekDays" : [ "NONE" ],
-        "MonthDays" : [ "ALL" ],
-        "DaysRelation" : "OR"
-      },
-      "eventsToWaitFor" : {
-        "Type" : "WaitForEvents",
-        "Events" : [ {
-          "Event" : "zzz_process_data-TO-zzz_synch_dir-313"
+          "Event" : "zzz-cleanup-lin02-TO-zzz-report1"
         }, {
-          "Event" : "zzz_file_exist-TO-zzz_synch_dir"
+          "Event" : "zzz-list2-dir2-contents-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-list2-dir-contents-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-dir-which-directory-TO-zzz-report1"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents"
+          "Event" : "zzz_report1-TO-zzz_impact_analysis-313-286"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "zzz_file_exist-TO-zzz_synch_dir"
+          "Event" : "aas_dir_which_directory-TO-aas_report1-286"
+        }, {
+          "Event" : "aas_list2_dir_contents-TO-aas_report1-286"
+        }, {
+          "Event" : "aas_list2_dir2_contents-TO-aas_report1-286"
+        }, {
+          "Event" : "aas_cleanup2_lin02-TO-aas_report1-286"
+        }, {
+          "Event" : "zzz-cleanup2-lin02-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-cleanup-lin02-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-list2-dir2-contents-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-list2-dir-contents-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-dir-which-directory-TO-zzz-report1"
         } ]
       }
     },
-    "zzz_touch" : {
-      "Type" : "Job:Command",
-      "SubApplication" : "zzz_",
-      "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ap01.bmc.com",
-      "CreatedBy" : "grask",
-      "Description" : "Create MFT file grask",
-      "RunAs" : "grask@adprod.bmc.com",
-      "Application" : "zzz_",
-      "Command" : "touch /home/grask@adprod.bmc.com/grask.txt",
+    "zzz-SP-MSSQL" : {
+      "Type" : "Job:Database:StoredProcedure",
+      "ConnectionProfile" : "ZZZ-MSSQL-WIN_1",
+      "Schema" : "dbo",
+      "StoredProcedure" : "sp_cleanup_old_logs",
+      "SubApplication" : "data-quality",
+      "RunAsDummy" : true,
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "MSSQL stored procedure",
+      "RunAs" : "ZZZ-MSSQL-WIN_1",
+      "Application" : "Financial",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
         "DaysRelation" : "OR"
       },
+      "ReturnValue" : {
+        "Name" : "@RETURN_VALUE",
+        "ValueType" : "int"
+      },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_touch-TO-zzz_output_capture"
+          "Event" : "zzz-SP-MSSQL-TO-zzz-output-capture"
         } ]
       }
     },
-    "zzz_trans_dir_contents" : {
+    "zzz-synch-dir" : {
       "Type" : "Job:FileTransfer",
-      "ConnectionProfileDualEndpoint" : "zzz_psctm",
-      "SubApplication" : "zzz_",
+      "ConnectionProfileSrc" : "SPARKIT_FS",
+      "ConnectionProfileDest" : "SPARKIT_FS",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "Host" : "vl-aus-ctm-vse-ag01.bmc.com",
-      "CreatedBy" : "grask",
-      "Description" : "transfer from ag01 to ap01",
-      "RunAs" : "zzz_psctm",
-      "Application" : "zzz_",
-      "Variables" : [ {
-        "FTP-LOSTYPE" : "Unix"
-      }, {
-        "FTP-CONNTYPE1" : "SFTP"
-      }, {
-        "FTP-LHOST" : "vl-aus-ctm-ag01.ctm.bmc.com"
-      }, {
-        "FTP-LUSER" : "grask@adprod.bmc.com"
-      }, {
-        "FTP-HOMEDIR1" : "/home/grask@adprod.bmc.com"
-      }, {
-        "FTP-ROSTYPE" : "Unix"
-      }, {
-        "FTP-CONNTYPE2" : "SFTP"
-      }, {
-        "FTP-RHOST" : "vl-aus-ctm-ap01.ctm.bmc.com"
-      }, {
-        "FTP-RUSER" : "grask@adprod.bmc.com"
-      }, {
-        "FTP-HOMEDIR2" : "/home/grask@adprod.bmc.com"
-      }, {
-        "FTP-CM_VER" : "9.0.20.100"
-      }, {
-        "FTP-COMPRESSION11" : "0"
-      }, {
-        "FTP-COMPRESSION21" : "0"
-      }, {
-        "FTP-OVERRIDE_WATCH_INTERVAL1" : "0"
-      }, {
-        "FTP-POSTCMD_ON_FAILURE1" : "0"
-      }, {
-        "FTP-SYNC_DIR_NO_DEL1" : "0"
-      } ],
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "synch directory",
+      "RunAs" : "SPARKIT_FS+SPARKIT_FS",
+      "Application" : "Financial",
       "FileTransfers" : [ {
         "TransferType" : "Binary",
         "TransferOption" : "SrcToDest",
-        "Src" : "/home/grask@adprod.bmc.com/grask.txt",
-        "Dest" : "/home/grask@adprod.bmc.com/",
+        "Src" : "/home/controlm/ctm/installed_versions.txt",
+        "Dest" : "/tmp/installed_versions_%%DATE..txt",
+        "SRC_PATTERN" : "Wildcard",
         "ABSTIME" : "0",
         "TIMELIMIT" : "0",
         "UNIQUE" : "0",
@@ -948,7 +874,103 @@
         "IncrementalTransfer" : {
           "IncrementalTransferEnabled" : false,
           "MaxModificationAgeForFirstRunEnabled" : false,
-          "MaxModificationAgeForFirstRunInHours" : "0"
+          "MaxModificationAgeForFirstRunInHours" : "1"
+        },
+        "SimultaneousTransfer" : {
+          "TransferMultipleFilesSimultaneously" : false
+        }
+      } ],
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_process_data-TO-zzz_synch_dir-313-286"
+        }, {
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents-286"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir-286"
+        } ]
+      }
+    },
+    "zzz-touch" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "Create MFT file grask",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "touch /home/controlm/onboarding.txt",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-touch-TO-zzz-output-capture"
+        } ]
+      }
+    },
+    "zzz-trans-dir-contents" : {
+      "Type" : "Job:FileTransfer",
+      "ConnectionProfileSrc" : "SPARKIT_FS",
+      "ConnectionProfileDest" : "SPARKIT_FS",
+      "SubApplication" : "data-quality",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "transfer to outgoing directory",
+      "RunAs" : "SPARKIT_FS+SPARKIT_FS",
+      "Application" : "Financial",
+      "FileTransfers" : [ {
+        "TransferType" : "Binary",
+        "TransferOption" : "SrcToDestFileWatcher",
+        "Src" : "/home/controlm/onboarding.txt",
+        "Dest" : "/tmp/onboarding_%%ORDERID..txt",
+        "SRC_PATTERN" : "Wildcard",
+        "ABSTIME" : "0",
+        "TIMELIMIT" : "0",
+        "UNIQUE" : "0",
+        "SRCOPT" : "0",
+        "IF_EXIST" : "0",
+        "DSTOPT" : "0",
+        "ContinueOnFailure" : false,
+        "DeleteFileOnDestIfFails" : false,
+        "FailJobOnDestActionFailure" : false,
+        "FailJobOnSourceCommandFailure" : false,
+        "FailJobOnDestCommandFailure" : false,
+        "RECURSIVE" : "0",
+        "EXCLUDE_WILDCARD" : "0",
+        "TRIM" : "1",
+        "NULLFLDS" : "0",
+        "VERNUM" : "0",
+        "CASEIFS" : "0",
+        "FileWatcherOptions" : {
+          "MinDetectedSizeInBytes" : "0",
+          "UnitsOfTimeLimit" : "Minutes",
+          "SkipToNextFileIfCriteriaNotMatch" : false
+        },
+        "IncrementalTransfer" : {
+          "IncrementalTransferEnabled" : false,
+          "MaxModificationAgeForFirstRunEnabled" : false,
+          "MaxModificationAgeForFirstRunInHours" : "1"
         },
         "SimultaneousTransfer" : {
           "TransferMultipleFilesSimultaneously" : false
@@ -965,7 +987,7 @@
         "Mail_0" : {
           "Type" : "Action:Mail",
           "Subject" : "BAD FILE!!!",
-          "To" : "grask@bmc.com",
+          "To" : "user_email",
           "Message" : "%%ODATE at %%TIME.\\n\\n%%JOBNAME in %%SCHEDTAB folder has failed.  %%MFT_FILE has not been received.\\n\\nClick on this link for direct access to the failed job: http://vl-aus-ctm-em01.ctm.bmc.com:18080/ControlM/#Neighborhood:id=%%ORDERID&ctm=%%DATACENTER&name=%%JOBNAME.&date=%%DATE&direction=1&radius=3",
           "Urgency" : "VeryUrgent"
         }
@@ -973,32 +995,34 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents"
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents-286"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_trans_dir_contents-TO-zzz_list2_dir_contents-313"
+          "Event" : "zzz_trans_dir_contents-TO-zzz_list2_dir_contents-313-286"
         }, {
-          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory"
+          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory-286"
+        }, {
+          "Event" : "zzz-trans-dir-contents-TO-zzz-list2-dir2-contents"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents"
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents-286"
         } ]
       }
     },
-    "zzz_User_Wait" : {
+    "zzz-User-Wait" : {
       "Type" : "Job:Dummy",
-      "SubApplication" : "zzz_",
+      "SubApplication" : "zzz-Order-Processing-saas",
       "Priority" : "Very Low",
-      "CreatedBy" : "grask",
+      "CreatedBy" : "user_email",
       "Description" : "wait for user interaction- updated",
-      "RunAs" : "ctmagent",
-      "Application" : "zzz_",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
       "RerunLimit" : {
         "Units" : "Minutes",
         "Every" : "5"
@@ -1011,7 +1035,7 @@
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_User_Wait-TO-zzz_output_capture-313"
+          "Event" : "zzz-User-Wait-TO-zzz-output-capture"
         } ]
       }
     }
