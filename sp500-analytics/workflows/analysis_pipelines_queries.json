@@ -127,10 +127,12 @@
 		"ConnectionProfileSrc" : "replace-with-usercode-uc-S3-CP",
       	"S3BucketNameSrc" : "gcp-bigquery-source",
 		"ConnectionProfileDest": "SPARKIT_FS",
+		"PreCommand": "echo hello",
+		"PostCommand": "nohup",
 		"FileTransfers": [
 			{
-				"Src": "%%repo_dir/whiskey-retail/scripts/*.py",
-				"Dest": "/home/controlm/labs/sp500-analytics/data/",
+				"Src": "/all_stocks_5yr.csv",
+				"Dest": "/home/controlm/labs/sp500-analytics/data/sp500_5yr.csv",
 				"TransferOption": "SrcToDest",
 				"TransferType": "Binary"
 			}
