@@ -175,21 +175,23 @@
       "Sequence": [
         "AWS_QuickSight_Refresh",
         "BQ_Top_Daily_Decliners",
-        "Copy_Cata_Local"
+        "Copy_Data_Local"
       ]
     },
     "Flow2": {
       "Type": "Flow",
       "Sequence": [
         "AWS_QuickSight_Refresh",
-        "BQ_Top_Daily_Gainers"
+        "BQ_Top_Daily_Gainers",
+        "Copy_Data_Local"
       ]
     },
     "Flow3": {
       "Type": "Flow",
       "Sequence": [
         "AWS_QuickSight_Refresh",
-        "BQ_Top_Most_Volatile"
+        "BQ_Top_Most_Volatile",
+        "Copy_Data_Local"
       ]
     }
   }
