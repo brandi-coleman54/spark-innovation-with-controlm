@@ -157,10 +157,25 @@
     "Copy_Data_Local": {
       "Type": "Job:FileTransfer",
       "ConnectionProfileSrc": "replace-with-usercode-uc-S3-CP",
-      "S3BucketNameSrc": "gcp-bigquery-source",
+      "S3BucketName": "gcp-bigquery-source",
       "ConnectionProfileDest": "SPARKIT_FS",
-      "PreCommand": "/home/controlm/labs/sp500-analytics/scripts/setup.sh",
-      "PostCommand": "cd /home/controlm/labs/ && nohup /home/controlm/labs/sp500-analytics/scripts/run.sh > output_file.log 2>&1 &",
+      "PreCommand": "chmod +x /home/controlm/labs/sp500-analytics/scripts/*.sh && /home/controlm/labs/sp500-analytics/scripts/setup.sh",
+      "PostCommand": "nohup /home/controlm/labs/sp500-analytics/scripts/run.sh > output_file.log 2>&1 &",
+      "RunAs": "replace-with-usercode-uc-S3-CP+SPARKIT_FS",
+      "Variables": [
+        {
+            "FTP-LOSTYPE": "Unix"
+        },
+        {
+            "FTP-CONNTYPE1": "S3"
+        },
+        {
+            "FTP-ROSTYPE": "Unix"
+        },
+        {
+            "FTP-CONNTYPE2": "File System"
+        }
+      ],
       "FileTransfers": [
         {
           "Src": "/all_stocks_5yr.csv",
