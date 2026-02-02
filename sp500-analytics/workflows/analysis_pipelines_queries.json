@@ -138,26 +138,27 @@
 			}
 		]
     },
-  "Flow": {
-            "Type": "Flow",
-            "Sequence": [
-                "AWS_QuickSight_Refresh",
-              "BQ_Top_Daily_Decliners"       
-            ]
+  	"Flow": {
+    	"Type": "Flow",
+        "Sequence": [
+        	"AWS_QuickSight_Refresh",
+            "BQ_Top_Daily_Decliners",
+			"copy_data_local"
+        ]
         },
     "Flow2": {
-            "Type": "Flow",
-            "Sequence": [
-                "AWS_QuickSight_Refresh",
-              "BQ_Top_Daily_Gainers"
-            ]
-        },
+        "Type": "Flow",
+        "Sequence": [
+            "AWS_QuickSight_Refresh",
+            "BQ_Top_Daily_Gainers"
+        ]
+    },
     "Flow3": {
-            "Type": "Flow",
-            "Sequence": [
-                "AWS_QuickSight_Refresh",
-              "BQ_Top_Most_Volatile"
-            ]
-        }
-}
+        "Type": "Flow",
+        "Sequence": [
+            "AWS_QuickSight_Refresh",
+            "BQ_Top_Most_Volatile"
+        ]
+    }
+	}
 }
