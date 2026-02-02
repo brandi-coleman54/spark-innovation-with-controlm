@@ -127,7 +127,7 @@
 		"ConnectionProfileSrc" : "replace-with-usercode-uc-S3-CP",
       	"S3BucketNameSrc" : "gcp-bigquery-source",
 		"ConnectionProfileDest": "SPARKIT_FS",
-		"PreCommand": "echo hello",
+		"PreCommand": "/home/controlm/labs/sp500/scripts/setup.sh",
 		"PostCommand": "nohup",
 		"FileTransfers": [
 			{
