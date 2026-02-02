@@ -11,8 +11,8 @@ st.set_page_config(page_title="S&P 500 — 4-Chart Dashboard", layout="wide")
 # =============================
 # Settings & constants
 # =============================
-DEFAULT_CSV_PATH = "../data/sp500_5yr.csv"
-DEFAULT_PARQUET_PATH = "../data/sp500_5yr.parquet"
+DEFAULT_CSV_PATH = "sp-analytics/data/sp500_5yr.csv"
+DEFAULT_PARQUET_PATH = "sp-analytics/data/sp500_5yr.parquet"
 
 DATE_COL = "date"
 TICKER_COL = "Name"  # exact column name from your schema
