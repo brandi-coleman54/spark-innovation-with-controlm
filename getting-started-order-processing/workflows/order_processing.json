@@ -1,0 +1,1043 @@
+{
+  "zzz-Order-Processing-saas" : {
+    "Type" : "Folder",
+    "BusinessFields" : [ {
+      "Usercode" : "zzz"
+    }, {
+      "BU" : "zzz"
+    } ],
+    "ControlmServer" : "IN01",
+    "Description" : "Ordered daily for AAS purposes.",
+    "OrderMethod" : "Manual",
+    "RunAs" : "controlm",
+    "SiteStandard" : "SaaS Standard",
+    "SubApplication" : "zzz_Order_Processing_zzz",
+    "CreatedBy" : "user_email",
+    "Priority" : "Very Low",
+    "Application" : "Financial",
+    "RerunLimit" : {
+      "Units" : "Minutes",
+      "Every" : "5"
+    },
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "IfBase:Folder:CompletionStatus_0" : {
+      "Type" : "If:CompletionStatus",
+      "CompletionStatus" : "NOTOK",
+      "Mail_0" : {
+        "Type" : "Action:Mail",
+        "Subject" : "WOOT WOOT!!!",
+        "To" : "user_email",
+        "Message" : "Folder failed."
+      }
+    },
+    "zzz-after-failure" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
+      "Description" : "this workload runs after the previous failure",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "sleep 10",
+      "DocumentationUrl" : {
+        "Url" : "https://confluence.bmc.com/display/AOE/Load+SnowFlake+Data+into+DataWarehouse"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_failure-TO-zzz_failure_copy-286"
+        } ]
+      }
+    },
+    "zzz-change-lin02" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "change file permissions",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "echo change line job",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01-313-286"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313-286"
+        } ]
+      }
+    },
+    "zzz-change2-lin02" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "change file permissions",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "chmod 777 /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/outgoing/*",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-cmd-not-found-TO-zzz-change2-lin02"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-change2-lin02-TO-zzz-cleanup2-lin02"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz-cmd-not-found-TO-zzz-change2-lin02"
+        } ]
+      }
+    },
+    "zzz-cleanup-lin02" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "cleanup ag01 environment",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "rm -f /tmp/*.txt",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-cleanup-lin02-TO-zzz-report1"
+        } ]
+      }
+    },
+    "zzz-cleanup2-lin02" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "cleanup ag01 environment",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "cat ~/.bashrc",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-change2-lin02-TO-zzz-cleanup2-lin02"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-cleanup2-lin02-TO-zzz-report1"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz-change2-lin02-TO-zzz-cleanup2-lin02"
+        } ]
+      }
+    },
+    "zzz-cmd-not-found" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "FileName" : "quotes.sh",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm",
+      "CreatedBy" : "user_email",
+      "Description" : "This workload is problematic. Replace with exit code 0 or echo good to go.",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "command not found",
+      "DocumentationUrl" : {
+        "Url" : "https://www.bmc.com/it-solutions/control-m.html"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Mail_0" : {
+          "Type" : "Action:Mail",
+          "Subject" : "WOMP WOMP WOMP!!!",
+          "To" : "user_email",
+          "Message" : "%%ODATE at %%TIME.\\n\\n%%JOBNAME in %%SCHEDTAB folder has failed.\\n\\nClick on this link for direct access to the failed job: http://vl-aus-ctm-em01.ctm.bmc.com:18080/ControlM/#Neighborhood:id=%%ORDERID&ctm=%%DATACENTER&name=%%JOBNAME.&date=%%DATE&direction=1&radius=3",
+          "AttachOutput" : true
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_cmd_not_found-313-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_cmd_not_found-TO-zzz_chmod-313-286"
+        }, {
+          "Event" : "zzz_cmd_not_found-TO-zzz_change_ag01-313-286"
+        }, {
+          "Event" : "zzz-cmd-not-found-TO-zzz-change2-lin02"
+        } ]
+      }
+    },
+    "zzz-command-updates" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
+      "Description" : "Use to update folder paths and permissions on agent.",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "echo processing data",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "Months" : [ "NONE" ],
+        "MonthDays" : [ "NONE" ],
+        "DaysRelation" : "OR"
+      }
+    },
+    "zzz-copy-dir-contents" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "copy directory contents",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "cp /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/onboarding.txt /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/onboarding2.txt",
+      "DocumentationUrl" : {
+        "Url" : "https://www.bmc.com/it-solutions/control-m.html"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "Output" : {
+        "Destination" : "/home/controlm",
+        "Operation" : "Move"
+      },
+      "Notify:NotOK_0" : {
+        "Type" : "Notify:NotOK",
+        "Urgency" : "VeryUrgent",
+        "Destination" : "Slack",
+        "Message" : "%%JOBNAME with JobID %%JOBID ended with Status %%COMPSTAT on %%NODEID at %%TIME  Log into https://acb-rhctmv20.centralus.cloudapp.azure.com:8443/ControlM/#viewpoint:id=All%2520Jobs%25201&name=All%2520Jobs to analyze"
+      },
+      "IfBase:Folder:CompletionStatus_1" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Action:Rerun_0" : {
+          "Type" : "Action:Rerun"
+        },
+        "Mail_1" : {
+          "Type" : "Action:Mail",
+          "Subject" : "Job Failure- Please attend to",
+          "To" : "user_email",
+          "Message" : "%%JOBNAME located in %%SCHEDTAB failed today %%ODATE in %%APPLIC within CTM instance %%DATACENTER on agent machine running as %%OWNER",
+          "AttachOutput" : true
+        },
+        "Run_2" : {
+          "Type" : "Action:Run",
+          "Folder" : "<FolderName>",
+          "RunAsIndependentFlow" : false,
+          "Job" : "<JobName>"
+        },
+        "Set_3" : {
+          "Type" : "Action:Set",
+          "Variable" : "AutomatedRecoveryforAG01",
+          "Value" : "GO_NOW"
+        }
+      },
+      "IfBase:Folder:CompletionStatus_2" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "<=3",
+        "DoNotify_0" : {
+          "Type" : "Action:Notify",
+          "Destination" : "JobLog",
+          "Message" : "%%JOBNAME failed"
+        }
+      },
+      "IfBase:Folder:Output_3" : {
+        "Type" : "If:Output",
+        "Statement" : "SpecificString",
+        "Action:SetToOK_0" : {
+          "Type" : "Action:SetToOK"
+        }
+      },
+      "CaptureOutput_4" : {
+        "Type" : "Action:CaptureOutput",
+        "Search" : "RC=6",
+        "VariableName" : "\\startJobs",
+        "ForwardBy" : {
+          "Columns" : "3",
+          "Lines" : "25"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_file_exist-TO-zzz_copy_dir_contents-313-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_copy_dir_contents-TO-zzz_failure-313-286"
+        } ]
+      }
+    },
+    "zzz-dir-which-directory" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "which directory are we in?",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "pwd",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-dir-which-directory-TO-zzz-report1"
+        } ]
+      }
+    },
+    "zzz-fail-runtime-breach" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "runtime breach workload",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "echo good to go",
+      "DocumentationUrl" : {
+        "Url" : "https://www.bmc.com/it-solutions/control-m.html"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Mail_0" : {
+          "Type" : "Action:Mail",
+          "Subject" : "WOMP WOMP WOMP!!!",
+          "To" : "user_email",
+          "Message" : "%%DAY FAILED!!!"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_output_capture-TO-zzz_fail_runtime_breach-313-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_cmd_not_found-313-286"
+        }, {
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_list2_dir_contents-313-286"
+        }, {
+          "Event" : "zzz-fail-runtime-breach-TO-zzz-list2-dir2-contents"
+        } ]
+      }
+    },
+    "zzz-failure" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/grask@adprod.bmc.com/apps/TST/App1/",
+      "CreatedBy" : "user_email",
+      "Description" : "this workload fails",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "exit code 1",
+      "DocumentationUrl" : {
+        "Url" : "https://confluence.bmc.com/display/AOE/Load+SnowFlake+Data+into+DataWarehouse"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_copy_dir_contents-TO-zzz_failure-313-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_failure-TO-zzz_failure_copy-286"
+        } ]
+      }
+    },
+    "zzz-file-exist" : {
+      "Type" : "Job:FileWatcher:Create",
+      "SearchInterval" : "5",
+      "Path" : "/home/controlm/.bashrc",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
+      "Description" : "check for file existence",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "RerunLimit" : {
+        "Units" : "Minutes",
+        "Every" : "5"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Action:SetToOK_0" : {
+          "Type" : "Action:SetToOK"
+        }
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_file_exist-TO-zzz_copy_dir_contents-313-286"
+        }, {
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir-286"
+        } ]
+      }
+    },
+    "zzz-impact-analysis" : {
+      "Type" : "Job:SLAManagement",
+      "ServiceActions" : {
+        "If:SLA:JobFailureOnServicePath_0" : {
+          "Type" : "If:SLA:JobFailureOnServicePath",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "user_email",
+            "Subject" : "Service %%SERVICE_NAME: Job failed on service path.",
+            "Message" : "The service %%SERVICE_NAME contains failed job(s). The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          },
+          "Action:SLA:Notify_1" : {
+            "Type" : "Action:SLA:Notify",
+            "Severity" : "Regular",
+            "Message" : "The service %%SERVICE_NAME contains failed job(s). The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          }
+        },
+        "If:SLA:JobRanTooLong_1" : {
+          "Type" : "If:SLA:JobRanTooLong",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "user_email",
+            "Subject" : "Service %%SERVICE_NAME: Job ran too long.",
+            "Message" : "The service %%SERVICE_NAME contains a job(s) that ran too long. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          }
+        },
+        "If:SLA:JobFinishedTooQuickly_2" : {
+          "Type" : "If:SLA:JobFinishedTooQuickly",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "user_email",
+            "Subject" : "Service %%SERVICE_NAME: Job finished too quickly.",
+            "Message" : "The service %%SERVICE_NAME contains a job(s) that ended too quickly. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          }
+        },
+        "If:SLA:ServiceEndedOK_3" : {
+          "Type" : "If:SLA:ServiceEndedOK",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "user_email",
+            "Subject" : "The service %%SERVICE_NAME ended OK at %%SERVICE_EXPECTED_END_TIME.",
+            "Message" : "The service %%SERVICE_NAME ended OK at %%SERVICE_EXPECTED_END_TIME, the service deadline was %%SERVICE_DUE_TIME."
+          }
+        },
+        "If:SLA:ServiceIsLate_4" : {
+          "Type" : "If:SLA:ServiceIsLate",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "user_email",
+            "Subject" : "Service %%SERVICE_NAME is late.",
+            "Message" : "Service %%SERVICE_NAME is projected to be late. The service deadline is %%SERVICE_DUE_TIME but it is estimated to complete at %%SERVICE_EXPECTED_END_TIME. The following job(s) are problematic: %%PROBLEMATIC_JOBS."
+          }
+        },
+        "If:SLA:ServiceLatePastDeadline_5" : {
+          "Type" : "If:SLA:ServiceLatePastDeadline",
+          "Action:SLA:Mail_0" : {
+            "Type" : "Action:SLA:Mail",
+            "Email" : "user_email",
+            "Subject" : "Service %%SERVICE_NAME past deadline.",
+            "Message" : "Service %%SERVICE_NAME has passed its deadline at %%SERVICE_DUE_TIME. The service is estimated to complete at %%SERVICE_EXPECTED_END_TIME. The following job(s) are problematic: %%PROBLEMATIC_JOBS"
+          }
+        }
+      },
+      "ServicePriority" : "1",
+      "ServiceName" : "zzz_Order_Processing",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "JobRunsDeviationsTolerance" : "3",
+      "CreatedBy" : "user_email",
+      "Description" : "monitor business service",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "CompleteIn" : {
+        "Time" : "0:1"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_report1-TO-zzz_impact_analysis-313-286"
+        } ]
+      }
+    },
+    "zzz-list2-dir-contents" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "list directory contents",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "ls -al /home/controlm/ctm/",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_list2_dir_contents-313-286"
+        }, {
+          "Event" : "zzz_fail_runtime_breach-TO-zzz_list2_dir_contents-313-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-list2-dir-contents-TO-zzz-report1"
+        } ]
+      }
+    },
+    "zzz-list2-dir2-contents" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "list directory contents",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "ls -al /home/controlm/",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-fail-runtime-breach-TO-zzz-list2-dir2-contents"
+        }, {
+          "Event" : "zzz-trans-dir-contents-TO-zzz-list2-dir2-contents"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-list2-dir2-contents-TO-zzz-report1"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz-fail-runtime-breach-TO-zzz-list2-dir2-contents"
+        }, {
+          "Event" : "zzz-trans-dir-contents-TO-zzz-list2-dir2-contents"
+        } ]
+      }
+    },
+    "zzz-output-capture" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "captures string from output",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "echo ERRNO=12345",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "CaptureOutput_0" : {
+        "Type" : "Action:CaptureOutput",
+        "Capture" : "UpToEndOfLine",
+        "Search" : "ERRNO",
+        "VariableName" : "\\capture_string",
+        "ForwardBy" : {
+          "Columns" : "1",
+          "ColumnsOption" : "Characters"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-SP-MSSQL-TO-zzz-output-capture"
+        }, {
+          "Event" : "zzz-touch-TO-zzz-output-capture"
+        }, {
+          "Event" : "zzz-User-Wait-TO-zzz-output-capture"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_output_capture-TO-zzz_fail_runtime_breach-313-286"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture-286"
+        }, {
+          "Event" : "zzz_touch-TO-zzz_output_capture-286"
+        }, {
+          "Event" : "zzz_SP_MSSQL-TO-zzz_output_capture-487-286"
+        }, {
+          "Event" : "zzz-SP-MSSQL-TO-zzz-output-capture"
+        }, {
+          "Event" : "zzz-touch-TO-zzz-output-capture"
+        }, {
+          "Event" : "zzz-User-Wait-TO-zzz-output-capture"
+        } ]
+      }
+    },
+    "zzz-process-data" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "data-quality",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
+      "Description" : "processing data",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "echo processing data",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_process_data-TO-zzz_synch_dir-313-286"
+        } ]
+      }
+    },
+    "zzz-report1" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "FilePath" : "/home/controlm/",
+      "CreatedBy" : "user_email",
+      "Description" : "business process report",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "ctm reporting report::get shared:ActiveJobsOrderProcessing excel -o /home/controlm/zzz_order_processing.xls",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_0" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "OK",
+        "Mail_0" : {
+          "Type" : "Action:Mail",
+          "Subject" : "YOO HOO!!!",
+          "To" : "user_email",
+          "Message" : "Your report is ready!!!",
+          "AttachOutput" : true
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz-cleanup2-lin02-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-cleanup-lin02-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-list2-dir2-contents-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-list2-dir-contents-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-dir-which-directory-TO-zzz-report1"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_report1-TO-zzz_impact_analysis-313-286"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "aas_dir_which_directory-TO-aas_report1-286"
+        }, {
+          "Event" : "aas_list2_dir_contents-TO-aas_report1-286"
+        }, {
+          "Event" : "aas_list2_dir2_contents-TO-aas_report1-286"
+        }, {
+          "Event" : "aas_cleanup2_lin02-TO-aas_report1-286"
+        }, {
+          "Event" : "zzz-cleanup2-lin02-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-cleanup-lin02-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-list2-dir2-contents-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-list2-dir-contents-TO-zzz-report1"
+        }, {
+          "Event" : "zzz-dir-which-directory-TO-zzz-report1"
+        } ]
+      }
+    },
+    "zzz-SP-MSSQL" : {
+      "Type" : "Job:Database:StoredProcedure",
+      "ConnectionProfile" : "ZZZ-MSSQL-WIN_1",
+      "Schema" : "dbo",
+      "StoredProcedure" : "sp_cleanup_old_logs",
+      "SubApplication" : "data-quality",
+      "RunAsDummy" : true,
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "MSSQL stored procedure",
+      "RunAs" : "ZZZ-MSSQL-WIN_1",
+      "Application" : "Financial",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "ReturnValue" : {
+        "Name" : "@RETURN_VALUE",
+        "ValueType" : "int"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-SP-MSSQL-TO-zzz-output-capture"
+        } ]
+      }
+    },
+    "zzz-synch-dir" : {
+      "Type" : "Job:FileTransfer",
+      "ConnectionProfileSrc" : "SPARKIT_FS",
+      "ConnectionProfileDest" : "SPARKIT_FS",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "synch directory",
+      "RunAs" : "SPARKIT_FS+SPARKIT_FS",
+      "Application" : "Financial",
+      "FileTransfers" : [ {
+        "TransferType" : "Binary",
+        "TransferOption" : "SrcToDest",
+        "Src" : "/home/controlm/ctm/installed_versions.txt",
+        "Dest" : "/tmp/installed_versions_%%DATE..txt",
+        "SRC_PATTERN" : "Wildcard",
+        "ABSTIME" : "0",
+        "TIMELIMIT" : "0",
+        "UNIQUE" : "0",
+        "SRCOPT" : "0",
+        "IF_EXIST" : "0",
+        "DSTOPT" : "0",
+        "ContinueOnFailure" : false,
+        "DeleteFileOnDestIfFails" : false,
+        "FailJobOnDestActionFailure" : false,
+        "FailJobOnSourceCommandFailure" : false,
+        "FailJobOnDestCommandFailure" : false,
+        "RECURSIVE" : "0",
+        "EXCLUDE_WILDCARD" : "0",
+        "TRIM" : "1",
+        "NULLFLDS" : "0",
+        "VERNUM" : "0",
+        "CASEIFS" : "0",
+        "FileWatcherOptions" : {
+          "MinDetectedSizeInBytes" : "0",
+          "UnitsOfTimeLimit" : "Minutes",
+          "SkipToNextFileIfCriteriaNotMatch" : false
+        },
+        "IncrementalTransfer" : {
+          "IncrementalTransferEnabled" : false,
+          "MaxModificationAgeForFirstRunEnabled" : false,
+          "MaxModificationAgeForFirstRunInHours" : "1"
+        },
+        "SimultaneousTransfer" : {
+          "TransferMultipleFilesSimultaneously" : false
+        }
+      } ],
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_process_data-TO-zzz_synch_dir-313-286"
+        }, {
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents-286"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_file_exist-TO-zzz_synch_dir-286"
+        } ]
+      }
+    },
+    "zzz-touch" : {
+      "Type" : "Job:Command",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "Create MFT file grask",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "Command" : "touch /home/controlm/onboarding.txt",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-touch-TO-zzz-output-capture"
+        } ]
+      }
+    },
+    "zzz-trans-dir-contents" : {
+      "Type" : "Job:FileTransfer",
+      "ConnectionProfileSrc" : "SPARKIT_FS",
+      "ConnectionProfileDest" : "SPARKIT_FS",
+      "SubApplication" : "data-quality",
+      "Priority" : "Very Low",
+      "Host" : "zzz_instruqt_server",
+      "CreatedBy" : "user_email",
+      "Description" : "transfer to outgoing directory",
+      "RunAs" : "SPARKIT_FS+SPARKIT_FS",
+      "Application" : "Financial",
+      "FileTransfers" : [ {
+        "TransferType" : "Binary",
+        "TransferOption" : "SrcToDestFileWatcher",
+        "Src" : "/home/controlm/onboarding.txt",
+        "Dest" : "/tmp/onboarding_%%ORDERID..txt",
+        "SRC_PATTERN" : "Wildcard",
+        "ABSTIME" : "0",
+        "TIMELIMIT" : "0",
+        "UNIQUE" : "0",
+        "SRCOPT" : "0",
+        "IF_EXIST" : "0",
+        "DSTOPT" : "0",
+        "ContinueOnFailure" : false,
+        "DeleteFileOnDestIfFails" : false,
+        "FailJobOnDestActionFailure" : false,
+        "FailJobOnSourceCommandFailure" : false,
+        "FailJobOnDestCommandFailure" : false,
+        "RECURSIVE" : "0",
+        "EXCLUDE_WILDCARD" : "0",
+        "TRIM" : "1",
+        "NULLFLDS" : "0",
+        "VERNUM" : "0",
+        "CASEIFS" : "0",
+        "FileWatcherOptions" : {
+          "MinDetectedSizeInBytes" : "0",
+          "UnitsOfTimeLimit" : "Minutes",
+          "SkipToNextFileIfCriteriaNotMatch" : false
+        },
+        "IncrementalTransfer" : {
+          "IncrementalTransferEnabled" : false,
+          "MaxModificationAgeForFirstRunEnabled" : false,
+          "MaxModificationAgeForFirstRunInHours" : "1"
+        },
+        "SimultaneousTransfer" : {
+          "TransferMultipleFilesSimultaneously" : false
+        }
+      } ],
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "IfBase:Folder:CompletionStatus_16" : {
+        "Type" : "If:CompletionStatus",
+        "CompletionStatus" : "NOTOK",
+        "Mail_0" : {
+          "Type" : "Action:Mail",
+          "Subject" : "BAD FILE!!!",
+          "To" : "user_email",
+          "Message" : "%%ODATE at %%TIME.\\n\\n%%JOBNAME in %%SCHEDTAB folder has failed.  %%MFT_FILE has not been received.\\n\\nClick on this link for direct access to the failed job: http://vl-aus-ctm-em01.ctm.bmc.com:18080/ControlM/#Neighborhood:id=%%ORDERID&ctm=%%DATACENTER&name=%%JOBNAME.&date=%%DATE&direction=1&radius=3",
+          "Urgency" : "VeryUrgent"
+        }
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents-286"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_list2_dir_contents-313-286"
+        }, {
+          "Event" : "zzz_trans_dir_contents-TO-zzz_dir_which_directory-286"
+        }, {
+          "Event" : "zzz-trans-dir-contents-TO-zzz-list2-dir2-contents"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "zzz_synch_dir-TO-zzz_trans_dir_contents-286"
+        } ]
+      }
+    },
+    "zzz-User-Wait" : {
+      "Type" : "Job:Dummy",
+      "SubApplication" : "zzz-Order-Processing-saas",
+      "Priority" : "Very Low",
+      "CreatedBy" : "user_email",
+      "Description" : "wait for user interaction- updated",
+      "RunAs" : "controlm",
+      "Application" : "Financial",
+      "RerunLimit" : {
+        "Units" : "Minutes",
+        "Every" : "5"
+      },
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "zzz-User-Wait-TO-zzz-output-capture"
+        } ]
+      }
+    }
+  }
+}
