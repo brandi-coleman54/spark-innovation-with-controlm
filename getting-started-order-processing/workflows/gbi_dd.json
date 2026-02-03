@@ -1,0 +1,39 @@
+{	"DeployDescriptor" : [
+
+		{
+		"ApplyOn" : {"Type":"Folder"},
+		"Property" : "@",
+		"Replace" : [ {"GBR-(.*)" : "PRD-GBR-$1"} ]
+		},
+		{
+		"Property": "Host",
+		"Replace" : [ 
+			{"zzz-linux-agent-01" : "runner1.tlvlab.ctm.bmc.com"}
+			]
+		},
+		{
+		"ApplyOn" : {"Type":"Job:Command"},
+		"Property" : "IfBase:Folder:CompletionStatus_0:Mail_0:To",
+		"Assign": "grask@bmc.com"
+		},
+		{  
+		"Property" : "RunAs",
+		"Assign" : "ctmvsePRD"
+		},
+		{
+		"ApplyOn" : {"Type":"Job:Command"},
+		"Property" : "Command",
+		"Replace" : [
+			{"(.*)/home/grask@adprod.bmc.com/apps/TST/App1" : "$1/home/grask@adprod.bmc.com/apps/PRD/App1"},
+			{"(.*)/home/grask@adprod.bmc.com/apps/TST/App1/(.*) /home/grask@adprod.bmc.com/apps/TST/App1/(.*)" : "$1/home/grask@adprod.bmc.com/apps/PRD/App1/$2 /home/grask@adprod.bmc.com/apps/PRD/App1/$3"}]
+		},
+		{
+		"Property" : "SiteStandard",
+		"Assign" : "GRA SaaS Standard"
+		},
+		{
+		"Property" :"ControlmServer",
+		"Assign" : "IN01"
+		}
+	]
+}
