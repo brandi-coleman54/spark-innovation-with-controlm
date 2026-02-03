@@ -1,16 +1,16 @@
 {
   "zzz-Order-Processing-saas" : {
     "Type" : "Folder",
-    "BusinessFields" : [ {
-      "Usercode" : "zzz"
-    }, {
-      "BU" : "zzz"
-    } ],
+    "SiteStandard": "SE Demo System Standard",
+    "BusinessFields": [
+      {
+        "Usercode": "zzz"
+      }
+    ],
     "ControlmServer" : "IN01",
     "Description" : "Ordered daily for AAS purposes.",
     "OrderMethod" : "Manual",
     "RunAs" : "controlm",
-    "SiteStandard" : "SaaS Standard",
     "SubApplication" : "zzz_Order_Processing_zzz",
     "CreatedBy" : "user_email",
     "Priority" : "Very Low",
