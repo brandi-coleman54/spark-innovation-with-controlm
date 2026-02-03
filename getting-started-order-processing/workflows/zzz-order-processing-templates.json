@@ -3,6 +3,12 @@
     "Type" : "SimpleFolder",
     "ControlmServer" : "IN01",
     "OrderMethod" : "Manual",
+    "SiteStandard": "SE Demo System Standard",
+    "BusinessFields": [
+      {
+        "Usercode": "zzz"
+      }
+    ],
     "zzz-file-exist" : {
       "Type" : "Job:FileWatcher:Create",
       "SearchInterval" : "5",
