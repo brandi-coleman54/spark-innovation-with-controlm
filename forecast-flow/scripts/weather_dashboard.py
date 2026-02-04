@@ -120,14 +120,14 @@ st.subheader("7 Day Forecast")
 # Original code block for 7 day
 #==============================
 # Build HTML table
-table_html = "<table><tr>"
-for date in df["Date"]:
-    table_html += f"<th>{date}</th>"
-table_html += "</tr><tr>"
-for code in df["Weather Code"]:
-    url = get_owm_icon_url(code)
-    table_html += f'<td><img src="{url}"</td>'
-table_html += "</tr></table>"
+#table_html = "<table><tr>"
+#for date in df["Date"]:
+#    table_html += f"<th>{date}</th>"
+#table_html += "</tr><tr>"
+#for code in df["Weather Code"]:
+#    url = get_owm_icon_url(code)
+#    table_html += f'<td><img src="{url}"</td>'
+#table_html += "</tr></table>"
 #st.markdown(table_html, unsafe_allow_html=True)
 #=================================
 
