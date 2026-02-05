@@ -1,7 +1,7 @@
 {   "Defaults" : {
         
-		"Application": "GBR-",
-		"SubApplication": "GBR-API",
+		"Application": "ZZZ-",
+		"SubApplication": "ZZZ-API",
 		"ControlmServer": "IN01",
 		"RunAs": "ctmvse",
 		"Job": {
@@ -27,59 +27,59 @@
 		"Type": "Folder",
 		"SiteStandard": "SE Demo System Standard",
 	    "BusinessFields" : [ {
-           "Usercode" : "GBR"
+           "Usercode" : "ZZZ"
 		   } ],
 		"Description": "this is the Global Business Intelligence Folder",
 		"Comment": "Code reviewed by Gregg",
 		
 
-		"GBR-echo-command": {
+		"ZZZ-echo-command": {
 			"Type": "Job:Command",
 			"Host": "zzz-linux-agent-01",
 			"Description": "this job will echo",
-			"Command": "echo This is the first workload to run in the GBR-API_Flow"
+			"Command": "echo This is the first workload to run in the ZZZ-API_Flow"
 		},
-		"GBR-sleep-command": {
+		"ZZZ-sleep-command": {
 			"Type": "Job:Command",
 			"Host": "zzz-linux-agent-01",
 			"Description": "this job will sleep",
 			"Command": "sleep 20"
 		},
-		"GBR-list-dir": {
+		"ZZZ-list-dir": {
 			"Type": "Job:Command",
 			"Host": "zzz-linux-agent-01",
 			"Description": "this job will list a directory",
 			"Command": "ls -al"
 		},
-		"GBR-copy-file": {
+		"ZZZ-copy-file": {
 			"Type": "Job:Command",
 			"Host": "zzz-linux-agent-01",
 			"Description": "this job will copy a file",
 			"Command": "cp /home/grask@adprod.bmc.com/apps/TST/App1/new_file /home/grask@adprod.bmc.com/apps/TST/App1/newer_file"
 		},
-		"GBR-run-script": {
+		"ZZZ-run-script": {
 			"Type": "Job:Script",
 			"FilePath": "/opt/ctm/ctmagent/scripts/",
 			"Host": "zzz-linux-agent-01",
 			"Description": "this job will run a script",
 			"FileName": "ag_diag_comm"
 		},
-		"GBR-SLA": {
+		"ZZZ-SLA": {
 			"Type": "Job:SLAManagement",
 			"ServiceName": "Global Business Intelligence",
 			"ServicePriority": "3",
-			"SubApplication": "GBR-API",
+			"SubApplication": "ZZZ-API",
 			"Description": "this job will track the SLA",
 			"Host": "zzz-linux-agent-01",
 			"JobRunsDeviationsTolerance": "3",
 			"CreatedBy": "grask",
 			"RunAs": "ctmvse",
-			"Application": "GBR-",
+			"Application": "ZZZ-",
 			"CompleteIn": {
 				"Time": "0:05"
 			}
 		},
-		"GBR-troublemaker": {
+		"ZZZ-troublemaker": {
 			"Type": "Job:Command",
 			"Description": "job runs as root which is a no-no",
 			"Command": "echo good to go",
@@ -92,43 +92,43 @@
 		"Flow1": {
 			"Type": "Flow",
 			"Sequence": [
-				"GBR-echo-command",
-				"GBR-sleep-command"
+				"ZZZ-echo-command",
+				"ZZZ-sleep-command"
 			]
 		},
 		"Flow2": {
 			"Type": "Flow",
 			"Sequence": [
-				"GBR-sleep-command",
-				"GBR-list-dir"
+				"ZZZ-sleep-command",
+				"ZZZ-list-dir"
 			]
 		},
 		"Flow3": {
 			"Type": "Flow",
 			"Sequence": [
-				"GBR-list-dir",
-				"GBR-run-script"
+				"ZZZ-list-dir",
+				"ZZZ-run-script"
 			]
 		},
 		"Flow4": {
 			"Type": "Flow",
 			"Sequence": [
-				"GBR-run-script",
-				"GBR-troublemaker"
+				"ZZZ-run-script",
+				"ZZZ-troublemaker"
 			]
 		},
 		"Flow5": {
 			"Type": "Flow",
 			"Sequence": [
-				"GBR-troublemaker",
-				"GBR-copy-file"
+				"ZZZ-troublemaker",
+				"ZZZ-copy-file"
 			]
 		},
 		"Flow6": {
 			"Type": "Flow",
 			"Sequence": [
-				"GBR-copy-file",
-				"GBR-SLA"
+				"ZZZ-copy-file",
+				"ZZZ-SLA"
 			]
 		}
 	}
