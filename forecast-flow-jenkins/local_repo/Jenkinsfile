@@ -12,23 +12,6 @@ pipeline {
       }
     }
 
-      stage('Environment Add') {
-      steps {
-        sh '''#!/usr/bin/env bash
-            set -euo pipefail
-            source /var/jenkins_home/venv/bin/activate 
-            if ctm environment saas::add sparkit replace-with-endpoint replace-with-token 2>add_err.log; then
-            echo "Environment added: sparkit"
-            exit 0 
-            fi 
-
-            if ctm environment saas::get "$ENV_NAME" >/dev/null 2>&1; then
-            echo "Environment already exists. Ignoring error and continuing."
-            exit 0
-            fi
-            '''
-      }
-    }
     
      stage('Build Workflow') {
       steps {
