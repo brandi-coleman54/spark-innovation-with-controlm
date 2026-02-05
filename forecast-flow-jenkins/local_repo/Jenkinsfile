@@ -18,9 +18,8 @@ pipeline {
         sh '''#!/usr/bin/env bash
             set -euo pipefail
             source /var/jenkins_home/venv/bin/activate 
-            mkdir -p workflows
-            cp /tmp/forecast-flow-jenkins/workflows/forecast-flow.json workflows/forecast-flow.json
-            ctm build workflows/forecast-flow.json
+
+            ctm build /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json
             '''
       }
     }
