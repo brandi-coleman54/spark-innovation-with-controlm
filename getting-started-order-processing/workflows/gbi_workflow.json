@@ -23,7 +23,7 @@
 			}
 		}
 	},
-	"GBR-GBI-Folder": {
+	"GBI-Folder": {
 		"Type": "Folder",
 		"SiteStandard": "SE Demo System Standard",
 	    "BusinessFields" : [ {
