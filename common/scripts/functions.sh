@@ -515,7 +515,7 @@ function Run_Background_As_User {
 
   # su - user -c 'nohup sh -c "<script> args" >log 2>&1 &'
   # Important: we single-quote the overall command and escape inner quotes.
-  su - ${user} -c nohup /bin/sh -c "${script_file} ${arguments}" > output.log 2>&1 &
+  su - ${user} -c nohup /bin/sh -c "${script_file} ${arguments}" > /home/${user}/output.log 2>&1 &
 }
 
 
