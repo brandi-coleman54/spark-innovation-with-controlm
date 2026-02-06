@@ -35,12 +35,12 @@ shut-ag -u controlm -p ALL
 tries=0
 until ctm provision saas::install SAP_plugin.Linux; do
   ((tries++))
-  if [ "\$tries" -ge 3 ]; then
-    echo "Failed installation of SAP plugin after \$tries attempt."
+  if [ "$tries" -ge 3 ]; then
+    echo "Failed installation of SAP plugin after $tries attempt."
     ctm env del admin
     exit 4
   fi
-  echo "Installation failed (attempt \$tries). Retrying in 10s..."
+  echo "Installation failed (attempt $tries). Retrying in 10s..."
   sleep 10
 done
 
