@@ -1,1 +1,15 @@
 
+{
+  "replace-with-usercode-uc_CP_JENKINS": {
+    "Type": "ConnectionProfile:Jenkins",
+    "Attempt Reruns": "3",
+    "User API Token": "*****",
+    "Rerun Interval": "30",
+    "Username": "admin",
+    "Jenkins URL": "https://jenkins-8080-replace-with-sandbox-id.env.play.instruqt.com/",
+    "Connection Timeout": "100",
+    "HTTP Codes": "429 504 503 500",
+    "Description": "",
+    "Centralized": true
+  }
+}
