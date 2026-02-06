@@ -41,8 +41,23 @@ until ctm provision image MFT_plugin; do
   sleep 10
 done
 
-
-ctm deploy /home/controlm/labs/control-m-for-databricks/local_repo/cp_azure_databricks.json
+ctm config server:agent:mft:ssh:key::generate IN01 ${user_code}_instruqt_server ${user_code}_id ${user_code}${user_code} 2048
+cat ~/ctm/cm/AFT/data/Keys/${user_cod}_id.pub >> ~/.ssh/authorized_keys
+cat > ~/sftp_cp.json <<EOF
+{
+  "${user_code^^}_SFTP": {
+    "Type": "ConnectionProfile:FileTransfer:SFTP",
+    "VerifyBytes": true,
+    "SSHCompression": false,
+    "User": "controlm",
+    "Passphrase": "${user_code}${user_code}",
+    "PrivateKeyName": "${user_code}_id",
+    "HostName": "localhost",
+    "Description": "",
+    "Centralized": true
+  }
+}
+EOF
 
 ctm env del ${ctm_env}
 echo "Agent install invoked successfully for ${target}."
