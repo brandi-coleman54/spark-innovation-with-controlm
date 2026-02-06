@@ -1,0 +1,34 @@
+{
+  "replace-with-usercode-jenkins" : {
+    "Type" : "Folder",
+    "ControlmServer" : "IN01",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "jenkins-pipeline-run" : {
+      "Type" : "Job:Jenkins",
+      "ConnectionProfile" : "replace-with-usercode-uc_CP_JENKINS",
+      "Pipeline Name" : "ctm-build-replace-with-usercode",
+      "Add Parameters" : "unchecked",
+      "Add Branch Name" : "unchecked",
+      "Fetch Console Logs" : "unchecked",
+      "Host" : "replace-with-instruqt-host",
+      "RunAs" : "replace-with-usercode-uc_CP_JENKINS",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      }
+    }
+  }
+}
