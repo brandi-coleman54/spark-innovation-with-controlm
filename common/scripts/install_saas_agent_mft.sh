@@ -44,8 +44,8 @@ done
 
 tries=0
 until ctm config server:agent:mft:ssh:key::generate IN01 ${target} ${user_code}_id ${user_code}${user_code} 2048 -e ${ctm_env}; do
-    ((tries++))
-  if [ "\$tries" -ge 10 ]; then
+    tries=$((tries +1))
+  if [ "$tries" -ge 10 ]; then
     echo "Failed config ssh after \$tries attempt."
     ctm env del ${ctm_env}
     exit 4
