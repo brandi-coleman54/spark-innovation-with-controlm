@@ -22,5 +22,16 @@ pipeline {
             '''
       }
     }
+
+    stage('Deploy Workflow') {
+      steps {
+        sh '''#!/usr/bin/env bash
+            set -euo pipefail
+            source /var/jenkins_home/venv/bin/activate 
+            ctm deploy /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json
+            '''
+      }
+    }
+    
   }
 }
