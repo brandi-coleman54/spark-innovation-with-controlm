@@ -46,15 +46,15 @@ tries=0
 until ctm config server:agent:mft:ssh:key::generate IN01 ${target} ${user_code}_id ${user_code}${user_code} 2048 -e ${ctm_env}; do
     tries=$((tries +1))
   if [ "$tries" -ge 10 ]; then
-    echo "Failed config ssh after \$tries attempt."
+    echo "Failed config ssh after $tries attempt."
     ctm env del ${ctm_env}
     exit 4
   fi
-  echo "SSH key setup failed (attempt \$tries). Retrying in 20s..."
+  echo "SSH key setup failed (attempt $tries). Retrying in 20s..."
   sleep 20
 done
 
-cat ~/ctm/cm/AFT/data/Keys/${user_cod}_id.pub >> ~/.ssh/authorized_keys
+cat ~/ctm/cm/AFT/data/Keys/${user_code}_id.pub >> ~/.ssh/authorized_keys
 cat > ~/sftp_cp.json <<EOF
 {
   "${user_code^^}_SFTP": {
