@@ -5,6 +5,8 @@ local api_endpoint=$2
 local api_token=$3
 ctm_env=agent_provisioning
 
+echo "$*"
+
 # Run from user home
 cd ~ || {
     echo "Error: cannot cd to ~"
