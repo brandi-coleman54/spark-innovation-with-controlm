@@ -111,7 +111,7 @@
       "Description" : "change file permissions",
       "RunAs" : "controlm",
       "Application" : "Financial",
-      "Command" : "chmod 777 /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/outgoing/*",
+      "Command" : "chmod 777 /home/controlm/installed-versions.txt",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
@@ -273,7 +273,7 @@
       "Description" : "copy directory contents",
       "RunAs" : "controlm",
       "Application" : "Financial",
-      "Command" : "cp /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/onboarding.txt /opt/controlm/ctm/cm/AFT/ftshome/controlm/zzz/onboarding2.txt",
+      "Command" : "cp /home/controlm/installed-versions.txt /tmp/",
       "DocumentationUrl" : {
         "Url" : "https://www.bmc.com/it-solutions/control-m.html"
       },
