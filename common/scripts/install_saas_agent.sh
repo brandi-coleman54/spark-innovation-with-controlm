@@ -20,7 +20,7 @@ until ctm provision saas::install Agent_Ubuntu.Linux sparkit ${target} -e ${ctm_
     ((tries++))
     if [ "${tries}" -ge "3" ]; then
         echo "Install failed after ${tries} attempts."
-        ctm env del admin
+        ctm env del ${ctm_env}
         exit 4
     fi
     echo "Install failed (attempt ${tries}). Retrying in 10s..."
