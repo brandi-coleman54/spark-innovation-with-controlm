@@ -41,7 +41,7 @@ until ctm provision image Jenkins_plugin.Linux; do
   sleep 10
 done
 
-
+ctm deploy /home/controlm/labs/forecast-flow-jenkins/local_repo/cp_jenkins.json
 
 ctm env del ${ctm_env}
 echo "Agent install invoked successfully for ${target}."
