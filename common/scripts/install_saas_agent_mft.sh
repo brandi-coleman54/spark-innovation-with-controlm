@@ -1,8 +1,8 @@
 #!/bin/bash
 
-local user_code=$1
-local api_endpoint=$2
-local api_token=$3
+user_code=$1
+api_endpoint=$2
+api_token=$3
 ctm_env=agent_provisioning
 
 echo "$*"
