@@ -32,12 +32,12 @@ done
 tries=0
 until ctm provision image Jenkins_plugin.Linux; do
   ((tries++))
-  if [ "\$tries" -ge 3 ]; then
-    echo "Failed installation of Jenkins plugin after \$tries attempt."
+  if [ "$tries" -ge 3 ]; then
+    echo "Failed installation of Jenkins plugin after $tries attempt."
     ctm env del ${ctm_env}
     exit 4
   fi
-  echo "Installation failed (attempt \$tries). Retrying in 10s..."
+  echo "Installation failed (attempt $tries). Retrying in 10s..."
   sleep 10
 done
 
