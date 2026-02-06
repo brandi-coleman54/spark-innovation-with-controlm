@@ -21,38 +21,26 @@ until ctm provision saas::install Agent_Ubuntu.Linux sparkit ${target} -e ${ctm_
     ((tries++))
     if [ "${tries}" -ge "3" ]; then
         echo "Install failed after ${tries} attempts."
-        ctm env del admin
+        ctm env del ${ctm_env}
         exit 4
     fi
     echo "Install failed (attempt ${tries}). Retrying in 10s..."
     sleep 10
 done
 
-# --- Install Azure Databricks plugin ---
+# --- Install MFT plugin ---
 tries=0
-until ctm provision image ZDX_plugin.Linux; do
+until ctm provision image MFT_plugin; do
   ((tries++))
   if [ "\$tries" -ge 3 ]; then
-    echo "Failed installation of SAP plugin after \$tries attempt."
-    ctm env del admin
+    echo "Failed installation of MFT plugin after \$tries attempt."
+    ctm env del ${ctm_env}
     exit 4
   fi
   echo "Installation failed (attempt \$tries). Retrying in 10s..."
   sleep 10
 done
 
-# --- Install Databricks plugin ---
-tries=0
-until ctm provision image DBX_plugin.Linux; do
-  ((tries++))
-  if [ "\$tries" -ge 3 ]; then
-    echo "Failed installation of SAP plugin after \$tries attempt."
-    ctm env del admin
-    exit 4
-  fi
-  echo "Installation failed (attempt \$tries). Retrying in 10s..."
-  sleep 10
-done
 
 ctm deploy /home/controlm/labs/control-m-for-databricks/local_repo/cp_azure_databricks.json
 
