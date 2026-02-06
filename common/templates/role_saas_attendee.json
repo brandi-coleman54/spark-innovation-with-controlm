@@ -80,8 +80,8 @@
   ],
   "SiteCustomization": [
     {
-      "Privilege": "Browse",
-      "Name": "*"
+      "Privilege": "Full",
+      "Name": "SPARK"
     }
   ],
   "AgentManagement": [
