@@ -3,7 +3,6 @@
 local user_code=$1
 local api_endpoint=$2
 local api_token=$3
-local plugins=$4
 ctm_env=agent_provisioning
 
 # Run from user home
