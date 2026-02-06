@@ -2,6 +2,8 @@
   "replace-with-usercode-jenkins" : {
     "Type" : "Folder",
     "ControlmServer" : "IN01",
+    "SubApplication" : "replace-with-usercode-jenkins",
+    "Application" : "replace-with-usercode-jenkins",
     "When" : {
       "RuleBasedCalendars" : {
         "Included" : [ "EVERYDAY" ],
@@ -18,6 +20,8 @@
     "jenkins-pipeline-run" : {
       "Type" : "Job:Jenkins",
       "ConnectionProfile" : "replace-with-usercode-uc_CP_JENKINS",
+      "SubApplication" : "replace-with-usercode-jenkins",
+      "Application" : "replace-with-usercode-jenkins",
       "Pipeline Name" : "ctm-build-replace-with-usercode",
       "Add Parameters" : "unchecked",
       "Add Branch Name" : "unchecked",
