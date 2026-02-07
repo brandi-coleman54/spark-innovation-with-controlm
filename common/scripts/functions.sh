@@ -248,6 +248,7 @@ function Create_TD_Token {
   # Create token; catch failures without breaking the whole script
   local token
   if ! token="$(ctm authentication token::create -f ${build_file} 2>/dev/null | jq -r '.tokenValue')"; then
+    echo "${token}"
     echo "Failed to create CTM authentication token (ctm/jq error)." >&2
     return 1
   fi
