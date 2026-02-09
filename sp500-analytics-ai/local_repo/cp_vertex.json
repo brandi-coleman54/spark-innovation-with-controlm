@@ -1,1 +1,17 @@
-
+{
+  "replace-with-usercode-uc-VERTEX-CP": {
+    "Type": "ConnectionProfile:GCP Vertex AI",
+    "Service Key": "replace-gcp-sm-service-account-key",
+    "GCP Vertex AI  URL": "https://{{location}}-aiplatform.googleapis.com",
+    "Attempt Reruns": "3",
+    "Rerun Interval": "10",
+    "HTTP Codes": "429",
+    "Identitty Type": "service",
+    "Type of Service": "{{location}}-aiplatform",
+    "Location": "us-west2",
+    "GCP Vertex AI URL": "https://notebooks.googleapis.com",
+    "Connection Timeout": "50",
+    "Description": "",
+    "Centralized": true
+  }
+}
