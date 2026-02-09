@@ -1,0 +1,14 @@
+{
+"replace-with-usercode-uc-QS-CP": {
+    "Type": "ConnectionProfile:AWS QuickSight",
+    "Connection Timeout": "30",
+    "AWS Region": "us-east-1",
+    "AWS Secret": "replace-aws-sm-secret-key",
+    "AWS Access Key": "AKIAZCKNG7JUMRSQSSHD",
+    "AWS Account ID": "623469066856",
+    "Authentication Method": "Secret",
+    "AWS QuickSight URL": "https://quicksight.{{AwsRegion}}.amazonaws.com",
+    "Description": "",
+    "Centralized": true
+  }
+}
