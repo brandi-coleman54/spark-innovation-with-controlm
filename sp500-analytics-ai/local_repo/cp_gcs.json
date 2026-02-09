@@ -1,0 +1,11 @@
+{
+"replace-with-usercode-uc-GCS-CP": {
+    "Type": "ConnectionProfile:FileTransfer:GCS",
+    "GCSServiceAccountKey": "replace-gcp-sm-service-account-key",
+    "VerifyBytes": true,
+    "GCSServiceAccountKeyFileName": "sso-gcp-dba-ctm4-pub-cc10274-afc12a60414e 2.json",
+    "VerifyDestination": true,
+    "Description": "",
+    "Centralized": true
+  }
+}
