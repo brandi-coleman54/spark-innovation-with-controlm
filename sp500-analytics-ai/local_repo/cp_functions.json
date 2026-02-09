@@ -1,1 +1,11 @@
-
+{
+  "replace-with-usercode-uc-FUNCTIONS-CP": {
+    "Type": "ConnectionProfile:GCP Functions",
+    "GCP API URL": "https://cloudfunctions.googleapis.com",
+    "Identity Type": "service_account",
+    "Service Account Key": "replace-gcp-sm-service-account-key",
+    "Connection Timeout": "20",
+    "Description": "",
+    "Centralized": true
+  }
+}
