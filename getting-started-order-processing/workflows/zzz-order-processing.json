@@ -744,7 +744,7 @@
       "Description" : "business process report",
       "RunAs" : "controlm",
       "Application" : "Financial",
-      "Command" : "ctm reporting report::get shared:ActiveJobsOrderProcessing excel -o /home/controlm/zzz_order_processing.xls",
+      "Command" : "ctm reporting report::get shared:ActiveJobsOrderProcessing excel -o /home/controlm/zzz_order_processing.xls -f /home/controlm/labs/getting-started-order-processing/report_filter.json",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
