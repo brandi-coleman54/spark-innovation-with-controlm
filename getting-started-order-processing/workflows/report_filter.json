@@ -1,0 +1,8 @@
+{
+  "filters": [
+    {
+      "name": "Folder",
+      "value": "zzz*"
+    }
+  ]
+}
