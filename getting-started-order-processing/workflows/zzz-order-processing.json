@@ -92,7 +92,7 @@
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01-313-286"
+          "Event" : "zzz_change_ag01-TO-zzz_cleanup_lin02"
         } ]
       },
       "eventsToDelete" : {
@@ -154,7 +154,7 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "zzz_change_ag01-TO-zzz_cleanup_ag01"
+          "Event" : "zzz_change_ag01-TO-zzz_cleanup_lin02"
         } ]
       },
       "eventsToAdd" : {
