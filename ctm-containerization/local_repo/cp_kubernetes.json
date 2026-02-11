@@ -1,1 +1,12 @@
 
+{
+  "replace-with-usercode-uc_CP_KUBERNETES": {
+    "Type": "ConnectionProfile:Kubernetes",
+    "Service Token File": "/var/run/secrets/kubernetes.io/serviceaccount/token",
+    "Connection Timeout": "50",
+    "Kubernetes Cluster URL": "https://kubernetes.default.svc",
+    "Namespace": "default",
+    "Description": "",
+    "Centralized": true
+  }
+}
