@@ -9,29 +9,37 @@ pipeline {
             source /var/jenkins_home/venv/bin/activate 
             ctm -v
             '''
-      }
-    }
+			}
+		}
 
+       stage('Deploy Transform Workflow') {
+      steps {
+        sh '''#!/usr/bin/env bash
+            set -euo pipefail
+            source /var/jenkins_home/venv/bin/activate 
+            ctm deploy transform /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json /var/jenkins_home/workflows/forecast-flow-jenkins/local_repo/deploy-descriptor.json
+            '''
+			}
+		}
     
      stage('Build Workflow') {
       steps {
         sh '''#!/usr/bin/env bash
             set -euo pipefail
             source /var/jenkins_home/venv/bin/activate 
-            ctm build /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json
+            ctm build /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json /var/jenkins_home/workflows/forecast-flow-jenkins/local_repo/deploy-descriptor.json
             '''
-      }
-    }
+			}
+		}
 
     stage('Deploy Workflow') {
       steps {
         sh '''#!/usr/bin/env bash
             set -euo pipefail
             source /var/jenkins_home/venv/bin/activate 
-            ctm deploy /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json
+            ctm deploy /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json /var/jenkins_home/workflows/forecast-flow-jenkins/local_repo/deploy-descriptor.json
             '''
-      }
-    }
-    
-  }
+			}
+		}
+	}
 }
