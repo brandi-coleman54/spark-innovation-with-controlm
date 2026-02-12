@@ -10,7 +10,7 @@
       },
       "Replace": [
         {
-          "<USER>(.*)": "<REPLACE_WITH_USER>$1_PROD"
+          "replace-with-usercode(.*)": "replace-with-usercode-$1_PROD"
         }
       ]
     }
