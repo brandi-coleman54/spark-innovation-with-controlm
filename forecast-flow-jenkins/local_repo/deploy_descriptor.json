@@ -1,1 +1,18 @@
 
+
+{
+  "DeployDescriptor": [
+    {
+      "Comment": "Rename folders for PROD standard",
+      "Property": "@",
+      "ApplyOn": {
+        "Type": "Folder"
+      },
+      "Replace": [
+        {
+          "<USER>(.*)": "<REPLACE_WITH_USER>$1_PROD"
+        }
+      ]
+    }
+  ]
+}
