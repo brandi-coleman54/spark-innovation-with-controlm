@@ -12,7 +12,7 @@ pipeline {
 			}
 		}
 
-       stage('Deploy Transform Workflow') {
+     stage('Deploy Transform Workflow') {
       steps {
         sh '''#!/usr/bin/env bash
             set -euo pipefail
