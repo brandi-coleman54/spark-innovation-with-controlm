@@ -5,7 +5,7 @@
     "Service Token File": "/var/run/secrets/kubernetes.io/serviceaccount/token",
     "Connection Timeout": "50",
     "Kubernetes Cluster URL": "https://kubernetes.default.svc",
-    "Namespace": "default",
+    "Namespace": "replace-with-usercode",
     "Description": "",
     "Centralized": true
   }
