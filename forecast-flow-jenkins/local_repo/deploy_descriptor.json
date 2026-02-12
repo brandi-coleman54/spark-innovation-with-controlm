@@ -1,16 +1,39 @@
 {
-  "DeployDescriptor": [
-    {
-      "Comment": "Rename folders for PROD standard",
-      "Property": "@",
-      "ApplyOn": {
-        "Type": "Folder"
-      },
-      "Replace": [
-        {
-          "replace-with-usercode(.*)": "replace-with-usercode$1-PROD"
-        }
-      ]
-    }
-  ]
+	"DeployDescriptor": [
+		{
+			"Comment": "Rename folders for PROD standard",
+			"Property": "@",
+			"ApplyOn": {
+				"Type": "Folder"
+			},
+			"Replace": [
+				{
+					"replace-with-usercode(.*)": "replace-with-usercode$1-PROD"
+				}
+			]
+		},
+		{
+			"Property": "Application",
+			"Replace": [
+				{
+					"replace-with-usercode(.*)": "replace-with-usercode$1-PROD"
+				}
+			]
+		},
+		{
+			"Property": "SubApplication",
+			"Replace": [
+				{
+					"replace-with-usercode(.*)": "replace-with-usercode$1-PROD"
+				}
+			]
+		},
+		{
+			"ApplyOn": {
+				"Type": "Folder"
+			},
+			"Property": "SiteStandard",
+			"Assign": "SparkDay_SiteStandard"
+		]
+	}
 }
