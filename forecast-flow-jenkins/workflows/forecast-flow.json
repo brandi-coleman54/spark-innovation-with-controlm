@@ -1,7 +1,7 @@
 {
   "replace-with-usercode-forecast-flow" : {
     "Type" : "Folder",
-    "SiteStandard": "Prod_SiteStandard",
+    "SiteStandard": "Dev_SiteStandard",
     "Variables" : [ {
       "appid" : "481be8b9210a09cc3a3bcdcf190a3aa8"
     }, {
