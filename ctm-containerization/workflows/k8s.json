@@ -29,8 +29,6 @@
       "Job Status Polling Interval" : "10",
       "SubApplication" : "replace-with-usercode-k8s",
       "Host" : "replace-with-usercode-eks-hg",
-      "CreatedBy" : "brandi_coleman@bmc.com",
-      "RunOnAllAgentsInGroup" : true,
       "RunAs" : "replace-with-usercode-uc_CP_KUBERNETES",
       "Application" : "replace-with-usercode-k8s",
       "WsRestBody" : {
