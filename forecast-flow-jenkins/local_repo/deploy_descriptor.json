@@ -8,7 +8,7 @@
       },
       "Replace": [
         {
-          "replace-with-usercode(.*)": "replace-with-usercode-$1_PROD"
+          "replace-with-usercode(.*)": "replace-with-usercode$1-PROD"
         }
       ]
     }
