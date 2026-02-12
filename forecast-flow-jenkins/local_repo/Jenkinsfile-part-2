@@ -27,7 +27,19 @@ pipeline {
         sh '''#!/usr/bin/env bash
             set -euo pipefail
             source /var/jenkins_home/venv/bin/activate 
-            ctm build /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json /var/jenkins_home/workflows/forecast-flow-jenkins/local_repo/deploy_descriptor_success.json
+            BUILD_OUTPUT=$(ctm build \
+        	/var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json \
+        	/var/jenkins_home/workflows/forecast-flow-jenkins/local_repo/deploy_descriptor_success.json)
+
+      		echo "$BUILD_OUTPUT"
+
+      		# Fail if warnings exist
+      		if echo "$BUILD_OUTPUT" | grep -q '"warnings":'; then
+        		echo "❌ Build contains warnings. Failing pipeline."
+        		exit 1
+      		fi
+
+      		echo "✅ Build validation passed with no warnings."
             '''
 			}
 		}
@@ -38,16 +50,6 @@ pipeline {
             set -euo pipefail
             source /var/jenkins_home/venv/bin/activate 
             ctm deploy /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json /var/jenkins_home/workflows/forecast-flow-jenkins/local_repo/deploy_descriptor_success.json
-            '''
-			}
-		}
-    
-	stage('Run Workflow') {
-      steps {
-        sh '''#!/usr/bin/env bash
-            set -euo pipefail
-            source /var/jenkins_home/venv/bin/activate 
-            ctm run /var/jenkins_home/workflows/forecast-flow-jenkins/workflows/forecast-flow.json /var/jenkins_home/workflows/forecast-flow-jenkins/local_repo/deploy_descriptor_success.json
             '''
 			}
 		}
