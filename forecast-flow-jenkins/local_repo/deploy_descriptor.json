@@ -33,7 +33,7 @@
 				"Type": "Folder"
 			},
 			"Property": "SiteStandard",
-			"Assign": "SparkDay_SiteStandard"
+			"Assign": "Prod_SiteStandard"
 
 		}
 	]
