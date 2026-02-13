@@ -96,9 +96,9 @@ done
 ctm deploy /home/controlm/labs/sp500-analytics-ai/local_repo/cp_bigquery.json
 ctm deploy /home/controlm/labs/sp500-analytics-ai/local_repo/cp_gcs.json
 ctm deploy /home/controlm/labs/sp500-analytics-ai/local_repo/cp_quicksight.json
-ctm deploy/home/controlm/labs/sp500-analytics-ai/local_repo/cp_s3.json
-ctm deploy/home/controlm/labs/sp500-analytics-ai/local_repo/cp_vertex.json
-ctm deploy/home/controlm/labs/sp500-analytics-ai/local_repo/cp_functions.json
+ctm deploy /home/controlm/labs/sp500-analytics-ai/local_repo/cp_s3.json
+ctm deploy /home/controlm/labs/sp500-analytics-ai/local_repo/cp_vertex.json
+ctm deploy /home/controlm/labs/sp500-analytics-ai/local_repo/cp_functions.json
 
 ctm env del ${ctm_env}
 echo "Agent install invoked successfully for ${target}."
