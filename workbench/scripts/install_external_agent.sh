@@ -45,7 +45,7 @@ function Run_Agent_Test {
 }
 EOF
   
-  . ${USER_HOME}/venv/bin/activate
+  . ${USER_HOME}/${BASE_DIR}/venv/bin/activate
   ctm env workbench::add
   ctm run /tmp/agt_test.json
   ctm env delete workbench 
