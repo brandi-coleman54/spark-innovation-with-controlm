@@ -48,7 +48,7 @@ EOF
   . ${USER_HOME}/${BASE_DIR}/venv/bin/activate
   ctm env workbench::add
   ctm run /tmp/agt_test.json
-  ctm env delete workbench 
+  #ctm env delete workbench 
 }
 
 function Create_Silent_File {
@@ -87,6 +87,8 @@ function Run_Silent_Install {
     ctmcfg -table CONFIG -action update -parameter LOGICAL_AGENT_NAME -value ${agent_name}
     ctmcfg -table CONFIG -action update -parameter PERSISTENT_CONNECTION -value Y
     shut-ag -u controlm -p ALL
+    cd ${USER_HOME}/PAAIT
+    ./PAAIT.9.0.21.310_Linux-x86_64_INSTALL.BIN
     start-ag -u controlm -p ALL
 
 }
@@ -94,8 +96,9 @@ function Run_Silent_Install {
 function Run_Patch_Install {
 
   cd ${USER_HOME}/PAAIT/
-  shut-ag
-  ./setup.sh
+  shut-ag -u ${USER} -p ALL
+  ./PAAIT.9.0.21.310_Linux-x86_64_INSTALL.BIN
+  start-ag -u ${USER} -p ALL
 
 }
 
