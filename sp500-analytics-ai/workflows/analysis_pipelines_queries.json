@@ -159,8 +159,8 @@
       "ConnectionProfileSrc": "replace-with-usercode-uc-S3-CP",
       "S3BucketName": "gcp-bigquery-source",
       "ConnectionProfileDest": "SPARKIT_FS",
-      "PreCommand": "chmod +x /home/controlm/labs/sp500-analytics/scripts/*.sh && /home/controlm/labs/sp500-analytics/scripts/setup.sh",
-      "PostCommand": "nohup /home/controlm/labs/sp500-analytics/scripts/run.sh > output_file.log 2>&1 &",
+      "PreCommand": "chmod +x /home/controlm/labs/sp500-analytics-ai/scripts/*.sh && /home/controlm/labs/sp500-analytics-ai/scripts/setup.sh",
+      "PostCommand": "nohup /home/controlm/labs/sp500-analytics-ai/scripts/run.sh > output_file.log 2>&1 &",
       "RunAs": "replace-with-usercode-uc-S3-CP+SPARKIT_FS",
       "Variables": [
         {
@@ -179,7 +179,7 @@
       "FileTransfers": [
         {
           "Src": "/all_stocks_5yr.csv",
-          "Dest": "/home/controlm/labs/sp500-analytics/data/sp500_5yr.csv",
+          "Dest": "/home/controlm/labs/sp500-analytics-ai/data/sp500_5yr.csv",
           "TransferOption": "SrcToDest",
           "TransferType": "Binary"
         }
