@@ -88,7 +88,7 @@ function Run_Silent_Install {
     ctmcfg -table CONFIG -action update -parameter PERSISTENT_CONNECTION -value Y
     shut-ag -u controlm -p ALL
     cd ${USER_HOME}/PAAIT
-    ./PAAIT.9.0.21.310_Linux-x86_64_INSTALL.BIN
+    ./PAAIT.9.0.21.310_Linux-x86_64_INSTALL.BIN -s
     start-ag -u controlm -p ALL
 
 }
