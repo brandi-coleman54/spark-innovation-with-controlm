@@ -91,6 +91,14 @@ function Run_Silent_Install {
 
 }
 
+function Run_Patch_Install {
+
+  cd ${USER_HOME}/PAAIT/
+  shut-ag
+  ./setup.sh
+
+}
+
 
 Create_Silent_File ${AGENT_PORT} ${SERVER_PORT} ${SERVER_HOST} ${SERVER_NAME}
 Run_Silent_Install ${AGENT_NAME}
