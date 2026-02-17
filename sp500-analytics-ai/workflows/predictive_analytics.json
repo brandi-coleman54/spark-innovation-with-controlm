@@ -83,7 +83,7 @@
       "ConnectionProfile" : "replace-with-usercode-uc-VERTEX-CP",
       "Action" : "Run A Pipeline",
       "Add Parameters" : "checked",
-      "Pipeline Run Name" : "replace-with-usercode",
+      "Pipeline Run Name" : "%%TIME",
       "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
       "Service Account" : "sso-gcp-dba-ctm4-pub-cc10274@appspot.gserviceaccount.com",
       "GCS Output Directory" : "gs://bmc-ctm-test",
