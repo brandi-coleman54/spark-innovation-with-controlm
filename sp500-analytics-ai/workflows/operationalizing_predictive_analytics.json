@@ -1,0 +1,603 @@
+{
+  "replace-with-usercode-SP500-Refresh-to-Queries" : {
+    "Type" : "Folder",
+    "ControlmServer" : "IN01",
+    "OrderMethod" : "Manual",
+    "SubApplication" : "replace-with-usercode_SAP500",
+    "CreatedBy" : "brandi_coleman@bmc.com",
+    "Application" : "replace-with-usercode_SAP500",
+    "AWS_QuickSight_Refresh" : {
+      "Type" : "Job:AWS QuickSight",
+      "ConnectionProfile" : "replace-with-usercode-uc-QS-CP",
+      "AWS Dataset ID" : "d409fb2a-cf47-4820-a24e-d6eca8bbef9b",
+      "Refresh Type" : "Full Refresh",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "RunAs" : "replace-with-usercode-uc-QS-CP",
+      "Application" : "replace-with-usercode_SAP500"
+    },
+    "BQ_Top_Daily_Decliners" : {
+      "Type" : "Job:GCP BigQuery",
+      "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
+      "Action" : "Query",
+      "Run Select Query and Copy to Table" : "unchecked",
+      "Query Type" : "SQL Query",
+      "Copy Operation Type" : "Copy",
+      "Show Load Options" : "unchecked",
+      "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Dataset Name" : "sp500_dataset",
+      "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.top_daily_decliners` AS SELECT Name, date, ROUND(((close - open) / open) * 100, 2) AS percent_change FROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean` WHERE date = '2018-02-07' ORDER BY percent_change ASC LIMIT 10;",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "Description" : "This query identifies the 10 stocks with the largest negative price movements (i.e., biggest losers) based on the percentage drop from open to close on the previous trading day.",
+      "RunAs" : "replace-with-usercode-uc-BQ-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      } ]
+    },
+    "BQ_Top_Daily_Gainers" : {
+      "Type" : "Job:GCP BigQuery",
+      "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
+      "Action" : "Query",
+      "Run Select Query and Copy to Table" : "unchecked",
+      "Query Type" : "SQL Query",
+      "Copy Operation Type" : "Copy",
+      "Show Load Options" : "unchecked",
+      "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Dataset Name" : "sp500_dataset",
+      "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.top_daily_gainers` AS SELECT Name, date, ROUND(((close - open) / open) * 100, 2) AS percent_change FROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean` WHERE date = '2018-02-07' ORDER BY percent_change DESC LIMIT 10;",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "Description" : "This query calculates the daily percentage change for each stock (from open to close) and returns the top 10 stocks with the highest gains (largest positive change) from the previous trading day.",
+      "RunAs" : "replace-with-usercode-uc-BQ-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      } ]
+    },
+    "BQ_Top_Most_Volatile" : {
+      "Type" : "Job:GCP BigQuery",
+      "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
+      "Action" : "Query",
+      "Run Select Query and Copy to Table" : "unchecked",
+      "Query Type" : "SQL Query",
+      "Copy Operation Type" : "Copy",
+      "Show Load Options" : "unchecked",
+      "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Dataset Name" : "sp500_dataset",
+      "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.top_daily_volatile` AS SELECT Name, date, ROUND(((high - low) / open) * 100, 2) AS intraday_volatility FROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean` WHERE date = '2018-02-07' ORDER BY intraday_volatility DESC LIMIT 10;",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "Description" : "This query calculates the intraday price range (difference between high and low prices) for each stock and lists the top 10 most volatile stocks for the previous trading day.",
+      "RunAs" : "replace-with-usercode-uc-BQ-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      } ]
+    },
+    "Copy_Data_Local" : {
+      "Type" : "Job:FileTransfer",
+      "ConnectionProfileSrc" : "replace-with-usercode-uc-S3-CP",
+      "ConnectionProfileDest" : "SPARKIT_FS",
+      "S3BucketName" : "gcp-bigquery-source",
+      "PreCommand" : "chmod +x /home/controlm/labs/sp500-analytics-ai/scripts/*.sh && /home/controlm/labs/sp500-analytics-ai/scripts/setup.sh",
+      "PostCommand" : "nohup /home/controlm/labs/sp500-analytics-ai/scripts/run.sh > output_file.log 2>&1 &",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "RunAs" : "replace-with-usercode-uc-S3-CP+SPARKIT_FS",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "FTP-LOSTYPE" : "Unix"
+      }, {
+        "FTP-CONNTYPE1" : "S3"
+      }, {
+        "FTP-ROSTYPE" : "Unix"
+      }, {
+        "FTP-CONNTYPE2" : "File System"
+      } ],
+      "FileTransfers" : [ {
+        "ABSTIME" : "0",
+        "VERNUM" : "0",
+        "Dest" : "/home/controlm/labs/sp500-analytics-ai/data/sp500_5yr.csv",
+        "SRC_PATTERN" : "Wildcard",
+        "SRCOPT" : "0",
+        "TransferType" : "Binary",
+        "CASEIFS" : "0",
+        "DSTOPT" : "0",
+        "RECURSIVE" : "0",
+        "TransferOption" : "SrcToDest",
+        "Src" : "/all_stocks_5yr.csv",
+        "TIMELIMIT" : "0",
+        "EXCLUDE_WILDCARD" : "0",
+        "NULLFLDS" : "0",
+        "TRIM" : "1",
+        "IF_EXIST" : "0",
+        "UNIQUE" : "0"
+      } ]
+    },
+    "eventsToWaitFor" : {
+      "Type" : "WaitForEvents",
+      "Events" : [ {
+        "Event" : "replace-with-usercode-SP500-MFT-to-Table-Setup-TO-replace-with-usercode-SP500-Refresh-to-Queries"
+      } ]
+    },
+    "eventsToDelete" : {
+      "Type" : "DeleteEvents",
+      "Events" : [ {
+        "Event" : "replace-with-usercode-SP500-MFT-to-Table-Setup-TO-replace-with-usercode-SP500-Refresh-to-Queries"
+      } ]
+    },
+    "Flow3" : {
+      "Type" : "Flow",
+      "Sequence" : [ "AWS_QuickSight_Refresh", "BQ_Top_Most_Volatile", "Copy_Data_Local" ]
+    },
+    "Flow2" : {
+      "Type" : "Flow",
+      "Sequence" : [ "AWS_QuickSight_Refresh", "BQ_Top_Daily_Gainers", "Copy_Data_Local" ]
+    },
+    "Flow" : {
+      "Type" : "Flow",
+      "Sequence" : [ "AWS_QuickSight_Refresh", "BQ_Top_Daily_Decliners", "Copy_Data_Local" ]
+    }
+  },
+  "replace-with-usercode-SP-500-vertex-AI" : {
+    "Type" : "Folder",
+    "ControlmServer" : "IN01",
+    "OrderMethod" : "Manual",
+    "ActiveRetentionPolicy" : "CleanEndedOK",
+    "SubApplication" : "replace-with-usercode_SAP500",
+    "CreatedBy" : "brandi_coleman@bmc.com",
+    "Application" : "replace-with-usercode_SAP500",
+    "When" : {
+      "RuleBasedCalendars" : {
+        "Included" : [ "EVERYDAY" ],
+        "EVERYDAY" : {
+          "Type" : "Calendar:RuleBased",
+          "When" : {
+            "DaysRelation" : "OR",
+            "WeekDays" : [ "NONE" ],
+            "MonthDays" : [ "ALL" ]
+          }
+        }
+      }
+    },
+    "BigQuery-Job" : {
+      "Type" : "Job:GCP BigQuery",
+      "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
+      "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Dataset Name" : "sp500_dataset",
+      "Action" : "Query",
+      "Run Select Query and Copy to Table" : "unchecked",
+      "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_features` AS%4ESELECT%4EDATE(date) AS date,%4Eopen,%4Ehigh,%4Elow,%4Eclose,%4Evolume,%4EName,%4ESAFE_DIVIDE(close - LAG(close) OVER (PARTITION BY Name ORDER BY DATE(date)),LAG(close) OVER (PARTITION BY Name ORDER BY DATE(date))) AS daily_return,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS ma_7,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 29 PRECEDING AND CURRENT ROW) AS ma_30,%4ESTDDEV(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS volatility_7d,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 13 PRECEDING AND CURRENT ROW) AS RSI_14,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 11 PRECEDING AND CURRENT ROW)%4E-%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 25 PRECEDING AND CURRENT ROW) AS MACD,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 8 PRECEDING AND CURRENT ROW) AS MACD_signal,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 19 PRECEDING AND CURRENT ROW)%4E+%4E2 * STDDEV(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 19 PRECEDING AND CURRENT ROW) AS bb_upper,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 19 PRECEDING AND CURRENT ROW) AS bb_middle,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 19 PRECEDING AND CURRENT ROW)%4E-%4E2 * STDDEV(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 19 PRECEDING AND CURRENT ROW) AS bb_lower,%4EAVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 19 PRECEDING AND CURRENT ROW) AS EMA20%4EFROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean`;%4E",
+      "Copy Operation Type" : "Copy",
+      "Show Load Options" : "unchecked",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "Description" : "This job further proccessses the clean data and feature engineering",
+      "RunAs" : "replace-with-usercode-uc-BQ-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      } ],
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "GCP_BigQuery_Job_1-TO-GCP_Vertex_AI_Job_300"
+        } ]
+      }
+    },
+    "Looker-refresh-job" : {
+      "Type" : "Job:GCP Functions",
+      "ConnectionProfile" : "replace-with-usercode-uc-FUNCTIONS-CP",
+      "Function Parameters" : "URL Parameters",
+      "Get Logs" : "unchecked",
+      "att2" : "\"filter\":\"labels.execution_id:",
+      "att3" : "\"orderBy\": \"timestamp desc\",   \"pageSize\": 1000 }",
+      "Project ID" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Location" : "us-west2",
+      "Function Name" : "looker-refresh",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "Description" : "This job triggers the GCP function that refreshes the looker dashboard",
+      "RunAs" : "replace-with-usercode-uc-FUNCTIONS-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "GCP_Vertex_AI_Job_300-TO-Looker_refresh"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "GCP_Vertex_AI_Job_300-TO-Looker_refresh"
+        } ]
+      }
+    },
+    "Vertex-AI-pipleine-Job" : {
+      "Type" : "Job:GCP Vertex AI",
+      "Pipeline Specification" : "{\"components\":{\"comp-load-preprocess-op\":{\"executorLabel\":\"exec-load-preprocess-op\",\"inputDefinitions\":{\"parameters\":{\"bucket_name\":{\"parameterType\":\"STRING\"},\"project_id\":{\"parameterType\":\"STRING\"},\"query\":{\"parameterType\":\"STRING\"}}},\"outputDefinitions\":{\"parameters\":{\"Output\":{\"parameterType\":\"STRING\"}}}},\"comp-register-and-deploy-model-op\":{\"executorLabel\":\"exec-register-and-deploy-model-op\",\"inputDefinitions\":{\"parameters\":{\"bucket_name\":{\"parameterType\":\"STRING\"},\"location\":{\"parameterType\":\"STRING\"},\"model_path\":{\"parameterType\":\"STRING\"},\"project_id\":{\"parameterType\":\"STRING\"}}},\"outputDefinitions\":{\"parameters\":{\"Output\":{\"parameterType\":\"STRING\"}}}},\"comp-score-model-op\":{\"executorLabel\":\"exec-score-model-op\",\"inputDefinitions\":{\"parameters\":{\"bucket_name\":{\"parameterType\":\"STRING\"},\"endpoint_name\":{\"parameterType\":\"STRING\"},\"location\":{\"parameterType\":\"STRING\"},\"project_id\":{\"parameterType\":\"STRING\"}}},\"outputDefinitions\":{\"parameters\":{\"Output\":{\"parameterType\":\"STRING\"}}}},\"comp-train-model-op\":{\"executorLabel\":\"exec-train-model-op\",\"inputDefinitions\":{\"parameters\":{\"bucket_name\":{\"parameterType\":\"STRING\"},\"processed_data_path\":{\"parameterType\":\"STRING\"}}},\"outputDefinitions\":{\"parameters\":{\"Output\":{\"parameterType\":\"STRING\"}}}}},\"deploymentSpec\":{\"executors\":{\"exec-load-preprocess-op\":{\"container\":{\"args\":[\"--executor_input\",\"{{$}}\",\"--function_to_execute\",\"load_preprocess_op\"],\"command\":[\"sh\",\"-c\",\"if ! [ -x \\\"$(command -v pip)\\\" ]; then python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip; fi; PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location 'google-cloud-bigquery' 'google-cloud-storage' 'pandas' 'scikit-learn' 'joblib' 'db-dtypes' && python3 -m pip install --quiet --no-warn-script-location 'kfp==2.14.4' '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\\\"3.9\\\"' && \\\"$0\\\" \\\"$@\\\"\",\"sh\",\"-ec\",\"program_path=$(mktemp -d); printf \\\"%s\\\" \\\"$0\\\" > \\\"$program_path/ephemeral_component.py\\\"; _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main --component_module_path \\\"$program_path/ephemeral_component.py\\\" \\\"$@\\\"\",\"import kfp\\nfrom kfp import dsl\\nfrom kfp.dsl import *\\nfrom typing import *\\n\\ndef load_preprocess_op(project_id: str, query: str, bucket_name: str) -> str:\\n    from google.cloud import bigquery, storage\\n    import pandas as pd\\n    from sklearn.model_selection import train_test_split\\n    from sklearn.impute import SimpleImputer\\n    from sklearn.preprocessing import StandardScaler\\n    import joblib\\n    import os\\n\\n    bq = bigquery.Client(project=project_id)\\n    df = bq.query(query).to_dataframe()\\n\\n    features = [\\\"open\\\",\\\"high\\\",\\\"low\\\",\\\"close\\\",\\\"volume\\\",\\\"ma_7\\\",\\\"ma_30\\\",\\\"volatility_7d\\\",\\\"RSI_14\\\",\\\"MACD\\\",\\\"MACD_signal\\\",\\\"bb_upper\\\",\\\"bb_middle\\\",\\\"bb_lower\\\",\\\"EMA20\\\"]\\n    target = \\\"daily_return\\\"\\n\\n    X = df[features]\\n    y = df[target]\\n\\n    imputer = SimpleImputer(strategy=\\\"mean\\\")\\n    X_imputed = imputer.fit_transform(X)\\n    y_imputed = imputer.fit_transform(y.values.reshape(-1, 1)).flatten()\\n\\n    scaler = StandardScaler()\\n    X_scaled = scaler.fit_transform(X_imputed)\\n\\n    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_imputed, test_size=0.2)\\n\\n    os.makedirs(\\\"/tmp/data\\\", exist_ok=True)\\n    processed_path = \\\"/tmp/data/processed_data.joblib\\\"\\n\\n    joblib.dump({\\\"X_train\\\": X_train, \\\"X_test\\\": X_test, \\\"y_train\\\": y_train, \\\"y_test\\\": y_test}, processed_path)\\n\\n    storage_client = storage.Client(project=project_id)\\n    bucket = storage_client.bucket(bucket_name)\\n    blob = bucket.blob(\\\"pipeline_artifacts/processed_data.joblib\\\")\\n    blob.upload_from_filename(processed_path)\\n\\n    return f\\\"gs://{bucket_name}/pipeline_artifacts/processed_data.joblib\\\"\\n\"],\"image\":\"python:3.9\"}}}},\"pipelineInfo\":{\"description\":\"Pipeline to preprocess SP500 data, train model and register on Vertex AI\",\"name\":\"sp500-training-pipeline\"},\"root\":{\"dag\":{\"tasks\":{\"load-preprocess-op\":{\"cachingOptions\":{\"enableCache\":true},\"componentRef\":{\"name\":\"comp-load-preprocess-op\"},\"inputs\":{\"parameters\":{\"bucket_name\":{\"componentInputParameter\":\"bucket_name\"},\"project_id\":{\"componentInputParameter\":\"project_id\"},\"query\":{\"componentInputParameter\":\"query\"}}},\"taskInfo\":{\"name\":\"load-preprocess-op\"}}}},\"inputDefinitions\":{\"parameters\":{\"bucket_name\":{\"parameterType\":\"STRING\"},\"location\":{\"parameterType\":\"STRING\"},\"project_id\":{\"parameterType\":\"STRING\"},\"query\":{\"parameterType\":\"STRING\"}}}},\"schemaVersion\":\"2.1.0\",\"sdkVersion\":\"kfp-2.14.4\" }",
+      "ConnectionProfile" : "replace-with-usercode-uc-VERTEX-CP",
+      "Action" : "Run A Pipeline",
+      "Add Parameters" : "checked",
+      "Pipeline Run Name" : "%%TIME",
+      "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Service Account" : "sso-gcp-dba-ctm4-pub-cc10274@appspot.gserviceaccount.com",
+      "GCS Output Directory" : "gs://bmc-ctm-test",
+      "Pipeline Runtime Paramaters" : "\"parameterValues\":{\"bucket_name\":\"sp500-etl\",\"location\":\"us-west2\",\"project_id\":\"sso-gcp-dba-ctm4-pub-cc10274\",\"query\":\"SELECT * FROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_features` WHERE daily_return IS NOT NULL\"}%4E",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "Description" : "This job triggers the vertex that trains the model, generate predictions and store the result in Big Query",
+      "RunAs" : "replace-with-usercode-uc-VERTEX-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "When" : {
+        "WeekDays" : [ "NONE" ],
+        "MonthDays" : [ "ALL" ],
+        "DaysRelation" : "OR"
+      },
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "GCP_BigQuery_Job_1-TO-GCP_Vertex_AI_Job_300"
+        } ]
+      },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "GCP_Vertex_AI_Job_300-TO-Looker_refresh"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "GCP_BigQuery_Job_1-TO-GCP_Vertex_AI_Job_300"
+        } ]
+      }
+    },
+    "eventsToWaitFor" : {
+      "Type" : "WaitForEvents",
+      "Events" : [ {
+        "Event" : "replace-with-usercode-SP500-MFT-to-Table-Setup-TO-replace-with-usercode-SP-500-vertex-AI-786"
+      } ]
+    },
+    "eventsToDelete" : {
+      "Type" : "DeleteEvents",
+      "Events" : [ {
+        "Event" : "replace-with-usercode-SP500-MFT-to-Table-Setup-TO-replace-with-usercode-SP-500-vertex-AI"
+      }, {
+        "Event" : "replace-with-usercode-SP500-MFT-to-Table-Setup-TO-replace-with-usercode-SP-500-vertex-AI-786"
+      } ]
+    }
+  },
+  "replace-with-usercode-SP500-MFT-to-Table-Setup" : {
+    "Type" : "Folder",
+    "ControlmServer" : "IN01",
+    "OrderMethod" : "Manual",
+    "SubApplication" : "replace-with-usercode_SAP500",
+    "CreatedBy" : "brandi_coleman@bmc.com",
+    "Application" : "replace-with-usercode_SAP500",
+    "BQ_Clean_Data" : {
+      "Type" : "Job:GCP BigQuery",
+      "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
+      "Action" : "Query",
+      "Run Select Query and Copy to Table" : "unchecked",
+      "Query Type" : "SQL Query",
+      "Copy Operation Type" : "Copy",
+      "Show Load Options" : "unchecked",
+      "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Dataset Name" : "sp500_dataset",
+      "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean` AS%4ESELECT%4E  DATE(date) AS date,%4E  open,%4E  high,%4E  low,%4E  close,%4E  volume,%4E  Name,%4E  SAFE_DIVIDE(close - open, open) AS daily_return,%4E  AVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS ma_7,%4E  AVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 29 PRECEDING AND CURRENT ROW) AS ma_30,%4E  STDDEV(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS volatility_7d%4EFROM%4E  `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_raw`;%4E",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "RunAs" : "replace-with-usercode-uc-BQ-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      } ]
+    },
+    "BQ_Load_data_to_table" : {
+      "Type" : "Job:GCP BigQuery",
+      "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
+      "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Dataset Name" : "sp500_dataset",
+      "Action" : "Load",
+      "Run Select Query and Copy to Table" : "unchecked",
+      "Copy Operation Type" : "Copy",
+      "Destination Table Properties" : "{\"datasetId\": \"sp500_dataset\", \"projectId\": \"sso-gcp-dba-ctm4-pub-cc10274\", \"tableId\": \"sp500_raw\"}",
+      "Show Load Options" : "checked",
+      "Destination/Source Bucket URIs" : "\"gs://sp500-etl/all_stocks_5yr.csv\"",
+      "Load Options" : "\"maxBadRecords\": 10",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "RunAs" : "replace-with-usercode-uc-BQ-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      } ]
+    },
+    "BQ_MFT_Job_s3_to_gcs" : {
+      "Type" : "Job:FileTransfer",
+      "ConnectionProfileSrc" : "replace-with-usercode-uc-S3-CP",
+      "ConnectionProfileDest" : "replace-with-usercode-uc-GCS-CP",
+      "S3BucketNameSrc" : "gcp-bigquery-source",
+      "GCSBucketNameDest" : "sp500-etl",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "RunAs" : "replace-with-usercode-uc-S3-CP+replace-with-usercode-uc-GCS-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "FTP-LOSTYPE" : "Unix"
+      }, {
+        "FTP-CONNTYPE1" : "S3"
+      }, {
+        "FTP-ROSTYPE" : "Unix"
+      }, {
+        "FTP-CONNTYPE2" : "GCS"
+      }, {
+        "FTP-CM_VER" : "9.0.00"
+      }, {
+        "FTP-COMPRESSION11" : "0"
+      }, {
+        "FTP-COMPRESSION21" : "0"
+      }, {
+        "FTP-OVERRIDE_WATCH_INTERVAL1" : "0"
+      }, {
+        "FTP-POSTCMD_ON_FAILURE1" : "0"
+      }, {
+        "FTP-SYNC_DIR_NO_DEL1" : "0"
+      } ],
+      "FileTransfers" : [ {
+        "ABSTIME" : "0",
+        "VERNUM" : "0",
+        "Dest" : "/",
+        "ContinueOnFailure" : false,
+        "SRC_PATTERN" : "Wildcard",
+        "SRCOPT" : "0",
+        "DeleteFileOnDestIfFails" : false,
+        "TransferType" : "Binary",
+        "CASEIFS" : "0",
+        "DSTOPT" : "0",
+        "RECURSIVE" : "0",
+        "TransferOption" : "SrcToDest",
+        "Src" : "/all_stocks_5yr.csv",
+        "TIMELIMIT" : "0",
+        "FailJobOnDestCommandFailure" : false,
+        "EXCLUDE_WILDCARD" : "0",
+        "NULLFLDS" : "0",
+        "FailJobOnDestActionFailure" : false,
+        "TRIM" : "1",
+        "IF_EXIST" : "0",
+        "FailJobOnSourceCommandFailure" : false,
+        "UNIQUE" : "0",
+        "FileWatcherOptions" : {
+          "UnitsOfTimeLimit" : "Minutes",
+          "SkipToNextFileIfCriteriaNotMatch" : false,
+          "MinDetectedSizeInBytes" : "0"
+        },
+        "SimultaneousTransfer" : {
+          "TransferMultipleFilesSimultaneously" : false
+        },
+        "IncrementalTransfer" : {
+          "IncrementalTransferEnabled" : false,
+          "MaxModificationAgeForFirstRunEnabled" : false,
+          "MaxModificationAgeForFirstRunInHours" : "1"
+        }
+      } ]
+    },
+    "BQ_Schema_Table_Creation" : {
+      "Type" : "Job:GCP BigQuery",
+      "ConnectionProfile" : "replace-with-usercode-uc-BQ-CP",
+      "Action" : "Query",
+      "Run Select Query and Copy to Table" : "unchecked",
+      "Query Type" : "SQL Query",
+      "Copy Operation Type" : "Copy",
+      "Show Load Options" : "unchecked",
+      "Project Name" : "sso-gcp-dba-ctm4-pub-cc10274",
+      "Dataset Name" : "sp500_dataset",
+      "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_raw` (date DATE, open FLOAT64, high FLOAT64, low FLOAT64, close FLOAT64, volume INT64, Name STRING);",
+      "SubApplication" : "replace-with-usercode_SAP500",
+      "Host" : "replace-with-usercode_instruqt_server",
+      "CreatedBy" : "brandi_coleman@bmc.com",
+      "Description" : "This table creates or replaces S&P500_raw table to store raw daily stock data for S&P500 companies including prices, volume, date, and ticker name. It serves as the base table for downstream financial analysis.",
+      "RunAs" : "replace-with-usercode-uc-BQ-CP",
+      "Application" : "replace-with-usercode_SAP500",
+      "Variables" : [ {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      }, {
+        "UCM-SOURCE_TABLES" : ""
+      }, {
+        "UCM-DESTINATION_TABLE" : ""
+      }, {
+        "UCM-LOAD_OPTION" : ""
+      }, {
+        "UCM-BUCKET" : ""
+      }, {
+        "UCM-TABLE_ID" : ""
+      } ]
+    },
+    "eventsToAdd" : {
+      "Type" : "AddEvents",
+      "Events" : [ {
+        "Event" : "replace-with-usercode-SP500-MFT-to-Table-Setup-TO-replace-with-usercode-SP500-Refresh-to-Queries"
+      }, {
+        "Event" : "replace-with-usercode-SP500-MFT-to-Table-Setup-TO-replace-with-usercode-SP-500-vertex-AI"
+      }, {
+        "Event" : "replace-with-usercode-SP500-MFT-to-Table-Setup-TO-replace-with-usercode-SP-500-vertex-AI-786"
+      } ]
+    },
+    "Flow" : {
+      "Type" : "Flow",
+      "Sequence" : [ "BQ_MFT_Job_s3_to_gcs", "BQ_Schema_Table_Creation", "BQ_Load_data_to_table", "BQ_Clean_Data" ]
+    }
+  }
+}
