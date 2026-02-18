@@ -1,13 +1,13 @@
 {
-  "Name": "replace-with-usercode",
-  "Description": "spark_replace-with-usercode",
+  "Name": "${user_code}",
+  "Description": "spark_${description}",
   "AllowedJobs": {
     "Included": [
       [
         [
           "Folder",
           "like",
-          "replace-with-usercode*"
+          "${user_code}*"
         ]
       ]
     ]
@@ -55,7 +55,7 @@
     {
       "Privilege": "Full",
       "ControlmServer": "*",
-      "Folder": "replace-with-usercode*",
+      "Folder": "${user_code}*",
       "Run": true
     }
   ],
@@ -63,7 +63,7 @@
     {
       "ControlmServer": "*",
       "RunasUser": "*",
-      "Host": "replace-with-usercode*"
+      "Host": "${user_code}*"
     }
   ],
   "SiteStandard": [
@@ -75,7 +75,7 @@
   "Secrets": [
     {
       "Privilege": "Browse",
-      "Name": "replace-with-usercode*"
+      "Name": "${user_code}*"
     }
   ],
   "SiteCustomization": [
