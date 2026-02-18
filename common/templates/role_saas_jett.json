@@ -1,0 +1,120 @@
+{
+    "Name": "${user_code}",
+    "Description": "spark_${description}",
+    "AllowedJobs": {
+        "Included": [
+            [
+                [
+                    "JobName",
+                    "like",
+                    "*"
+                ]
+            ]
+        ]
+    },
+    "AllowedJobActions": {
+        "ViewProperties": true,
+        "Documentation": true,
+        "Log": true,
+        "Statistics": true,
+        "ViewOutputList": true,
+        "ViewJcl": true,
+        "Why": true,
+        "Hold": true,
+        "Free": true,
+        "Confirm": true,
+        "Rerun": true,
+        "React": true,
+        "Restart": true,
+        "Kill": true,
+        "Bypass": true,
+        "Delete": true,
+        "Undelete": true,
+        "SetToOk": true,
+        "EditProperties": true,
+        "EditJcl": true
+    },
+    "Privileges": {
+        "ClientAccess": {
+            "ControlmWebClientAccess": "Full",
+            "ApplicationIntegratorAccess": "Full",
+            "AutomationAPIAccess": "Full"
+        },
+        "ConfigurationManager": {
+            "Configuration": "Browse",
+            "ControlmSecurity": "Full"
+        },
+        "Tools": {
+            "HistoryReports": "Full",
+            "ControlMReport": "Full",
+            "SiteStandardPolicies": "Browse"
+        },
+        "ViewpointManager": {
+            "Viewpoints": "Browse"
+        }
+    },
+    "Folders": [
+        {
+            "Privilege": "Full",
+            "ControlmServer": "*",
+            "Folder": "${user_code}*",
+            "Run": true
+        }
+    ],
+    "RunasUsers": [
+        {
+            "ControlmServer": "*",
+            "RunasUser": "*",
+            "Host": "${user_code}*"
+        }
+    ],
+    "SiteStandard": [
+        {
+            "Privilege": "Browse",
+            "Name": "*"
+        }
+    ],
+    "Secrets": [
+        {
+            "Privilege": "Browse",
+            "Name": "${user_code}*"
+        }
+    ],
+    "SiteCustomization": [
+        {
+            "Privilege": "Browse",
+            "Name": "*"
+        }
+    ],
+    "AgentManagement": [
+        {
+            "ControlmServer": "*",
+            "Agent": "sparkit",
+            "Privilege": "Full"
+        }
+    ],
+    "PluginManagement": [
+        {
+            "ControlmServer": "*",
+            "Agent": "sparkit",
+            "PluginType": "*",
+            "Privilege": "Browse"
+        }
+    ],
+    "ConnectionProfileManagement": [
+        {
+            "ControlmServer": "IN01",
+            "Agent": "sparkit",
+            "PluginType": "*",
+            "Name": "SPARKIT*",
+            "Privilege": "Browse"
+        },
+        {
+            "ControlmServer": "*",
+            "Agent": "sparkit",
+            "PluginType": "*",
+            "Name": "${user_code}*",
+            "Privilege": "Full"
+        }
+    ]
+}
