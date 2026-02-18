@@ -75,7 +75,7 @@
         "Events" : [ {
           "Event" : "Looker_refresh-TO-Copy_Data_Local"
         } ]
-      }
+      },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
@@ -123,8 +123,8 @@
     "Copy_Data_Local": {
       "Type": "Job:FileTransfer",
       "ConnectionProfileSrc": "replace-with-usercode-uc-GCS-CP",
-      "GCSBucketName": "sp500-etl",
       "ConnectionProfileDest": "SPARKIT_FS",
+      "GCSBucketNameSrc": "sp500-etl",
       "PreCommand": "chmod +x /home/controlm/labs/sp500-analytics-ai/scripts/*.sh && /home/controlm/labs/sp500-analytics-ai/scripts/setup_predictions.sh",
       "PostCommand": "nohup /home/controlm/labs/sp500-analytics-ai/scripts/run_predictions.sh > output_file.log 2>&1 &",
       "RunAs": "replace-with-usercode-uc-GCS-CP+SPARKIT_FS",
@@ -162,6 +162,6 @@
           "Event" : "Looker_refresh-TO-Copy_Data_Local"
         } ]
       }
-    },
+    }
   }
 }
