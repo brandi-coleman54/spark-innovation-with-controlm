@@ -70,6 +70,12 @@
           "Event" : "GCP_Vertex_AI_Job_300-TO-Looker_refresh"
         } ]
       },
+      "eventsToAdd" : {
+        "Type" : "AddEvents",
+        "Events" : [ {
+          "Event" : "Looker_refresh-TO-Copy_Data_Local"
+        } ]
+      }
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
@@ -113,6 +119,49 @@
           "Event" : "GCP_BigQuery_Job_1-TO-GCP_Vertex_AI_Job_300"
         } ]
       }
-    }
+    },
+    "Copy_Data_Local": {
+      "Type": "Job:FileTransfer",
+      "ConnectionProfileSrc": "SPARKIT_GCS",
+      "GCSBucketName": "sp500-etl",
+      "ConnectionProfileDest": "SPARKIT_FS",
+      "PreCommand": "chmod +x /home/controlm/labs/sp500-analytics-ai/scripts/*.sh && /home/controlm/labs/sp500-analytics-ai/scripts/setup_predictions.sh",
+      "PostCommand": "nohup /home/controlm/labs/sp500-analytics-ai/scripts/run_predictions.sh > output_file.log 2>&1 &",
+      "RunAs": "SPARKIT_GCS+SPARKIT_FS",
+      "Variables": [
+        {
+            "FTP-LOSTYPE": "Unix"
+        },
+        {
+            "FTP-CONNTYPE1": "GCS"
+        },
+        {
+            "FTP-ROSTYPE": "Unix"
+        },
+        {
+            "FTP-CONNTYPE2": "File System"
+        }
+      ],
+      "FileTransfers": [
+        {
+          "Src": "pipeline_artifacts/predictions.csv",
+          "Dest": "/home/controlm/labs/sp500-analytics-ai/data/sp500_analytics.csv",
+          "TransferOption": "SrcToDest",
+          "TransferType": "Binary"
+        }
+      ],
+      "eventsToWaitFor" : {
+        "Type" : "WaitForEvents",
+        "Events" : [ {
+          "Event" : "Looker_refresh-TO-Copy_Data_Local"
+        } ]
+      },
+      "eventsToDelete" : {
+        "Type" : "DeleteEvents",
+        "Events" : [ {
+          "Event" : "Looker_refresh-TO-Copy_Data_Local"
+        } ]
+      }
+    },
   }
 }
