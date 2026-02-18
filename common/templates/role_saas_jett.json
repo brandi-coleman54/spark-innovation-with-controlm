@@ -36,12 +36,7 @@
     "Privileges": {
         "ClientAccess": {
             "ControlmWebClientAccess": "Full",
-            "ApplicationIntegratorAccess": "Full",
             "AutomationAPIAccess": "Full"
-        },
-        "ConfigurationManager": {
-            "Configuration": "Browse",
-            "ControlmSecurity": "Full"
         },
         "Tools": {
             "HistoryReports": "Full",
@@ -73,12 +68,6 @@
             "Name": "*"
         }
     ],
-    "Secrets": [
-        {
-            "Privilege": "Browse",
-            "Name": "replace-with-usercode*"
-        }
-    ],
     "SiteCustomization": [
         {
             "Privilege": "Browse",
@@ -89,7 +78,7 @@
         {
             "ControlmServer": "*",
             "Agent": "sparkit",
-            "Privilege": "Full"
+            "Privilege": "Browse"
         }
     ],
     "PluginManagement": [
@@ -102,7 +91,7 @@
     ],
     "ConnectionProfileManagement": [
         {
-            "ControlmServer": "IN01",
+            "ControlmServer": "*",
             "Agent": "sparkit",
             "PluginType": "*",
             "Name": "SPARKIT*",
@@ -113,7 +102,7 @@
             "Agent": "sparkit",
             "PluginType": "*",
             "Name": "replace-with-usercode*",
-            "Privilege": "Full"
+            "Privilege": "Browse"
         }
     ]
 }
