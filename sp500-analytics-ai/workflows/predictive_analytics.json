@@ -145,7 +145,7 @@
       "FileTransfers": [
         {
           "Src": "pipeline_artifacts/predictions.csv",
-          "Dest": "/home/controlm/labs/sp500-analytics-ai/data/sp500_analytics.csv",
+          "Dest": "/home/controlm/labs/sp500-analytics-ai/data/sp500_predictions.csv",
           "TransferOption": "SrcToDest",
           "TransferType": "Binary"
         }
