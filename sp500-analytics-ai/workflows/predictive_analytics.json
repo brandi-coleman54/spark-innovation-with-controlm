@@ -122,12 +122,12 @@
     },
     "Copy_Data_Local": {
       "Type": "Job:FileTransfer",
-      "ConnectionProfileSrc": "SPARKIT_GCS",
+      "ConnectionProfileSrc": "replace-with-usercode-uc-GCS-CP",
       "GCSBucketName": "sp500-etl",
       "ConnectionProfileDest": "SPARKIT_FS",
       "PreCommand": "chmod +x /home/controlm/labs/sp500-analytics-ai/scripts/*.sh && /home/controlm/labs/sp500-analytics-ai/scripts/setup_predictions.sh",
       "PostCommand": "nohup /home/controlm/labs/sp500-analytics-ai/scripts/run_predictions.sh > output_file.log 2>&1 &",
-      "RunAs": "SPARKIT_GCS+SPARKIT_FS",
+      "RunAs": "replace-with-usercode-uc-GCS-CP+SPARKIT_FS",
       "Variables": [
         {
             "FTP-LOSTYPE": "Unix"
