@@ -1,5 +1,5 @@
 {
-    "Name": "replace-with-usercode",
+    "Name": "${user_code}",
     "Description": "spark_${description}",
     "AllowedJobs": {
         "Included": [
@@ -52,7 +52,7 @@
         {
             "Privilege": "Full",
             "ControlmServer": "*",
-            "Folder": "replace-with-usercode*",
+            "Folder": "${user_code}*",
             "Run": true
         }
     ],
@@ -60,7 +60,7 @@
         {
             "ControlmServer": "*",
             "RunasUser": "*",
-            "Host": "replace-with-usercode*"
+            "Host": "${user_code}*"
         }
     ],
     "SiteStandard": [
@@ -102,7 +102,7 @@
             "ControlmServer": "*",
             "Agent": "sparkit",
             "PluginType": "*",
-            "Name": "replace-with-usercode*",
+            "Name": "${user_code}*",
             "Privilege": "Browse"
         }
     ]
