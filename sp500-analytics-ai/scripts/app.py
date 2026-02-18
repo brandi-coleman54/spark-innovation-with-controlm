@@ -153,7 +153,7 @@ all_tickers_sorted = sorted(all_tickers)
 
 with st.sidebar:
     st.header("Filters (apply to Charts 1 & 4 only)")
-    default_selection = [t for t in ["AAPL", "MSFT", "AMZN", "GOOGL", "META", "NVDA"] if t in all_tickers_sorted][:6] \
+    default_selection = [t for t in ["AAPL","MSFT","AMZN","GOOGL","META","NVDA","TSLA","BRK.B","JPM","V","MA","UNH","XOM","JNJ","PG","HD","KO","PEP","COST","AVGO"] if t in all_tickers_sorted][:6] \
                         or all_tickers_sorted[:6]
     sel_tickers = st.multiselect("Tickers", options=all_tickers_sorted, default=default_selection)
 
