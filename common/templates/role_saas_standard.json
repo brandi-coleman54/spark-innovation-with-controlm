@@ -44,9 +44,7 @@
       "ControlmSecurity": "Full"
     },
     "Tools": {
-      "SiteStandardPolicies": "Browse",
-      "HistoryReports": "Full",
-      "ControlMReport": "Full"
+      "SiteStandardPolicies": "Browse"
     },
     "ViewpointManager": {
       "Viewpoints": "Browse"
@@ -82,7 +80,7 @@
   "SiteCustomization": [
     {
       "Privilege": "Browse",
-      "Name": "*"
+      "Name": "SPARK"
     }
   ],
   "AgentManagement": [
