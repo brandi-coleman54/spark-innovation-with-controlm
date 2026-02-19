@@ -199,6 +199,7 @@ function Create_TD_User {
   local user_code="${2:?usage: Create_TD_User <user> <user_code>}"
   local template_file=$3
   local build_file=/tmp/user_build_file.json
+  local build_file2=/tmp/user_build_file2.json
 
   command -v ctm       >/dev/null 2>&1 || { echo "Error: 'ctm' CLI not found." >&2; return 127; }
   command -v jq        >/dev/null 2>&1 || { echo "Error: 'jq' not found."        >&2; return 127; }
@@ -217,15 +218,39 @@ function Create_TD_User {
             | if $i == -1 then . + [$role] else . end
           )
         ' > ${build_file}
-
-    ctm config authorization:user::update "${user}" ${build_file}
+      # If BMC user, make sure they have a standard role
+      if [[ "${user}" =~ bmc\.com$ ]]; then
+        cat ${build_file} \
+          | jq --arg role "Viewer" '
+              .Roles = (
+                ( .Roles // [] )
+                | (index($role) // -1) as $i
+                | if $i == -1 then . + [$role] else . end
+              )
+            ' > ${build_file2}
+        else
+          build_file2=${build_file}
+        fi
+    ctm config authorization:user::update "${user}" ${build_file2}
   else
     # Create new user via templated JSON
     user="${user}" user_code="${user_code}" \
       envsubst < ${template_file} > ${build_file}
-
-    echo "Adding user '${user}' using ${build_file}"
-    ctm config authorization:user::add ${build_file}
+    # If BMC user, make sure they have a standard role
+    if [[ "${user}" =~ bmc\.com$ ]]; then
+      cat ${build_file} \
+        | jq --arg role "Viewer" '
+            .Roles = (
+              ( .Roles // [] )
+              | (index($role) // -1) as $i
+              | if $i == -1 then . + [$role] else . end
+            )
+          ' > ${build_file2}
+    else
+      build_file2=${build_file}
+    fi
+    echo "Adding user '${user}' using ${build_file2}"
+    ctm config authorization:user::add ${build_file2}
   fi
 }
 
