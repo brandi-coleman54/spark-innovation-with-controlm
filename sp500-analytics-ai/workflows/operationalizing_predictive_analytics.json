@@ -4,7 +4,6 @@
     "ControlmServer" : "IN01",
     "OrderMethod" : "Manual",
     "SubApplication" : "replace-with-usercode_SAP500",
-    "CreatedBy" : "brandi_coleman@bmc.com",
     "Application" : "replace-with-usercode_SAP500",
     "AWS_QuickSight_Refresh" : {
       "Type" : "Job:AWS QuickSight",
@@ -30,7 +29,6 @@
       "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.top_daily_decliners` AS SELECT Name, date, ROUND(((close - open) / open) * 100, 2) AS percent_change FROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean` WHERE date = '2018-02-07' ORDER BY percent_change ASC LIMIT 10;",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "Description" : "This query identifies the 10 stocks with the largest negative price movements (i.e., biggest losers) based on the percentage drop from open to close on the previous trading day.",
       "RunAs" : "replace-with-usercode-uc-BQ-CP",
       "Application" : "replace-with-usercode_SAP500",
@@ -89,7 +87,6 @@
       "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.top_daily_gainers` AS SELECT Name, date, ROUND(((close - open) / open) * 100, 2) AS percent_change FROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean` WHERE date = '2018-02-07' ORDER BY percent_change DESC LIMIT 10;",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "Description" : "This query calculates the daily percentage change for each stock (from open to close) and returns the top 10 stocks with the highest gains (largest positive change) from the previous trading day.",
       "RunAs" : "replace-with-usercode-uc-BQ-CP",
       "Application" : "replace-with-usercode_SAP500",
@@ -148,7 +145,6 @@
       "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.top_daily_volatile` AS SELECT Name, date, ROUND(((high - low) / open) * 100, 2) AS intraday_volatility FROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean` WHERE date = '2018-02-07' ORDER BY intraday_volatility DESC LIMIT 10;",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "Description" : "This query calculates the intraday price range (difference between high and low prices) for each stock and lists the top 10 most volatile stocks for the previous trading day.",
       "RunAs" : "replace-with-usercode-uc-BQ-CP",
       "Application" : "replace-with-usercode_SAP500",
@@ -203,7 +199,6 @@
       "PostCommand" : "nohup /home/controlm/labs/sp500-analytics-ai/scripts/run.sh > output_file.log 2>&1 &",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "RunAs" : "replace-with-usercode-uc-S3-CP+SPARKIT_FS",
       "Application" : "replace-with-usercode_SAP500",
       "Variables" : [ {
@@ -265,7 +260,6 @@
     "ControlmServer" : "IN01",
     "OrderMethod" : "Manual",
     "SubApplication" : "replace-with-usercode_SAP500",
-    "CreatedBy" : "brandi_coleman@bmc.com",
     "Application" : "replace-with-usercode_SAP500",
     "BQ_Clean_Data" : {
       "Type" : "Job:GCP BigQuery",
@@ -280,7 +274,6 @@
       "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_clean` AS%4ESELECT%4E  DATE(date) AS date,%4E  open,%4E  high,%4E  low,%4E  close,%4E  volume,%4E  Name,%4E  SAFE_DIVIDE(close - open, open) AS daily_return,%4E  AVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS ma_7,%4E  AVG(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 29 PRECEDING AND CURRENT ROW) AS ma_30,%4E  STDDEV(close) OVER (PARTITION BY Name ORDER BY DATE(date) ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS volatility_7d%4EFROM%4E  `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_raw`;%4E",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "RunAs" : "replace-with-usercode-uc-BQ-CP",
       "Application" : "replace-with-usercode_SAP500",
       "Variables" : [ {
@@ -339,7 +332,6 @@
       "Load Options" : "\"maxBadRecords\": 10",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "RunAs" : "replace-with-usercode-uc-BQ-CP",
       "Application" : "replace-with-usercode_SAP500",
       "Variables" : [ {
@@ -368,7 +360,6 @@
       "GCSBucketNameDest" : "sp500-etl",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "RunAs" : "replace-with-usercode-uc-S3-CP+replace-with-usercode-uc-GCS-CP",
       "Application" : "replace-with-usercode_SAP500",
       "Variables" : [ {
@@ -443,7 +434,6 @@
       "SQL Statement" : "CREATE OR REPLACE TABLE `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_raw` (date DATE, open FLOAT64, high FLOAT64, low FLOAT64, close FLOAT64, volume INT64, Name STRING);",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "Description" : "This table creates or replaces S&P500_raw table to store raw daily stock data for S&P500 companies including prices, volume, date, and ticker name. It serves as the base table for downstream financial analysis.",
       "RunAs" : "replace-with-usercode-uc-BQ-CP",
       "Application" : "replace-with-usercode_SAP500",
@@ -512,7 +502,6 @@
     "OrderMethod" : "Manual",
     "ActiveRetentionPolicy" : "CleanEndedOK",
     "SubApplication" : "replace-with-usercode_SAP500",
-    "CreatedBy" : "brandi_coleman@bmc.com",
     "Application" : "replace-with-usercode_SAP500",
     "When" : {
       "RuleBasedCalendars" : {
@@ -539,7 +528,6 @@
       "Show Load Options" : "unchecked",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "Description" : "This job further proccessses the clean data and feature engineering",
       "RunAs" : "replace-with-usercode-uc-BQ-CP",
       "Application" : "replace-with-usercode_SAP500",
@@ -575,7 +563,6 @@
       "PostCommand" : "nohup /home/controlm/labs/sp500-analytics-ai/scripts/run_predictions.sh > output_file.log 2>&1 &",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "RunAs" : "replace-with-usercode-uc-GCS-CP+SPARKIT_FS",
       "Application" : "replace-with-usercode_SAP500",
       "Variables" : [ {
@@ -631,7 +618,6 @@
       "Function Name" : "looker-refresh",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "Description" : "This job triggers the GCP function that refreshes the looker dashboard",
       "RunAs" : "replace-with-usercode-uc-FUNCTIONS-CP",
       "Application" : "replace-with-usercode_SAP500",
@@ -672,7 +658,6 @@
       "Pipeline Runtime Paramaters" : "\"parameterValues\":{\"bucket_name\":\"sp500-etl\",\"location\":\"us-west2\",\"project_id\":\"sso-gcp-dba-ctm4-pub-cc10274\",\"query\":\"SELECT * FROM `sso-gcp-dba-ctm4-pub-cc10274.sp500_dataset.sp500_features` WHERE daily_return IS NOT NULL\"}%4E",
       "SubApplication" : "replace-with-usercode_SAP500",
       "Host" : "replace-with-usercode_instruqt_server",
-      "CreatedBy" : "brandi_coleman@bmc.com",
       "Description" : "This job triggers the vertex that trains the model, generate predictions and store the result in Big Query",
       "RunAs" : "replace-with-usercode-uc-VERTEX-CP",
       "Application" : "replace-with-usercode_SAP500",
