@@ -219,38 +219,38 @@ function Create_TD_User {
           )
         ' > ${build_file}
       # If BMC user, make sure they have a standard role
-      if [[ "${user}" =~ bmc\.com$ ]]; then
-        cat ${build_file} \
-          | jq --arg role "Viewer" '
-              .Roles = (
-                ( .Roles // [] )
-                | (index($role) // -1) as $i
-                | if $i == -1 then . + [$role] else . end
-              )
-            ' > ${build_file2}
-        else
-          build_file2=${build_file}
-        fi
-    ctm config authorization:user::update "${user}" ${build_file2}
+      #if [[ "${user}" =~ bmc\.com$ ]]; then
+      #  cat ${build_file} \
+      #    | jq --arg role "Viewer" '
+      #        .Roles = (
+      #          ( .Roles // [] )
+      #          | (index($role) // -1) as $i
+      #          | if $i == -1 then . + [$role] else . end
+      #        )
+      #      ' > ${build_file2}
+      #  else
+      #    build_file2=${build_file}
+      #  fi
+    ctm config authorization:user::update "${user}" ${build_file}
   else
     # Create new user via templated JSON
     user="${user}" user_code="${user_code}" \
       envsubst < ${template_file} > ${build_file}
     # If BMC user, make sure they have a standard role
-    if [[ "${user}" =~ bmc\.com$ ]]; then
-      cat ${build_file} \
-        | jq --arg role "Viewer" '
-            .Roles = (
-              ( .Roles // [] )
-              | (index($role) // -1) as $i
-              | if $i == -1 then . + [$role] else . end
-            )
-          ' > ${build_file2}
-    else
-      build_file2=${build_file}
-    fi
-    echo "Adding user '${user}' using ${build_file2}"
-    ctm config authorization:user::add ${build_file2}
+    #if [[ "${user}" =~ bmc\.com$ ]]; then
+    #  cat ${build_file} \
+    #    | jq --arg role "Viewer" '
+    #        .Roles = (
+    #          ( .Roles // [] )
+    #          | (index($role) // -1) as $i
+    #          | if $i == -1 then . + [$role] else . end
+    #        )
+    #      ' > ${build_file2}
+    #else
+    #  build_file2=${build_file}
+    #fi
+    echo "Adding user '${user}' using ${build_file}"
+    ctm config authorization:user::add ${build_file}
   fi
 }
 
