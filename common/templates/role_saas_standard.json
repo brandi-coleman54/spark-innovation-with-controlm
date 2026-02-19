@@ -103,7 +103,7 @@
       "ControlmServer": "*",
       "Agent": "sparkit",
       "PluginType": "*",
-      "Name": "${uc_user_code}*",
+      "Name": "replace-with-usercode-uc*",
       "Privilege": "Full"
     },
     {
