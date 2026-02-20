@@ -1,5 +1,5 @@
 {
-    "${CTM_UC_USER_CODE}_KUBERNETES": {
+    "${CTM_USER_CODE}_kubernetes": {
         "Type": "Folder",
         "ControlmServer": "IN01",
         "OrderMethod": "Manual",
