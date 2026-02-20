@@ -1,0 +1,4 @@
+{
+  "agents": [ ${assoc_agents} ],
+  "tag": "sparkit"
+}
