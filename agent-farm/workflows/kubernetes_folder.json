@@ -1,0 +1,75 @@
+{
+    "${CTM_UC_USER_CODE}_KUBERNETES": {
+        "Type": "Folder",
+        "ControlmServer": "IN01",
+        "OrderMethod": "Manual",
+        "${CTM_USER_CODE}_k8s_job": {
+            "Type": "Job:Kubernetes",
+            "Host": "${CTM_USER_CODE}-eks-hg",
+            "Application": "${CTM_UC_USER_CODE}",
+            "ConnectionProfile": "ZZI_K8S",
+            "Job Spec Yaml": "apiVersion: batch/v1\nkind: Job\nmetadata:\n  name: {{job_yaml_file_params:jobname}}\nspec:\n  template:\n    spec:\n      containers:\n      - name: python-container\n        image: python:3.9-slim-buster # Use a suitable Python Docker image\n        command: [\"python\", \"/app/wi_job.py\"]\n        env:\n        - name: APPLIC\n          value: \"{{job_yaml_file_params:APPLIC}}\"\n        - name: APPLGROUP\n          value: \"{{job_yaml_file_params:APPLGROUP}}\"\n        - name: JOBNAME\n          value: \"{{job_yaml_file_params:JOBNAME}}\"\n        - name: ORDERID\n          value: \"{{job_yaml_file_params:ORDERID}}\"\n        - name: TABLEID\n          value: \"{{job_yaml_file_params:TABLEID}}\"\n        - name: ODATE\n          value: \"{{job_yaml_file_params:ODATE}}\"\n        - name: SLEEP_RANGE\n          value: \"{{job_yaml_file_params:SLEEP_RANGE}}\"\n        - name: LONGRUN_CHANCE\n          value: \"{{job_yaml_file_params:LONGRUN_CHANCE}}\"\n        - name: LONGRUN_RANGE\n          value: \"{{job_yaml_file_params:LONGRUN_RANGE}}\"\n        - name: FAIL_RATE\n          value: \"{{job_yaml_file_params:FAIL_RATE}}\"\n        - name: RERUN_RATE\n          value: \"{{job_yaml_file_params:RERUN_RATE}}\"\n        - name: INC_START\n          value: \"{{job_yaml_file_params:INC_START}}\"\n        - name: INC_DURATION\n          value: \"{{job_yaml_file_params:INC_DURATION}}\"\n        - name: INC_PERCENT\n          value: \"{{job_yaml_file_params:INC_PERCENT}}\"\n        volumeMounts:\n        - name: script-volume\n          mountPath: /app\n          readOnly: true\n      volumes:\n      - name: script-volume\n        configMap:\n          name: wi-job-configmap\n      restartPolicy: Never\n  backoffLimit: 0 # Optional: Number of retries before marking the Job as failed",
+            "Job Spec Parameters": "{\"jobname\":\"ctmjob-%%ORDERID\",\"APPLIC\": \"%%APPLIC\",\"APPLGROUP\": \"%%APPLGROUP\",\"JOBNAME\": \"%%JOBNAME\",\"ORDERID\": \"%%ORDERID\",\"TABLEID\": \"%%TABLE_ID\",\"ODATE\": \"%%$ODATE\",\"SLEEP_RANGE\": \"%%SLEEP_RANGE\",\"LONGRUN_CHANCE\": \"%%LONGRUN_CHANCE\",\"LONGRUN_RANGE\": \"%%LONGRUN_RANGE\",\"FAIL_RATE\": \"%%FAIL_RATE\",\"RERUN_RATE\": \"%%RERUN_RATE\",\"INC_START\": \"%%INC_START\",\"INC_DURATION\": \"%%INC_DURATION\",\"INC_PERCENT\": \"%%INC_PERCENT\"}",
+            "Get Pod Logs": "Get Logs",
+            "Job Cleanup": "Delete Job",
+            "Job Status Polling Interval": "20"
+            "RerunLimit": {
+                "Times": "5",
+                "Every": "1",
+                "Units": "Minutes"
+            },
+            "RunAs": "controlm",
+            "SubApplication": "K8S",
+            "Variables": [
+                {
+                    "SLEEP_RANGE": "220-360"
+                },
+                {
+                    "LONGRUN_CHANCE": "10"
+                },
+                {
+                    "LONGRUN_RANGE": "340-440"
+                },
+                {
+                    "FAIL_RATE": "6"
+                },
+                {
+                    "RERUN_RATE": "2"
+                },
+                {
+                    "INC_START": "15"
+                },
+                {
+                    "INC_DURATION": "6"
+                },
+                {
+                    "INC_PERCENT": ".025"
+                }
+            ],
+            "search_output": {
+                "Type": "If:Output",
+                "rerun_me": {
+                    "Type": "Action:Rerun"
+                },
+                "Code": "*rerun me please*",
+                "Statement": "*"
+            },
+            "search_error": {
+                "Type": "If:Output",
+                "rerun_error": {
+                    "Type": "Action:Rerun"
+                },
+                "Code": "*failure*",
+                "Statement": "*"
+            },
+            "search_failed": {
+                "Type": "If:Output",
+                "rerun_failed": {
+                    "Type": "Action:Rerun"
+                },
+                "Code": "*failed*",
+                "Statement": "*"
+            } 
+        }
+    }
+}
