@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{job_yaml_file_params:jobname}}
+spec:
+  template:
+    spec:
+      containers:
+      - name: python-container
+        image: python:3.9-slim-buster # Use a suitable Python Docker image
+        command: ["python", "/app/wi_job.py"]
+        env:
+        - name: APPLIC
+          value: "{{job_yaml_file_params:APPLIC}}"
+        - name: APPLGROUP
+          value: "{{job_yaml_file_params:APPLGROUP}}"
+        - name: JOBNAME
+          value: "{{job_yaml_file_params:JOBNAME}}"
+        - name: ORDERID
+          value: "{{job_yaml_file_params:ORDERID}}"
+        - name: TABLEID
+          value: "{{job_yaml_file_params:TABLEID}}"
+        - name: ODATE
+          value: "{{job_yaml_file_params:ODATE}}"
+        - name: SLEEP_RANGE
+          value: "{{job_yaml_file_params:SLEEP_RANGE}}"
+        - name: LONGRUN_CHANCE
+          value: "{{job_yaml_file_params:LONGRUN_CHANCE}}"
+        - name: LONGRUN_RANGE
+          value: "{{job_yaml_file_params:LONGRUN_RANGE}}"
+        - name: FAIL_RATE
+          value: "{{job_yaml_file_params:FAIL_RATE}}"
+        - name: RERUN_RATE
+          value: "{{job_yaml_file_params:RERUN_RATE}}"
+        - name: INC_START
+          value: "{{job_yaml_file_params:INC_START}}"
+        - name: INC_DURATION
+          value: "{{job_yaml_file_params:INC_DURATION}}"
+        - name: INC_PERCENT
+          value: "{{job_yaml_file_params:INC_PERCENT}}"
+        volumeMounts:
+        - name: script-volume
+          mountPath: /app
+          readOnly: true
+      volumes:
+      - name: script-volume
+        configMap:
+          name: wi-job-configmap
+      restartPolicy: Never
+  backoffLimit: 0 # Optional: Number of retries before marking the Job as failed
