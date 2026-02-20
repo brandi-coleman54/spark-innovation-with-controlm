@@ -504,6 +504,18 @@
         "CreatedBy" : "brandi_coleman@bmc.com",
         "RunAs" : "replace-with-usercode-uc-QS-CP",
         "Application" : "replace-with-usercode_SP500",
+        "IfBase:Folder:CompletionStatus_0": {
+          "Type": "If:CompletionStatus",
+          "CompletionStatus": "NOTOK",
+          "Action:Rerun_0": {
+            "Type": "Action:Rerun"
+          }
+        },
+        "RerunLimit": {
+          "Times": "8",
+          "Units": "Minutes",
+          "Every": "1"
+        },
         "eventsToAdd" : {
           "Type" : "AddEvents",
           "Events" : [ {
