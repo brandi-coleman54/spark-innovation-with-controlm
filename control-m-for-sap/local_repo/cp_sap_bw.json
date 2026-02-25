@@ -1,0 +1,17 @@
+{
+   "replace-with-usercode-uc_CP_SAP_BW" : 
+   {
+   "Type": "ConnectionProfile:SAP",
+    "User": "BWDEVELOPER",
+    "Password": "replace-with-SAP_LOGIN_PASSWORD-secret",
+    "SapClient": "001",
+    "Description": "",
+    "AppVersion": "BW 3.<X> or later",
+    "Centralized": true,
+    "ApplicationServerLogon": {
+      "SystemNumber": "00",
+      "Host": "vhcalnplci"
+    
+   }
+   }
+}
