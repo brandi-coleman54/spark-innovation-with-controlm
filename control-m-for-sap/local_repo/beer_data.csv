@@ -1,0 +1,901 @@
+Brewery,Beer,Style,ABV,Avg_Review,Review_Num,Regional_Rank,State
+Russian River Brewing Company,Pliny the Younger,American Double/Imperial IPA,0.11,4.67,724,1,California
+The Alchemist,Heady Topper,American Double/Imperial IPA,0.08,4.61,760,1,Vermont
+Founders Brewing Company,Founders CBS Imperial Stout,American Double/Imperial Stout,0.11,4.6,717,1,Michigan
+Three Floyds Brewing Co.,Bourbon Barrel Aged Vanilla Bean Dark Lord,Russian Imperial Stout,0.15,4.59,156,2,Indiana
+Russian River Brewing Company,Pliny the Elder,American Double/Imperial IPA,0.08,4.59,2673,2,California
+Goose Island Beer Co.,King Henry,English Barleywine,0.13,4.57,227,3,Illinois
+Peg's Cantina & Brewpub,Peg's G.O.O.D. Rare D.O.S.,American Double/Imperial Stout,,4.57,43,1,Florida
+Kern River Brewing Company,Citra DIPA,American Double/Imperial IPA,0.08,4.55,284,3,California
+Goose Island Beer Co.,Bourbon County Brand Coffee Stout,American Double/Imperial Stout,0.14,4.52,567,5,Illinois
+Founders Brewing Company,Founders KBS (Kentucky Breakfast Stout),American Double/Imperial Stout,0.11,4.52,567,4,Michigan
+Deschutes Brewery,The Abyss,American Double/Imperial Stout,0.11,4.51,1449,4,Oregon
+Three Floyds Brewing Co.,Zombie Dust,American Pale Ale (APA),0.06,4.5,605,6,Indiana
+Portsmouth Brewery,Kate the Great,Russian Imperial Stout,0.12,4.5,467,2,New Hampshire
+Cigar City Brewing,Hunahpu's Imperial Stout,American Double/Imperial Stout,0.11,4.48,485,2,Florida
+Three Floyds Brewing Co.,Bourbon Barrel Aged Dark Lord Imperial Stout,Russian Imperial Stout,0.15,4.47,142,9,Indiana
+"Bell's Brewery, Inc.",Bell's Hopslam Ale,American Double/Imperial IPA,0.10,4.47,2758,7,Michigan
+Kuhnhenn Brewing Company,Kuhnhenn Bourbon Barrel Fourth Dementia,Old Ale,0.14,4.47,266,8,Michigan
+Lawson's Finest Liquids,Double Sunshine IPA,American Double/Imperial IPA,0.08,4.47,146,3,Vermont
+Russian River Brewing Company,Supplication,American Wild Ale,0.07,4.47,1140,5,California
+Hill Farmstead Brewery,Galaxy Imperial Single Hop IPA,American Double/Imperial IPA,0.08,4.46,101,4,Vermont
+The Lost Abbey,Duck Duck Gooze,American Wild Ale,0.07,4.46,190,6,California
+Hair of the Dog Brewing Company,Adam from the Wood,Old Ale,0.12,4.46,102,7,Oregon
+Cigar City Brewing,Hunahpu's Imperial Stout - Laird's Apple Brandy Barrel,American Double/Imperial Stout,0.12,4.45,81,3,Florida
+Firestone Walker Brewing Co.,Parabola,Russian Imperial Stout,0.13,4.45,701,8,California
+Alpine Beer Company,Hoppy Birthday,American Pale Ale (APA),0.05,4.45,81,9,California
+Founders Brewing Company,Founders Breakfast Stout,American Double/Imperial Stout,0.08,4.44,2570,10,Michigan
+Dark Horse Brewing Company,Dark Horse Bourbon Barrel Aged Plead the 5th,Russian Imperial Stout,0.14,4.44,161,11,Michigan
+"Bell's Brewery, Inc.",Bell's Black Note Stout,American Double/Imperial Stout,0.12,4.43,202,12,Michigan
+Surly Brewing Company,Abrasive Ale,American Double/Imperial IPA,0.09,4.42,647,1,Minnesota
+Hill Farmstead Brewery,Ephraim,American Double/Imperial IPA,0.11,4.42,141,5,Vermont
+The Funky Buddha Lounge & Brewery,Maple Bacon Coffee Porter,American Porter,0.06,4.42,94,4,Florida
+The Bruery,Black Tuesday,American Double/Imperial Stout,0.18,4.42,429,10,California
+Three Floyds Brewing Co.,Dreadnaught IPA,American Double/Imperial IPA,0.10,4.41,1508,13,Indiana
+Peg's Cantina & Brewpub,Peg's G.O.O.D. RareR D.O.S.,American Double/Imperial Stout,,4.41,24,5,Florida
+Russian River Brewing Company,Beatification,American Wild Ale,0.06,4.41,426,11,California
+AleSmith Brewing Company,AleSmith Speedway Stout - Barrel Aged,American Double/Imperial Stout,0.12,4.41,219,13,California
+The Lost Abbey,Cable Car,American Wild Ale,0.07,4.41,178,14,California
+Pelican Pub & Brewery,Mother of All Storms,English Barleywine,0.14,4.41,308,12,Oregon
+Hill Farmstead Brewery,Abner Imperial IPA,American Double/Imperial IPA,0.08,4.4,138,6,Vermont
+Midnight Sun Brewing Co.,Bar Fly,American Double/Imperial Stout,0.13,4.4,61,17,Alaska
+Ballast Point Brewing Company,Sculpin India Pale Ale,American IPA,0.07,4.4,1499,15,California
+Firestone Walker Brewing Co.,Sucaba (Abacus),English Barleywine,0.13,4.4,522,16,California
+Goose Island Beer Co.,Bourbon County Brand Stout,American Double/Imperial Stout,0.15,4.39,1726,14,Illinois
+Southampton Publick House,Southampton Berliner Weisse,Berliner Weissbier,0.02,4.39,41,1,New York
+Minneapolis Town Hall Brewery,Masala Mama India Pale Ale,American IPA,0.06,4.39,665,2,Minnesota
+FiftyFifty Brewing Co.,Imperial Eclipse Stout - Elijah Craig (12 Year),American Double/Imperial Stout,0.10,4.39,139,18,California
+Cascade Brewing/Raccoon Lodge & Brewpub,Cascade Sang Noir,American Wild Ale,0.10,4.39,62,19,Oregon
+Kuhnhenn Brewing Company,Kuhnhenn Raspberry Eisbock,Eisbock,0.14,4.38,362,15,Michigan
+Surly Brewing Company,Darkness,Russian Imperial Stout,0.10,4.38,673,3,Minnesota
+Hill Farmstead Brewery,Everett Robust Porter,American Porter,0.08,4.38,143,7,Vermont
+Cigar City Brewing,Hunahpu's Imperial Stout - Bourbon Barrel Aged,American Double/Imperial Stout,0.12,4.38,63,6,Florida
+Russian River Brewing Company,Temptation,American Wild Ale,0.07,4.38,879,20,California
+FiftyFifty Brewing Co.,Imperial Eclipse Stout - Elijah Craig (18 Year),American Double/Imperial Stout,0.10,4.38,112,21,California
+Kern River Brewing Company,5th Anniversary Ale,American Double/Imperial IPA,0.08,4.38,78,22,California
+Stone Brewing Co.,Imperial Russian Stout,Russian Imperial Stout,0.11,4.37,2348,23,California
+AleSmith Brewing Company,AleSmith Speedway Stout,American Double/Imperial Stout,0.12,4.37,1181,24,California
+Alpine Beer Company,Bad Boy,American Double/Imperial IPA,0.09,4.37,93,26,California
+The Bruery,Humulus Lager,American Double/Imperial Pilsner,0.07,4.37,78,27,California
+Hair of the Dog Brewing Company,Matt,American Strong Ale,0.12,4.37,178,25,Oregon
+Ithaca Beer Company,Brute,American Wild Ale,0.07,4.36,363,3,New York
+Troegs Brewing Company,Troegs Nugget Nectar,American Amber/Red Ale,0.08,4.36,2115,2,Pennsylvania
+Live Oak Brewing Company,Live Oak Hefeweizen,Hefeweizen,0.05,4.36,325,1,Texas
+Russian River Brewing Company,Consecration,American Wild Ale,0.10,4.36,903,28,California
+Alpine Beer Company,Exponential Hoppiness,American Double/Imperial IPA,0.11,4.36,361,29,California
+Green Flash Brewing Co.,Silva Stout,American Double/Imperial Stout,0.10,4.36,179,30,California
+Boston Beer Company (Sam Adams),Samuel Adams Utopias,American Strong Ale,0.27,4.35,358,8,Massachusetts
+Hill Farmstead Brewery,Birth of Tragedy,American Porter,0.11,4.35,54,9,Vermont
+Stone Brewing Co.,Imperial Russian Stout - Bourbon Barrel Aged,Russian Imperial Stout,0.12,4.35,95,31,California
+Flossmoor Station Restaurant & Brewery,Bourbon Barrel Aged Hi-Fi Rye,American Barleywine,0.11,4.34,90,18,Illinois
+Great Lakes Brewing Company,Great Lakes Barrel-Aged Blackout Stout,Russian Imperial Stout,0.10,4.34,310,17,Ohio
+New Glarus Brewing Company,Wisconsin Belgian Red,Fruit/Vegetable Beer,0.04,4.34,830,16,Wisconsin
+Minneapolis Town Hall Brewery,Czar Jack Imperial Stout,Russian Imperial Stout,0.09,4.34,129,4,Minnesota
+Alpine Beer Company,Nelson,American IPA,0.07,4.34,459,32,California
+Three Floyds Brewing Co.,Dark Lord Imperial Stout,Russian Imperial Stout,0.15,4.33,1029,19,Indiana
+Troegs Brewing Company,Splinter Gold,American Wild Ale,0.12,4.33,55,4,Pennsylvania
+Surly Brewing Company,Furious,American IPA,0.06,4.33,1262,5,Minnesota
+Hill Farmstead Brewery,Damon,Russian Imperial Stout,0.11,4.33,33,10,Vermont
+Midnight Sun Brewing Co.,Sloth - Belgian-Style Imperial Stout,Russian Imperial Stout,0.10,4.33,48,34,Alaska
+Alpine Beer Company,Pure Hoppiness,American Double/Imperial IPA,0.08,4.33,580,33,California
+AleSmith Brewing Company,AleSmith Speedway Stout - Kopi Luwak,American Double/Imperial Stout,0.12,4.33,25,35,California
+New Glarus Brewing Company,Raspberry Tart,Fruit/Vegetable Beer,0.04,4.32,736,20,Wisconsin
+Hill Farmstead Brewery,Edward Pale Ale,American Pale Ale (APA),0.05,4.32,144,11,Vermont
+Moonlight Brewing Company,Reality Czeck,Czech Pilsener,0.05,4.32,130,36,California
+Alpine Beer Company,Great,American Barleywine,0.14,4.32,125,37,California
+Selin's Grove Brewing Company,India Pale Ale,American IPA,0.07,4.31,83,5,Pennsylvania
+Minneapolis Town Hall Brewery,Three Hour Tour,Milk/Sweet Stout,0.06,4.31,59,6,Minnesota
+Dry Dock Brewing Co.,Bligh's Barleywine Ale,English Barleywine,0.10,4.31,73,1,Colorado
+Foothills Brewing Company,Barrel Aged Sexual Chocolate,Russian Imperial Stout,0.10,4.31,152,8,North Carolina
+Olde Hickory Brewery,The Event Horizon,American Double/Imperial Stout,0.09,4.31,142,9,North Carolina
+COAST Brewing Company,Boy King Double IPA,American Double/Imperial IPA,0.10,4.31,169,7,South Carolina
+Midnight Sun Brewing Co.,Arctic Devil Barley Wine,English Barleywine,0.13,4.31,254,39,Alaska
+Alpine Beer Company,Duet IPA,American IPA,0.07,4.31,401,38,California
+Stone Brewing Co.,Ruination Tenth Anniversary IPA,American Double/Imperial IPA,0.11,4.31,225,40,California
+Boneyard Beer Company,Hop Venom Double IPA,American Double/Imperial IPA,0.09,4.31,22,41,Oregon
+Fat Heads Brewery & Saloon,Fat Head's Head Hunter IPA,American IPA,0.08,4.3,127,22,Ohio
+New Glarus Brewing Company,Dancing Man Wheat,Hefeweizen,0.07,4.3,375,21,Wisconsin
+Southampton Publick House,Southampton Black Raspberry Lambic,Lambic - Fruit,0.06,4.3,33,7,New York
+Selin's Grove Brewing Company,Phoenix Kriek,Fruit/Vegetable Beer,0.07,4.3,65,6,Pennsylvania
+Jack's Abby Brewing,Hoponius Union,Dortmunder/Export Lager,0.07,4.3,68,12,Massachusetts
+The Funky Buddha Lounge & Brewery,Wide Awake It's Morning,American Double/Imperial Stout,0.11,4.3,44,10,Florida
+Russian River Brewing Company,Blind Pig IPA,American IPA,0.06,4.3,1188,42,California
+AleSmith Brewing Company,AleSmith IPA,American IPA,0.07,4.3,985,43,California
+Ballast Point Brewing Company,Victory at Sea Coffee Vanilla Imperial Porter,American Porter,0.10,4.3,625,44,California
+North Coast Brewing Co.,Old Stock Cellar Reserve (Aged in Bourbon Barrels),Old Ale,0.13,4.3,239,45,California
+Fremont Brewing Company,Bourbon Barrel Abominable,American Strong Ale,0.10,4.3,34,46,Washington
+Founders Brewing Company,Founders Curmudgeon's Better Half,Old Ale,0.12,4.29,149,25,Michigan
+Great Lakes Brewing Company,Great Lakes Edmund Fitzgerald Porter,American Porter,0.06,4.29,1645,23,Ohio
+The Brew Kettle Taproom & Smokehouse,White Rajah,American IPA,0.07,4.29,185,24,Ohio
+Voodoo Brewing Company,Cowbell Imperial Oatmeal Stout,Milk/Sweet Stout,0.09,4.29,58,8,Pennsylvania
+Boulevard Brewing Co.,Saison - Brett,Saison/Farmhouse Ale,0.09,4.29,494,7,Missouri
+The Alchemist,Luscious,Russian Imperial Stout,0.11,4.29,37,13,Vermont
+Cigar City Brewing,Marshal Zhukov's Imperial Stout - Zhukov's Final Push,Russian Imperial Stout,0.12,4.29,20,11,Florida
+Stone Brewing Co.,Ruination IPA,American Double/Imperial IPA,0.08,4.29,2689,47,California
+Bootlegger's Brewery,Knuckle Sandwich,American Double/Imperial IPA,0.10,4.29,182,48,California
+The Bruery,Melange No. 3,American Strong Ale,0.16,4.29,152,49,California
+Russian River Brewing Company,Compunction,American Wild Ale,0.05,4.29,66,50,California
+Three Floyds Brewing Co.,Alpha King Pale Ale,American Pale Ale (APA),0.06,4.28,1512,27,Indiana
+"Bell's Brewery, Inc.",Two Hearted Ale,American IPA,0.07,4.28,2710,26,Michigan
+Founders Brewing Company,Founders Imperial Stout,Russian Imperial Stout,0.11,4.28,1249,28,Michigan
+Southern Tier Brewing Company,Choklat,American Double/Imperial Stout,0.11,4.28,1280,9,New York
+Captain Lawrence Brewing Co.,Cuvee de Castleton,American Wild Ale,0.09,4.28,203,10,New York
+Big Sky Brewing Company,Ivan the Terrible Imperial Stout,Russian Imperial Stout,0.10,4.28,220,2,Montana
+Hill Farmstead Brewery,Hill Farmstead Double Citra IPA,American Double/Imperial IPA,0.08,4.28,62,14,Vermont
+Hill Farmstead Brewery,What is Enlightenment?,American Pale Ale (APA),0.05,4.28,36,15,Vermont
+Midnight Sun Brewing Co.,Berserker Imperial Stout,American Double/Imperial Stout,0.13,4.28,139,54,Alaska
+Russian River Brewing Company,Sanctification,American Wild Ale,0.07,4.28,500,51,California
+Bear Republic Brewing Co.,Racer X Double IPA,American Double/Imperial IPA,0.08,4.28,347,52,California
+The Bruery,Chocolate Rain,American Double/Imperial Stout,0.20,4.28,145,53,California
+Stone Brewing Co.,IPA - Double Dry Hopped,American IPA,0.07,4.28,90,55,California
+Three Floyds Brewing Co.,Hell's Black Intelligencer,Oatmeal Stout,0.06,4.27,65,30,Indiana
+Jolly Pumpkin Artisan Ales,Biere De Mars - Grand Reserve,Biere de Garde,0.07,4.27,89,29,Michigan
+Columbus Brewing  Company,Columbus Bodhi DIPA,American Double/Imperial IPA,0.08,4.27,29,31,Ohio
+Surly Brewing Company,Wet,American IPA,0.08,4.27,345,8,Minnesota
+Oskar Blues Brewing Company,Ten FIDY,Russian Imperial Stout,0.11,4.27,1828,3,Colorado
+Great Divide Brewing Company,Barrel Aged Yeti,Russian Imperial Stout,0.10,4.27,165,4,Colorado
+Maine Beer Company,Lunch,American IPA,0.07,4.27,244,16,Maine
+Hill Farmstead Brewery,Twilight of the Idols,American Porter,0.08,4.27,60,17,Vermont
+The Funky Buddha Lounge & Brewery,Last Snow,American Porter,0.07,4.27,27,12,Florida
+Anchorage Brewing Company,Bitter Monk,Belgian IPA,0.09,4.27,146,59,Alaska
+North Coast Brewing Co.,Old Rasputin Russian Imperial Stout,Russian Imperial Stout,0.09,4.27,3032,56,California
+Bear Republic Brewing Co.,Hop Rod Rye,Rye Beer,0.08,4.27,1911,57,California
+Stone Brewing Co.,Double Bastard Ale,American Strong Ale,0.11,4.27,1818,58,California
+Russian River Brewing Company,Porter,American Porter,0.06,4.27,62,61,California
+Cascade Brewing/Raccoon Lodge & Brewpub,Cascade Sang Royal,American Wild Ale,0.09,4.27,93,60,Oregon
+Kuhnhenn Brewing Company,Kuhnhenn Bourbon Barrel Barley Wine,English Barleywine,0.15,4.26,148,32,Michigan
+High Point Brewing Company,Ramstein Winter Wheat Eisbock,Eisbock,0.12,4.26,44,13,New Jersey
+East End Brewing Company,Gratitude,American Barleywine,0.12,4.26,203,12,Pennsylvania
+DC Brau Brewing Co.,On the Wings of Armageddon,American Double/Imperial IPA,0.09,4.26,31,11,"Washington, DC"
+Minneapolis Town Hall Brewery,Mango Mama,American IPA,0.06,4.26,106,9,Minnesota
+Avery Brewing Company,Tweak,American Double/Imperial Stout,0.16,4.26,38,5,Colorado
+Smuttynose Brewing Company,Smuttynose Baltic Porter (Big Beer Series),Baltic Porter,0.09,4.26,440,18,New Hampshire
+Cigar City Brewing,Hunahpu's Imperial Stout - Rum Barrel Aged,American Double/Imperial Stout,0.12,4.26,32,13,Florida
+Cigar City Brewing,Hunahpu's Imperial Stout - Whiskey Barrel Aged,American Double/Imperial Stout,0.12,4.26,31,14,Florida
+Lagunitas Brewing Company,Lagunitas Sucks Holiday Ale,American Double/Imperial IPA,0.08,4.26,588,62,California
+Boneyard Beer Company,RPM IPA,American IPA,0.08,4.26,36,63,Oregon
+Goose Island Beer Co.,Imperial IPA,American Double/Imperial IPA,0.09,4.25,314,33,Illinois
+Odell Brewing Company,Myrcenary Double IPA,American Double/Imperial Stout,0.09,4.25,368,6,Colorado
+New England Brewing Co.,Fuzzy Baby Ducks IPA,American IPA,0.06,4.25,11,20,Connecticut
+Allagash Brewing Company,Allagash Odyssey,Belgian Strong Dark Ale,0.10,4.25,340,19,Maine
+Stone Brewing Co.,IPA (India Pale Ale),American IPA,0.07,4.25,2506,64,California
+AleSmith Brewing Company,YuleSmith (Summer),American Double/Imperial IPA,0.09,4.25,854,65,California
+AleSmith Brewing Company,AleSmith Wee Heavy - Barrel Aged,Scotch Ale/Wee Heavy,0.10,4.25,84,66,California
+Alpine Beer Company,O'Brien's IPA,American IPA,0.06,4.25,56,67,California
+Three Floyds Brewing Co.,Gumballhead,American Pale Wheat Ale,0.05,4.24,1245,34,Indiana
+Kuhnhenn Brewing Company,Kuhnhenn Fourth Dementia (4D),Old Ale,0.14,4.24,388,37,Michigan
+Hoppin' Frog Brewery,Barrel Aged B.O.R.I.S. Oatmeal Imperial Stout,Russian Imperial Stout,0.09,4.24,431,35,Ohio
+Columbus Brewing  Company,Columbus IPA,American IPA,0.07,4.24,256,38,Ohio
+Central Waters Brewing Company,Bourbon Barrel Barleywine,American Barleywine,0.12,4.24,392,36,Wisconsin
+Dogfish Head Craft Brewery,90 Minute IPA,American Double/Imperial IPA,0.09,4.24,3188,14,Delaware
+Southampton Publick House,Southampton Grand Cru,Belgian Strong Pale Ale,0.10,4.24,280,15,New York
+Selin's Grove Brewing Company,Framboise,Fruit/Vegetable Beer,0.07,4.24,37,16,Pennsylvania
+Free State Brewing Co.,Old Backus Barleywine,American Barleywine,0.11,4.24,63,10,Kansas
+Great Divide Brewing Company,Oak Aged Yeti Imperial Stout,Russian Imperial Stout,0.10,4.24,1429,7,Colorado
+New England Brewing Co.,Gold Stock Ale,American Strong Ale,0.07,4.24,36,21,Connecticut
+Hill Farmstead Brewery,Nor,American Double/Imperial IPA,0.09,4.24,35,22,Vermont
+Midnight Sun Brewing Co.,Oak-Aged Imperial Chocolate Pumpkin Porter,American Porter,0.08,4.24,65,70,Alaska
+AleSmith Brewing Company,AleSmith Old Numbskull - Barrel Aged,American Barleywine,0.10,4.24,65,68,California
+Russian River Brewing Company,Row 2/Hill 56,American Pale Ale (APA),0.06,4.24,61,69,California
+Drake's Brewing Co.,Aroma Coma,American IPA,0.07,4.24,43,71,California
+Three Floyds Brewing Co.,Live a Rich Life,Belgian IPA,0.09,4.23,62,42,Indiana
+Founders Brewing Company,Founders Porter,American Porter,0.07,4.23,1022,39,Michigan
+Hoppin' Frog Brewery,B.O.R.I.S. the Crusher Oatmeal-Imperial Stout,Russian Imperial Stout,0.09,4.23,873,40,Ohio
+Hoppin' Frog Brewery,Barrel Aged Naked Evil,English Barleywine,0.11,4.23,87,41,Ohio
+Oskar Blues Brewing Company,Ten FIDY (Whiskey Barrel),Russian Imperial Stout,0.09,4.23,71,8,Colorado
+Terrapin Beer Company,Terrapin Coffee Oatmeal Imperial Stout,American Double/Imperial Stout,0.08,4.23,1002,15,Georgia
+Olde Hickory Brewery,Lindley Park,American Double/Imperial Stout,0.10,4.23,46,16,North Carolina
+Foothills Brewing Company,Jade,American IPA,,4.23,24,17,North Carolina
+Firestone Walker Brewing Co.,Double Jack,American Double/Imperial IPA,0.10,4.23,828,72,California
+FiftyFifty Brewing Co.,Imperial Eclipse Stout - Evan Williams Bourbon,American Double/Imperial Stout,0.10,4.23,132,73,California
+Bear Republic Brewing Co.,Tartare,Berliner Weissbier,0.04,4.23,25,74,California
+The Lost Abbey,Cable Car Kriek,American Wild Ale,0.07,4.23,21,75,California
+Central Waters Brewing Company,Brewhouse Coffee Stout,American Double/Imperial Stout,0.08,4.22,324,43,Wisconsin
+Selin's Grove Brewing Company,Olde Frosty IPA,American IPA,,4.22,17,17,Pennsylvania
+Great Divide Brewing Company,Yeti Imperial Stout,Russian Imperial Stout,0.10,4.22,1441,9,Colorado
+Great Divide Brewing Company,Old Ruffian Barley Wine,American Barleywine,0.10,4.22,959,10,Colorado
+Thomas Hooker Ales & Lagers,Thomas Hooker Liberator Doppelbock,Doppelbock,0.08,4.22,492,23,Connecticut
+New England Brewing Co.,Cherry Vanilla Infused Imperial Stout Trooper,Russian Imperial Stout,0.09,4.22,12,25,Connecticut
+Hill Farmstead Brewery,Society & Solitude #2,American Black Ale,0.10,4.22,37,24,Vermont
+The Lost Abbey,Deliverance,American Strong Ale,0.13,4.22,272,77,California
+Stone Brewing Co.,Ruination IPA - Double Dry Hopped,American Double/Imperial IPA,0.08,4.22,92,79,California
+Russian River Brewing Company,Framboise for a Cure,American Wild Ale,0.07,4.22,84,80,California
+Rogue Ales,Chocolate Stout,American Stout,0.06,4.22,1734,76,Oregon
+Hair of the Dog Brewing Company,Cherry Adam from the Wood,Old Ale,0.10,4.22,214,78,Oregon
+Haymarket Pub & Brewery,Mathias Imperial IPA,American Double/Imperial IPA,0.10,4.21,27,45,Illinois
+Founders Brewing Company,Founders Red's Rye PA,Rye Beer,0.07,4.21,1464,44,Michigan
+Evolution Craft Brewing,Rise Up Stout,American Stout,0.07,4.21,26,19,Maryland
+Southampton Publick House,Imperial Russian Stout,Russian Imperial Stout,0.10,4.21,149,18,New York
+Odell Brewing Company,Odell IPA,American IPA,0.07,4.21,486,11,Colorado
+New Belgium Brewing,Lips of Faith - Le Terroir,American Wild Ale,0.08,4.21,290,12,Colorado
+Bull & Bush Pub & Brewery,Royal Oil,English Barleywine,0.13,4.21,16,13,Colorado
+Hill Farmstead Brewery,Citra Single Hop Pale,American Pale Ale (APA),0.05,4.21,46,26,Vermont
+Hill Farmstead Brewery,Civil Disobedience #1,Saison/Farmhouse Ale,0.07,4.21,23,27,Vermont
+Cigar City Brewing,Nielsbohrium,American Double/Imperial Stout,0.10,4.21,86,18,Florida
+Stone Brewing Co.,Sublimely Self-Righteous Ale,American Black Ale,0.09,4.21,1638,81,California
+Firestone Walker Brewing Co.,Union Jack India Pale Ale,American IPA,0.08,4.21,856,83,California
+The Lost Abbey,Red Poppy Ale,Flanders Red Ale,0.06,4.21,444,85,California
+Kern River Brewing Company,Just Outstanding IPA,American IPA,0.07,4.21,353,86,California
+The Lost Abbey,Framboise de Amorosa,American Wild Ale,0.07,4.21,185,87,California
+The Bruery,Oude Tart,Flanders Red Ale,0.08,4.21,183,88,California
+North Coast Brewing Co.,Old Rasputin XIV Anniversary,Russian Imperial Stout,0.12,4.21,113,89,California
+Ballast Point Brewing Company,Victory at Sea (Barrel Aged) Imperial Porter,American Porter,0.12,4.21,36,90,California
+Hair of the Dog Brewing Company,Adam,Old Ale,0.10,4.21,858,82,Oregon
+Deschutes Brewery,Obsidian Stout,American Stout,0.06,4.21,784,84,Oregon
+Three Floyds Brewing Co.,Barrel Aged Behemoth,American Barleywine,0.13,4.2,37,48,Indiana
+"Bell's Brewery, Inc.",The Oracle,American Double/Imperial IPA,0.10,4.2,518,47,Michigan
+Great Lakes Brewing Company,Great Lakes Blackout Stout,Russian Imperial Stout,0.09,4.2,969,46,Ohio
+Jackie O's Pub & Brewery,Dark Apparition - Nuts,Russian Imperial Stout,0.11,4.2,23,49,Ohio
+Captain Lawrence Brewing Co.,Rosso E Marrone,Flanders Oud Bruin,0.10,4.2,142,20,New York
+Shmaltz Brewing Company,He'Brew Jewbelation Vertical (Rye Whiskey Barrel Aged Blend),American Strong Ale,0.11,4.2,142,21,New York
+Minneapolis Town Hall Brewery,Ol' Jack Frost Imperial Stout,Russian Imperial Stout,0.10,4.2,30,11,Minnesota
+New Belgium Brewing,Lips of Faith - La Folie,Flanders Oud Bruin,0.06,4.2,810,14,Colorado
+Avery Brewing Company,Uncle Jacob's Stout,American Double/Imperial Stout,0.17,4.2,42,15,Colorado
+New England Brewing Co.,Gandhi-Bot Double IPA,American Double/Imperial IPA,0.09,4.2,356,30,Connecticut
+Bar Harbor Brewing Company,Cadillac Mountain Stout,American Stout,0.07,4.2,616,28,Maine
+Allagash Brewing Company,Allagash Interlude,American Wild Ale,0.10,4.2,372,29,Maine
+Maine Beer Company,Zoe,American Amber/Red Ale,0.07,4.2,319,31,Maine
+Allagash Brewing Company,Allagash Coolship Red,Lambic - Fruit,0.06,4.2,38,32,Maine
+Hill Farmstead Brewery,Society & Solitude #3,American Double/Imperial IPA,0.08,4.2,36,33,Vermont
+Cigar City Brewing,Marshal Zhukov's Imperial Stout - Brandy Barrel Aged,Russian Imperial Stout,0.12,4.2,57,21,Florida
+Wild Heaven Craft Beers,Eschaton,Quadrupel (Quad),0.11,4.2,17,22,Georgia
+COAST Brewing Company,32/50,Kolsch,0.05,4.2,100,19,South Carolina
+Williamsburg AleWerks,Bitter Valentine,American Double/Imperial IPA,0.09,4.2,64,20,Virginia
+Hardywood Park Craft Brewery,Gingerbread Stout,Milk/Sweet Stout,0.09,4.2,12,23,Virginia
+Bear Republic Brewing Co.,Racer 5 India Pale Ale,American IPA,0.07,4.2,2015,91,California
+Stone Brewing Co.,Oaked Arrogant Bastard Ale,American Strong Ale,0.07,4.2,1704,92,California
+The Lost Abbey,The Angel's Share - Bourbin Barrel Aged,American Strong Ale,0.13,4.2,567,94,California
+Firestone Walker Brewing Co.,Firestone 15 - Anniversary Ale,American Strong Ale,0.13,4.2,244,95,California
+Russian River Brewing Company,Hopfather,American IPA,0.07,4.2,27,96,California
+The Bruery,Oude Tart with Sour Cherries,American Wild Ale,0.08,4.2,26,98,California
+Rogue Ales,Shakespeare Oatmeal Stout,Oatmeal Stout,0.06,4.2,1467,93,Oregon
+Walking Man Brewing Co.,Jaywalker Imperial Stout,Russian Imperial Stout,0.11,4.2,26,97,Washington
+Fremont Brewing Company,Kentucky Dark Star,American Double/Imperial Stout,0.10,4.2,11,99,Washington
+Half Acre Beer Company,Daisy Cutter Pale Ale,American Pale Ale (APA),0.05,4.19,541,51,Illinois
+Three Floyds Brewing Co.,Alpha Klaus Christmas (Xmas) Porter,American Porter,0.06,4.19,632,50,Indiana
+Three Floyds Brewing Co.,Behemoth Blonde Barleywine,American Barleywine,0.11,4.19,473,52,Indiana
+Brewery Ommegang,Hennepin (Farmhouse Saison),Saison/Farmhouse Ale,0.08,4.19,1822,22,New York
+Voodoo Brewing Company,Big Black Voodoo Daddy,American Double/Imperial Stout,0.13,4.19,342,23,Pennsylvania
+Troegs Brewing Company,Splinter Blue,American Wild Ale,,4.19,71,24,Pennsylvania
+Selin's Grove Brewing Company,Pumpkin Ale,Pumpkin Ale,0.06,4.19,21,25,Pennsylvania
+Surly Brewing Company,Smoke,Baltic Porter,0.08,4.19,234,12,Minnesota
+Surly Brewing Company,Moe's Bender,American Brown Ale,0.06,4.19,35,13,Minnesota
+New England Brewing Co.,Imperial Stout Trooper,Russian Imperial Stout,0.09,4.19,426,34,Connecticut
+Lawson's Finest Liquids,Triple Play IPA,American IPA,0.07,4.19,46,35,Vermont
+Swamp Head Brewery & Tasting Room,Saison Du Swamp,Saison/Farmhouse Ale,0.08,4.19,39,24,Florida
+Saint Arnold Brewing Company,Saint Arnold Endeavour IPA,American Double/Imperial IPA,0.09,4.19,71,2,Texas
+Stone Brewing Co.,Arrogant Bastard Ale,American Strong Ale,0.07,4.19,2570,100,California
+Boulevard Brewing Co.,Bourbon Barrel Quad (BBQ),Quadrupel (Quad),0.12,4.18,407,15,Missouri
+Three Floyds Brewing Co.,Broo Doo,American IPA,0.07,4.18,340,55,Indiana
+"Bell's Brewery, Inc.",Bell's Expedition Stout,Russian Imperial Stout,0.11,4.18,1668,53,Michigan
+Founders Brewing Company,Founders Double Trouble,American Double/Imperial IPA,0.09,4.18,1361,54,Michigan
+Central Waters Brewing Company,Fourteen Fourteen,American Double/Imperial Stout,0.11,4.18,23,56,Wisconsin
+Brooklyn Brewery,Brooklyner-Schneider Hopfen-Weisse,Weizenbock,0.09,4.18,304,26,New York
+Southampton Publick House,Saison Deluxe,Saison/Farmhouse Ale,0.07,4.18,28,27,New York
+Captain Lawrence Brewing Co.,Imperial Smoked Porter,American Porter,0.12,4.18,29,28,New York
+Southampton Publick House,Southampton Peconic County Reserve Ale,Saison/Farmhouse Ale,0.07,4.18,28,29,New York
+Surly Brewing Company,Four,Milk/Sweet Stout,0.10,4.18,137,14,Minnesota
+Avery Brewing Company,Maharaja,American Double/Imperial IPA,0.10,4.18,1581,16,Colorado
+Great Divide Brewing Company,Espresso Oak Aged Yeti Imperial Stout,American Double/Imperial Stout,0.10,4.18,822,17,Colorado
+Avery Brewing Company,Margarete,American Double/Imperial Stout,0.15,4.18,32,18,Colorado
+Cambridge Brewing Company,Blunderbuss Barley Wine,American Barleywine,0.12,4.18,40,36,Massachusetts
+Cigar City Brewing,Marshal Zhukov's Imperial Stout,Russian Imperial Stout,0.11,4.18,357,25,Florida
+The Funky Buddha Lounge & Brewery,Nib Smuggler,American Porter,0.06,4.18,18,28,Florida
+Pisgah Brewing Co.,Pisgah Valdez,American Double/Imperial Stout,0.07,4.18,181,26,North Carolina
+COAST Brewing Company,Event Horizon Cascadian Dark Ale,American Black Ale,0.07,4.18,23,27,South Carolina
+Thirsty Dog Brewing Company,Siberian Night Imperial Stout,Russian Imperial Stout,0.10,4.17,739,57,Ohio
+High Point Brewing Company,Ramstein Winter Wheat,Weizenbock,0.10,4.17,237,30,New Jersey
+Flying Fish Brewing Company,Exit 16,American Double/Imperial IPA,0.08,4.17,117,32,New Jersey
+Ithaca Beer Company,LeBleu,American Wild Ale,0.05,4.17,186,31,New York
+Blue Point Brewing Company,Blue Point Extra Special Bitter,Extra Special/Strong Bitter (ESB),0.05,4.17,33,33,New York
+Allagash Brewing Company,Allagash Curieux (Bourbon Barrel-Aged Tripel),Tripel,0.11,4.17,667,37,Maine
+Cambridge Brewing Company,Benevolence,American Wild Ale,0.13,4.17,25,38,Massachusetts
+Cigar City Brewing,Jai Alai IPA - Peach,American IPA,0.08,4.17,31,29,Florida
+"Skull Coast Ale Company, LLC",Gallows Point Dead Man's Porter,American Porter,0.07,4.17,29,30,South Carolina
+Goose Island Beer Co.,Juliet,American Wild Ale,0.08,4.16,238,62,Illinois
+Founders Brewing Company,Founders Backwoods Bastard,Scotch Ale/Wee Heavy,0.10,4.16,1084,58,Michigan
+Founders Brewing Company,Founders Harvest Ale,American IPA,0.07,4.16,670,59,Michigan
+Dark Horse Brewing Company,Plead the 5th Imperial Stout,Russian Imperial Stout,0.12,4.16,567,60,Michigan
+Hoppin' Frog Brewery,D.O.R.I.S. the Destroyer Double Imperial Stout,Russian Imperial Stout,0.11,4.16,294,61,Ohio
+Kane Brewing Company,Head High,American IPA,0.07,4.16,23,37,New Jersey
+Brooklyn Brewery,Brooklyn Black Chocolate Stout,Russian Imperial Stout,0.10,4.16,2432,34,New York
+Troegs Brewing Company,Flying Mouflan,American Barleywine,0.09,4.16,491,35,Pennsylvania
+Stoudts Brewing Co.,Stoudt's Barrel Aged Old Abominable,English Barleywine,0.09,4.16,43,36,Pennsylvania
+McKenzie Brew House,Saison Vautout Du Bois,Saison/Farmhouse Ale,0.07,4.16,16,38,Pennsylvania
+Surly Brewing Company,Coffee Bender,American Brown Ale,0.05,4.16,669,16,Minnesota
+Barley John's Brew Pub,Dark Knight,Baltic Porter,0.12,4.16,73,17,Minnesota
+Fitger's Brewhouse,Edmund Fitzgerald Imperial Stout (Bourbon Barrel Aged),Russian Imperial Stout,0.10,4.16,16,18,Minnesota
+Snake River Brewing Company & Brewpub,Zonker Stout,Foreign/Export Stout,0.06,4.16,196,19,Wyoming
+Clown Shoes,Vampire Slayer,American Double/Imperial Stout,0.10,4.16,121,39,Massachusetts
+Cambridge Brewing Company,Arquebus,English Barleywine,0.11,4.16,32,41,Massachusetts
+Hill Farmstead Brewery,Jim,American Black Ale,0.08,4.16,49,40,Vermont
+Lawson's Finest Liquids,Maple Barrel Aged Fayston Maple Imperial Stout,American Double/Imperial Stout,0.12,4.16,30,42,Vermont
+Cigar City Brewing,Big Sound Scotch Ale - Bourbon Barrel Aged,Scotch Ale/Wee Heavy,0.09,4.16,28,31,Florida
+COAST Brewing Company,Carnie Fire,American Amber/Red Ale,0.05,4.16,12,32,South Carolina
+Half Acre Beer Company,Galactic Double Daisy Cutter,American Double/Imperial IPA,0.08,4.15,91,65,Illinois
+Three Floyds Brewing Co.,Apocalypse Cow,American Double/Imperial IPA,0.11,4.15,347,63,Indiana
+Three Floyds Brewing Co.,Lord Admiral Nelson,Extra Special/Strong Bitter (ESB),0.07,4.15,130,64,Indiana
+Three Floyds Brewing Co.,Barrel Aged Moloko,Milk/Sweet Stout,0.10,4.15,27,67,Indiana
+New Glarus Brewing Company,R&D Bourbon Barrel Kriek,American Wild Ale,0.06,4.15,79,66,Wisconsin
+Dogfish Head Craft Brewery,Burtin Baton,American Double/Imperial IPA,0.10,4.15,2363,40,Delaware
+Brooklyn Brewery,Brooklyn Detonation Ale,American Double/Imperial IPA,0.10,4.15,48,43,New York
+Victory Brewing Company,Storm King Stout,Russian Imperial Stout,0.09,4.15,2363,39,Pennsylvania
+Weyerbacher Brewing Co.,Insanity,English Barleywine,0.11,4.15,724,41,Pennsylvania
+Pennsylvania Brewing Company,St. Nikolaus Bock Bier - Brewer's Reserve,Doppelbock,0.09,4.15,86,42,Pennsylvania
+McKenzie Brew House,Saison Vautour,Saison/Farmhouse Ale,0.07,4.15,46,44,Pennsylvania
+Surly Brewing Company,Darkness - Bourbon Barrel Aged,Russian Imperial Stout,0.10,4.15,15,19,Minnesota
+Great Divide Brewing Company,Hercules Double IPA,American Double/Imperial IPA,0.10,4.15,1374,20,Colorado
+Allagash Brewing Company,Allagash Tripel Ale,Tripel,0.09,4.15,771,43,Maine
+Ipswich Ale Brewery,Ipswich Oatmeal Stout,Oatmeal Stout,0.07,4.15,347,44,Massachusetts
+Hill Farmstead Brewery,Fear and Trembling (Cabernet/Bourbon Blend),Baltic Porter,0.09,4.15,48,45,Vermont
+Cigar City Brewing,Tocobaga Red Ale,American Amber/Red Ale,0.07,4.15,110,33,Florida
+COAST Brewing Company,Rye Knot Brown,American Brown Ale,0.06,4.15,32,35,South Carolina
+Williamsburg AleWerks,Café Royale,Milk/Sweet Stout,0.08,4.15,97,34,Virginia
+Three Floyds Brewing Co.,Arctic Panzer Wolf,American Double/Imperial IPA,0.09,4.14,537,68,Indiana
+Great Lakes Brewing Company,Rye of the Tiger,Rye Beer,0.08,4.14,27,69,Ohio
+Great Lakes Brewing Company,Great Lakes Wolfhound Stout,Irish Dry Stout,0.05,4.14,22,70,Ohio
+Jackie O's Pub & Brewery,Bolero Brown,American Strong Ale,0.10,4.14,16,71,Ohio
+Dogfish Head Craft Brewery,Palo Santo Marron,American Brown Ale,0.12,4.14,1704,45,Delaware
+Ithaca Beer Company,Flower Power India Pale Ale,American IPA,0.08,4.14,920,46,New York
+Bullfrog Brewery,Double Coffee Stout,American Stout,0.07,4.14,45,47,Pennsylvania
+Selin's Grove Brewing Company,Saison De Peche,Fruit/Vegetable Beer,0.06,4.14,35,48,Pennsylvania
+Surly Brewing Company,Bender,American Brown Ale,0.05,4.14,686,20,Minnesota
+Nebraska Brewing Company,Melange a Trois - Reserve Series Aged in French Oak Chardonnay Barrels,Belgian Strong Pale Ale,0.10,4.14,60,21,Nebraska
+Smuttynose Brewing Company,Smuttynose Robust Porter,American Porter,0.06,4.14,888,46,New Hampshire
+Lawson's Finest Liquids,Chinooker'd IPA,American IPA,0.07,4.14,47,47,Vermont
+The Funky Buddha Lounge & Brewery,Passionfruit Berliner Weisse,Berliner Weissbier,0.05,4.14,14,37,Florida
+COAST Brewing Company,Old Nuptial - Bourbon Barrel Aged Barleywine,American Barleywine,0.11,4.14,19,36,South Carolina
+La Cumbre Brewing Co.,Elevated IPA,American IPA,0.07,4.14,15,4,New Mexico
+Coop Ale Works,F5 IPA,American IPA,0.07,4.14,15,5,Oklahoma
+Live Oak Brewing Company,Live Oak Tree Hugger Barleywine,American Barleywine,0.12,4.14,26,3,Texas
+Upland Brewing Company,Persimmon Lambic,Lambic - Fruit,,4.13,58,72,Indiana
+Three Floyds Brewing Co.,Rye'd Da Lightning,Rye Beer,0.07,4.13,38,73,Indiana
+Shmaltz Brewing Company,He'Brew Genesis 15:15,American Barleywine,0.13,4.13,89,49,New York
+Southampton Publick House,Southampton Uberliner (Imperial Berliner Weisse),Berliner Weissbier,0.06,4.13,30,50,New York
+Boulevard Brewing Co.,Rye-on-Rye,Rye Beer,0.11,4.13,209,22,Missouri
+Boulevard Brewing Co.,Collaboration No. 2 - White IPA,Belgian IPA,0.08,4.13,158,23,Missouri
+Allagash Brewing Company,Allagash Coolship Resurgam,Gueuze,0.06,4.13,16,50,Maine
+Hill Farmstead Brewery,Fear and Trembling (French Oak Cabernet),Baltic Porter,0.09,4.13,37,48,Vermont
+Lawson's Finest Liquids,Maple Tripple Ale,American Strong Ale,0.12,4.13,21,49,Vermont
+Hill Farmstead Brewery,Apollo Single Hop IPA,American IPA,0.05,4.13,10,51,Vermont
+Good People Brewing Company,Coffee Oatmeal Stout,Oatmeal Stout,0.06,4.13,40,1,Alabama
+The Funky Buddha Lounge & Brewery,No Crusts,American Brown Ale,0.06,4.13,66,40,Florida
+Terrapin Beer Company,Terrapin Oak Aged Wake-n-Bake Coffee Oatmeal Imperial Stout,American Double/Imperial Stout,0.08,4.13,41,41,Georgia
+Five Seasons Prado,Hopgasm,American IPA,0.07,4.13,19,42,Georgia
+Foothills Brewing Company,Seeing Double IPA,American Double/Imperial IPA,0.10,4.13,138,38,North Carolina
+"Skull Coast Ale Company, LLC",Sea Witch Watermelon Wheat,Fruit/Vegetable Beer,0.05,4.13,14,43,South Carolina
+Williamsburg AleWerks,Bourbon Barrel Porter,American Porter,0.09,4.13,106,39,Virginia
+Half Acre Beer Company,Double Daisy Cutter,American Double/Imperial IPA,0.09,4.12,123,78,Illinois
+Three Floyds Brewing Co.,Drunk Monk Hefeweizen,Hefeweizen,0.06,4.12,45,80,Indiana
+Founders Brewing Company,Founders Blushing Monk,Fruit/Vegetable Beer,0.09,4.12,428,74,Michigan
+Jackie O's Pub & Brewery,Dark Apparition - Kopi Lowak,Russian Imperial Stout,,4.12,16,81,Ohio
+Hoppin' Frog Brewery,Hop Heathen,American Black Ale,0.09,4.12,16,82,Ohio
+New Glarus Brewing Company,Unplugged Cranbic Ale,American Wild Ale,0.05,4.12,304,75,Wisconsin
+Central Waters Brewing Company,Kosmyk Charlie Y2K Catastrophe Ale,American Barleywine,0.10,4.12,156,76,Wisconsin
+New Glarus Brewing Company,Thumb Print IIPA,American Double/Imperial IPA,0.10,4.12,148,77,Wisconsin
+Ale Asylum,Bedlam,Belgian IPA,0.08,4.12,73,79,Wisconsin
+Triumph Brewing Company,Coffee & Cream Stout,American Stout,0.06,4.12,16,55,New Jersey
+Brewery Ommegang,Ommegang (Abbey Ale),Dubbel,0.09,4.12,1502,51,New York
+Southern Tier Brewing Company,Mokah,American Double/Imperial Stout,0.11,4.12,572,52,New York
+Captain Lawrence Brewing Co.,Nor'Easter,Belgian Strong Dark Ale,0.12,4.12,201,53,New York
+Selin's Grove Brewing Company,Shade Mountain Oatmeal Stout,Oatmeal Stout,0.05,4.12,29,54,Pennsylvania
+Saint Louis Brewery/Schlafly Tap Room,Schlafly Pumpkin Ale,Pumpkin Ale,0.08,4.12,296,24,Missouri
+The Cambridge House,Cambridge House Abijah Rowe IPA,English India Pale Ale (IPA),0.07,4.12,35,55,Connecticut
+Willimantic Brewing Co.,Willimantic Pushing the Envelope IPA,American IPA,0.07,4.12,15,59,Connecticut
+Willimantic Brewing Co.,Willimantic Pony Espresso Stout,American Stout,0.06,4.12,11,60,Connecticut
+Smuttynose Brewing Company,Smuttynose Ry(e)an Ale,Rye Beer,0.08,4.12,115,52,New Hampshire
+Portsmouth Brewery,Portsmouth Hop Harvest #2,American IPA,0.06,4.12,34,56,New Hampshire
+McNeill's Brewery,McNeill's Imperial Stout,Russian Imperial Stout,0.08,4.12,52,53,Vermont
+Rock Art Brewery,Black Moon IPA,American Black Ale,0.10,4.12,47,54,Vermont
+Hill Farmstead Brewery,Foster,Rye Beer,0.07,4.12,32,57,Vermont
+Hill Farmstead Brewery,James Black Ale,American Black Ale,0.07,4.12,26,58,Vermont
+Yazoo Brewing Company,Sue,American Porter,0.09,4.12,151,2,Tennessee
+Cigar City Brewing,Hopped Up Johnnie,Russian Imperial Stout,0.12,4.12,14,45,Florida
+COAST Brewing Company,Cascade Pale,American Pale Ale (APA),0.06,4.12,20,44,South Carolina
+Goose Island Beer Co.,Sofie,Saison/Farmhouse Ale,0.07,4.11,658,84,Illinois
+Upland Brewing Company,Kiwi Lambic,Lambic - Fruit,6.00,4.11,60,89,Indiana
+Founders Brewing Company,Founders Centennial IPA,American IPA,0.07,4.11,1462,83,Michigan
+Jolly Pumpkin Artisan Ales,Oro de Calabaza,Biere de Garde,0.08,4.11,584,85,Michigan
+Jolly Pumpkin Artisan Ales,Biere de Mars,Biere de Garde,0.07,4.11,170,88,Michigan
+Kuhnhenn Brewing Company,Kuhnhenn Road Rash Imperial Stout,Russian Imperial Stout,0.12,4.11,49,90,Michigan
+Kuhnhenn Brewing Company,Kuhnhenn American Imperial Stout,American Double/Imperial Stout,0.14,4.11,20,92,Michigan
+Jackie O's Pub & Brewery,Oil of Aphrodite - Rum Barrel Aged,American Double/Imperial Stout,0.10,4.11,38,91,Ohio
+Central Waters Brewing Company,Peruvian Morning,American Double/Imperial Stout,0.09,4.11,335,86,Wisconsin
+New Glarus Brewing Company,Apple Ale,Fruit/Vegetable Beer,0.04,4.11,331,87,Wisconsin
+Dogfish Head Craft Brewery,Miles Davis' Bitches Brew,American Double/Imperial Stout,0.09,4.11,673,57,Delaware
+Evolution Craft Brewing,Menagerie #5,Russian Imperial Stout,0.11,4.11,32,61,Maryland
+Brooklyn Brewery,Brooklyn Black OPS,Russian Imperial Stout,0.11,4.11,627,58,New York
+Sixpoint,Express,Quadrupel (Quad),0.11,4.11,25,62,New York
+Weyerbacher Brewing Co.,Double Simcoe IPA,American Double/Imperial IPA,0.09,4.11,1198,56,Pennsylvania
+Troegs Brewing Company,Troegs Perpetual IPA,American IPA,0.08,4.11,319,59,Pennsylvania
+Otto's Pub and Brewery,Jolly Roger Imperial Stout,Russian Imperial Stout,0.10,4.11,66,60,Pennsylvania
+Boulevard Brewing Co.,Imperial Stout,American Double/Imperial Stout,0.11,4.11,233,25,Missouri
+Great Divide Brewing Company,Titan IPA,American IPA,0.07,4.11,1274,21,Colorado
+Avery Brewing Company,DuganA IPA,American Double/Imperial IPA,0.09,4.11,514,22,Colorado
+Uinta Brewing Company,Labyrinth Black Ale,American Double/Imperial Stout,0.13,4.11,179,23,Utah
+The Cambridge House,Cambridge House Copper Kolsch,Kolsch,0.05,4.11,20,66,Connecticut
+Allagash Brewing Company,Allagash White,Witbier,0.05,4.11,1139,62,Maine
+Maine Beer Company,MO (Madeline & Oliver) Pale Ale,American Pale Ale (APA),0.06,4.11,65,63,Maine
+Cambridge Brewing Company,YouEnjoyMyStout,Russian Imperial Stout,0.10,4.11,44,64,Massachusetts
+Cambridge Brewing Company,Bannatyne's Scotch Ale,Scotch Ale/Wee Heavy,0.09,4.11,38,65,Massachusetts
+Smuttynose Brewing Company,"Smuttynose IPA ""Finest Kind""",American IPA,0.07,4.11,1514,61,New Hampshire
+Hill Farmstead Brewery,Mimosa,American Wild Ale,0.10,4.11,20,67,Vermont
+Cigar City Brewing,Warmer Winter Winter Warmer - Laird's Apple Brandy Barrel Aged,Old Ale,0.10,4.11,19,48,Florida
+Foothills Brewing Company,Foothills Baltic Porter,Baltic Porter,0.09,4.11,121,46,North Carolina
+Catawba Valley Brewing Company,King Coconut Porter,American Porter,0.05,4.11,18,49,North Carolina
+Williamsburg AleWerks,Pumpkin Ale,Pumpkin Ale,0.08,4.11,79,47,Virginia
+Dark Horse Brewing Company,Dark Horse Double Crooked Tree IPA,American Double/Imperial IPA,0.14,4.1,739,94,Michigan
+Arcadia Brewing Company,Bourbon Barrel Aged Shipwreck Porter,Baltic Porter,0.12,4.1,201,96,Michigan
+Great Lakes Brewing Company,Great Lakes Dortmunder Gold,Dortmunder/Export Lager,0.06,4.1,883,93,Ohio
+Tyranena Brewing Company,Dirty Old Man Imperial Rye Porter,American Porter,0.08,4.1,332,95,Wisconsin
+Dogfish Head Craft Brewery,Indian Brown Ale,American Brown Ale,0.07,4.1,1688,64,Delaware
+Stillwater Artisanal Ales,Cellar Door,Saison/Farmhouse Ale,0.07,4.1,189,68,Maryland
+Brewery Ommegang,Three Philosophers Belgian Style Blend (Quadrupel),Quadrupel (Quad),0.10,4.1,1676,65,New York
+Southern Tier Brewing Company,Unearthly (Imperial India Pale Ale),American Double/Imperial IPA,0.10,4.1,1087,66,New York
+Brooklyn Brewery,Brooklyn Sorachi Ace,Saison/Farmhouse Ale,0.08,4.1,447,67,New York
+"Middle Ages Brewing Co., Ltd.",Blackheart Stout,English Stout,0.07,4.1,47,71,New York
+Victory Brewing Company,Prima Pils,German Pilsener,0.05,4.1,1855,63,Pennsylvania
+East End Brewing Company,Blackstrap Stout,American Stout,0.06,4.1,85,69,Pennsylvania
+Victory Brewing Company,Braumeister Pils,German Pilsener,0.06,4.1,48,70,Pennsylvania
+Minneapolis Town Hall Brewery,Twisted Reality Barleywine,American Barleywine,0.10,4.1,20,28,Minnesota
+Saint Louis Brewery/Schlafly Tap Room,Schlafly American IPA,American IPA,0.07,4.1,145,26,Missouri
+Perennial Artisan Ales,Abraxas,American Double/Imperial Stout,0.10,4.1,28,27,Missouri
+Oskar Blues Brewing Company,G'Knight Imperial Red Ale,American Double/Imperial IPA,0.09,4.1,1150,24,Colorado
+Bru Rm. at BAR,BruRm Damn Good Stout,American Stout,0.06,4.1,17,77,Connecticut
+New England Brewing Co.,Galaxy Pale Ale,American Pale Ale (APA),0.05,4.1,16,78,Connecticut
+Maine Beer Company,Peeper Ale,American Pale Ale (APA),0.06,4.1,341,68,Maine
+Allagash Brewing Company,Allagash Ghoulschip,American Wild Ale,0.07,4.1,46,72,Maine
+Cisco Brewers Inc.,Monomoy Kriek,American Wild Ale,0.07,4.1,81,69,Massachusetts
+Wormtown Brewing Co.,Be Hoppy,American IPA,0.07,4.1,46,71,Massachusetts
+Cambridge Brewing Company,Red God IPA,American Amber/Red Ale,0.09,4.1,43,73,Massachusetts
+Hill Farmstead Brewery,Art,Saison/Farmhouse Ale,0.07,4.1,47,70,Vermont
+Hill Farmstead Brewery,Everett (Barrel Aged),American Porter,0.08,4.1,41,74,Vermont
+Hill Farmstead Brewery,E.,Saison/Farmhouse Ale,0.07,4.1,31,75,Vermont
+Hill Farmstead Brewery,Amarillo Single Hop Pale,American Pale Ale (APA),0.05,4.1,30,76,Vermont
+Hill Farmstead Brewery,Nelson Sauvin Single Hop Pale,American Pale Ale (APA),0.05,4.1,11,79,Vermont
+Cigar City Brewing,Big Sound Scotch Ale,Scotch Ale/Wee Heavy,0.09,4.1,160,52,Florida
+Cigar City Brewing,Imperial Milk Porter - Stranahan Whiskey Barrel Aged,American Porter,,4.1,70,53,Florida
+The Duck-Rabbit Craft Brewery,Duck-Rabbit Baltic Porter,Baltic Porter,0.09,4.1,423,50,North Carolina
+Foothills Brewing Company,Sexual Chocolate,Russian Imperial Stout,0.10,4.1,386,51,North Carolina
+Foothills Brewing Company,Bourbon Barrel Aged Total Eclipse Stout,American Stout,0.07,4.1,31,54,North Carolina
+Saint Arnold Brewing Company,Pumpkinator,American Double/Imperial Stout,0.10,4.1,47,6,Texas
+Two Brothers Brewing Company,Cane & Ebel,Rye Beer,0.07,4.09,563,99,Illinois
+"Bell's Brewery, Inc.",Third Coast Old Ale,American Barleywine,0.10,4.09,817,97,Michigan
+Great Lakes Brewing Company,Great Lakes Eliot Ness,Vienna Lager,0.06,4.09,817,98,Ohio
+Central Waters Brewing Company,Brewer's Reserve Bourbon Barrel Stout,American Double/Imperial Stout,0.10,4.09,415,100,Wisconsin
+Dogfish Head Craft Brewery,75 Minute IPA,American IPA,0.08,4.09,345,74,Delaware
+Flying Dog Brewery,Wild Dog Barrel-Aged Gonzo Imperial Porter,Baltic Porter,0.10,4.09,295,75,Maryland
+Flying Fish Brewing Company,Exit 11,American Pale Wheat Ale,0.06,4.09,77,79,New Jersey
+Captain Lawrence Brewing Co.,Captain's Reserve Imperial IPA,American Double/Imperial IPA,0.09,4.09,471,73,New York
+Brewery Ommegang,Gnomegang,Belgian Strong Pale Ale,0.10,4.09,293,76,New York
+Brooklyn Brewery,Brooklyn Blast Pale ale,American Double/Imperial IPA,0.08,4.09,186,77,New York
+Sixpoint,Gorilla Warfare Coffee Porter,American Porter,0.08,4.09,63,80,New York
+C.H. Evans Brewing Company,Kick-Ass Brown,American Brown Ale,0.05,4.09,39,82,New York
+Victory Brewing Company,HopDevil Ale,American IPA,0.08,4.09,345,72,Pennsylvania
+Spring House Brewing Company,Planet Bean Coffee Stout,American Stout,0.07,4.09,106,78,Pennsylvania
+Weyerbacher Brewing Co.,Rapture,American Wild Ale,0.07,4.09,61,81,Pennsylvania
+Selin's Grove Brewing Company,Stealth Tripel,Tripel,0.09,4.09,29,83,Pennsylvania
+Great River Brewery,Redband Stout,American Stout,0.06,4.09,88,30,Iowa
+Minneapolis Town Hall Brewery,Russian Roulette,Russian Imperial Stout,0.09,4.09,12,31,Minnesota
+Boulevard Brewing Co.,Tank 7 Farmhouse Ale,Saison/Farmhouse Ale,0.08,4.09,487,29,Missouri
+Great Divide Brewing Company,Chocolate Oak Aged Yeti,American Double/Imperial Stout,0.10,4.09,659,25,Colorado
+Great Divide Brewing Company,Fresh Hop Pale Ale,American Pale Ale (APA),0.06,4.09,586,26,Colorado
+Epic Brewing Co.,Big Bad Baptist,American Double/Imperial Stout,0.11,4.09,109,27,Utah
+Thomas Hooker Ales & Lagers,Thomas Hooker Imperial Porter,American Porter,0.08,4.09,277,81,Connecticut
+Allagash Brewing Company,Allagash Grand Cru,Quadrupel (Quad),0.07,4.09,456,80,Maine
+Pretty Things Beer & Ale Project,"December 6th, 1855 EIP",American Black Ale,0.06,4.09,99,82,Massachusetts
+Wormtown Brewing Co.,Pro-Am Porter,English Porter,0.07,4.09,29,85,Massachusetts
+Hill Farmstead Brewery,Anna,Saison/Farmhouse Ale,0.06,4.09,78,83,Vermont
+Hill Farmstead Brewery,Harlan India Pale Ale,American IPA,0.06,4.09,38,84,Vermont
+Good People Brewing Company,Snake Handler Double IPA,American Double/Imperial IPA,0.09,4.09,50,3,Alabama
+Cigar City Brewing,Hunahpu's Imperial Stout - Virgin Oak Barrel Aged,American Double/Imperial Stout,0.12,4.09,27,55,Florida
+The Funky Buddha Lounge & Brewery,Bonita Applebaum,American Brown Ale,0.06,4.09,25,57,Florida
+Catawba Valley Brewing Company,Whiskey River IPA,American IPA,0.07,4.09,14,59,North Carolina
+COAST Brewing Company,Bulls Bay Oyster Stout,American Stout,0.07,4.09,15,58,South Carolina
+Westbrook Brewing Co.,Gose,Gose,0.04,4.09,12,60,South Carolina
+Mad Fox Brewing Company,Orange Whip IPA,American IPA,0.07,4.09,25,56,Virginia
+Dogfish Head Craft Brewery,60 Minute IPA,American IPA,0.06,4.08,2415,84,Delaware
+Dogfish Head Craft Brewery,World Wide Stout,American Double/Imperial Stout,0.18,4.08,1486,85,Delaware
+High Point Brewing Company,Ramstein Oktoberfest,Marzen/Oktoberfest,0.06,4.08,38,92,New Jersey
+High Point Brewing Company,Ramstein Double Platinum Blonde,Hefeweizen,0.07,4.08,23,93,New Jersey
+Brooklyn Brewery,Brooklyn Local 1,Belgian Strong Pale Ale,0.09,4.08,811,87,New York
+Southern Tier Brewing Company,Gemini (Imperial Blended Ale),American Strong Ale,0.09,4.08,566,88,New York
+"Middle Ages Brewing Co., Ltd.",Dragonslayer,Russian Imperial Stout,0.10,4.08,332,89,New York
+Southampton Publick House,Southampton Cuvee Des Fleurs,Saison/Farmhouse Ale,0.08,4.08,191,90,New York
+Victory Brewing Company,Old Horizontal,American Barleywine,0.11,4.08,1023,86,Pennsylvania
+Victory Brewing Company,Braumeister Harvest Pils,German Pilsener,0.06,4.08,82,91,Pennsylvania
+Selin's Grove Brewing Company,SNAFU IPA,American Black Ale,0.07,4.08,14,94,Pennsylvania
+Victory Brewing Company,Hersbrucker Pils,German Pilsener,0.05,4.08,11,95,Pennsylvania
+Berwick Brewing Company,Bourbon barrel Imperial Stout,American Double/Imperial Stout,0.09,4.08,10,96,Pennsylvania
+Free State Brewing Co.,Owd Mac's Imperial Stout,Russian Imperial Stout,,4.08,22,32,Kansas
+Odell Brewing Company,Mountain Standard Double Black IPA,American Black Ale,0.10,4.08,159,28,Colorado
+Willimantic Brewing Co.,Willimantic V.E.G. IPA,American IPA,0.06,4.08,15,87,Connecticut
+Cambridge Brewing Company,Cerise Cassee American Sour Ale,American Wild Ale,0.08,4.08,39,86,Massachusetts
+Jack's Abby Brewing,Kiwi Rising,Dortmunder/Export Lager,0.09,4.08,14,88,Massachusetts
+Cigar City Brewing,Jai Alai IPA,American IPA,0.08,4.08,708,61,Florida
+Cigar City Brewing,Good Gourd Imperial Pumpkin Ale,Pumpkin Ale,0.09,4.08,95,62,Florida
+Cigar City Brewing,Marshal Zhukov's Imperial Stout - Cedar Aged (Humidor Series),Russian Imperial Stout,0.12,4.08,64,63,Florida
+Cigar City Brewing,Puppy's Breath Porter,American Porter,0.08,4.08,43,65,Florida
+Westbrook Brewing Co.,India Pale Ale,American IPA,0.07,4.08,54,64,South Carolina
+Westbrook Brewing Co.,Mexican Cake,American Double/Imperial Stout,0.11,4.08,38,66,South Carolina
+COAST Brewing Company,ALTerior Motive,Altbier,0.06,4.08,16,67,South Carolina
+(512) Brewing Company,(512) Pecan Porter,American Porter,0.07,4.08,89,7,Texas
+Southern Tier Brewing Company,Oat (Imperial Oatmeal Stout),American Double/Imperial Stout,0.11,4.07,613,99,New York
+Southern Tier Brewing Company,Iniquity (Imperial Black Ale),American Black Ale,0.09,4.07,546,100,New York
+Victory Brewing Company,Hop Wallop,American Double/Imperial IPA,0.09,4.07,1815,97,Pennsylvania
+Troegs Brewing Company,Troegs Hopback Amber Ale,American Amber/Red Ale,0.06,4.07,1056,98,Pennsylvania
+Minneapolis Town Hall Brewery,Black H20 Oatmeal Stout,Oatmeal Stout,0.06,4.07,90,33,Minnesota
+Ska Brewing Co.,Modus Hoperandi,American IPA,0.07,4.07,590,29,Colorado
+Odell Brewing Company,Odell Cutthroat Porter,American Porter,0.05,4.07,325,30,Colorado
+Dry Dock Brewing Co.,Dry Dock's Double IPA,American Double/Imperial IPA,0.09,4.07,80,31,Colorado
+Odell Brewing Company,Odell DeConstruction Golden Ale,American Wild Ale,0.11,4.07,63,32,Colorado
+Avery Brewing Company,Meretrix,American Wild Ale,0.10,4.07,28,33,Colorado
+Dry Dock Brewing Co.,Dry Dock Hefeweizen,Hefeweizen,0.04,4.07,21,34,Colorado
+Lewis & Clark Brewing Company,Tumbleweed IPA,American IPA,0.07,4.07,16,35,Montana
+Allagash Brewing Company,Allagash FOUR,Quadrupel (Quad),0.10,4.07,428,89,Maine
+Marshall Wharf Brewing Company,Sexy Chaos,Russian Imperial Stout,0.10,4.07,16,97,Maine
+Mayflower Brewing Company,Mayflower Porter,English Porter,0.06,4.07,186,90,Massachusetts
+Mayflower Brewing Company,Mayflower Spring Hop,American Amber/Red Ale,0.05,4.07,69,91,Massachusetts
+Wormtown Brewing Co.,Sweet Tat's Breakfast Stout,Oatmeal Stout,0.09,4.07,22,95,Massachusetts
+Mystic Brewery,Sauvignon Blanc Barrel Fermented Saison,Saison/Farmhouse Ale,0.07,4.07,19,96,Massachusetts
+Portsmouth Brewery,Portsmouth Imperial (Baltic) Porter,Baltic Porter,0.09,4.07,37,92,New Hampshire
+Portsmouth Brewery,Porstmouth 5 C's IPA,American IPA,0.07,4.07,36,94,New Hampshire
+The Alchemist,Heretic,American Double/Imperial IPA,0.10,4.07,37,93,Vermont
+Good People Brewing Company,Hitchhiker,American IPA,0.07,4.07,10,4,Alabama
+Terrapin Beer Company,Terrapin Big Hoppy Monster,American Amber/Red Ale,0.08,4.07,597,68,Georgia
+SweetWater Brewing Company,Sweetwater Dank Tank Ghoulash,American Black Ale,0.09,4.07,60,70,Georgia
+The Duck-Rabbit Craft Brewery,Duck-Rabbit Duck-Rabbator,Doppelbock,0.09,4.07,93,69,North Carolina
+COAST Brewing Company,"Blackbeerd Imperial Stout, 2011 Barrel Aged",Russian Imperial Stout,0.09,4.07,25,71,South Carolina
+Four Peaks Brewing Company,Hop Knot,American IPA,0.07,4.07,100,8,Arizona
+Marble Brewery,Marble Reserve Ale,American Strong Ale,0.09,4.07,21,11,New Mexico
+Redbud Brewing Company,Cuvee Three,Saison/Farmhouse Ale,0.07,4.07,23,10,Oklahoma
+(512) Brewing Company,(512) IPA,American IPA,0.07,4.07,55,9,Texas
+Boulevard Brewing Co.,Long Strange Tripel,Tripel,0.09,4.06,274,34,Missouri
+Odell Brewing Company,St. Lupulin,American Pale Ale (APA),0.07,4.06,196,36,Colorado
+New Belgium Brewing,Lips of Faith - Dunkel Weiss,Dunkelweizen,0.09,4.06,122,37,Colorado
+Clown Shoes,Hoppy Feet 1.5,American Black Ale,0.10,4.06,171,99,Massachusetts
+Element,Dark Element,American Black Ale,0.08,4.06,67,100,Massachusetts
+Smuttynose Brewing Company,Smuttynose Imperial Stout (Big Beer Series),Russian Imperial Stout,0.10,4.06,629,98,New Hampshire
+Cigar City Brewing,Jai Alai IPA - White Oak,American IPA,0.08,4.06,219,73,Florida
+Cigar City Brewing,Jose Marti American Porter,American Porter,0.08,4.06,193,74,Florida
+SweetWater Brewing Company,Sweetwater IPA,American IPA,0.06,4.06,674,72,Georgia
+The Olde Mecklenburg Brewery,Mecktoberfest,Marzen/Oktoberfest,0.05,4.06,19,76,North Carolina
+"Skull Coast Ale Company, LLC",Maelstrom IPA,American IPA,0.07,4.06,35,75,South Carolina
+Karbach Brewing Co.,Weisse Versa Wheat,Hefeweizen,0.05,4.06,21,12,Texas
+Surly Brewing Company,Bitter Brewer,English Bitter,0.04,4.05,385,35,Minnesota
+Steel Toe Brewing,Size 7,American IPA,0.07,4.05,60,36,Minnesota
+New Belgium Brewing,Lips of Faith - Eric's Ale,American Wild Ale,0.07,4.05,207,38,Colorado
+Bull & Bush Pub & Brewery,Legend of the Liquid Brain,American Double/Imperial Stout,0.12,4.05,20,39,Colorado
+Cigar City Brewing,Maduro Oatmeal Brown Ale - Vanilla,English Brown Ale,0.06,4.05,41,82,Florida
+Swamp Head Brewery & Tasting Room,Stumpknocker Pale Ale,American Pale Ale (APA),0.06,4.05,18,85,Florida
+SweetWater Brewing Company,Sweetwater Dank Tank Fresh Sticky Nugs,American Amber/Red Ale,0.08,4.05,45,81,Georgia
+Highland Brewing,Highland Tasgall Ale,Scotch Ale/Wee Heavy,0.08,4.05,152,77,North Carolina
+Pisgah Brewing Co.,Vortex I,American Strong Ale,0.11,4.05,127,79,North Carolina
+Foothills Brewing Company,Olde Rabbit's Foot,American Double/Imperial Stout,0.10,4.05,95,80,North Carolina
+Pisgah Brewing Co.,Pisgah Nitro Stout,American Stout,,4.05,18,84,North Carolina
+COAST Brewing Company,Belafonte,Belgian Pale Ale,0.06,4.05,14,86,South Carolina
+"Skull Coast Ale Company, LLC",Scallywag Extra Pale Ale,American Pale Ale (APA),0.05,4.05,14,87,South Carolina
+The St. George Brewing Company,Porter,English Porter,0.05,4.05,137,78,Virginia
+Sweetwater Tavern & Brewery,High Desert Imperial Stout,Russian Imperial Stout,0.11,4.05,20,83,Virginia
+Marble Brewery,Marble IPA,American IPA,0.06,4.05,85,13,New Mexico
+Surly Brewing Company,SurlyFest,Rye Beer,0.06,4.04,294,37,Minnesota
+Minneapolis Town Hall Brewery,1800 Old English IPA,English India Pale Ale (IPA),0.08,4.04,40,38,Minnesota
+Great Divide Brewing Company,Hibernation Ale,Old Ale,0.09,4.04,952,40,Colorado
+Great Divide Brewing Company,Belgian Style Yeti,Russian Imperial Stout,0.10,4.04,217,41,Colorado
+Left Hand Brewing Company,Smoke Jumper Smoked Imperial Porter,American Porter,0.09,4.04,211,42,Colorado
+Snake River Brewing Company & Brewpub,Pako's IPA,American IPA,0.07,4.04,31,43,Wyoming
+Cigar City Brewing,Cubano-Style Espresso Brown Ale,English Brown Ale,0.06,4.04,206,88,Florida
+The Funky Buddha Lounge & Brewery,Pina Colada Wheat,American Pale Wheat Ale,0.05,4.04,13,91,Florida
+The Mash House Restaurant & Brewery,Hoppy Hour IPA,American IPA,0.06,4.04,95,89,North Carolina
+Pisgah Brewing Co.,Pisgah Baptista,Belgian Strong Pale Ale,0.12,4.04,62,90,North Carolina
+Rahr & Sons Brewing Company,Bourbon Barrel Aged Winter Warmer,Winter Warmer,0.09,4.04,69,14,Texas
+Freetail Brewing Company,Ananke,American Wild Ale,0.06,4.04,46,15,Texas
+Toppling Goliath Brewing Company,Golden Nugget IPA,American IPA,0.06,4.03,14,43,Iowa
+Surly Brewing Company,CynicAle,Saison/Farmhouse Ale,0.07,4.03,539,39,Minnesota
+Summit Brewing Company,Summit Oatmeal Stout,Oatmeal Stout,0.05,4.03,78,42,Minnesota
+Saint Louis Brewery/Schlafly Tap Room,Schlafly Reserve - Imperial Stout,Russian Imperial Stout,0.11,4.03,329,40,Missouri
+Boulevard Brewing Co.,Harvest Dance,Wheatwine,0.09,4.03,207,41,Missouri
+Avery Brewing Company,Mephistopheles' Stout,American Double/Imperial Stout,0.17,4.03,713,44,Colorado
+Great Divide Brewing Company,Barrel Aged Old Ruffian,American Barleywine,0.13,4.03,96,45,Colorado
+Mountain Sun Pub & Brewery,FYIPA,American IPA,,4.03,26,46,Colorado
+The Funky Buddha Lounge & Brewery,Ich Bin Lime Berliner,Berliner Weissbier,0.04,4.03,10,96,Florida
+SweetWater Brewing Company,Sweetwater Dank Tank BSP Quad Ale,Quadrupel (Quad),0.11,4.03,62,93,Georgia
+COAST Brewing Company,Red Legs Scotch Ale,Scottish Ale,0.07,4.03,15,95,South Carolina
+Port City Brewing,Porter,American Porter,0.08,4.03,91,92,Virginia
+Fitger's Brewhouse,El Nino IPA,American IPA,0.07,4.02,46,46,Minnesota
+"Brau Brothers Brewing Co., LLC",Hopsession Super Pale Ale,American Pale Ale (APA),0.04,4.02,14,47,Minnesota
+Boulevard Brewing Co.,The Sixth Glass,Quadrupel (Quad),0.11,4.02,482,44,Missouri
+Boulevard Brewing Co.,Two Jokers Double-Wit,Witbier,0.08,4.02,166,45,Missouri
+Rocky Mountain Brewing,Da Yoopers,Fruit/Vegetable Beer,,4.02,12,47,Colorado
+Cigar City Brewing,Guava Grove Saison,Saison/Farmhouse Ale,0.08,4.02,349,97,Florida
+Natty Greene's Pub & Brewing Co.,230th Anniversary American Sour Ale,Flanders Oud Bruin,0.06,4.02,19,94,North Carolina
+The Duck-Rabbit Craft Brewery,Duck-Rabbit Schwarzbier,Schwarzbier,0.06,4.02,142,98,North Carolina
+Olde Hickory Brewery,Imperial Stout,American Double/Imperial Stout,0.10,4.02,104,99,North Carolina
+Marshall Brewing Company,El CuCuy,American Black Ale,0.09,4.02,43,17,Oklahoma
+Live Oak Brewing Company,Live Oak Primus Weizenbock,Weizenbock,0.08,4.02,43,16,Texas
+New Belgium Brewing,Love (Foeder #3),American Wild Ale,0.06,4.01,25,50,Colorado
+Odell Brewing Company,Wooden Elephant,American IPA,,4.01,11,51,Colorado
+Uinta Brewing Company,Dubhe Imperial Black IPA,American Black Ale,0.09,4.01,179,48,Utah
+Utah Brewers Cooperative,Squatters Fifth Element,Saison/Farmhouse Ale,0.07,4.01,30,49,Utah
+Highland Brewing,Highland Cold Mountain Winter Ale,Winter Warmer,0.06,4.01,268,100,North Carolina
+Marble Brewery,Marble Red Ale,American Amber/Red Ale,0.06,4.01,48,18,New Mexico
+Coop Ale Works,Territorial Reserve Oak Aged Imperial Stout,American Double/Imperial Stout,0.09,4.01,31,19,Oklahoma
+"August Schell Brewing Co., Inc.",Burton Ale,English Strong Ale,0.08,4,54,51,Minnesota
+Saint Louis Brewery/Schlafly Tap Room,Schlafly Reserve - Barleywine Style Ale,English Barleywine,0.10,4,228,48,Missouri
+Charleville Vineyards and Microbrewery,Box of Chocolate,Quadrupel (Quad),0.11,4,77,49,Missouri
+Nebraska Brewing Company,Hop God - Reserve Series Aged in French Oah Chardonnay Barrels),Belgian IPA,0.10,4,57,50,Nebraska
+Oskar Blues Brewing Company,Old Chub - Scottish Style Ale,Scotch Ale/Wee Heavy,0.08,4,1267,52,Colorado
+New Belgium Brewing,Lips of Faith - Cocoa Mole,Chile Beer,0.09,4,160,53,Colorado
+Odell Brewing Company,Red,American Amber/Red Ale,0.07,4,145,54,Colorado
+Good People Brewing Company,Fatso,Russian Imperial Stout,0.09,4,16,5,Alabama
+(512) Brewing Company,(512) Whiskey Barrel Aged Double Pecan Porter,American Porter,0.08,4,53,20,Texas
+Fitger's Brewhouse,Big Boat Oatmeal Stout,Oatmeal Stout,0.07,3.99,34,52,Minnesota
+Harriet Brewing,West Side Belgian-Style IPA,Belgian IPA,0.07,3.99,25,53,Minnesota
+Fulton Beer,War and Peace,Russian Imperial Stout,,3.99,10,54,Minnesota
+New Belgium Brewing,Abbey Belgian Style Ale,Dubbel,0.07,3.99,647,55,Colorado
+Odell Brewing Company,India Barley Wine,American Barleywine,0.10,3.99,51,56,Colorado
+Freetail Brewing Company,La Muerta,American Double/Imperial Stout,0.10,3.99,64,21,Texas
+Freetail Brewing Company,Woodicus,American Wild Ale,0.08,3.99,17,22,Texas
+"Brau Brothers Brewing Co., LLC",Rye Wyne Ale,Rye Beer,0.11,3.98,28,55,Minnesota
+Minneapolis Town Hall Brewery,Grand Cru,Belgian Strong Dark Ale,0.10,3.98,26,56,Minnesota
+Minneapolis Town Hall Brewery,Twisted Jim,American Barleywine,0.10,3.98,20,57,Minnesota
+Minneapolis Town Hall Brewery,Grinch's Grog,American Pale Ale (APA),0.05,3.98,17,58,Minnesota
+Oskar Blues Brewing Company,Deviant Dale's IPA,American IPA,0.08,3.98,349,57,Colorado
+Dry Dock Brewing Co.,Apricot Ale,Fruit/Vegetable Beer,0.05,3.98,16,59,Colorado
+Grand Teton Brewing Co.,The Grand Saison,Saison/Farmhouse Ale,0.08,3.98,47,58,Idaho
+Marshall Brewing Company,Arrowhead Pale Ale,American Pale Ale (APA),0.05,3.98,16,23,Oklahoma
+Coop Ale Works,Gran Sport Porter,American Porter,0.06,3.98,12,24,Oklahoma
+Summit Brewing Company,Saga,American IPA,0.07,3.97,42,60,Minnesota
+Olvalde Farm & Brewing Company,The Auroch's Horn,Belgian Strong Pale Ale,0.10,3.97,38,61,Minnesota
+Steel Toe Brewing,Size 11,American Double/Imperial IPA,0.11,3.97,25,62,Minnesota
+O'Fallon Brewery,Barrel Aged Smoke (Smoked Porter),American Porter,0.07,3.97,95,59,Missouri
+O'Fallon Brewery,B.D.S. Belgian-Style Dark Ale,Belgian Strong Dark Ale,0.10,3.97,16,63,Missouri
+Avery Brewing Company,Hog Heaven Barley Wine,American Barleywine,0.09,3.97,803,60,Colorado
+New Belgium Brewing,Lips of Faith - Grand Cru Abbey Ale,Belgian Strong Dark Ale,0.10,3.97,164,61,Colorado
+Funkwerks,Saison,Saison/Farmhouse Ale,0.07,3.97,63,65,Colorado
+Avery Brewing Company,Dihos Dactylion,American Wild Ale,0.10,3.97,61,66,Colorado
+Grand Teton Brewing Co.,Pursuit of Hoppiness,American Amber/Red Ale,0.09,3.97,154,63,Idaho
+Big Sky Brewing Company,Olde Bluehair Barley Wine,American Barleywine,0.11,3.97,88,64,Montana
+Big Sky Brewing Company,Biere de Noel,Belgian Strong Dark Ale,0.09,3.97,20,67,Montana
+Uinta Brewing Company,Hop Notch IPA,American IPA,0.07,3.97,160,62,Utah
+New Orleans Lager & Ale Brewing Company (NOLA),Irish Channel Stout,American Stout,0.07,3.97,30,6,Louisiana
+Choc Beer Co./Pete's Place,Smoked Porter,Smoked Beer,0.07,3.97,46,25,Oklahoma
+Jester King Craft Brewery,Das Wunderkind,Saison/Farmhouse Ale,0.04,3.97,23,26,Texas
+Uncle Billy's Brew & Que,Hop Zombie,American IPA,0.07,3.97,14,27,Texas
+Surly Brewing Company,Mild,English Dark Mild Ale,0.04,3.96,50,65,Minnesota
+Harriet Brewing,Wodan Weizen,Hefeweizen,0.05,3.96,13,66,Minnesota
+Boulevard Brewing Co.,21st Anniversary Fresh Hop Pale Ale,American Pale Ale (APA),0.07,3.96,69,64,Missouri
+Oskar Blues Brewing Company,Dale's Pale Ale,American Pale Ale (APA),0.07,3.96,1483,68,Colorado
+Funkwerks,Tropic King (Maori King),Saison/Farmhouse Ale,0.07,3.96,27,69,Colorado
+SandLot Brewery @ Coors Field,Barmen Pilsner,Czech Pilsener,,3.96,13,70,Colorado
+Good People Brewing Company,Brown,American Brown Ale,0.06,3.96,20,8,Alabama
+Cumberland Brews,Nitro Porter,American Porter,0.06,3.96,20,7,Kentucky
+Lumberyard Brewinf Company,Big Rapid Imperial Red Ale,American Strong Ale,0.10,3.96,13,30,Arizona
+Marble Brewery,Double IPA,American Double/Imperial IPA,0.08,3.96,44,28,New Mexico
+Jester King Craft Brewery,Boxer's Revenge,American Wild Ale,0.09,3.96,15,29,Texas
+Madhouse Brewing Company,Hopburst IPA,American IPA,0.07,3.95,20,69,Iowa
+Summit Brewing Company,Summit Silver Anniversary  Ale,American IPA,0.07,3.95,107,67,Minnesota
+Fulton Beer,The Worthy Adversary,American Double/Imperial Stout,0.09,3.95,12,70,Minnesota
+4 Hands Brewing Company,War Hammer Imperial IPA,American Double/Imperial IPA,0.04,3.95,12,71,Missouri
+Nebraska Brewing Company,Black Betty Imperial Stout - Rserve Series Aged in Whiskey Barrels),Russian Imperial Stout,0.09,3.95,73,68,Nebraska
+Fort Collins Brewing,Barrel Licked Bock,Doppelbock,0.10,3.95,55,71,Colorado
+Crooked Stave Artisan Beer Project,"Crooked Stave Wild Wild Brett ""Green""",American Wild Ale,0.07,3.95,20,72,Colorado
+Southern Star Brewing Company,Buried Hatchet Stout,American Double/Imperial Stout,0.08,3.95,379,31,Texas
+Live Oak Brewing Company,Live Oak Pilz,Czech Pilsener,0.05,3.95,53,32,Texas
+Free State Brewing Co.,Copperhead Pale Ale,American IPA,0.06,3.94,51,74,Kansas
+"August Schell Brewing Co., Inc.",Rauchbier,Rauchbier,,3.94,43,75,Minnesota
+Barley John's Brew Pub,Old Eight Porter,Baltic Porter,0.08,3.94,27,76,Minnesota
+Minneapolis Town Hall Brewery,Thunderstorm Summer Ale,Belgian Pale Ale,0.07,3.94,12,77,Minnesota
+Boulevard Brewing Co.,Double Wide I.P.A.,American Double/Imperial IPA,0.09,3.94,563,72,Missouri
+Saint Louis Brewery/Schlafly Tap Room,Schlafly Irish-Style Extra Stout,Foreign/Export Stout,0.08,3.94,128,73,Missouri
+New Belgium Brewing,Lips of Faith - Fresh Hop India Pale Ale,American IPA,0.07,3.94,127,73,Colorado
+Odell Brewing Company,Friek,American Wild Ale,0.07,3.94,124,74,Colorado
+Great Divide Brewing Company,Barrel Aged Hibernation Ale,Old Ale,0.11,3.94,31,77,Colorado
+Crooked Stave Artisan Beer Project,"Crooked Stave Wild Wild Brett ""Orange""",American Wild Ale,0.06,3.94,20,79,Colorado
+Ska Brewing Co.,Local Series Merlo Stout #12,Foreign/Export Stout,0.10,3.94,12,80,Colorado
+Grand Teton Brewing Co.,Wake Up Call Imperial Coffee Porter,American Porter,0.08,3.94,54,76,Idaho
+Grand Teton Brewing Co.,5 o'clock Shadow Double Black Lager,Schwarzbier,0.08,3.94,24,78,Idaho
+Uinta Brewing Company,Oak Jacked Imperial Pumpkin Ale,Pumpkin Ale,0.10,3.94,73,75,Utah
+Straight to Ale,Monkeynaut IPA,American IPA,0.07,3.94,51,9,Alabama
+Coop Ale Works,Native Amber,American Amber/Red Ale,0.06,3.94,49,33,Oklahoma
+Freetail Brewing Company,Rye Wit,Witbier,0.04,3.94,14,34,Texas
+Summit Brewing Company,Summit Black Ale,American Black Ale,0.07,3.93,64,80,Minnesota
+Minneapolis Town Hall Brewery,Hefe Weizen,Hefeweizen,0.06,3.93,27,81,Minnesota
+Olvalde Farm & Brewing Company,Ode to a Russian Shipwright,American Porter,,3.93,26,82,Minnesota
+Surly Brewing Company,Damien,American Black Ale,0.05,3.93,25,83,Minnesota
+Lift Bridge Brewery,Irish Coffee Stout,Milk/Sweet Stout,0.08,3.93,17,85,Minnesota
+Boulevard Brewing Co.,Bully! Porter,American Porter,0.05,3.93,475,78,Missouri
+Saint Louis Brewery/Schlafly Tap Room,Schlafly Biere de Garde,Biere de Garde,0.08,3.93,97,79,Missouri
+Boulevard Brewing Co.,Love Child No. 2,American Wild Ale,0.10,3.93,24,84,Missouri
+New Belgium Brewing,Lips of Faith - Tart Lychee,American Wild Ale,0.08,3.93,129,81,Colorado
+Utah Brewers Cooperative,Squatters 529,Flanders Oud Bruin,0.07,3.93,27,82,Utah
+Mogollon Brewing Company,Horny Toad IPA,American IPA,0.07,3.93,13,36,Arizona
+North by Northwest Restaurant & Brewery,North by Northwest Py Jingo Pale Ale,American Pale Ale (APA),,3.93,21,35,Texas
+"August Schell Brewing Co., Inc.",Schell's Bock,Bock,0.06,3.92,61,86,Minnesota
+Minneapolis Town Hall Brewery,Town Hall Maibock,Maibock/Helles Bock,,3.92,13,87,Minnesota
+Minneapolis Town Hall Brewery,ERB - Black IPA,American Black Ale,,3.92,12,88,Minnesota
+Boulder Beer/Wilderness Pub,Mojo IPA,American IPA,0.07,3.92,714,83,Colorado
+Avery Brewing Company,Collaboration Not Litigation Ale,Belgian Strong Dark Ale,0.09,3.92,650,84,Colorado
+Steamworks Brewing Co.,Conductor Imperial India Pale Ale,American Double/Imperial IPA,0.09,3.92,104,86,Colorado
+Crabtree Brewing,Berliner Weisse,Berliner Weissbier,0.04,3.92,28,88,Colorado
+Crooked Stave Artisan Beer Project,"Crooked Stave Wild Wild Brett ""Yellow""",American Wild Ale,0.06,3.92,19,89,Colorado
+Oskar Blues Brewing Company,Chubourbon (Old Chub - Whiskey Barrel Aged),Scotch Ale/Wee Heavy,,3.92,12,90,Colorado
+Big Sky Brewing Company,Big Sky IPA,American IPA,0.06,3.92,396,85,Montana
+Utah Brewers Cooperative,Squatters Outer Darkness,Russian Imperial Stout,0.11,3.92,87,87,Utah
+New Orleans Lager & Ale Brewing Company (NOLA),Flambeau Red,American Amber/Red Ale,0.06,3.92,11,10,Louisiana
+Papago Brewing,Elsie's Irisih Coffee Milk Stout,Milk/Sweet Stout,0.06,3.92,18,38,Arizona
+Real Ale Brewing Company,Shade Grown Coffee Porter,American Porter,0.06,3.92,199,37,Texas
+(512) Brewing Company,(512) Bruin,American Brown Ale,0.08,3.92,16,39,Texas
+Free State Brewing Co.,Josiah Miller IPA,American IPA,0.06,3.91,17,93,Kansas
+Surly Brewing Company,Hell,Keller Bier/Zwickel Bier,0.05,3.91,234,89,Minnesota
+Minneapolis Town Hall Brewery,India Brown Ale,American Brown Ale,0.07,3.91,22,90,Minnesota
+Great Waters Brewing,The Blackwatch Oat Stout,Oatmeal Stout,0.06,3.91,18,92,Minnesota
+Saint Louis Brewery/Schlafly Tap Room,Schlafly Hop Harvest Ale,American IPA,0.07,3.91,20,91,Missouri
+Odell Brewing Company,Bourbon Barrel Stout,American Double/Imperial Stout,0.12,3.91,184,91,Colorado
+Left Hand Brewing Company,Week Sauce Coffee Porter,American Porter,0.06,3.91,25,92,Colorado
+Red Rock Brewing Company,Red Rock Reve,Tripel,0.10,3.91,20,93,Utah
+Red Rock Brewing Company,Red Rock Elephino,American Double/Imperial IPA,0.08,3.91,19,94,Utah
+Prescott Brewing Company,Petrified Porter,American Porter,,3.91,13,43,Arizona
+Santa Fe Brewing Company,Imperial Java Stout,American Double/Imperial Stout,0.08,3.91,84,40,New Mexico
+Real Ale Brewing Company,Hans' Pils,German Pilsener,0.05,3.91,19,41,Texas
+Franconia Brewing Company,Franconia Wheat,Hefeweizen,,3.91,15,42,Texas
+Left Hand Brewing Company,Left Hand Milk Stout,Milk/Sweet Stout,0.06,3.9,1384,95,Colorado
+Avery Brewing Company,Avery India Pale Ale (IPA),American IPA,0.07,3.9,1062,96,Colorado
+Breckenridge Brewery,471 IPA,American Double/Imperial IPA,0.09,3.9,708,97,Colorado
+Avery Brewing Company,Ellie's Brown Ale,American Brown Ale,0.06,3.9,575,98,Colorado
+Avery Brewing Company,New World Porter,American Porter,0.07,3.9,453,99,Colorado
+Grand Teton Brewing Co.,Black Cauldron Imperial Stout,Russian Imperial Stout,0.08,3.9,279,100,Idaho
+Mogollon Brewing Company,Apache Trout Stout,American Stout,0.05,3.9,15,48,Arizona
+Thunder Canyon Brewery,Thunder Canyon Warhead Stout,Russian Imperial Stout,0.12,3.9,10,51,Arizona
+Marshall Brewing Company,Big Jamoke,American Porter,0.07,3.9,49,44,Oklahoma
+Choc Beer Co./Pete's Place,Winter Stout,American Stout,0.07,3.9,13,50,Oklahoma
+Jester King Craft Brewery,Noble King Hoppy Farmhouse Ale,Belgian Pale Ale,0.06,3.9,33,45,Texas
+Austin Beerworks,Pearl Snap Pils,German Pilsener,0.05,3.9,31,46,Texas
+(512) Brewing Company,(512) Wit,Witbier,0.05,3.9,18,47,Texas
+Freetail Brewing Company,Witicus Double Rye Wit,Rye Beer,0.09,3.9,14,49,Texas
+"Brau Brothers Brewing Co., LLC",Moo Joos,Milk/Sweet Stout,0.06,3.89,101,94,Minnesota
+Lake Superior Brewing Company,Old Man Winter Warmer,English Barleywine,0.10,3.89,65,95,Minnesota
+Good People Brewing Company,Mumbai Rye,American IPA,0.07,3.89,10,11,Alabama
+Real Ale Brewing Company,Anniversary Ale XV,Russian Imperial Stout,0.10,3.89,76,52,Texas
+Jester King Craft Brewery,Thrash Metal Farmhouse Strong Ale,Belgian Strong Pale Ale,0.09,3.89,29,53,Texas
+Thirsty Planet Brewing Company,Buckethead IPA,American IPA,,3.89,10,54,Texas
+"Brau Brothers Brewing Co., LLC",Ring Neck Braun Ale,English Brown Ale,0.07,3.88,74,97,Minnesota
+Minneapolis Town Hall Brewery,Hope & King Scotch Ale,Scotch Ale/Wee Heavy,0.06,3.88,69,98,Minnesota
+Minneapolis Town Hall Brewery,Smoked Hefe,Hefeweizen,0.05,3.88,21,99,Minnesota
+Minneapolis Town Hall Brewery,Macaroon,Fruit/Vegetable Beer,,3.88,12,100,Minnesota
+Boulevard Brewing Co.,Dark Truth Stout,American Double/Imperial Stout,0.10,3.88,427,96,Missouri
+Bluegrass Brewing Co. - East St. Matthew's,Rye 75,American IPA,0.08,3.88,37,12,Kentucky
+Redbud Brewing Company,Cuvee Two,Belgian Strong Pale Ale,0.09,3.88,14,58,Oklahoma
+Real Ale Brewing Company,Sisyphus,American Barleywine,0.12,3.88,292,55,Texas
+Independence Brewing Co.,Convict Hill Oatmeal Stout,Oatmeal Stout,0.09,3.88,115,56,Texas
+Live Oak Brewing Company,Live Oak Oaktoberfest,Marzen/Oktoberfest,0.06,3.88,31,57,Texas
+(512) Brewing Company,(512) Black IPA,American Black Ale,0.07,3.88,14,59,Texas
+Lazy Magnolia Brewing Company,Jefferson Stout,Milk/Sweet Stout,0.05,3.87,43,13,Mississippi
+Papago Brewing,Coconut Joe,Milk/Sweet Stout,0.06,3.87,12,62,Arizona
+Live Oak Brewing Company,Live Oak Liberation Ale,American IPA,0.06,3.87,48,60,Texas
+Jester King Craft Brewery,Le Petit Prince Farmhouse Table Beer,Saison/Farmhouse Ale,0.03,3.87,35,61,Texas
+Diamond Bear Brewing Company,Paradise Porter,American Porter,0.06,3.86,55,14,Arkansas
+Choc Beer Co./Pete's Place,Gose,Gose,0.06,3.86,24,63,Oklahoma
+North by Northwest Restaurant & Brewery,Kodiak IPA,American IPA,0.07,3.86,20,64,Texas
+Southern Star Brewing Company,Pine Belt Pale Ale,American Pale Ale (APA),0.07,3.85,362,65,Texas
+Real Ale Brewing Company,Lost Gold IPA,American IPA,0.07,3.85,113,66,Texas
+Jester King Craft Brewery,Black Metal Farmhouse Imperial Stout,Russian Imperial Stout,0.09,3.85,27,67,Texas
+Live Oak Brewing Company,Live Oak Roggenbier,Roggenbier,0.05,3.85,14,68,Texas
+Freetail Brewing Company,Bandito,American Wild Ale,0.06,3.85,14,69,Texas
+Freetail Brewing Company,Buffalo Hump 1840,Belgian IPA,0.06,3.85,13,70,Texas
+Freetail Brewing Company,Figgy Wood'n,American Wild Ale,,3.85,11,71,Texas
+Hofbrauhaus Newport,Hofbrau Dunkel,Munich Dunkel Lager,0.06,3.84,14,15,Kentucky
+Marble Brewery,Imperial Red Ale,American Amber/Red Ale,0.09,3.84,16,74,New Mexico
+Marshall Brewing Company,McNellie's Pub Ale,English Bitter,0.05,3.84,58,72,Oklahoma
+Rahr & Sons Brewing Company,Iron Thistle,Scotch Ale/Wee Heavy,0.08,3.84,45,73,Texas
+Nimbus Brewing Company,Nimbus Old Monkeyshine,English Strong Ale,0.08,3.83,76,76,Arizona
+SanTan Brewing Co.,HopShock IPA,American IPA,0.07,3.83,51,77,Arizona
+Marble Brewery,Oatmeal Stout,Oatmeal Stout,0.05,3.83,24,79,New Mexico
+Charma River Brewing Company,Jackalope IPA,American IPA,0.06,3.83,11,81,New Mexico
+Choc Beer Co./Pete's Place,Biere de Garde,Biere de Garde,0.07,3.83,42,78,Oklahoma
+Saint Arnold Brewing Company,Saint Arnold Weedwacker,Hefeweizen,0.05,3.83,78,75,Texas
+Jester King Craft Brewery,Mad Meg Farmhouse Provision Ale,Saison/Farmhouse Ale,0.10,3.83,23,80,Texas
+Bluegrass Brewing Co. - East St. Matthew's,Bearded Pat's Barleywine,American Barleywine,0.11,3.82,74,16,Kentucky
+Marble Brewery,Double White Ale,Witbier,0.07,3.82,15,84,New Mexico
+Choc Beer Co./Pete's Place,Belgian-Style Dubbel,Dubbel,0.08,3.82,57,83,Oklahoma
+Saint Arnold Brewing Company,Saint Arnold Elissa IPA,American IPA,0.07,3.82,364,82,Texas
+Uncle Billy's Brew & Que,Uncle Billy's Ax Handle American Pale Ale,American Pale Ale (APA),0.06,3.82,15,85,Texas
+North by Northwest Restaurant & Brewery,Black Jack (Bourbon Barrel Aged),Belgian Dark Ale,,3.82,14,86,Texas
+Deep Ellum Brewing Company,Deep Ellum IPA,American IPA,0.07,3.82,10,87,Texas
+Santa Fe Brewing Company,State Pen Porter,American Porter,0.06,3.81,110,88,New Mexico
+Real Ale Brewing Company,Devil's Backbone,Tripel,0.08,3.81,103,89,Texas
+Austin Beerworks,Fire Eagle IPA,American IPA,0.06,3.81,40,90,Texas
+Franconia Brewing Company,Franconia Dunkel,Munich Dunkel Lager,,3.81,18,91,Texas
+(512) Brewing Company,(512) Cascabel Cream Stout,Milk/Sweet Stout,0.06,3.81,11,92,Texas
+Rahr & Sons Brewing Company,Visionary Brew,Bock,,3.8,10,97,Texas
+Good People Brewing Company,IPA,American IPA,0.07,3.8,84,17,Alabama
+Bluegrass Brewing Co. - East St. Matthew's,Sheltowee Hop-a-Lot IPA,American Double/Imperial IPA,0.08,3.8,34,20,Kentucky
+New Orleans Lager & Ale Brewing Company (NOLA),Hopitoulas IPA,American IPA,0.06,3.8,41,18,Louisiana
+Yazoo Brewing Company,Rye Saison,Saison/Farmhouse Ale,0.05,3.8,41,19,Tennessee
+Santa Fe Brewing Company,Freestyle Pilsner,German Pilsener,0.06,3.8,22,94,New Mexico
+Real Ale Brewing Company,Full Moon Pale Rye Ale,Rye Beer,0.06,3.8,302,93,Texas
+Real Ale Brewing Company,Real Heavy,Scotch Ale/Wee Heavy,0.10,3.8,19,95,Texas
+Freetail Brewing Company,3Tail,Belgian Strong Pale Ale,0.10,3.8,14,96,Texas
+Hofbrauhaus Newport,Maibock,Maibock/Helles Bock,0.07,3.79,24,25,Kentucky
+Cumberland Brews,Pale Ale,American Pale Ale (APA),0.06,3.79,18,26,Kentucky
+New Orleans Lager & Ale Brewing Company (NOLA),NOLA Brown Ale,English Dark Mild Ale,0.04,3.79,37,23,Louisiana
+Smoky Mountain Brewery & Restaurant,Tuckaleechee Porter,American Porter,0.06,3.79,51,21,Tennessee
+Yazoo Brewing Company,Sly Rye Porter,English Porter,0.06,3.79,51,22,Tennessee
+Smoky Mountain Brewery & Restaurant,Appalachian Pale Ale,American Pale Ale (APA),0.06,3.79,18,24,Tennessee
+Blackstone Restaurant & Brewery,Red Springs Ale,American Amber/Red Ale,0.05,3.79,11,27,Tennessee
+Santa Fe Brewing Company,Happy Camper IPA,American IPA,0.07,3.79,86,98,New Mexico
+Choc Beer Co./Pete's Place,Belgian-Style Quad,Quadrupel (Quad),0.11,3.79,18,99,Oklahoma
+Southern Star Brewing Company,Walloon,Saison/Farmhouse Ale,0.06,3.79,12,100,Texas
+Yazoo Brewing Company,Onward Stout,Irish Dry Stout,0.04,3.78,24,28,Tennessee
+Bluegrass Brewing Co. - East St. Matthew's,Jefferson's Reserve Bourbon Barrel Stout,American Double/Imperial Stout,0.09,3.76,322,29,Kentucky
+Bluegrass Brewing Co. - East St. Matthew's,American Pale Ale,American Pale Ale (APA),0.06,3.76,163,30,Kentucky
+New Orleans Lager & Ale Brewing Company (NOLA),NOLA Blonde Ale,American Blonde Ale,0.05,3.76,33,32,Louisiana
+Blackstone Restaurant & Brewery,St. Charles Porter,American Porter,0.06,3.76,35,31,Tennessee
+Lazy Magnolia Brewing Company,Southern Pecan,English Brown Ale,0.04,3.75,410,33,Mississippi
+Yazoo Brewing Company,Hefeweizen,Hefeweizen,0.05,3.75,99,34,Tennessee
+Abita Brewing Co.,SOS (Save Our Shores),German Pilsener,0.07,3.74,218,35,Louisiana
+Abita Brewing Co.,Abita Select Imperial Louisiana Oyster Stout,American Double/Imperial Stout,0.08,3.74,10,37,Louisiana
+Big Riber Grille & Brewing Works,House Brand  IPA,American IPA,0.06,3.74,11,36,Tennessee
+Tin Roof Brewing Company,Perfect Tin Amber,American Amber/Red Ale,0.05,3.73,27,38,Louisiana
+Yazoo Brewing Company,Fortuitous,American Wild Ale,0.10,3.73,12,39,Tennessee
+Terminal Brewhouse,Magnum P.A.,American IPA,0.06,3.73,12,40,Tennessee
+Cumberland Brews,Matt's Red,American Amber/Red Ale,0.06,3.72,11,42,Kentucky
+Boscos Restaurant & Brewing Co. - Nashville,Boscos Bombay IPA (Nashville),American IPA,,3.72,17,41,Tennessee
+Abita Brewing Co.,Abita Select Double IPA,American Double/Imperial IPA,0.09,3.71,14,44,Louisiana
+Blackstone Restaurant & Brewery,American Pale Ale,American Pale Ale (APA),0.05,3.71,16,43,Tennessee
+Diamond Bear Brewing Company,Rocktoberfest,Marzen/Oktoberfest,0.06,3.7,11,48,Arkansas
+Bluegrass Brewing Co. - East St. Matthew's,Heine Brothers Coffee Stout,Oatmeal Stout,0.06,3.7,33,45,Kentucky
+Bluegrass Brewing Co. - East St. Matthew's,Luna De Miel: Raspberry Meade,Braggot,0.08,3.7,22,46,Kentucky
+Boscos Restaurant & Brewing Co. - Nashville,Boscos Isle of Skye Scottish Ale (Nashville),Scottish Ale,,3.7,12,47,Tennessee
+Downtown Grill & Brewery,Woodruff IPA,English India Pale Ale (IPA),,3.7,10,49,Tennessee
+Blackstone Restaurant & Brewery,Nut Brown Ale,English Brown Ale,0.06,3.69,42,50,Tennessee
+Boscos Restaurant & Brewing Co. - Nashville,Boscos Isle of Skye Scottish Ale (Little Rock),Scottish Ale,,3.68,10,51,Arkansas
+Good People Brewing Company,Pale Ale,American Pale Ale (APA),0.06,3.67,12,56,Alabama
+Alltech's Lexington Brewing & Distilling Co.,Kentucky Bourbon Barrel Ale,American Strong Ale,0.08,3.67,366,52,Kentucky
+Bluegrass Brewing Co. - East St. Matthew's,Nut Brown Ale,English Brown Ale,0.05,3.67,105,53,Kentucky
+Bluegrass Brewing Co. - East St. Matthew's,RIP - Russian Imperial Porter,American Porter,0.11,3.67,32,54,Kentucky
+Hofbrauhaus Newport,Hofbrau Munich Weizen,Hefeweizen,0.05,3.67,20,55,Kentucky
+Depot Street Brewing,Loose Caboose Lager,Dortmunder/Export Lager,0.06,3.67,11,57,Tennessee
+Bluegrass Brewing Co. - East St. Matthew's,Dark Star Porter,English Porter,0.06,3.66,147,58,Kentucky
+Abita Brewing Co.,Abbey Ale,Dubbel,0.08,3.65,199,59,Louisiana
+Heiner Brau,Kolsch,Kolsch,,3.64,51,60,Louisiana
+Bluegrass Brewing Co. - East St. Matthew's,Professor Gesser's Mind Numbing Ale,American IPA,0.07,3.63,37,63,Kentucky
+Bluegrass Brewing Co. - East St. Matthew's,Sheltowee GloomSucker Black Ale,Schwarzbier,0.06,3.63,15,64,Kentucky
+Abita Brewing Co.,Turbodog,English Brown Ale,0.06,3.63,877,61,Louisiana
+Crescent City Brewhouse,Black Forest,Munich Dunkel Lager,,3.63,14,65,Louisiana
+Yazoo Brewing Company,Dos Perros,American Brown Ale,0.04,3.63,133,62,Tennessee
+Covington Brewhouse,Pontchartrain Pilsner,German Pilsener,,3.62,22,66,Louisiana
+Yazoo Brewing Company,Fall Ale,American Amber/Red Ale,0.05,3.62,10,67,Tennessee
+Back Forty Beer Co.,Truck Stop Honey Brown Ale,American Brown Ale,0.06,3.61,19,69,Alabama
+Bluegrass Brewing Co. - East St. Matthew's,Hell for Certain,Belgian Dark Ale,0.07,3.61,65,68,Kentucky
+Diamond Bear Brewing Company,Two Term Double IPA,American Double/Imperial IPA,0.09,3.6,16,70,Arkansas
+Boscos Restaurant & Brewing Co. - Nashville,Boscos Famous Flaming Stone Beer (Nashville),American Blonde Ale,0.05,3.58,15,71,Tennessee
+Bluegrass Brewing Co. - East St. Matthew's,Sheltowee 502 Amber Ale,American Amber/Red Ale,0.05,3.57,10,75,Kentucky
+Bayou Teche Brewery,LA-31 Biere Pale,American Pale Ale (APA),,3.57,60,72,Louisiana
+Heiner Brau,Maerzen,Marzen/Oktoberfest,,3.57,36,73,Louisiana
+Blackstone Restaurant & Brewery,Chaser Pale,Kolsch,0.05,3.57,30,74,Tennessee
+Diamond Bear Brewing Company,Irish Red,Irish Red Ale,0.06,3.56,20,76,Arkansas
+Bayou Teche Brewery,LA-31 Biere Noire,Schwarzbier,,3.56,10,77,Louisiana
+Diamond Bear Brewing Company,Pale Ale,English Pale Ale,0.06,3.55,68,78,Arkansas
+Abita Brewing Co.,Strawberry Harvest Lager,Fruit/Vegetable Beer,0.04,3.54,303,79,Louisiana
+Zea Rotisserie & Brewery,Zea Pontchartrain Porter,American Porter,,3.54,24,80,Louisiana
+Bluegrass Brewing Co. - East St. Matthew's,Homewrecker,American Double/Imperial IPA,0.10,3.53,42,82,Kentucky
+Bluegrass Brewing Co. - East St. Matthew's,Mephistopheles' Metamorphosis,Tripel,0.11,3.53,25,83,Kentucky
+Abita Brewing Co.,25th Anniversary Vanilla Doubledog,American Strong Ale,0.07,3.53,173,81,Louisiana
+Abita Brewing Co.,Satsuma Harvest Wit,Witbier,0.05,3.52,139,84,Louisiana
+Boscos Restaurant & Brewing Co. - Nashville,Boscos Famous Flaming Stone Beer (Little Rock),American Blonde Ale,,3.51,12,85,Arkansas
+Bluegrass Brewing Co. - East St. Matthew's,Altbier,Altbier,0.04,3.5,84,86,Kentucky
+Crescent City Brewhouse,Pilsner,German Pilsener,,3.5,13,87,Louisiana
+Zea Rotisserie & Brewery,Zea Amber Lager,Vienna Lager,,3.5,10,88,Louisiana
+Back Forty Beer Co.,Naked Pig Pale Ale,American Pale Ale (APA),0.06,3.49,24,92,Alabama
+Abita Brewing Co.,Jockamo IPA,American IPA,0.07,3.49,490,89,Louisiana
+Abita Brewing Co.,Andygator,Maibock/Helles Bock,0.08,3.49,307,90,Louisiana
+Crescent City Brewhouse,Red Stallion,Vienna Lager,0.06,3.49,16,93,Louisiana
+Crescent City Brewhouse,Weiss Beer,Hefeweizen,,3.49,13,94,Louisiana
+Yazoo Brewing Company,Pale Ale,American Pale Ale (APA),0.06,3.49,135,91,Tennessee
+Zea Rotisserie & Brewery,Zea Category 5 American Pale Ale,American Pale Ale (APA),,3.47,14,95,Louisiana
+Diamond Bear Brewing Company,Southern Blonde,German Pilsener,0.05,3.46,28,96,Arkansas
+Abita Brewing Co.,Red Ale,American Amber/Red Ale,0.05,3.44,72,97,Louisiana
+Dixie Brewing Co.,Dixie Blackened Voodoo Lager,Schwarzbier,0.05,3.43,355,98,Louisiana
+Abita Brewing Co.,Mardi Gras Bock,Maibock/Helles Bock,0.07,3.43,181,99,Louisiana
+Abita Brewing Co.,Restoration Pale Ale,American Pale Ale (APA),0.05,3.42,195,100,Louisiana
