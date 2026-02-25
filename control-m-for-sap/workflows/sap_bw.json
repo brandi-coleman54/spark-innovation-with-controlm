@@ -11,7 +11,7 @@
     "Type" : "Folder",
     "replace-with-usercode-job_bw" : {
       "Type" : "Job:SAP:BW:ProcessChain",
-        "ConnectionProfile": "WOD1_CP_SAP_BW",
+        "ConnectionProfile": "replace-with-usercode-uc_CP_SAP_BW",
         "ProcessChainDescription": "BW310 Process Chain",
         "Id": "ZBW310_BREW_PC_1",
         "RerunOption": "RestartFromFailiurePoint",
