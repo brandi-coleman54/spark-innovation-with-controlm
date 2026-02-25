@@ -1,0 +1,22 @@
+{
+  "Defaults" : {
+		"Host": "replace-with-usercode_instruqt_server",
+	  	"CreatedBy" : "replace-with-email",
+		"ControlmServer": "IN01",
+		"Application": "replace-with-usercode_sap_bw",
+		"SubApplication": "replace-with-usercode_sap_bw",
+		"OrderMethod": "Manual"
+	},
+  "replace-with-usercode-SAP01_bw" : {
+    "Type" : "Folder",
+    "replace-with-usercode-job_bw" : {
+      "Type" : "Job:SAP:BW:ProcessChain",
+        "ConnectionProfile": "WOD1_CP_SAP_BW",
+        "ProcessChainDescription": "BW310 Process Chain",
+        "Id": "ZBW310_BREW_PC_1",
+        "RerunOption": "RestartFromFailiurePoint",
+        "EnablePeridoicJob": true,
+        "ConsiderOnlyOverallChainStatus": true
+      }
+    }
+}
