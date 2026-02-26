@@ -305,7 +305,7 @@ function Provision_Agents_Helm {
   agent_set CTM_HG "${ctm_hg}"
 
   # Helm repo setup (idempotent)
-  helm repo add controlm "https://controlm-charts.s3.us-west-2.amazonaws.com/" >/dev/null 2>&1 || true
+  helm repo add controlm-saas "https://controlm-charts.s3.us-west-2.amazonaws.com/saas/" >/dev/null 2>&1 || true
   helm repo update
 
   # Ensure namespace exists; apply resources
@@ -315,7 +315,7 @@ function Provision_Agents_Helm {
 
   # NOTE: Avoid duplicate flags; set each value once.
   # TIP: The mft mountPath should be an absolute path (e.g., /opt/controlm/mft). Adjust as needed.
-  helm upgrade --install "${ctm_user_code}" controlm/saas-controlm-agent --version "9.22.050" \
+  helm upgrade --install "${ctm_user_code}" controlm/saas-controlm-agent --version "9.22.060" \
     --set image.tag="latest-k8s-mft-openjdk" \
     --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}' \
     --set-json 'pod.annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}' \
