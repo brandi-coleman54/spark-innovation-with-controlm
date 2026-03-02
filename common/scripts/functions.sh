@@ -472,7 +472,7 @@ function Provision_Helm_Agents {
         ai_additionalPluginsConfigMapName=""
     fi
     mft_string=""
-    if [ -z "${mft:-}" ]; then
+    if [ ! -z "${mft:-}" ]; then
         if [[ "${mft}" == "yes" ]]; then
             if [ -z "${mft_pvcs_name:-}" ]; then
                 mft_pvcs_name="mft-pvc"
