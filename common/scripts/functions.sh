@@ -315,8 +315,10 @@ function Provision_Agents_Helm {
 
   # NOTE: Avoid duplicate flags; set each value once.
   # TIP: The mft mountPath should be an absolute path (e.g., /opt/controlm/mft). Adjust as needed.
-  helm upgrade --install "${ctm_user_code}" controlm-saas/saas-controlm-agent --version "9.22.060" \
-    --set image.tag="latest-k8s-mft-openjdk" \
+  #helm upgrade --install "${ctm_user_code}" controlm-saas/saas-controlm-agent --version "9.22.060" \
+  #  --set image.tag="latest-k8s-mft-openjdk" \
+  helm upgrade --install "${ctm_user_code}" controlm-saas/saas-agent --version "9.22.060" \
+    --set image.tag="test-k8s-mft-openjdk" \
     --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}' \
     --set-json 'pod.annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}' \
     --set server.name="${ctm_server}" \
