@@ -541,7 +541,7 @@ function Provision_Helm_Agents {
                 mft_sshPrivateKeySecretName="k3s-sftp-key"
             fi
 
-            mft_string=" --set mft.pvcs[0].name=${mft_pvcs_name} --set mft.pvcs[0].mountPath=${mft_pvcs_mountPath} --set mft.configParametersConfigMapName=${mft_configParametersConfigMapName} --set mft.sshPrivateKeySecretName=${mft_configPrivateKeySecretName}"
+            mft_string=" --set mft.pvcs[0].name=${mft_pvcs_name} --set mft.pvcs[0].mountPath=${mft_pvcs_mountPath} --set mft.configParametersConfigMapName=${mft_configParametersConfigMapName} --set mft.sshPrivateKeySecretName=${mft_sshPrivateKeySecretName}"
         fi
     fi
     if [[ "${repo_type}" == "saas" ]]; then
