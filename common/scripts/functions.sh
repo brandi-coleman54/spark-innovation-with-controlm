@@ -429,63 +429,118 @@ function Provision_Helm_Agents {
     echo "foo=${kv[foo]-<unset>}"
     echo "count=${kv[count]-0}"
 
-    if [ -z "${chart_version:-}" ]; then
+    if [[ -v kv["chart_version"] ]]; then
+        chart_version=${kv["chart_version"]}
+    else
         chart_version="9.22.060"
     fi
-    if [ -z "${image_tag:-}" ]; then
+
+    if [[ -v kv["image_tag"] ]]; then
+        image_tag=${kv["image_tag"]}
+    else
         image_tag="9.22.055-k8s-openjdk"
     fi
-    if [ -z "${image_pullPolicy:-}" ]; then
+
+    if [[ -v kv["image_pullPolicy"] ]]; then
+        image_pullPolicy=${kv["image_pullPolicy"]}
+    else
         image_pullPolicy="IfNotPresent"
     fi
-    if [ -z "${server_port:-}" ]; then
+
+    if [[ -v kv["server_port"] ]]; then
+        server_port=${kv["server_port"]}
+    else
         server_port="7005"
     fi
-    if [ -z "${server_host:-}" ]; then
+
+    if [[ -v kv["server_host"] ]]; then
+        server_host=${kv["server_host"]}
+    else
         server_host="${ctm_server}"
     fi
-    if [ -z "${server_ip:-}" ]; then
+
+    if [[ -v kv["server_ip"] ]]; then
+        server_ip=${kv["server_ip"]}
+    else
         server_ip="${server_host}"
     fi
-    if [ -z "${agent_replicas:-}" ]; then
+
+    if [[ -v kv["agent_replicas"] ]]; then
+        agent_replicas=${kv["agent_replicas"]}
+    else
         agent_replicas="2"
     fi
-    if [ -z "${agent_tag:-}" ]; then
+
+    if [[ -v kv["agent_tag"] ]]; then
+        agent_tag=${kv["agent_tag"]}
+    else
         agent_tag="sparkit"
     fi
-    if [ -z "${pvc_storageClass:-}" ]; then
+
+    if [[ -v kv["pvc_storageClass"] ]]; then
+        pvc_storageClass=${kv["pvc_storageClass"]}
+    else
         pvc_storageClass="default"
     fi
-    if [ -z "${pvc_volumeSize:-}" ]; then
+
+    if [[ -v kv["pvc_volumeSize"] ]]; then
+        pvc_volumeSize=${kv["pvc_volumeSize"]}
+    else
         pvc_volumeSize="1Gi"
     fi
-    if [ -z "${pvc_accessMode:-}" ]; then
+
+    if [[ -v kv["pvc_accessMode"] ]]; then
+        pvc_accessMode=${kv["pvc_accessMode"]}
+    else
         pvc_accessMode="ReadWriteOnce"
     fi
-    if [ -z "${server_hostgroup:-}" ]; then
+
+    if [[ -v kv["server_hostgroup"] ]]; then
+        server_hostgroup=${kv["server_hostgroup"]}
+    else
         server_hostgroup="${ctm_user_code}-eks-hg"
     fi
-    if [ -z "${namespace_resources_file:-}" ]; then
+
+    if [[ -v kv["namespace_resources_file"] ]]; then
+        namespace_resources_file=${kv["namespace_resources_file"]}
+    else
         namespace_resources_file=""
     fi
-    if [ -z "${ai_additionalPluginsConfigMapName:-}" ]; then
+
+    if [[ -v kv["ai_additionalPluginsConfigMapName"] ]]; then
+        ai_additionalPluginsConfigMapName=${kv["ai_additionalPluginsConfigMapName"]}
+    else
         ai_additionalPluginsConfigMapName=""
     fi
+
     mft_string=""
-    if [ ! -z "${mft:-}" ]; then
-        if [[ "${mft}" == "yes" ]]; then
-            if [ -z "${mft_pvcs_name:-}" ]; then
+    if [[ -v kv["mft"] ]]; then
+        if [[ ${kv["mft"]} == "yes" ]]; then
+            
+            if [[ -v kv["mft_pvcs_name"] ]]; then
+                mft_pvcs_name=${kv["mft_pvcs_name"]}
+            else
                 mft_pvcs_name="mft-pvc"
             fi
-            if [ -z "${mft_pvcs_name:-}" ]; then
+
+            if [[ -v kv["mft_pvcs_mountPath"] ]]; then
+                mft_pvcs_mountPath=${kv["mft_pvcs_mountPath"]}
+            else
                 mft_pvcs_mountPath="/mft_mountPath"
             fi
-            if [ -z "${mft_configParametersConfigMapName:-}" ]; then
+
+            if [[ -v kv["mft_configParametersConfigMapName"] ]]; then
+                mft_configParametersConfigMapName=${kv["mft_configParametersConfigMapName"]}
+            else
                 mft_configParametersConfigMapName="mft-config-params"
             fi
-            if [ -z "${mft_sshPrivateKeySecretName}" ]; then
+
+            if [[ -v kv["mft_sshPrivateKeySecretName"] ]]; then
+                mft_sshPrivateKeySecretName=${kv["mft_sshPrivateKeySecretName"]}
+            else
                 mft_sshPrivateKeySecretName="k3s-sftp-key"
             fi
+
             mft_string=" --set mft.pvcs[0].name=${mft_pvcs_name} --set mft.pvcs[0].mountPath=${mft_pvcs_mountPath} --set mft.configParametersConfigMapName=${mft_configParametersConfigMapName} --set mft.sshPrivateKeySecretName=${mft_configPrivateKeySecretName}"
         fi
     fi
