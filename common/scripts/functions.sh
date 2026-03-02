@@ -502,7 +502,7 @@ function Provision_Helm_Agents {
         helm_url="https://controlm-charts.s3.us-west-2.amazonaws.com/saas/"
     fi
 
-    helm_cmd=$(cat <<EOF
+    helm_cmd=(
         helm install "${ctm_user_code}" controlm/${repo_name} --version "${chart_version}" \
         --namespace "${ctm_user_code}" --create-namespace \
         --set image.tag="${image_tag}" \
@@ -522,17 +522,14 @@ function Provision_Helm_Agents {
         --set pvc.accessMode="${pvc_accessMode}" \
         --set server.hostgroup="${server_hostgroup}" \
         --set ai.additionalPluginsConfigMapName="${ai_additionalPluginsConfigMapName}"
-    EOF
     )
-    helm_cmd="${helm_cmd} ${mft_string}"
-
+    helm_cmd[-1]+="${mft_string}"
     if [[ -n "${namespace_resources_file}" ]]; then
       kubectl apply -f "${namespace_resources_file}" -n "${ctm_user_code}"
     fi
-
     helm repo add controlm ${helm_url}
     helm repo update
-    "${helm_cmd}"
+    "${helm_cmd[@]}"
 
 }
 
