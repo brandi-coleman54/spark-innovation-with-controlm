@@ -465,7 +465,7 @@ function Provision_Helm_Agents {
     if [ -z "${server_hostgroup:-}" ]; then
         server_hostgroup="${ctm_user_code}-eks-hg"
     fi
-    if [ -z "${namespace_resources_file:-}" ]]; then
+    if [ -z "${namespace_resources_file:-}" ]; then
         namespace_resources_file=""
     fi
     if [ -z "${ai_additionalPluginsConfigMapName:-}" ]; then
