@@ -389,7 +389,7 @@ function Provision_Helm_Agents {
     local ctm_aapi_endpoint="${3:?usage: Provision_Helm_Agents <repo_type> <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> + \"<kv_string>\"}}"
     local ctm_auth_token="${4:?usage: Provision_Helm_Agents <repo_type> <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> + \"<kv_string>\"}}"
     local ctm_server="${5:?usage: Provision_Helm_Agents <repo_type> <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> + \"<kv_string>\"}}"
-    local kv_string="$5"   # the quoted "a=b|c=d" argument
+    local kv_string="$6"   # the quoted "a=b|c=d" argument
 
     # Parse kv_string into an associative array
     declare -A kv=()
