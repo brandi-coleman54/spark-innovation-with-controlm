@@ -429,65 +429,64 @@ function Provision_Helm_Agents {
     echo "foo=${kv[foo]-<unset>}"
     echo "count=${kv[count]-0}"
 
-    if [[ ! -v "${chart_version}" ]]; then
+    if [ -z "${chart_version:-}" ]; then
         chart_version="9.0.22.060"
     fi
-    if [[ ! -v "${image_tag}" ]]; then
+    if [ -z "${image_tag:-}" ]; then
         image_tag="9.22.055-k8s-openjdk"
     fi
-    if [[ ! -v "${image_pullPolicy}" ]]; then
+    if [ -z "${image_pullPolicy:-}" ]; then
         image_pullPolicy="IfNotPresent"
     fi
-    if [[ ! -v "${server_port}" ]]; then
+    if [ -z "${server_port:-}" ]; then
         server_port="7005"
     fi
-    if [[ ! -v "${server_host}" ]]; then
+    if [ -z "${server_host:-}" ]; then
         server_host="${ctm_server}"
     fi
-    if [[ ! -v "${server_ip}" ]]; then
+    if [ -z "${server_ip:-}" ]; then
         server_ip="${server_host}"
     fi
-    if [[ ! -v "${agent_replicas}" ]]; then
+    if [ -z "${agent_replicas:-}" ]; then
         agent_replicas="2"
     fi
-    if [[ ! -v "${agent_tag}" ]]; then
+    if [ -z "${agent_tag:-}" ]; then
         agent_tag="sparkit"
     fi
-    if [[ ! -v "${pvc_storageClass}" ]]; then
+    if [ -z "${pvc_storageClass:-}" ]; then
         pvc_storageClass="default"
     fi
-    if [[ ! -v "${pvc_volumeSize}" ]]; then
+    if [ -z "${pvc_volumeSize:-}" ]; then
         pvc_volumeSize="1Gi"
     fi
-    if [[ ! -v "${pvc_accessMode}" ]]; then
+    if [ -z "${pvc_accessMode:-}" ]; then
         pvc_accessMode="ReadWriteOnce"
     fi
-    if [[ ! -v "${server_hostgroup}" ]]; then
+    if [ -z "${server_hostgroup:-}" ]; then
         server_hostgroup="${ctm_user_code}-eks-hg"
     fi
-    if [[ ! -v "${namespace_resources_file}" ]]; then
+    if [ -z "${namespace_resources_file:-}" ]]; then
         namespace_resources_file=""
     fi
-    if [[ ! -v "${ai_additionalPluginsConfigMapName}" ]]; then
+    if [ -z "${ai_additionalPluginsConfigMapName:-}" ]; then
         ai_additionalPluginsConfigMapName=""
     fi
-    if [[ -v "${mft}" ]]; then
+    mft_string=""
+    if [ -z "${mft:-}" ]; then
         if [[ "${mft}" == "yes" ]]; then
-            if [[ ! -v "${mft_pvcs_name}" ]]; then
+            if [ -z "${mft_pvcs_name:-}" ]; then
                 mft_pvcs_name="mft-pvc"
             fi
-            if [[ ! -v "${mft_pvcs_name}" ]]; then
+            if [ -z "${mft_pvcs_name:-}" ]; then
                 mft_pvcs_mountPath="/mft_mountPath"
             fi
-            if [[ ! -v "${mft_configParametersConfigMapName}" ]]; then
+            if [ -z "${mft_configParametersConfigMapName:-}" ]; then
                 mft_configParametersConfigMapName="mft-config-params"
             fi
-            if [[ ! -v "${mft_sshPrivateKeySecretName}" ]]; then
+            if [ -z "${mft_sshPrivateKeySecretName}" ]; then
                 mft_sshPrivateKeySecretName="k3s-sftp-key"
             fi
             mft_string=" --set mft.pvcs[0].name=${mft_pvcs_name} --set mft.pvcs[0].mountPath=${mft_pvcs_mountPath} --set mft.configParametersConfigMapName=${mft_configParametersConfigMapName} --set mft.sshPrivateKeySecretName=${mft_configPrivateKeySecretName}"
-        else
-            mft_string=""
         fi
     fi
     if [[ "${repo_type}" == "saas" ]]; then
