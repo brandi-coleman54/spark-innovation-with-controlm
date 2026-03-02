@@ -465,6 +465,9 @@ function Provision_Helm_Agents {
     if [[ ! -n "${server_hostgroup}" ]]; then
         server_hostgroup="${ctm_user_code}-eks-hg"
     fi
+    if [[ ! -n "${namespace_resources_file}" ]]; then
+        namespace_resources_file=""
+    fi
     if [[ ! -n "${ai_additionalPluginsConfigMapName}" ]]; then
         ai_additionalPluginsConfigMapName=""
     fi
@@ -522,6 +525,10 @@ function Provision_Helm_Agents {
     EOF
     )
     helm_cmd="${helm_cmd} ${mft_string}"
+
+    if [[ -n "${namespace_resources_file}" ]]; then
+      kubectl apply -f "${namespace_resources_file}" -n "${ctm_user_code}"
+    fi
 
     helm repo add controlm ${helm_url}
     helm repo update
