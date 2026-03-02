@@ -430,7 +430,7 @@ function Provision_Helm_Agents {
     echo "count=${kv[count]-0}"
 
     if [ -z "${chart_version:-}" ]; then
-        chart_version="9.0.22.060"
+        chart_version="9.22.060"
     fi
     if [ -z "${image_tag:-}" ]; then
         image_tag="9.22.055-k8s-openjdk"
