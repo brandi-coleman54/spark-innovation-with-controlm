@@ -315,17 +315,15 @@ function Provision_Agents_Helm {
 
   # NOTE: Avoid duplicate flags; set each value once.
   # TIP: The mft mountPath should be an absolute path (e.g., /opt/controlm/mft). Adjust as needed.
-  #helm upgrade --install "${ctm_user_code}" controlm-saas/saas-controlm-agent --version "9.22.060" \
-  #  --set image.tag="latest-k8s-mft-openjdk" \
   helm upgrade --install "${ctm_user_code}" controlm-saas/saas-controlm-agent --version "9.22.060" \
-    --set image.tag="test-k8s-mft-openjdk" \
+    --set image.tag="latest-k8s-mft-openjdk" \
     --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}' \
     --set-json 'pod.annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}' \
     --set server.name="${ctm_server}" \
     --set api.endpoint="${ctm_aapi_endpoint}" \
     --set api.token="${ctm_auth_token}" \
     --set agent.tag="sparkit" \
-    --set agent.replicas="1" \
+    --set agent.replicas="2" \
     --set pvc.storageClass="local-path" \
     --set pvc.volumeSize="1Gi" \
     --set pvc.accessMode="ReadWriteOnce" \
@@ -353,7 +351,7 @@ function Provision_Agents_Helm2 {
   agent_set CTM_HG "${ctm_hg}"
 
   # Helm repo setup (idempotent)
-  helm repo add controlm "https://controlm-charts.s3.us-west-2.amazonaws.com/" >/dev/null 2>&1 || true
+  helm repo add controlm "https://controlm-charts.s3.us-west-2.amazonaws.com/saas/" >/dev/null 2>&1 || true
   helm repo update
 
   # Ensure namespace exists; apply resources
@@ -363,7 +361,7 @@ function Provision_Agents_Helm2 {
 
   # NOTE: Avoid duplicate flags; set each value once.
   # TIP: The mft mountPath should be an absolute path (e.g., /opt/controlm/mft). Adjust as needed.
-  helm upgrade --install "${ctm_user_code}" controlm/saas-controlm-agent --version "9.22.050" \
+  helm upgrade --install "${ctm_user_code}" controlm/saas-controlm-agent --version "9.22.060" \
     --set image.tag="9.22.050-k8s-mft-openjdk" \
     --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}' \
     --set-json 'pod.annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}' \
@@ -382,6 +380,153 @@ function Provision_Agents_Helm2 {
     --namespace "${ctm_user_code}" --create-namespace
     #--set ai.additionalPluginsConfigMapName="plugins-list" \
     
+}
+
+function Provision_Helm_Agents {
+    
+    local repo_type="${1:?usage: Provision_Helm_Agents <repo_type> <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> + \"<kv_string>\"}}"
+    local ctm_user_code="${2:?usage: Provision_Helm_Agents <repo_type> <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> + \"<kv_string>\"}}"
+    local ctm_aapi_endpoint="${3:?usage: Provision_Helm_Agents <repo_type> <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> + \"<kv_string>\"}}"
+    local ctm_auth_token="${4:?usage: Provision_Helm_Agents <repo_type> <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> + \"<kv_string>\"}}"
+    local ctm_server="${5:?usage: Provision_Helm_Agents <repo_type> <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> + \"<kv_string>\"}}"
+    local kv_string="$5"   # the quoted "a=b|c=d" argument
+
+    # Parse kv_string into an associative array
+    declare -A kv=()
+
+    local pair key val
+    IFS='|' read -r -a pairs <<< "$kv_string"
+    for pair in "${pairs[@]}"; do
+        # Skip empty segments (e.g. trailing |)
+        [[ -z "$pair" ]] && continue
+
+        # Require '=' in each pair
+        if [[ "$pair" != *"="* ]]; then
+            echo "Invalid pair (missing '='): $pair" >&2
+            return 3
+        fi
+
+        key="${pair%%=*}"   # everything before first '='
+        val="${pair#*=}"    # everything after first '='
+
+        # Optional: trim whitespace (basic)
+        key="${key#"${key%%[![:space:]]*}"}"
+        key="${key%"${key##*[![:space:]]}"}"
+        val="${val#"${val%%[![:space:]]*}"}"
+        val="${val%"${val##*[![:space:]]}"}"
+
+        # Optional: validate key format
+        if [[ ! "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
+            echo "Invalid key name: '$key'" >&2
+            return 4
+        fi
+
+        kv["$key"]="$val"
+    done
+
+    # --- Use the required args + kv map in your logic ---
+    #echo "req1=$req1 req2=$req2"
+    echo "foo=${kv[foo]-<unset>}"
+    echo "count=${kv[count]-0}"
+
+    if [[ ! -n "${chart_version}" ]]; then
+        chart_version="9.0.22.060"
+    fi
+    if [[ ! -n "${image_tag}" ]]; then
+        image_tag="9.22.055-k8s-openjdk"
+    fi
+    if [[ ! -n "${image_pullPolicy}" ]]; then
+        image_pullPolicy="IfNotPresent"
+    fi
+    if [[ ! -n "${server_port}" ]]; then
+        server_port="7005"
+    fi
+    if [[ ! -n "${server_host}" ]]; then
+        server_host="${ctm_server}"
+    fi
+    if [[ ! -n "${server_ip}" ]]; then
+        server_ip="${server_host}"
+    fi
+    if [[ ! -n "${agent_replicas}" ]]; then
+        agent_replicas="2"
+    fi
+    if [[ ! -n "${agent_tag}" ]]; then
+        agent_tag="sparkit"
+    fi
+    if [[ ! -n "${pvc_storageClass}" ]]; then
+        pvc_storageClass="default"
+    fi
+    if [[ ! -n "${pvc_volumeSize}" ]]; then
+        pvc_volumeSize="1Gi"
+    fi
+    if [[ ! -n "${pvc_accessMode}" ]]; then
+        pvc_accessMode="ReadWriteOnce"
+    fi
+    if [[ ! -n "${server_hostgroup}" ]]; then
+        server_hostgroup="${ctm_user_code}-eks-hg"
+    fi
+    if [[ ! -n "${ai_additionalPluginsConfigMapName}" ]]; then
+        ai_additionalPluginsConfigMapName=""
+    fi
+    if [[ -n "${mft}" ]]; then
+        if [[ "${mft}" == "yes" ]]; then
+            if [[ ! -n "${mft_pvcs_name}" ]]; then
+                mft_pvcs_name="mft-pvc"
+            fi
+            if [[ ! -n "${mft_pvcs_name}" ]]; then
+                mft_pvcs_mountPath="/mft_mountPath"
+            fi
+            if [[ ! -n "${mft_configParametersConfigMapName}" ]]; then
+                mft_configParametersConfigMapName="mft-config-params"
+            fi
+            if [[ ! -n "${mft_sshPrivateKeySecretName}" ]]; then
+                mft_sshPrivateKeySecretName="k3s-sftp-key"
+            fi
+            mft_string=" --set mft.pvcs[0].name=${mft_pvcs_name} --set mft.pvcs[0].mountPath=${mft_pvcs_mountPath} --set mft.configParametersConfigMapName=${mft_configParametersConfigMapName} --set mft.sshPrivateKeySecretName=${mft_configPrivateKeySecretName}"
+        else
+            mft_string=""
+        fi
+    fi
+    if [[ "${repo_type}" == "saas" ]]; then
+        repo_name=saas-controlm-agent
+        helm_url="https://controlm-charts.s3.us-west-2.amazonaws.com/saas/"
+    elif [[ "${repo_type}" == "ops" ]]; then
+        repo_name=controlm-agent
+        helm_url="https://controlm-charts.s3.us-west-2.amazonaws.com/"
+    else
+        echo "Arg 1 repo_type should either be saas or ops.  Defaulting to saas"
+        repo_name=saas-controlm-agent
+        helm_url="https://controlm-charts.s3.us-west-2.amazonaws.com/saas/"
+    fi
+
+    helm_cmd=$(cat <<EOF
+        helm install "${ctm_user_code}" controlm/${repo_name} --version "${chart_version}" \
+        --namespace "${ctm_user_code}" --create-namespace \
+        --set image.tag="${image_tag}" \
+        --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}' \
+        --set-json 'pod.annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}' \
+        --set image.pullPolicy="${image_pullPolicy}" \
+        --set server.name="${ctm_server}" \
+        --set server.port="${server_port}" \
+        --set server.host="${server_host}" \
+        --set server.ip="${server_ip}" \
+        --set api.endpoint="${ctm_aapi_endpoint}" \
+        --set api.token="${ctm_auth_token}" \
+        --set agent.replicas="${agent_replicas}" \
+        --set agent.tag="${agent_tag}" \
+        --set pvc.storageClass="${pvc_storageClass}" \
+        --set pvc.volumeSize="${pvc_volumeSize}" \
+        --set pvc.accessMode="${pvc_accessMode}" \
+        --set server.hostgroup="${server_hostgroup}" \
+        --set ai.additionalPluginsConfigMapName="${ai_additionalPluginsConfigMapName}"
+    EOF
+    )
+    helm_cmd="${helm_cmd} ${mft_string}"
+
+    helm repo add controlm ${helm_url}
+    helm repo update
+    "${helm_cmd}"
+
 }
 
 function Create_Docker_Secret {
