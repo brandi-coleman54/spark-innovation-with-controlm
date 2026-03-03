@@ -1,0 +1,175 @@
+api:
+  # api.endpoint defines the URL for Control-M Automation API, with the following format: https://<controlm>/automation-api (required)
+  endpoint:
+  # api.token Defines the token value for connecting to the Automation API server. (required)
+  # For information about obtaining this token, see Creating an API Token: https://documents.bmc.com/supportu/9.0.21/en-US/Documentation/Creating_an_API_Token.htm
+  token:
+  # api.secret defines a pre-existing Kubernetes secret that holds the API token, instead of setting the API token when running helm.
+  secret:
+  # api.username defines a Control-M user name to use (together with a password) to connect to the Automation API server, instead of using an API token.
+  # Authentication using a user name and password is required if you are working in Compatibility mode after an upgrade from Control-M/EM 9.0.20.200.
+  # Otherwise, BMC recommends using an API token.
+  username:
+  # api.password defines a password for the specified Control-M user name to use to connect to the Automation API server, instead of using an API token.
+  password:
+
+ai:
+  # ai.additionalPluginsConfigMapName defines the name of the configMap that contains a list of the additional plugin ids to be deployed in the agent (optional)
+  additionalPluginsConfigMapName:
+  # ai.additionalCertsConfigMapName defines the name of the configMap that contains additional AI certifications (optional)
+  additionalCertsConfigMapName:
+  # ai.proxyConfigMapName defines the name of the configMap that contains AI proxy settings (optional)
+  proxyConfigMapName:
+
+mft:
+  # mft.pvcs defines a list (array) of pre-defined pvcs that can be used to "land" files using mft (optional)
+  # 0 to unlimited number of PVCs can be defined
+  # usage example: --set mft.pvcs[0].name=mft-pvc --set mft.pvcs[0].mountPath=/mft_mountPath
+  #pvcsConfigMapName:
+  pvcs:
+    - name: ""
+      mountPath: ""
+  # mft.configParametersConfigMapName defines the Kubernetes ConfigMap holding the list of MFT configuration parameters that are used by the MFT plug-in (optional)
+  configParametersConfigMapName:
+  # mft.sshPrivateKeysSecretName defines the Kubernetes Secret holding the list of private client SSH keys that are used by the MFT plug-in (optional)
+  sshPrivateKeySecretName:
+
+agent:
+  # agent.replicas determines the number of Agent pods to run. (optional)
+  # Kubernetes Resource: statefulset.spec.replicas
+  replicas: 2
+  # agent.tag defines a logical name that is used to label specific Agents into a group with a specific authorization level. (optional)
+  # For more information about agent tag, see Agent General Parameters: https://documents.bmc.com/supportu/9.0.21/en-US/Documentation/Control-M_Agents.htm#Agent
+  tag:
+  # agent.trace runs ctm config APIs to check connectivity and server parameters (requires Configuration Browse permission)
+  trace: false
+  # agent.ssl sets the Agent's COMM mode to SSL and updates the Server (not needed in case the Server is set to SSL by default)
+  ssl: false
+  # agent.avoidDelAiLogs For troubleshooting, unless set to true, the AI_DLL_TRACK_* logs will be deleted to avoid filling up storage
+  avoidDelAiLogs: false
+  # agent.configParametersConfigMapName defines the Kubernetes ConfigMap holding the list of agent configuration parameters (optional)
+  configParametersConfigMapName:
+  # agent.uploadRemoteUtils enables uploading agent utilities to remote hosts (will set UPLOAD_REMOTE_UTILS to Y) (optional)
+  # Values: true | false
+  uploadRemoteUtils: false
+
+server:
+  # server.name defines the name of the Control-M/Server. (required)
+  name:
+  # server.host defines the name of the Control-M/Server host. (required)
+  host:
+  # server.port defines the listening port of the Control-M/Server. (required)
+  port:
+  # server.ip defines the public IPv4 address of the Control-M/Server. This is required only if the hostname cannot be resolved by DNS lookup from the cluster. (optional)
+  ip:
+  # server.hostgroup defines the name of the host group that the deployed agent is added to. (optional)
+  # For more information on Host Group authorizations, see Role Authorizations: https://documents.bmc.com/supportu/9.0.21/en-US/Documentation/Users_and_Roles.htm#Role
+  hostgroup: k8s_group
+  # server.secondaryHost defines the name of the secondary Control-M/Server host used in High Availability configurations. (optional)
+  secondaryHost:
+  # server.secondaryPort defines the listening port of the secondary HA Control-M/Server. (optional)
+  secondaryPort:
+  # server.secondaryIp defines the public IPv4 address of the secondary Control-M/Server host used in High Availability configurations. (optional)
+  # This is required only if the secondary hostname cannot be resolved by DNS lookup from the cluster.
+  secondaryIp:
+  # Disaster Recovery configuration
+  dr:
+    # server.dr.host defines the name of the DR Control-M/Server host. (required for DR configuration)
+    host:
+    # server.dr.port defines the listening port of the DR Control-M/Server. (optional)
+    port:
+    # server.dr.ip defines the public IPv4 address of the DR Control-M/Server. (optional)
+    # This is required only if the DR hostname cannot be resolved by DNS lookup from the cluster.
+    ip:
+    # server.dr.secondaryHost defines the name of the secondary DR Control-M/Server host used in HA configurations. (optional)
+    secondaryHost:
+    # server.dr.secondaryPort defines the listening port of the secondary DR Control-M/Server. (optional)
+    secondaryPort:
+    # server.dr.secondaryIp defines the public IPv4 address of the secondary DR Control-M/Server. (optional)
+    # This is required only if the secondary DR hostname cannot be resolved by DNS lookup from the cluster.
+    secondaryIp:
+
+image:
+  # image.repo defines the path to the container image repository, in the following format: <registry hostname>/<account name>/<repository name> (optional)
+  # If you do not specify a registry hostname, Kubernetes assumes that you mean the Docker public registry.
+  # Default: controlm/agent
+  # Kubernetes Resource: statefulset.spec.template.spec.containers.image
+  repo:
+  # image.tag defines the tag associated with the image. Tags allow you to identify different versions of the same series of images. (optional)
+  # Kubernetes Resource: statefulset.spec.template.spec.containers.image
+  tag:
+  # image.pullPolicy determines whether to update the image (by pulling a new version of the image) when the kubelet launches a container. (optional)
+  # Kubernetes Resource: statefulset.spec.template.spec.containers.imagePullPolicy
+  pullPolicy: IfNotPresent
+  # image.pullSecrets defines a secret (password) for accessing a private registry. (optional)
+  # Kubernetes Resource: statefulset.spec.template.spec.imagePullSecrets
+  pullSecrets: [ ]
+
+pod:
+  # pod.labels defines custom labels to add to the agent pods (optional)
+  # These labels are merged with the default labels. Usage example: --set pod.labels.environment=production --set pod.labels.team=devops
+  labels: {}
+  # pod.annotations are annotations added to the agent pods (optional)
+  annotations: {}
+  # pod.affinity defines the pod's scheduling constraints. (optional)
+  # Kubernetes resource: statefulset.spec.template.spec.affinity
+  affinity: [ ]
+  # pod.nodeSelector defines node labels for the NodeSelector, so that the pod can be scheduled on the nodes. (optional)
+  # Kubernetes resource: statefulset.spec.template.spec.nodeSelector
+  nodeSelector:
+    kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+  # pod.resources defines Kubernetes memory and CPU resource requests and resource limits for the pod. (optional)
+  # Kubernetes resource: statefulset.spec.template.spec.containers.resources
+  resources:
+    requests:
+      memory: "2Gi"
+  serviceAccount:
+    # pod.serviceAccount.create determines whether to create a Service Account. (optional)
+    # If this parameter is set to true, the service account has the default name  ".Release.Name.-sa".
+    # You can use pod.serviceAccount.name to change the default name.
+    # Values: true | false
+    # If you plan to run Kubernetes jobs in namespaces outside of the namespace where the Agent is deployed, set this parameter to false.
+    # You already created your Service Account, as described in "Defining privileges for running Kubernetes Jobs" in the documentation.
+    create: true
+    # pod.serviceAccount.name defines name of the ServiceAccount to use to run the pod. (optional)
+    # if pod.serviceAccount.create is set to true. Required if pod.serviceAccount.create is set to false.
+    # Default: ".Release.Name.-sa" (where .Release.Name is the name that you assigned to this installation instance)
+    # If you plan to run Kubernetes jobs in namespaces outside of the namespace where the Agent is deployed,
+    # use the same name that you defined when you created the Service Account, as described in "Defining privileges for running Kubernetes Jobs" in the documentation.
+    # Kubernetes resource: statefulset.spec.template.spec.serviceAccountName
+    name:
+  # Include timeoutSeconds only if explicitly set in values
+  livenessProbe:
+    # If timeoutSeconds is not set, this field will be omitted
+    # and Kubernetes will use its default value (currently 1 second)
+    timeoutSeconds: 2
+  # pod.timezone defines a timezone in the pod, for example: Asia/Taipei(optional)
+  timezone:
+  # pod.fsGroup defines the fsGroup ID for the pod's security context. (optional)
+  # This is used when pod.securityContext is not set to "auto".
+  # Default: 0 (maintains backward compatibility)
+  # Kubernetes resource: statefulset.spec.template.spec.securityContext.fsGroup
+  fsGroup:
+
+pvc:
+  # pvc.accessMode determines the required access mode of the volume used by the Persistent Volume Claim (optional).
+  # Values:
+  # ReadWriteOnce: The volume is mounted as read-write by a single node.
+  # ReadWriteMany: The volume is mounted as read-write by many nodes.
+  # The default ReadWriteMany is necessary when you deploy 2 or more Agents (as set by agent.replicas) on separate nodes.
+  # Kubernetes resource: persistentvolumeclaim.spec.accessModes
+  accessMode: ReadWriteMany
+  # pvc.storageClass defines the name of the Storage Class required by the Persistent Volume Claim (required).
+  # When you choose a Storage Class, note the following:
+  # Ensure that the Storage Class that you choose is compatible with the access mode that you set through pvc.accessMode. For a list of Storage Classes that support the different access modes, see Access Modes in the Kubernetes documentation.
+  # If you use an NFS Storage Class, ensure that the UID and GID, which are Storage Class parameters for dynamic provisioning, are both set to 1000.
+  # Kubernetes resource: persistentvolumeclaim.spec.storageClassName
+  storageClass:
+  # pvc.volumeSize determines the minimum amount of persistent volume required. (optional)
+  # Default: 10Gi, appropriate for 2 agents (the default value of agent.replicas)
+  # Kubernetes resource: persistentvolumeclaim.spec.resources.requests.storage
+  volumeSize: 10Gi
+
+# Set this to true to skip pre-install/upgrade hook job
+skipChecks: false
