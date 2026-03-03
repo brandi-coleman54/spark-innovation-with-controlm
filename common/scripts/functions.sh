@@ -513,7 +513,7 @@ function Provision_Helm_Agents {
         ai_additionalPluginsConfigMapName=""
     fi
 
-    mft_string=""
+    mft_args=()
     if [[ -v kv["mft"] ]]; then
         if [[ ${kv["mft"]} == "yes" ]]; then
             
@@ -541,7 +541,12 @@ function Provision_Helm_Agents {
                 mft_sshPrivateKeySecretName="k3s-sftp-key"
             fi
 
-            mft_string="--set mft.pvcs[0].name=${mft_pvcs_name} --set mft.pvcs[0].mountPath=${mft_pvcs_mountPath} --set mft.configParametersConfigMapName=${mft_configParametersConfigMapName} --set mft.sshPrivateKeySecretName=${mft_sshPrivateKeySecretName}"
+            mft_args+=(
+                --set mft.pvcs[0].name=${mft_pvcs_name}
+                --set mft.pvcs[0].mountPath=${mft_pvcs_mountPath}
+                --set mft.configParametersConfigMapName=${mft_configParametersConfigMapName}
+                --set mft.sshPrivateKeySecretName=${mft_sshPrivateKeySecretName}
+              )
         fi
     fi
     if [[ "${repo_type}" == "saas" ]]; then
@@ -581,10 +586,8 @@ function Provision_Helm_Agents {
             --set ai.additionalPluginsConfigMapName="${ai_additionalPluginsConfigMapName}"
         )
     fi
-    if [[ "${mft_string}" != "" ]]; then
-        helm_args+=(
-            ${mft_string}
-        )
+    if [ ${#mft_args[@]} -gt 0 ]; then
+        helm_args+=("${mft_args[@]}")
     fi
     if [[ -n "${namespace_resources_file}" ]]; then
       kubectl apply -f "${namespace_resources_file}" -n "${ctm_user_code}"
