@@ -556,34 +556,42 @@ function Provision_Helm_Agents {
         helm_url="https://controlm-charts.s3.us-west-2.amazonaws.com/saas/"
     fi
 
-    helm_cmd=(
-        helm install "${ctm_user_code}" controlm/${repo_name} --version "${chart_version}" \
-        --namespace "${ctm_user_code}" --create-namespace \
-        --set image.tag="${image_tag}" \
-        --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}' \
-        --set-json 'pod.annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}' \
-        --set image.pullPolicy="${image_pullPolicy}" \
-        --set server.name="${ctm_server}" \
-        --set server.port="${server_port}" \
-        --set server.host="${server_host}" \
-        --set server.ip="${server_ip}" \
-        --set api.endpoint="${ctm_aapi_endpoint}" \
-        --set api.token="${ctm_auth_token}" \
-        --set agent.replicas="${agent_replicas}" \
-        --set agent.tag="${agent_tag}" \
-        --set pvc.storageClass="${pvc_storageClass}" \
-        --set pvc.volumeSize="${pvc_volumeSize}" \
-        --set pvc.accessMode="${pvc_accessMode}" \
-        --set server.hostgroup="${server_hostgroup}" \
-        --set ai.additionalPluginsConfigMapName="${ai_additionalPluginsConfigMapName}"
+    helm_args=(
+        install "${ctm_user_code}" controlm/${repo_name} --version "${chart_version}"
+        --namespace "${ctm_user_code}" --create-namespace
+        --set image.tag="${image_tag}"
+        --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}'
+        --set-json 'pod.annotations={"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}'
+        --set image.pullPolicy="${image_pullPolicy}"
+        --set server.name="${ctm_server}"
+        --set server.port="${server_port}"
+        --set server.host="${server_host}"
+        --set server.ip="${server_ip}"
+        --set api.endpoint="${ctm_aapi_endpoint}"
+        --set api.token="${ctm_auth_token}"
+        --set agent.replicas="${agent_replicas}"
+        --set agent.tag="${agent_tag}"
+        --set pvc.storageClass="${pvc_storageClass}"
+        --set pvc.volumeSize="${pvc_volumeSize}"
+        --set pvc.accessMode="${pvc_accessMode}"
+        --set server.hostgroup="${server_hostgroup}"
     )
-    helm_cmd[-1]+="${mft_string}"
+    if [[ "${ai_additionalPluginsConfigMapName}" != "" ]]; then
+        helm_args+=(
+            --set ai.additionalPluginsConfigMapName="${ai_additionalPluginsConfigMapName}"
+        )
+    fi
+    if [[ "${mft_string}" != "" ]]; then
+        helm_args+=(
+            "${mft_string}"
+        )
+    fi
     if [[ -n "${namespace_resources_file}" ]]; then
       kubectl apply -f "${namespace_resources_file}" -n "${ctm_user_code}"
     fi
     helm repo add controlm ${helm_url}
     helm repo update
-    "${helm_cmd[@]}"
+    helm "${helm_args[@]}"
 
 }
 
