@@ -583,7 +583,7 @@ function Provision_Helm_Agents {
     fi
     if [[ "${mft_string}" != "" ]]; then
         helm_args+=(
-            "${mft_string}"
+            ${mft_string}
         )
     fi
     if [[ -n "${namespace_resources_file}" ]]; then
