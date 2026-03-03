@@ -542,8 +542,8 @@ function Provision_Helm_Agents {
             fi
 
             mft_args+=(
-                --set mft.pvcs[0].name=${mft_pvcs_name}
-                --set mft.pvcs[0].mountPath=${mft_pvcs_mountPath}
+                "--set mft.pvcs[0].name=${mft_pvcs_name}"
+                "--set mft.pvcs[0].mountPath=${mft_pvcs_mountPath}"
                 --set mft.configParametersConfigMapName=${mft_configParametersConfigMapName}
                 --set mft.sshPrivateKeySecretName=${mft_sshPrivateKeySecretName}
               )
