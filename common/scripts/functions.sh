@@ -595,8 +595,8 @@ function Provision_Helm_Agents {
     helm repo add controlm ${helm_url}
     helm repo update
     declare -p helm_args
-    helm "${helm_args[@]}"
-
+    #helm "${helm_args[@]}"
+    echo "${helm_args[@]}"
 }
 
 function Create_Docker_Secret {
