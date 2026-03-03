@@ -15,7 +15,7 @@ api:
 
 ai:
   # ai.additionalPluginsConfigMapName defines the name of the configMap that contains a list of the additional plugin ids to be deployed in the agent (optional)
-  additionalPluginsConfigMapName:
+  additionalPluginsConfigMapName: plugins_list
   # ai.additionalCertsConfigMapName defines the name of the configMap that contains additional AI certifications (optional)
   additionalCertsConfigMapName:
   # ai.proxyConfigMapName defines the name of the configMap that contains AI proxy settings (optional)
@@ -27,12 +27,12 @@ mft:
   # usage example: --set mft.pvcs[0].name=mft-pvc --set mft.pvcs[0].mountPath=/mft_mountPath
   #pvcsConfigMapName:
   pvcs:
-    - name: ""
-      mountPath: ""
+    - name: "mft-pvc"
+      mountPath: "/mft_mountPath"
   # mft.configParametersConfigMapName defines the Kubernetes ConfigMap holding the list of MFT configuration parameters that are used by the MFT plug-in (optional)
-  configParametersConfigMapName:
+  configParametersConfigMapName: mft-config-params
   # mft.sshPrivateKeysSecretName defines the Kubernetes Secret holding the list of private client SSH keys that are used by the MFT plug-in (optional)
-  sshPrivateKeySecretName:
+  sshPrivateKeySecretName: k8s-sftp-key
 
 agent:
   # agent.replicas determines the number of Agent pods to run. (optional)
@@ -40,7 +40,7 @@ agent:
   replicas: 2
   # agent.tag defines a logical name that is used to label specific Agents into a group with a specific authorization level. (optional)
   # For more information about agent tag, see Agent General Parameters: https://documents.bmc.com/supportu/9.0.21/en-US/Documentation/Control-M_Agents.htm#Agent
-  tag:
+  tag: sparkit
   # agent.trace runs ctm config APIs to check connectivity and server parameters (requires Configuration Browse permission)
   trace: false
   # agent.ssl sets the Agent's COMM mode to SSL and updates the Server (not needed in case the Server is set to SSL by default)
