@@ -13,7 +13,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: local-sc
+  storageClassName: local-path
   resources:
     requests:
       storage: 20Mi
