@@ -12,7 +12,7 @@ metadata:
   name: mft-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: local-path
   resources:
     requests:
