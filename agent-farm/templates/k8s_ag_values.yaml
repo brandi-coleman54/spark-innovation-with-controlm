@@ -13,9 +13,9 @@
   # api.password defines a password for the specified Control-M user name to use to connect to the Automation API server, instead of using an API token.
   #password:
 
-ai:
+#ai:
   # ai.additionalPluginsConfigMapName defines the name of the configMap that contains a list of the additional plugin ids to be deployed in the agent (optional)
-  additionalPluginsConfigMapName: plugins_list
+  #additionalPluginsConfigMapName: plugins-list
   # ai.additionalCertsConfigMapName defines the name of the configMap that contains additional AI certifications (optional)
   #additionalCertsConfigMapName:
   # ai.proxyConfigMapName defines the name of the configMap that contains AI proxy settings (optional)
