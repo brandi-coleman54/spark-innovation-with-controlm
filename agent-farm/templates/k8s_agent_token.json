@@ -1,0 +1,5 @@
+{
+  "tokenName": "emuser1-token",
+  "expirationDate":"2030-12-02",
+  "roles": ["Admin"]
+}
