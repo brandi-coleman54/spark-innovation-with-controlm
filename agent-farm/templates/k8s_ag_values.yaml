@@ -1,4 +1,4 @@
-api:
+#api:
   # api.endpoint defines the URL for Control-M Automation API, with the following format: https://<controlm>/automation-api (required)
   #endpoint:
   # api.token Defines the token value for connecting to the Automation API server. (required)
@@ -110,15 +110,15 @@ pod:
   # These labels are merged with the default labels. Usage example: --set pod.labels.environment=production --set pod.labels.team=devops
   #labels: {}
   # pod.annotations are annotations added to the agent pods (optional)
-  annotations: {"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}
+  #annotations: {"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"}
   # pod.affinity defines the pod's scheduling constraints. (optional)
   # Kubernetes resource: statefulset.spec.template.spec.affinity
   #affinity: [ ]
   # pod.nodeSelector defines node labels for the NodeSelector, so that the pod can be scheduled on the nodes. (optional)
   # Kubernetes resource: statefulset.spec.template.spec.nodeSelector
-  nodeSelector:
-    kubernetes.io/os: linux
-    kubernetes.io/arch: amd64
+  #nodeSelector:
+  #  kubernetes.io/os: linux
+  #  kubernetes.io/arch: amd64
   # pod.resources defines Kubernetes memory and CPU resource requests and resource limits for the pod. (optional)
   # Kubernetes resource: statefulset.spec.template.spec.containers.resources
   resources:
