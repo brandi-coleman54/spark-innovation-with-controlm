@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PREFIX=1
+PREFIX=$1
 SERVER=$2
 OPER=$3
 NAME=$4
@@ -8,7 +8,7 @@ COUNT=${5:-}
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Build assoc agents array string
-assoc_ct=$(ctm config server:agents::get ${SERVER} -s "agent=${PREFIX}*" | jq '.agents | length'
+assoc_ct=$(ctm config server:agents::get ${SERVER} -s "agent=${PREFIX}*" | jq '.agents | length')
 assoc_str=""
 for ((i=0; i<assoc_ct; i++)); do
   assoc_str+="\"${PREFIX}${i}\","
