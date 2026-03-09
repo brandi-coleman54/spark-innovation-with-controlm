@@ -4,6 +4,7 @@ VENV_DIR=$1
 PREFIX=$2
 SERVER=$3
 COUNT=$4
+((COUNT--))
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 source ${VENV_DIR}/venv/bin/activate
