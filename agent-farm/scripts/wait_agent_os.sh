@@ -1,9 +1,12 @@
 #!/bin/bash
 
-PREFIX=$1
-SERVER=$2
-COUNT=$3
+VENV_DIR=$1
+PREFIX=$2
+SERVER=$3
+COUNT=$4
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+source ${VENV_DIR}/venv/bin/activate
 
 for ((i=1; i<=${COUNT}; i++)); do
   agent=${PREFIX}${i}
