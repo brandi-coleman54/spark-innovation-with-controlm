@@ -8,7 +8,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 source ${VENV_DIR}/venv/bin/activate
 
-for ((i=1; i<=${COUNT}; i++)); do
+for ((i=0; i<=${COUNT}; i++)); do
   agent=${PREFIX}${i}
   tries=1
   echo "Starting os lookup for agent ${agent}"
