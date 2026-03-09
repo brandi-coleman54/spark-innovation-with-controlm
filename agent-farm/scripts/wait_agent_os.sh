@@ -13,7 +13,7 @@ for ((i=0; i<=${COUNT}; i++)); do
   tries=1
   echo "Starting os lookup for agent ${agent}"
   set -e
-  until ctm config server:agents::get ${SERVER} -s "agent=${agent}" | tee /dev/tty | jq -e '.agents[0] | has("operatingSystem")'; do
+  until ctm config server:agents::get ${SERVER} -s "agent=${agent}" | tee /dev/stderr | jq -e '.agents[0] | has("operatingSystem")'; do
     echo "Try for OS ${tries}"
     if [ "${tries}" -ge "20" ]; then
       ctm config server:agents::get ${SERVER} -s "agent=${agent}"
