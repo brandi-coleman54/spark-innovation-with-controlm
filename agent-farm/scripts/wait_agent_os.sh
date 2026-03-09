@@ -11,9 +11,11 @@ source ${VENV_DIR}/venv/bin/activate
 for ((i=1; i<=${COUNT}; i++)); do
   agent=${PREFIX}${i}
   tries=1
-  until ctm config server:agents::get ${SERVER} -s "agent=${agent}" | jq 'has("operatingSystem")'; do
+  echo "Starting os lookup for agent ${agent}"
+  until ctm config server:agents::get ${SERVER} -s "agent=${agent}" | jq -e '.agents[0] | has("operatingSystem")'; do
     echo "Try for OS ${tries}"
     if [ "${tries}" -ge "20" ]; then
+      ctm config server:agents::get ${SERVER} -s "agent=${agent}"
       echo "breaking"
       break
     fi
