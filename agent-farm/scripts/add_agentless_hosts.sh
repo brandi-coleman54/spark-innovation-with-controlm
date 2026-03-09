@@ -1,10 +1,10 @@
 #!/bin/bash
 
-PREFIX=$1
-SERVER=$2
-OPER=$3
-NAME=$4
-COUNT=${5:-}
+PREFIX=$1    # this is the user code
+SERVER=$2    # ctm server name
+OPER=$3      # single or count
+NAME=$4      # this is the prefix for the agentless name
+COUNT=${5:-}  # number of agentless machines to add
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Build assoc agents array string
