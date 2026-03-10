@@ -48,6 +48,7 @@
       "SpoolListRecipient" : {
         "ReciptNoForwarding" : false
         }
-      }
+      },
+	  "flowName": {"Type":"Flow","Sequence":["replace-with-usercode-job_events_to_CTM", "replace-with-usercode-job_events_FROM_SAP"]}
     }
 }
