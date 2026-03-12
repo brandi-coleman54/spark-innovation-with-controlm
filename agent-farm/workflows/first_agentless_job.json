@@ -6,7 +6,6 @@
     "first_agentless_job": {
       "Type": "Job:Command",
       "Host": "agentless1",
-      "CreatedBy": "emuser",
       "RunAs": "spark_ctm",
       "Command": "echo \"My fist agentless job\""
     }
