@@ -11,7 +11,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 assoc_ct=$(ctm config server:agents::get ${SERVER} -s "agent=${PREFIX}*" | jq '.agents | length')
 assoc_str=""
 for ((i=0; i<assoc_ct; i++)); do
-  assoc_str+="\"${PREFIX}${i}\","
+  assoc_str+="\"${PREFIX}-sts-${i}\","
 done
 assoc_str="${assoc_str%,}"
 
