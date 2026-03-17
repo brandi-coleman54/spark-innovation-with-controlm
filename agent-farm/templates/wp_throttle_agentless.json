@@ -5,7 +5,7 @@
     "RunningJobs": [
       {
         "Server": "instruqt",
-        "Quantity": "25"
+        "Quantity": "${running_jobs}"
       }
     ],
     "Filter": {
