@@ -4,7 +4,7 @@
     "Description": "Throttling Agentless Jobs",
     "RunningJobs": [
       {
-        "Server": "instruqt",
+        "Server": "${server}",
         "Quantity": "${running_jobs}"
       }
     ],
