@@ -1,4 +1,0 @@
-#!/bin/bash
-
-AGENTLESS_COUNT=$1
-RUNNING_JOBS=$2
