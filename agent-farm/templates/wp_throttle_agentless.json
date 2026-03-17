@@ -1,0 +1,16 @@
+{
+  "${policy_name}": {
+    "Type": "WorkloadPolicy",
+    "Description": "Throttling Agentless Jobs",
+    "RunningJobs": [
+      {
+        "Server": "instruqt",
+        "Quantity": "25"
+      }
+    ],
+    "Filter": {
+      "JobType": "OS",
+      "Host": "${agentless_host}"
+    }
+  }
+}
