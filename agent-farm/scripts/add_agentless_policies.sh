@@ -7,6 +7,5 @@ RUNNIN_JOBS=$4
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 for ((i=1; i<=AGENT_COUNT; i++)); do
-
-
+  policy_name=AGENTLESS${i}_THROTTLE agent_name=${AGENT_PREFIX}${i}
 done
