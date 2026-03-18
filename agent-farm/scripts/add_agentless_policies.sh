@@ -11,7 +11,7 @@ source ${VENV_DIR}/venv/bin/activate
 
 for ((i=1; i<=AGENT_COUNT; i++)); do
   policy_name=AGENTLESS${i}_THROTTLE \
-  agent_name=${AGENT_PREFIX}${i} \
+  agentless_host=${AGENT_PREFIX}${i} \
   running_jobs=${RUNNING_JOBS} \
   server=${SERVER} \
     envsubst < ${SCRIPT_DIR}/../templates/wp_throttle_agentless.json > /tmp/wp_${i}.json
