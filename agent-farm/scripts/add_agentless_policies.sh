@@ -1,10 +1,13 @@
 #!/bin/bash
 
-SERVER=$1            # ctm server name
-AGENT_PREFIX=$2      # this is the prefix for the agentless name
-AGENT_COUNT=$3      # number of agentless machines to add
-RUNNING_JOBS=$4
+VENV_DIR=$1
+SERVER=$2            # ctm server name
+AGENT_PREFIX=$3      # this is the prefix for the agentless name
+AGENT_COUNT=$4      # number of agentless machines to add
+RUNNING_JOBS=$5
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+source ${VENV_DIR}/venv/bin/activate
 
 for ((i=1; i<=AGENT_COUNT; i++)); do
   policy_name=AGENTLESS${i}_THROTTLE \
