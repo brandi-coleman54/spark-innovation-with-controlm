@@ -16,5 +16,5 @@ for ((i=1; i<=AGENT_COUNT; i++)); do
   server=${SERVER} \
     envsubst < ${SCRIPT_DIR}/../templates/wp_throttle_agentless.json > /tmp/wp_${i}.json
   ctm run workloadpolicies::add /tmp/wp_${i}.json
-  ctm run workloadpolicies::activate AGENTLESS${i}_THROTTLE
+  ctm run workloadpolicy::activate AGENTLESS${i}_THROTTLE
 done
