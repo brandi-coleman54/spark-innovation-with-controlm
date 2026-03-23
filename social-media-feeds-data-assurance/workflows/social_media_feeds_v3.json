@@ -28,7 +28,7 @@
       "Host" : "data-assurance-ag",
       "CreatedBy" : "miwalter",
       "Description" : "This job runs Google Gemini test on file (Sentiment scoring). It uses token set in root environment.",
-      "RunAs" : "ctmda",
+      "RunAs" : "controlm",
       "Application" : "zzz-da-feeds",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -64,7 +64,7 @@
       "Host" : "data-assurance-ag",
       "CreatedBy" : "miwalter",
       "Description" : "This job exports proper lines to STD OUT.",
-      "RunAs" : "ctmda",
+      "RunAs" : "controlm",
       "Application" : "zzz-da-feeds",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -89,7 +89,7 @@
       "SubApplication" : "zzz-da-feeds",
       "Host" : "data-assurance-ag",
       "CreatedBy" : "miwalter",
-      "RunAs" : "ctmda",
+      "RunAs" : "controlm",
       "Application" : "zzz-da-feeds",
       "Command" : "curl http://social-media-feeds-app:8080/ > /opt/controlm/social-media-feeds/feeds.csv",
       "When" : {
