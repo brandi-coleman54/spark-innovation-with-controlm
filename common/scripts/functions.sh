@@ -562,7 +562,7 @@ function Provision_Helm_Agents {
     fi
 
     helm_args=(
-        install "${ctm_user_code}" controlm/${repo_name} --version "${chart_version}"
+        install "${ctm_user_code}" controlm/${repo_name}"
         --namespace "${ctm_user_code}" --create-namespace
         --set image.tag="${image_tag}"
         --set-json 'pod.nodeSelector={"kubernetes.io/os":"linux"}'
