@@ -57,6 +57,10 @@ function Check_Mode_Vars {
 
 function Set_User_Data {
   local gen_random_code="${1:-}"
+  local code_chars="${2:-}"
+  if [[ "${code_chars}" -eq "" ]]; then
+    code_chars=4
+  fi
   local current_mode="INVITE"
 
   if [ -z "${INSTRUQT_USER_NAME:-}" ]; then
@@ -82,7 +86,7 @@ function Set_User_Data {
 
     if [[ "${gen_random_code}" == "random_code" ]]; then
       export CTM_USER_CODE
-      CTM_USER_CODE="$(Generate_User_Code)"
+      CTM_USER_CODE="$(Generate_User_Code ${code_chars})"
     else
       local first_initial="${first_name:0:1}"
       local last_initials="${last_name:0:2}"
@@ -116,10 +120,15 @@ EOF
 }
 
 function Generate_User_Code {
+  local code_chars=$1
   local alpha numeric
   alpha=$(head /dev/urandom | tr -dc a-z | head -c 3)
   numeric=$(head /dev/urandom | tr -dc 0-9 | head -c 1)
-  echo "${alpha}${numeric}"
+  if [ "${code_chars -eq "3" ]; then
+    echo "${alpha}"
+  else
+    echo "${alpha}${numeric}"
+  fi
 }
 
 
