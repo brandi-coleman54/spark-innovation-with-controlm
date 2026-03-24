@@ -124,7 +124,7 @@ function Generate_User_Code {
   local alpha numeric
   alpha=$(head /dev/urandom | tr -dc a-z | head -c 3)
   numeric=$(head /dev/urandom | tr -dc 0-9 | head -c 1)
-  if [ "${code_chars -eq "3" ]; then
+  if [ "${code_chars}" -eq "3" ]; then
     echo "${alpha}"
   else
     echo "${alpha}${numeric}"
