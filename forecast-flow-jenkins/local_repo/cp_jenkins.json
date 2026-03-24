@@ -1,6 +1,6 @@
 
 {
-  "replace-with-usercode-uc_CP_JENKINS": {
+  "replace-with-uc-usercode_CP_JENKINS": {
     "Type": "ConnectionProfile:Jenkins",
     "Attempt Reruns": "3",
     "User API Token": "replace-with-jenkins-api-token",
