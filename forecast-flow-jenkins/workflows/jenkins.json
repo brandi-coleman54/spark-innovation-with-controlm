@@ -19,7 +19,7 @@
     },
     "jenkins-pipeline-run" : {
       "Type" : "Job:Jenkins",
-      "ConnectionProfile" : "replace-with-usercode-uc_CP_JENKINS",
+      "ConnectionProfile" : "replace_with_uc_usercode_CP_JENKINS",
       "SubApplication" : "replace-with-usercode-jenkins",
       "Application" : "replace-with-usercode-jenkins",
       "Pipeline Name" : "ctm-build-replace-with-usercode",
@@ -27,7 +27,7 @@
       "Add Branch Name" : "unchecked",
       "Fetch Console Logs" : "unchecked",
       "Host" : "replace-with-instruqt-host",
-      "RunAs" : "replace-with-usercode-uc_CP_JENKINS",
+      "RunAs" : "replace_with_uc_usercode_CP_JENKINS",
       "When" : {
         "WeekDays" : [ "NONE" ],
         "MonthDays" : [ "ALL" ],
