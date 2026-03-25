@@ -42,4 +42,4 @@ jobs:
           for file in $(find . -name *.json); do
             sed -i -E 's|${{ inputs.find-str }}|${{ inputs.replace-str }}|g' $file
           done
-          cat local_repo/jenkins_cp.json
+          cat local_repo/cp_jenkins.json
