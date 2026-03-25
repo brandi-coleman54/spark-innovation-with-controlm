@@ -44,7 +44,7 @@ jobs:
           ls -l
           echo "Updating json files..."
           echo "Replacing ${{ inputs.find-str }} with ${{ inputs.replace-str }}"
-          for file in $(find . -name *); do
+          for file in $(find . -name "*"); do
             sed -i -E 's|${{ inputs.find-str }}|${{ inputs.replace-str }}|g' $file
           done
           cat local_repo/cp_jenkins.json
