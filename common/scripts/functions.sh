@@ -1000,6 +1000,20 @@ function Repo_Replacements2 {
   done
 }
 
+function Repo_Replacements3 {
+
+  local repo_dir=$1
+
+  for replacement in "${!replace@}"; do
+    echo "Variable: $replacement"
+    eval echo "Value1: ${!replacement}"
+    rep_value=$(eval echo "${!replacement}")
+    echo "Replacing ${replacement} with ${rep_value} in ${repo_dir}/..."
+    find "${repo_dir}/" -type f -exec sed -i "s|${replacement}|${rep_value}|g" {} +
+  done
+
+}
+
 function Config_Code_Server {
   local user_home="${1:?usage: Config_Code_Server <user_home> <base_dir> <user>}"
   local base_dir="${2:?usage: Config_Code_Server <user_home> <base_dir> <user>}"
