@@ -26,7 +26,7 @@
       "Add Parameters" : "unchecked",
       "Add Branch Name" : "unchecked",
       "Fetch Console Logs" : "unchecked",
-      "Host" : "replace-with-instruqt-host",
+      "Host" : "replace_with_instruqt_host",
       "RunAs" : "replace_with_uc_usercode_CP_JENKINS",
       "When" : {
         "WeekDays" : [ "NONE" ],

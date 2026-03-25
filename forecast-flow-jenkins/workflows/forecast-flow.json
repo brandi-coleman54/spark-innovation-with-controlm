@@ -30,7 +30,7 @@
     "replace_with_usercode-cityvar" : {
       "Type" : "Job:Command",
       "SubApplication" : "replace_with_usercode-forecast-flow",
-      "Host" : "replace-with-instruqt-host",
+      "Host" : "replace_with_instruqt_host",
       "RunAs" : "controlm",
       "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "cd $HOME/ && city=$(cat output.json | jq -r \".name\") | echo \"$city\"",
@@ -71,7 +71,7 @@
     "replace_with_usercode-countryvar" : {
       "Type" : "Job:Command",
       "SubApplication" : "replace_with_usercode-forecast-flow",
-      "Host" : "replace-with-instruqt-host",
+      "Host" : "replace_with_instruqt_host",
       "RunAs" : "controlm",
       "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "cd $HOME/ && country=$(cat output.json | jq -r \".sys.country\") | echo \"$country\"",
@@ -114,7 +114,7 @@
       "ServiceName" : "replace_with_usercode-forecast-flow-sla",
       "ServicePriority" : "3",
       "SubApplication" : "replace_with_usercode-forecast-flow",
-      "Host" : "replace-with-instruqt-host",
+      "Host" : "replace_with_instruqt_host",
       "JobRunsDeviationsTolerance" : "3",
       "RunAs" : "controlm",
       "Application" : "replace_with_usercode-forecast-flow",
@@ -143,7 +143,7 @@
     "replace_with_usercode-getoutput" : {
       "Type" : "Job:Command",
       "SubApplication" : "replace_with_usercode-forecast-flow",
-      "Host" : "replace-with-instruqt-host",
+      "Host" : "replace_with_instruqt_host",
       "RunAs" : "controlm",
       "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "echo \\\"Today, the high temperature in %%city %%country is %%hightemp F.\\\"",
@@ -195,7 +195,7 @@
     "replace_with_usercode-getweatherdata" : {
       "Type" : "Job:Command",
       "SubApplication" : "replace_with_usercode-forecast-flow",
-      "Host" : "replace-with-instruqt-host",
+      "Host" : "replace_with_instruqt_host",
       "RunAs" : "controlm",
       "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "wget \"https://api.openweathermap.org/data/2.5/weather?zip=%%zipcode,us&appid=%%appid&units=imperial\" -O $HOME/output.json",
@@ -219,7 +219,7 @@
     "replace_with_usercode-hightempvar" : {
       "Type" : "Job:Command",
       "SubApplication" : "replace_with_usercode-forecast-flow",
-      "Host" : "replace-with-instruqt-host",
+      "Host" : "replace_with_instruqt_host",
       "RunAs" : "controlm",
       "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "cd $HOME/ && high_temp=$(cat output.json | jq \".main.temp_max\") | echo \"$high_temp\"",
