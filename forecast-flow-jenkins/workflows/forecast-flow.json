@@ -7,7 +7,7 @@
     }, {
       "zipcode" : "68116"
     }, {
-      "email" : "replace-with-email"
+      "email" : "replace_with_email"
     } ],
     "ControlmServer" : "IN01",
     "OrderMethod" : "Manual",
