@@ -44,3 +44,8 @@ jobs:
             sed -i -E 's|${{ inputs.find-str }}|${{ inputs.replace-str }}|g' $file
           done
           cat local_repo/cp_jenkins.json
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Committing substring replacement in ${{ inputs.folder }}
