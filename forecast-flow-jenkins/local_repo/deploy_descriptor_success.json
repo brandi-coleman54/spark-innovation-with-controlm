@@ -8,7 +8,7 @@
 			},
 			"Replace": [
 				{
-					"replace-with-usercode(.*)": "replace-with-usercode$1-PROD"
+					"replace_with_usercode(.*)": "replace_with_usercode$1-PROD"
 				}
 			]
 		},
@@ -16,7 +16,7 @@
 			"Property": "Application",
 			"Replace": [
 				{
-					"replace-with-usercode(.*)": "replace-with-usercode$1-PROD"
+					"replace_with_usercode(.*)": "replace_with_usercode$1-PROD"
 				}
 			]
 		},
@@ -24,7 +24,7 @@
 			"Property": "SubApplication",
 			"Replace": [
 				{
-					"replace-with-usercode(.*)": "replace-with-usercode$1-PROD"
+					"replace_with_usercode(.*)": "replace_with_usercode$1-PROD"
 				}
 			]
 		},

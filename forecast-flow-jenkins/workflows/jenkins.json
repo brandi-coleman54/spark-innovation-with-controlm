@@ -1,9 +1,9 @@
 {
-  "replace-with-usercode-jenkins" : {
+  "replace_with_usercode-jenkins" : {
     "Type" : "Folder",
     "ControlmServer" : "IN01",
-    "SubApplication" : "replace-with-usercode-jenkins",
-    "Application" : "replace-with-usercode-jenkins",
+    "SubApplication" : "replace_with_usercode-jenkins",
+    "Application" : "replace_with_usercode-jenkins",
     "When" : {
       "RuleBasedCalendars" : {
         "Included" : [ "EVERYDAY" ],
@@ -20,9 +20,9 @@
     "jenkins-pipeline-run" : {
       "Type" : "Job:Jenkins",
       "ConnectionProfile" : "replace_with_uc_usercode_CP_JENKINS",
-      "SubApplication" : "replace-with-usercode-jenkins",
-      "Application" : "replace-with-usercode-jenkins",
-      "Pipeline Name" : "ctm-build-replace-with-usercode",
+      "SubApplication" : "replace_with_usercode-jenkins",
+      "Application" : "replace_with_usercode-jenkins",
+      "Pipeline Name" : "ctm-build-replace_with_usercode",
       "Add Parameters" : "unchecked",
       "Add Branch Name" : "unchecked",
       "Fetch Console Logs" : "unchecked",

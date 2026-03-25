@@ -1,5 +1,5 @@
 {
-  "replace-with-usercode-forecast-flow" : {
+  "replace_with_usercode-forecast-flow" : {
     "Type" : "Folder",
     "SiteStandard": "Dev_SiteStandard",
     "Variables" : [ {
@@ -12,8 +12,8 @@
     "ControlmServer" : "IN01",
     "OrderMethod" : "Manual",
     "RunAs" : "controlm",
-    "SubApplication" : "replace-with-usercode-forecast-flow",
-    "Application" : "replace-with-usercode-forecast-flow",
+    "SubApplication" : "replace_with_usercode-forecast-flow",
+    "Application" : "replace_with_usercode-forecast-flow",
     "When" : {
       "RuleBasedCalendars" : {
         "Included" : [ "EVERYDAY" ],
@@ -27,12 +27,12 @@
         }
       }
     },
-    "replace-with-usercode-cityvar" : {
+    "replace_with_usercode-cityvar" : {
       "Type" : "Job:Command",
-      "SubApplication" : "replace-with-usercode-forecast-flow",
+      "SubApplication" : "replace_with_usercode-forecast-flow",
       "Host" : "replace-with-instruqt-host",
       "RunAs" : "controlm",
-      "Application" : "replace-with-usercode-forecast-flow",
+      "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "cd $HOME/ && city=$(cat output.json | jq -r \".name\") | echo \"$city\"",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -52,28 +52,28 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-cityvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-cityvar"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-cityvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-cityvar-TO-replace_with_usercode-getoutput"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-cityvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-cityvar"
         } ]
       }
     },
-    "replace-with-usercode-countryvar" : {
+    "replace_with_usercode-countryvar" : {
       "Type" : "Job:Command",
-      "SubApplication" : "replace-with-usercode-forecast-flow",
+      "SubApplication" : "replace_with_usercode-forecast-flow",
       "Host" : "replace-with-instruqt-host",
       "RunAs" : "controlm",
-      "Application" : "replace-with-usercode-forecast-flow",
+      "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "cd $HOME/ && country=$(cat output.json | jq -r \".sys.country\") | echo \"$country\"",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -93,31 +93,31 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-countryvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-countryvar"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-countryvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-countryvar-TO-replace_with_usercode-getoutput"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-countryvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-countryvar"
         } ]
       }
     },
-    "replace-with-usercode-forecast-flow-sla" : {
+    "replace_with_usercode-forecast-flow-sla" : {
       "Type" : "Job:SLAManagement",
-      "ServiceName" : "replace-with-usercode-forecast-flow-sla",
+      "ServiceName" : "replace_with_usercode-forecast-flow-sla",
       "ServicePriority" : "3",
-      "SubApplication" : "replace-with-usercode-forecast-flow",
+      "SubApplication" : "replace_with_usercode-forecast-flow",
       "Host" : "replace-with-instruqt-host",
       "JobRunsDeviationsTolerance" : "3",
       "RunAs" : "controlm",
-      "Application" : "replace-with-usercode-forecast-flow",
+      "Application" : "replace_with_usercode-forecast-flow",
       "CompleteIn" : {
         "Time" : "0:5"
       },
@@ -130,22 +130,22 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getoutput-TO-replace-with-usercode-forecast-flow-sla"
+          "Event" : "replace_with_usercode-getoutput-TO-replace_with_usercode-forecast-flow-sla"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getoutput-TO-replace-with-usercode-forecast-flow-sla"
+          "Event" : "replace_with_usercode-getoutput-TO-replace_with_usercode-forecast-flow-sla"
         } ]
       }
     },
-    "replace-with-usercode-getoutput" : {
+    "replace_with_usercode-getoutput" : {
       "Type" : "Job:Command",
-      "SubApplication" : "replace-with-usercode-forecast-flow",
+      "SubApplication" : "replace_with_usercode-forecast-flow",
       "Host" : "replace-with-instruqt-host",
       "RunAs" : "controlm",
-      "Application" : "replace-with-usercode-forecast-flow",
+      "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "echo \\\"Today, the high temperature in %%city %%country is %%hightemp F.\\\"",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -166,38 +166,38 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-countryvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-countryvar-TO-replace_with_usercode-getoutput"
         }, {
-          "Event" : "replace-with-usercode-cityvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-cityvar-TO-replace_with_usercode-getoutput"
         }, {
-          "Event" : "replace-with-usercode-hightempvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-hightempvar-TO-replace_with_usercode-getoutput"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getoutput-TO-SLA"
+          "Event" : "replace_with_usercode-getoutput-TO-SLA"
         }, {
-          "Event" : "replace-with-usercode-getoutput-TO-replace-with-usercode-forecast-flow-sla"
+          "Event" : "replace_with_usercode-getoutput-TO-replace_with_usercode-forecast-flow-sla"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-cityvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-cityvar-TO-replace_with_usercode-getoutput"
         }, {
-          "Event" : "replace-with-usercode-countryvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-countryvar-TO-replace_with_usercode-getoutput"
         }, {
-          "Event" : "replace-with-usercode-hightempvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-hightempvar-TO-replace_with_usercode-getoutput"
         } ]
       }
     },
-    "replace-with-usercode-getweatherdata" : {
+    "replace_with_usercode-getweatherdata" : {
       "Type" : "Job:Command",
-      "SubApplication" : "replace-with-usercode-forecast-flow",
+      "SubApplication" : "replace_with_usercode-forecast-flow",
       "Host" : "replace-with-instruqt-host",
       "RunAs" : "controlm",
-      "Application" : "replace-with-usercode-forecast-flow",
+      "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "wget \"https://api.openweathermap.org/data/2.5/weather?zip=%%zipcode,us&appid=%%appid&units=imperial\" -O $HOME/output.json",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -208,20 +208,20 @@
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-countryvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-countryvar"
         }, {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-cityvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-cityvar"
         }, {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-hightempvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-hightempvar"
         } ]
       }
     },
-    "replace-with-usercode-hightempvar" : {
+    "replace_with_usercode-hightempvar" : {
       "Type" : "Job:Command",
-      "SubApplication" : "replace-with-usercode-forecast-flow",
+      "SubApplication" : "replace_with_usercode-forecast-flow",
       "Host" : "replace-with-instruqt-host",
       "RunAs" : "controlm",
-      "Application" : "replace-with-usercode-forecast-flow",
+      "Application" : "replace_with_usercode-forecast-flow",
       "Command" : "cd $HOME/ && high_temp=$(cat output.json | jq \".main.temp_max\") | echo \"$high_temp\"",
       "When" : {
         "WeekDays" : [ "NONE" ],
@@ -241,19 +241,19 @@
       "eventsToWaitFor" : {
         "Type" : "WaitForEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-hightempvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-hightempvar"
         } ]
       },
       "eventsToAdd" : {
         "Type" : "AddEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-hightempvar-TO-replace-with-usercode-getoutput"
+          "Event" : "replace_with_usercode-hightempvar-TO-replace_with_usercode-getoutput"
         } ]
       },
       "eventsToDelete" : {
         "Type" : "DeleteEvents",
         "Events" : [ {
-          "Event" : "replace-with-usercode-getweatherdata-TO-replace-with-usercode-hightempvar"
+          "Event" : "replace_with_usercode-getweatherdata-TO-replace_with_usercode-hightempvar"
         } ]
       }
     }
