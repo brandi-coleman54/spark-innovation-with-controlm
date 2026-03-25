@@ -39,6 +39,7 @@ jobs:
           cd "${{ inputs.folder }}"
           ls -l
           echo "Updating json files..."
+          echo "Replacing ${{ inputs.find-str }} with ${{ inputs.replace-str }}"
           for file in $(find . -name *.json); do
             sed -i -E 's|${{ inputs.find-str }}|${{ inputs.replace-str }}|g' $file
           done
