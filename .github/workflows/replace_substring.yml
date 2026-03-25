@@ -1,0 +1,44 @@
+##############################################################################
+# Spark Github Actions Workflow
+#
+# This workflow will perform a find replace on all files in a folder
+##############################################################################
+name: replace-substring-in-folder
+  
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+on: 
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: Folder to update
+        required: true
+        type: string
+      find-str:
+        description: Find string
+        required: true
+        type: string
+      replace-str:
+        description: Replace string
+        required: true
+        type: string
+jobs:
+  ReplaceSubstring:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Replace substrings in folder
+        run: |
+          cd "${{ inputs.folder }}"
+          ls -l
+          echo "Updating json files..."
+          for file in $(find . -name *.json); do
+            sed -i -E 's|${{ inputs.find-str }}|${{ inputs.replace-str }}|g' $file
+          done
