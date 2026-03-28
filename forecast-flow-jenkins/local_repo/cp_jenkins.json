@@ -6,7 +6,7 @@
     "User API Token": "replace-with-jenkins-api-token",
     "Rerun Interval": "30",
     "Username": "admin",
-    "Jenkins URL": "http://jenkins:8080",
+    "Jenkins URL": "http://jenkins-v2:8080",
     "Connection Timeout": "100",
     "HTTP Codes": "429 504 503 500",
     "Description": "",
