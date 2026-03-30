@@ -30,7 +30,7 @@ done
 
 # --- Install Snowflake plugin ---
 tries=1
-until ctm provision image SNF_plugin.Linux; do
+until ctm provision image SNF_plugin.Linux -e ${ctm_env}; do
   if [ "$tries" -ge 3 ]; then
     echo "Failed installation of Snowflake plugin after $tries attempt."
     ctm env del ${ctm_env}
