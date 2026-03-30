@@ -300,6 +300,38 @@ function Create_TD_Token {
   fi
 }
 
+function Onboard_User {
+  local email=$1
+  local user_code=$2
+  local endpoint=$3
+  local token=$4
+  local user_home=$5
+  local base_dir=$6
+  local prv_env=onboard
+  
+  ctm env add ${prv_env} ${endpoint} ${token}
+  ctm env set ${prv_env}
+  
+  tries=1
+  set -e
+  echo "Onboarding User ${email}"
+  until Create_TD_User "${email}" "${user_code}" "${user_home}/${based_dir}/common/templates/user.json"; do
+      echo "Try ${tries} onboarding user failed."
+      if [ "${tries}" -eq "5" ]; then
+          echo "Reached max tries of 5.  Exiting."
+          exit 12
+      fi
+      timer=$(shuf -i 3-20 -n 1)
+      sleep ${timer}
+      echo "Trying again."
+      ((tries++))
+  done
+  set +e
+  
+  ctm env delete ${prv_env}
+
+}
+
 function Provision_Agents_Helm {
   local ctm_user_code="${1:?usage: Provision_Agents_Helm <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> <resources_file> <ctm_hg>}"
   local ctm_aapi_endpoint="${2:?usage: Provision_Agents_Helm <ctm_user_code> <aapi_endpoint> <auth_token> <ctm_server> <resources_file> <ctm_hg>}"
