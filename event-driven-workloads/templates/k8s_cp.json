@@ -1,0 +1,11 @@
+{
+  "${CTM_UC_USER_CODE}_K8S": {
+    "Type": "ConnectionProfile:Kubernetes",
+    "Service Token File": "/var/run/secrets/kubernetes.io/serviceaccount/token",
+    "Connection Timeout": "50",
+    "Kubernetes Cluster URL": "https://kubernetes.default.svc",
+    "Namespace": "${CTM_USER_CODE}",
+    "Description": "",
+    "Centralized": true
+  }
+}
