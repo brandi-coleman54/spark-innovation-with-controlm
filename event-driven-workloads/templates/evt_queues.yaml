@@ -1,0 +1,16 @@
+event_queues:
+  - name: sqs-orders
+    type: sqs
+    format: yaml
+    connection:
+      region: us-east-2
+      queue_url: https://sqs.us-east-2.amazonaws.com/390426403709/zzi_runorder.fifo
+    action:
+      type: runorder
+logging:
+  level: DEBUG
+  to_file: false
+  filename: consumer.log
+controlm:
+  aapi: ${CTM_AAPI_ENDPOINT}
+  token: CONTROLM_TOKEN
