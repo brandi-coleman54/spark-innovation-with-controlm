@@ -18,7 +18,7 @@
 					"Type": "Mail",
 					"Subject": "%%JOBNAME has failed",
 					"Message": "Click the link: http://vl-aus-ctm-em01.ctm.bmc.com:18080/ControlM/#Neighborhood:id=%%ORDERID.&ctm=%%DATACENTER&name=%%JOBNAME.&date=%%DATE",
-					"To": "gregg_rask@bmc.com"
+					"To": "replace_with_email"
 				}
 			}
 		}
