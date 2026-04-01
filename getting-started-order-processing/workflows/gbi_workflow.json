@@ -23,7 +23,7 @@
 			}
 		}
 	},
-	"zzz-folder": {
+	"GBI-folder": {
 		"Type": "Folder",
 		"SiteStandard": "SE Demo System Standard",
 	    "BusinessFields" : [ {
