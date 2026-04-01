@@ -1,5 +1,5 @@
 {
-    "Name": "replace-with-usercode",
+    "Name": "replace_with_usercode",
     "AllowedJobs": {
         "Included": [
             [
@@ -51,7 +51,7 @@
         {
             "Privilege": "Full",
             "ControlmServer": "*",
-            "Folder": "replace-with-usercode*",
+            "Folder": "replace_with_usercode*",
             "Run": true
         }
     ],
@@ -59,7 +59,7 @@
         {
             "ControlmServer": "*",
             "RunasUser": "*",
-            "Host": "replace-with-usercode*"
+            "Host": "replace_with_usercode*"
         }
     ],
     "SiteStandard": [
@@ -101,7 +101,7 @@
             "ControlmServer": "*",
             "Agent": "sparkit",
             "PluginType": "*",
-            "Name": "replace-with-usercode*",
+            "Name": "replace_with_usercode*",
             "Privilege": "Browse"
         }
     ]
