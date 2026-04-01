@@ -59,7 +59,7 @@
 		},
 		"zzz-run-script": {
 			"Type": "Job:Script",
-			"FilePath": "/opt/ctm/ctmagent/scripts/",
+			"FilePath": "/home/controlm/ctm/scripts",
 			"Host": "zzz_instruqt_server",
 			"Description": "this job will run a script",
 			"FileName": "ag_diag_comm"
