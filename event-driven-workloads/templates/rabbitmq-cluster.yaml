@@ -38,8 +38,8 @@ spec:
       - rabbitmq_shovel_management
 
   # Service configuration
-  service:
-    type: ClusterIP
+  #service:
+  #  type: NodePort
 
   # Affinity rules for high availability
   affinity:
@@ -49,3 +49,21 @@ spec:
             matchLabels:
               app.kubernetes.io/name: rabbitmq
           topologyKey: kubernetes.io/hostname
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-external
+  namespace: messaging  # Ensure this matches your RabbitMQ namespace
+spec:
+  type: NodePort
+  selector:
+    # This label must match the labels on your RabbitMQ pods
+    # If using the Operator, it's usually: app.kubernetes.io/name: <cluster-name>
+    app.kubernetes.io/name: rabbitmq
+  ports:
+    - name: management
+      protocol: TCP
+      port: 15672        # Internal ClusterIP port
+      targetPort: 15672  # Port the RabbitMQ container listens on
+      nodePort: 31928    # <--- External port for UI (must be 30000-32767)
