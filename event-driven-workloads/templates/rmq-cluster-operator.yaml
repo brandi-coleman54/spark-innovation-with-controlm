@@ -1,0 +1,51 @@
+# rabbitmq-cluster.yaml
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq
+  namespace: messaging
+spec:
+  replicas: 3
+
+  # Resource allocation
+  resources:
+    requests:
+      cpu: 500m
+      memory: 250Mi
+    limits:
+      cpu: 2
+      memory: 1Gi
+
+  # Persistence configuration
+  persistence:
+    storageClassName: local-path  # Use your storage class
+    storage: 3Gi
+
+  # RabbitMQ configuration
+  rabbitmq:
+    additionalConfig: |
+      cluster_partition_handling = pause_minority
+      vm_memory_high_watermark.relative = 0.7
+      disk_free_limit.absolute = 2GB
+      collect_statistics_interval = 10000
+
+  # Enable management plugin
+  rabbitmq:
+    additionalPlugins:
+      - rabbitmq_management
+      - rabbitmq_prometheus
+      - rabbitmq_shovel
+      - rabbitmq_shovel_management
+
+  # Service configuration
+  service:
+    type: ClusterIP
+
+  # Affinity rules for high availability
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: rabbitmq
+          topologyKey: kubernetes.io/hostname
