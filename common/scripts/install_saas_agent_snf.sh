@@ -41,6 +41,18 @@ until ctm provision image SNF_plugin.Linux -e ${ctm_env}; do
   sleep 10
 done
 
+# --- Install MFT plugin ---
+tries=1
+until ctm provision image MFT_plugin; do
+  if [ "$tries" -ge 3 ]; then
+    echo "Failed installation of MFT plugin after $tries attempt."
+    ctm env del ${ctm_env}
+    exit 4
+  fi
+  echo "Installation failed (attempt $tries). Retrying in 10s..."
+  ((tries++))
+  sleep 10
+done
 
 ctm env del ${ctm_env}
 echo "Agent install invoked successfully for ${target}."
