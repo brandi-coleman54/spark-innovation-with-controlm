@@ -1,9 +1,9 @@
 {   "Defaults" : {
         
-		"Application": "ZZZ-",
-		"SubApplication": "ZZZ-API",
+		"Application": "zzz-",
+		"SubApplication": "zzz-api",
 		"ControlmServer": "IN01",
-		"RunAs": "ctmvse",
+		"RunAs": "controlm",
 		"Job": {
 			"When": {
 				"WeekDays": [
@@ -23,68 +23,68 @@
 			}
 		}
 	},
-	"GBI-Folder": {
+	"zzz-folder": {
 		"Type": "Folder",
 		"SiteStandard": "SE Demo System Standard",
 	    "BusinessFields" : [ {
-           "Usercode" : "ZZZ"
+           "Usercode" : "zzz"
 		   } ],
 		"Description": "this is the Global Business Intelligence Folder",
 		"Comment": "Code reviewed by Gregg",
 		
 
-		"ZZZ-echo-command": {
+		"zzz-echo-command": {
 			"Type": "Job:Command",
-			"Host": "zzz-linux-agent-01",
+			"Host": "zzz_instruqt_server",
 			"Description": "this job will echo",
-			"Command": "echo This is the first workload to run in the ZZZ-API_Flow"
+			"Command": "echo This is the first workload to run in the zzz-api_Flow"
 		},
-		"ZZZ-sleep-command": {
+		"zzz-sleep-command": {
 			"Type": "Job:Command",
-			"Host": "zzz-linux-agent-01",
+			"Host": "zzz_instruqt_server",
 			"Description": "this job will sleep",
 			"Command": "sleep 20"
 		},
-		"ZZZ-list-dir": {
+		"zzz-list-dir": {
 			"Type": "Job:Command",
-			"Host": "zzz-linux-agent-01",
+			"Host": "zzz_instruqt_server",
 			"Description": "this job will list a directory",
 			"Command": "ls -al"
 		},
-		"ZZZ-copy-file": {
+		"zzz-copy-file": {
 			"Type": "Job:Command",
-			"Host": "zzz-linux-agent-01",
+			"Host": "zzz_instruqt_server",
 			"Description": "this job will copy a file",
-			"Command": "cp /home/grask@adprod.bmc.com/apps/TST/App1/new_file /home/grask@adprod.bmc.com/apps/TST/App1/newer_file"
+			"Command": "cp /home/controlm/installed-versions.txt /tmp/newer_file"
 		},
-		"ZZZ-run-script": {
+		"zzz-run-script": {
 			"Type": "Job:Script",
 			"FilePath": "/opt/ctm/ctmagent/scripts/",
-			"Host": "zzz-linux-agent-01",
+			"Host": "zzz_instruqt_server",
 			"Description": "this job will run a script",
 			"FileName": "ag_diag_comm"
 		},
-		"ZZZ-SLA": {
+		"zzz-SLA": {
 			"Type": "Job:SLAManagement",
 			"ServiceName": "Global Business Intelligence",
 			"ServicePriority": "3",
-			"SubApplication": "ZZZ-API",
+			"SubApplication": "zzz-api",
 			"Description": "this job will track the SLA",
-			"Host": "zzz-linux-agent-01",
+			"Host": "zzz_instruqt_server",
 			"JobRunsDeviationsTolerance": "3",
 			"CreatedBy": "grask",
-			"RunAs": "ctmvse",
-			"Application": "ZZZ-",
+			"RunAs": "controlm",
+			"Application": "zzz-",
 			"CompleteIn": {
 				"Time": "0:05"
 			}
 		},
-		"ZZZ-troublemaker": {
+		"zzz-troublemaker": {
 			"Type": "Job:Command",
 			"Description": "job runs as root which is a no-no",
 			"Command": "echo good to go",
-			"RunAs": "ctmvse",
-			"Host": "zzz-linux-agent-01",
+			"RunAs": "controlm",
+			"Host": "zzz_instruqt_server",
 			"DocumentationUrl": {
 				"Url": "http://bmc.com"
 			}
@@ -92,43 +92,43 @@
 		"Flow1": {
 			"Type": "Flow",
 			"Sequence": [
-				"ZZZ-echo-command",
-				"ZZZ-sleep-command"
+				"zzz-echo-command",
+				"zzz-sleep-command"
 			]
 		},
 		"Flow2": {
 			"Type": "Flow",
 			"Sequence": [
-				"ZZZ-sleep-command",
-				"ZZZ-list-dir"
+				"zzz-sleep-command",
+				"zzz-list-dir"
 			]
 		},
 		"Flow3": {
 			"Type": "Flow",
 			"Sequence": [
-				"ZZZ-list-dir",
-				"ZZZ-run-script"
+				"zzz-list-dir",
+				"zzz-run-script"
 			]
 		},
 		"Flow4": {
 			"Type": "Flow",
 			"Sequence": [
-				"ZZZ-run-script",
-				"ZZZ-troublemaker"
+				"zzz-run-script",
+				"zzz-troublemaker"
 			]
 		},
 		"Flow5": {
 			"Type": "Flow",
 			"Sequence": [
-				"ZZZ-troublemaker",
-				"ZZZ-copy-file"
+				"zzz-troublemaker",
+				"zzz-copy-file"
 			]
 		},
 		"Flow6": {
 			"Type": "Flow",
 			"Sequence": [
-				"ZZZ-copy-file",
-				"ZZZ-SLA"
+				"zzz-copy-file",
+				"zzz-SLA"
 			]
 		}
 	}
