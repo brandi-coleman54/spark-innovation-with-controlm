@@ -1,0 +1,10 @@
+{
+  "ctm": "{{message.server}}",
+  "folder": "{{message.folder_name}}",
+  "hold": "false",
+  "ignoreCriteria": "true",
+  "independentFlow": "true",
+  "variables": [
+    { "var1": "{{ message.var1 }}"}
+  ]
+}
