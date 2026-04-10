@@ -1,0 +1,6 @@
+controlmTemplates: eventhandler-templates
+credentialSecrets:
+- ctm-credentials
+- rmq-creds
+queuesConfig: event-handlers
+replicas: 1
