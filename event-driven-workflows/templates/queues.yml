@@ -3,14 +3,14 @@ event_queues:
     type: rabbitmq
     format: yaml
     connection:
-      server: 10.106.9.6
+      server: ${RMQ_IP}
       port: 5672
-      vhost: vhost1
-      credentials: RMQ1
+      vhost: /
+      credentials: RABBITMQ1
     action:
       type: runorder
 logging:
-  level: DEBUG
+  level: INFO
   to_file: false
   filename: consumer.log
 controlm:
