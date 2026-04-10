@@ -1,10 +1,12 @@
 event_queues:
-  - name: sqs-orders
-    type: sqs
+  - name: rmq-orders
+    type: rabbitmq
     format: yaml
     connection:
-      region: us-east-2
-      queue_url: https://sqs.us-east-2.amazonaws.com/390426403709/zzi_runorder.fifo
+      server: 10.106.9.6
+      port: 5672
+      vhost: vhost1
+      credentials: rmq_creds
     action:
       type: runorder
 logging:
