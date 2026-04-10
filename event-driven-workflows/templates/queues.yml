@@ -6,7 +6,7 @@ event_queues:
       server: 10.106.9.6
       port: 5672
       vhost: vhost1
-      credentials: rmq_creds
+      credentials: rmq-creds
     action:
       type: runorder
 logging:
