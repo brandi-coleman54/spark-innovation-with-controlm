@@ -315,7 +315,7 @@ function Onboard_User {
   tries=1
   set -e
   echo "Onboarding User ${email}"
-  until Create_TD_User "${email}" "${user_code}" "${user_home}/${based_dir}/common/templates/user.json"; do
+  until Create_TD_User "${email}" "${user_code}" "${user_home}/${base_dir}/common/templates/user.json"; do
       echo "Try ${tries} onboarding user failed."
       if [ "${tries}" -eq "5" ]; then
           echo "Reached max tries of 5.  Exiting."
