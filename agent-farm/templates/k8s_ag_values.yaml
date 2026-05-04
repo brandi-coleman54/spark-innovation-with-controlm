@@ -97,7 +97,7 @@ image:
   #repo:
   # image.tag defines the tag associated with the image. Tags allow you to identify different versions of the same series of images. (optional)
   # Kubernetes Resource: statefulset.spec.template.spec.containers.image
-  tag: latest-k8s-mft-openjdk
+  tag: 9.22.070-k8s-mft-openjdk
   # image.pullPolicy determines whether to update the image (by pulling a new version of the image) when the kubelet launches a container. (optional)
   # Kubernetes Resource: statefulset.spec.template.spec.containers.imagePullPolicy
   pullPolicy: IfNotPresent
